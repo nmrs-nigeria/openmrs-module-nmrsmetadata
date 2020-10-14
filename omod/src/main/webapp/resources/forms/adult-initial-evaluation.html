@@ -170,8 +170,11 @@
             if(!isNaN(getValue("ge.value"))) {
                 var rWeeks = 40 - getValue("ge.value");
                 var edd = new Date();
+                var lmp = new Date();
                 edd = edd.setDate(edd.getDate() + (rWeeks * 7));
+                lmp = lmp.setDate(lmp.getDate() - (getValue("ge.value") * 7));
                 setValue('edd.value', getCustomDate(new Date(edd)));
+                setValue('lmp.value', getCustomDate(new Date(lmp)));
             }else{
                 setValue("ge.value", "");
             }
@@ -180,13 +183,15 @@
         function calEDD() {
             var lmp = new Date(getValue('lmp.value'));
             if (lmp != null) {
-                if(getValue('ge.value') === "") {
-                    lmp = lmp.setDate(lmp.getDate() + 280);
-                    console.log(lmp);
+                lmp = lmp.setDate(lmp.getDate() + 280);
+                var Difference_In_Time = new Date().getTime() - new Date(getValue('lmp.value')).getTime();
 
-                    //setValue('edd.value', null);
-                    setValue('edd.value', getCustomDate(new Date(lmp)));
-                }
+                var Difference_In_Days = Difference_In_Time / (1000 * 3600 * 24);
+                setValue("ge.value", Math.round(Difference_In_Days / 7));
+                console.log(lmp);
+
+                //setValue('edd.value', null);
+                setValue('edd.value', getCustomDate(new Date(lmp)));
             }
         }
     </script>
