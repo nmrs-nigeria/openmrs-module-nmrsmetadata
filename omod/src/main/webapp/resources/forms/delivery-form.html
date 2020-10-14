@@ -80,6 +80,8 @@
             font-size: 14px;
         }
 
+
+
         <!--table.baseline-aligned td {-->
             <!--vertical-align: baseline;-->
             <!--}-->
@@ -90,6 +92,90 @@
         $(document).ready(function ()
         {
             $('.hasDatepicker').attr('readonly', true);
+            $('#birthStatus1').attr('readonly', true);
+            $('#childBirth').change(function (e) {
+                console.log("Called: "+getValue('childBirth.value'));
+                switch (getValue('childBirth.value')) {
+                    case "165643":
+                        console.log(1);
+                        $('#birthStatus1').show();
+                        $('#birthStatus2').hide();
+                        $('#birthStatus3').hide();
+                        $('#birthStatus4').hide();
+                        $('#birthStatus5').hide();
+                        $('#birthStatus6').hide();
+                        $('#birthStatus7').hide();
+                        break;
+                    case "165644":
+                        console.log(1);
+                        $('#birthStatus1').show();
+                        $('#birthStatus2').show();
+                        $('#birthStatus3').hide();
+                        $('#birthStatus4').hide();
+                        $('#birthStatus5').hide();
+                        $('#birthStatus6').hide();
+                        $('#birthStatus7').hide();
+                        break;
+                    case "165645":
+                        console.log(1);
+                        $('#birthStatus1').show();
+                        $('#birthStatus2').show();
+                        $('#birthStatus3').show();
+                        $('#birthStatus4').hide();
+                        $('#birthStatus5').hide();
+                        $('#birthStatus6').hide();
+                        $('#birthStatus7').hide();
+                        break;
+                    case "165646":
+                        console.log(1);
+                        $('#birthStatus1').show();
+                        $('#birthStatus2').show();
+                        $('#birthStatus3').show();
+                        $('#birthStatus4').show();
+                        $('#birthStatus5').hide();
+                        $('#birthStatus6').hide();
+                        $('#birthStatus7').hide();
+                        break;
+                    case "165647":
+                        console.log(1);
+                        $('#birthStatus1').show();
+                        $('#birthStatus2').show();
+                        $('#birthStatus3').show();
+                        $('#birthStatus4').show();
+                        $('#birthStatus5').show();
+                        $('#birthStatus6').hide();
+                        $('#birthStatus7').hide();
+                        break;
+                    case "165648":
+                        console.log(1);
+                        $('#birthStatus1').show();
+                        $('#birthStatus2').show();
+                        $('#birthStatus3').show();
+                        $('#birthStatus4').show();
+                        $('#birthStatus5').show();
+                        $('#birthStatus6').show();
+                        $('#birthStatus7').hide();
+                        break;
+                    case "165649":
+                        console.log(1);
+                        $('#birthStatus1').show();
+                        $('#birthStatus2').show();
+                        $('#birthStatus3').show();
+                        $('#birthStatus4').show();
+                        $('#birthStatus5').show();
+                        $('#birthStatus6').show();
+                        $('#birthStatus7').show();
+                        break;
+                    default:
+                        $('#birthStatus1').hide();
+                        $('#birthStatus2').hide();
+                        $('#birthStatus3').hide();
+                        $('#birthStatus4').hide();
+                        $('#birthStatus5').hide();
+                        $('#birthStatus6').hide();
+                        $('#birthStatus7').hide();
+                }
+            });
 
         });
     </script>
@@ -216,47 +302,51 @@
             </tr>
         </table>
         <table class="birthStatus1,birthStatus2,birthStatus3,birthStatus4,birthStatus5,birthStatus6,birthStatus7,table" width="100%">
-            <tr>
+            <tr id="birthStatus1">
 
                     <td >Child Outcome 1</td>
                     <td >
-                        <obs conceptId="164968" answerConceptIds="160429,154223,125872" answerLabels="Alive,Neonatal death,StillBirth"/>
+                        <obs conceptId="164968" class="childNum" answerConceptIds="160429,154223,125872" answerLabels="Alive,Neonatal death,StillBirth"/>
                     </td>
             </tr>
-            <tr>
+            <tr id="birthStatus2">
                     <td >Child Outcome 2</td>
                     <td >
-                        <obs conceptId="164968" answerConceptIds="160429,154223,125872" answerLabels="Alive,Neonatal death,StillBirth"/>
+                        <obs conceptId="164968" class="childNum" answerConceptIds="160429,154223,125872" answerLabels="Alive,Neonatal death,StillBirth"/>
                     </td>
             </tr>
-            <tr class="num3">
+            <tr id="birthStatus3">
                     <td >Child Outcome 3</td>
                     <td >
-                        <obs conceptId="164968" answerConceptIds="160429,154223,125872" answerLabels="Alive,Neonatal death,StillBirth"/>
+                        <obs conceptId="164968" class="childNum" answerConceptIds="160429,154223,125872" answerLabels="Alive,Neonatal death,StillBirth"/>
                     </td>
 
-            </tr><tr class="num4">
+            </tr >
+            <tr id="birthStatus4">
                     <td >Child Outcome 4</td>
                     <td >
-                        <obs conceptId="164968" answerConceptIds="160429,154223,125872" answerLabels="Alive,Neonatal death,StillBirth"/>
+                        <obs conceptId="164968" class="childNum" answerConceptIds="160429,154223,125872" answerLabels="Alive,Neonatal death,StillBirth"/>
                     </td>
 
-            </tr><tr class="num5">
+            </tr>
+            <tr id="birthStatus5">
                     <td >Child Outcome 5</td>
                     <td >
-                        <obs conceptId="164968" answerConceptIds="160429,154223,125872" answerLabels="Alive,Neonatal death,StillBirth"/>
+                        <obs conceptId="164968" class="childNum" answerConceptIds="160429,154223,125872" answerLabels="Alive,Neonatal death,StillBirth"/>
                     </td>
 
-            </tr><tr class="num6">
+            </tr>
+            <tr id="birthStatus6">
                     <td >Child Outcome 6</td>
                     <td >
-                        <obs conceptId="164968" answerConceptIds="160429,154223,125872" answerLabels="Alive,Neonatal death,StillBirth"/>
+                        <obs conceptId="164968" class="childNum" answerConceptIds="160429,154223,125872" answerLabels="Alive,Neonatal death,StillBirth"/>
                     </td>
 
-            </tr><tr class="num7">
+            </tr>
+            <tr id="birthStatus7">
                     <td >Child Outcome 7</td>
                     <td >
-                        <obs conceptId="164968" answerConceptIds="160429,154223,125872" answerLabels="Alive,Neonatal death,StillBirth"/>
+                        <obs conceptId="164968" class="childNum" answerConceptIds="160429,154223,125872" answerLabels="Alive,Neonatal death,StillBirth"/>
                     </td>
 
             </tr>
