@@ -3,6 +3,8 @@
     def now = new Date()
     def year = now.getAt(Calendar.YEAR);
 %>
+<% ui.includeCss("nmrsmetadata", "bootstrap.css") %>
+<% ui.includeJavascript("nmrsmetadata", "bootstrap.js") %>
 
 <!DOCTYPE html>
 <html>
