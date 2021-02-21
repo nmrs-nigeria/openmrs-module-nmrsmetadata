@@ -32,7 +32,7 @@
             <column name="uuid" value="b7ddf181-40eb-4f5f-93c7-0527db87bcbb"/>
         </insert>
         <insert tableName="concept_answer">
-            <column name="concept_answer_id" value="8906"/>
+            <!--<column name="concept_answer_id" value="8906"/>-->
             <column name="concept_id" value="166253"/>
             <column name="answer_concept" value="1065"/>
             <column name="creator" value="1"/>
@@ -41,7 +41,7 @@
             <column name="sort_weight" value="1"/>
         </insert>
         <insert tableName="concept_answer">
-            <column name="concept_answer_id" value="8907"/>
+            <!--<column name="concept_answer_id" value="8907"/>-->
             <column name="concept_id" value="166253"/>
             <column name="answer_concept" value="1066"/>
             <column name="creator" value="1"/>
@@ -96,14 +96,14 @@
     <changeSet id="inslude_ABC-3TC-LPV/r_2020-09-15-14:16" author="tega" runOnChange="true">
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="0">
-                SELECT COUNT(*) FROM reporting_report_design WHERE report_definition_uuid='7huveyx5-d050-4e99-4826-ccddc456b8rf';
+                SELECT COUNT(*) FROM concept_answer WHERE concept_id='164507' and answer_concept='162200';
             </sqlCheck>
         </preConditions>
         <insert tableName="concept_answer">
             <column name="concept_id" valueNumeric="164507"/>
             <column name="answer_concept" valueNumeric="162200"/>
             <column name="creator" valueNumeric="1"/>
-            <column name="date_created" valueDate="now()"/>
+            <column name="date_created" valueDate="2021-02-02"/>
             <column name="uuid" value="7huveyx5-d050-4e99-4826-ccddc456b8rf"/>
             <column name="sort_weight" valueNumeric="15"/>
         </insert>
