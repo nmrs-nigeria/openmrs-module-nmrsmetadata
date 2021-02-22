@@ -32,7 +32,6 @@
             <column name="uuid" value="b7ddf181-40eb-4f5f-93c7-0527db87bcbb"/>
         </insert>
         <insert tableName="concept_answer">
-            
             <column name="concept_id" value="166253"/>
             <column name="answer_concept" value="1065"/>
             <column name="creator" value="1"/>
@@ -41,7 +40,6 @@
             <column name="sort_weight" value="1"/>
         </insert>
         <insert tableName="concept_answer">
-            
             <column name="concept_id" value="166253"/>
             <column name="answer_concept" value="1066"/>
             <column name="creator" value="1"/>
