@@ -101,7 +101,7 @@
             <column name="concept_id" valueNumeric="164507"/>
             <column name="answer_concept" valueNumeric="162200"/>
             <column name="creator" valueNumeric="1"/>
-            <column name="date_created" valueDate="2021-02-02"/>
+            <column name="date_created" valueDate="now()"/>
             <column name="uuid" value="7huveyx5-d050-4e99-4826-ccddc456b8rf"/>
             <column name="sort_weight" valueNumeric="15"/>
         </insert>
