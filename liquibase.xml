@@ -96,7 +96,7 @@
     <changeSet id="inslude_ABC-3TC-LPV/r_2020-09-15-14:16" author="tega" runOnChange="true">
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="0">
-                SELECT COUNT(*) FROM concept_answer WHERE concept_id='164507' and answer_concept='162200'
+                SELECT COUNT(*) FROM concept_answer WHERE concept_id='164507' and answer_concept='162200';
             </sqlCheck>
         </preConditions>
         <insert tableName="concept_answer">
