@@ -130,6 +130,50 @@
         </insert>
         
     </changeSet>
+    <!-- Error - Viral Loads Without Reported Dated -->
+    <changeSet id="report_update_20210227554" author="Bright">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                SELECT COUNT(*) FROM reporting_report_design WHERE report_definition_uuid='33ddb8f8-3bfa-4953-b654-21d60966ec72';
+            </sqlCheck>
+        </preConditions>
+        <!-- Excel -->
+        <insert tableName="reporting_report_design">
+            <column name="uuid" value="7db46114-e25e-4c84-bc13-a44e6d15d7e9"/>
+            <column name="name" value="Excel"/>
+            <column name="description" value="Excel Export"/>
+            <column name="renderer_type" value="org.openmrs.module.reporting.report.renderer.XlsReportRenderer"/>
+            <column name="properties" value="#Mon Mar 23 02:22:36 WAT 2020"/>
+            <column name="creator" value="1"/>
+            <column name="date_created" valueDate="2020-03-23 02:22:36"/>
+            <column name="retired" value="0"/>
+            <column name="report_definition_uuid" value="33ddb8f8-3bfa-4953-b654-21d60966ec72"/>
+        </insert>
+        <!-- CSV -->
+        <insert tableName="reporting_report_design">
+            <column name="uuid" value="75ea74de-8f6e-4265-8d62-fb2bce79a938"/>
+            <column name="name" value="CSV"/>
+            <column name="description" value="CSV Export"/>
+            <column name="renderer_type" value="org.openmrs.module.reporting.report.renderer.CsvReportRenderer"/>
+            <column name="properties" value="#Mon Mar 23 02:22:48 WAT 2020"/>
+            <column name="creator" value="1"/>
+            <column name="date_created" valueDate="2020-03-23 02:22:48"/>
+            <column name="retired" value="0"/>
+            <column name="report_definition_uuid" value="33ddb8f8-3bfa-4953-b654-21d60966ec72"/>
+        </insert>
+        <!-- Web -->
+        <insert tableName="reporting_report_design">
+            <column name="uuid" value="79ed61c8-65d9-4297-a20b-5bc5620aa2f8"/>
+            <column name="name" value="Web"/>
+            <column name="description" value="Web Export"/>
+            <column name="renderer_type" value="org.openmrs.module.reporting.report.renderer.SimpleHtmlReportRenderer"/>
+            <column name="properties" value="#Mon Mar 23 02:23:01 WAT 2020"/>
+            <column name="creator" value="1"/>
+            <column name="date_created" valueDate="2020-03-23 02:23:01"/>
+            <column name="retired" value="0"/>
+            <column name="report_definition_uuid" value="33ddb8f8-3bfa-4953-b654-21d60966ec72"/>
+        </insert>
+    </changeSet>
     <changeSet id="report_update_20201129850" author="Bright">
         <!-- ERROR - ENCOUNTER WITHOUT ADD PAST VISIT  -->
         <preConditions onFail="MARK_RAN">
