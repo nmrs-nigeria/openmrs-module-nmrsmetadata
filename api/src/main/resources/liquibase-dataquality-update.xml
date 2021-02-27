@@ -393,5 +393,37 @@
             <column name="report_definition_uuid" value="34e0883c-5b15-4fc4-a929-239cfa1b0ecb"/>
         </insert>
     </changeSet>
+    <!-- Maternal Cohort Report -->
+    <changeSet id="report_update_202102271043" author="Bright">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                SELECT COUNT(*) FROM reporting_report_design WHERE uuid='004adb10-7da2-47b7-bdfc-dd798245a850';
+            </sqlCheck>
+        </preConditions>
+        <!-- Excel -->
+        <insert tableName="reporting_report_design">
+            <column name="uuid" value="09fcc8a4-01e2-4f78-a25f-a76a51235b5f"/>
+            <column name="name" value="Excel"/>
+            <column name="description" value="Excel Export"/>
+            <column name="renderer_type" value="org.openmrs.module.reporting.report.renderer.XlsReportRenderer"/>
+            <column name="properties" value="#Thu Jan 07 01:37:30 WAT 2021"/>
+            <column name="creator" value="1"/>
+            <column name="date_created" valueDate="2021-01-07 01:37:30"/>
+            <column name="retired" value="0"/>
+            <column name="report_definition_uuid" value="004adb10-7da2-47b7-bdfc-dd798245a850"/>
+        </insert>
+        <!-- CSV -->
+        <insert tableName="reporting_report_design">
+            <column name="uuid" value="14417cc2-cec2-4b77-9b39-f61de40894e2"/>
+            <column name="name" value="CSV"/>
+            <column name="description" value="CSV Export"/>
+            <column name="renderer_type" value="org.openmrs.module.reporting.report.renderer.CsvReportRenderer"/>
+            <column name="properties" value="#Thu Jan 07 01:37:44 WAT 2021"/>
+            <column name="creator" value="1"/>
+            <column name="date_created" valueDate="2021-01-07 01:37:44"/>
+            <column name="retired" value="0"/>
+            <column name="report_definition_uuid" value="004adb10-7da2-47b7-bdfc-dd798245a850"/>
+        </insert>
+    </changeSet>
        
 </databaseChangeLog>
