@@ -267,7 +267,7 @@
       <changeSet id="report_update_202102271105" author="Bright">
           <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="0">
-                SELECT COUNT(*) FROM reporting_report_design WHERE uuid='65dba83d-b268-48af-a7ee-dd1626cd37a1';
+                SELECT COUNT(*) FROM reporting_report_design WHERE report_definition_uuid='65dba83d-b268-48af-a7ee-dd1626cd37a1';
             </sqlCheck>
         </preConditions>
         <!-- CSV -->
@@ -300,7 +300,7 @@
       <changeSet id="report_update_202102270633" author="Bright">
           <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="0">
-                SELECT COUNT(*) FROM reporting_report_design WHERE uuid='3959a398-0ec7-45df-9ae2-5039ebfa736e';
+                SELECT COUNT(*) FROM reporting_report_design WHERE report_definition_uuid='3959a398-0ec7-45df-9ae2-5039ebfa736e';
             </sqlCheck>
           </preConditions>
           <!-- CSV -->
@@ -332,7 +332,7 @@
       <changeSet id="report_update_202102270640" author="Bright">
           <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="0">
-                SELECT COUNT(*) FROM reporting_report_design WHERE uuid='eaabfbea-83c3-49a4-b1fb-25ac95391d7f';
+                SELECT COUNT(*) FROM reporting_report_design WHERE report_definition_uuid='eaabfbea-83c3-49a4-b1fb-25ac95391d7f';
             </sqlCheck>
           </preConditions>
           <!-- Excel -->
@@ -365,7 +365,7 @@
       <changeSet id="report_update_202102271036" author="Bright">
           <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="0">
-                SELECT COUNT(*) FROM reporting_report_design WHERE uuid='34e0883c-5b15-4fc4-a929-239cfa1b0ecb';
+                SELECT COUNT(*) FROM reporting_report_design WHERE report_definition_uuid='34e0883c-5b15-4fc4-a929-239cfa1b0ecb';
             </sqlCheck>
           </preConditions>
         <!-- Excel -->
@@ -397,7 +397,7 @@
     <changeSet id="report_update_202102271043" author="Bright">
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="0">
-                SELECT COUNT(*) FROM reporting_report_design WHERE uuid='004adb10-7da2-47b7-bdfc-dd798245a850';
+                SELECT COUNT(*) FROM reporting_report_design WHERE report_definition_uuid='004adb10-7da2-47b7-bdfc-dd798245a850';
             </sqlCheck>
         </preConditions>
         <!-- Excel -->
