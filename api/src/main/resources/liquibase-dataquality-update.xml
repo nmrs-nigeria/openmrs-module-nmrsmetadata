@@ -296,41 +296,15 @@
         </insert>
         
       </changeSet>
-      <!-- GENERAL ANTENATAL EXPORT -->
+      <!-- PMTCT Line List -->
       <changeSet id="report_update_202102270633" author="Bright">
-          
-      </changeSet>
-        <!-- HTS EXPORT -->
-    <changeSet id="report_update_20201129615" author="Bright">
-        <preConditions onFail="MARK_RAN">
+          <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="0">
-                SELECT COUNT(*) FROM reporting_report_design WHERE uuid='80889f61-c5ff-4f2e-98fa-4511e4f2898c';
+                SELECT COUNT(*) FROM reporting_report_design WHERE uuid='3959a398-0ec7-45df-9ae2-5039ebfa736e';
             </sqlCheck>
-        </preConditions>
-        <insert tableName="reporting_report_design">
-            <column name="uuid" value="80889f61-c5ff-4f2e-98fa-4511e4f2898c"/>
-            <column name="name" value="CSV"/>
-            <column name="description" value="CSV Export"/>
-            <column name="renderer_type" value="org.openmrs.module.reporting.report.renderer.CsvReportRenderer"/>
-            <column name="properties" value="#Sun Nov 15 23:07:29 WAT 2020"/>
-            <column name="creator" value="1"/>
-            <column name="date_created" valueDate="2020-11-15 23:07:29"/>
-            <column name="retired" value="0"/>
-            <column name="report_definition_uuid" value="65dba83d-b268-48af-a7ee-dd1626cd37a1"/>
-        </insert>
-        <insert tableName="reporting_report_design">
-            <column name="uuid" value="61cfbb18-70ed-4ef1-87fd-e2bd1903937d"/>
-            <column name="name" value="Excel"/>
-            <column name="description" value="Excel Export"/>
-            <column name="renderer_type" value="org.openmrs.module.reporting.report.renderer.XlsReportRenderer"/>
-            <column name="properties" value="#Sun Nov 15 23:07:56 WAT 2020"/>
-            <column name="creator" value="1"/>
-            <column name="date_created" valueDate="2020-11-15 23:07:56"/>
-            <column name="retired" value="0"/>
-            <column name="report_definition_uuid" value="65dba83d-b268-48af-a7ee-dd1626cd37a1"/>
-        </insert>
-        <!-- GENERAL ANTENATAL EXPORT -->
-        <insert tableName="reporting_report_design">
+          </preConditions>
+          <!-- CSV -->
+          <insert tableName="reporting_report_design">
             <column name="uuid" value="ad20eaae-540c-4a9d-a0af-7bde42c7223f"/>
             <column name="name" value="CSV"/>
             <column name="description" value="CSV Export"/>
@@ -341,6 +315,7 @@
             <column name="retired" value="0"/>
             <column name="report_definition_uuid" value="3959a398-0ec7-45df-9ae2-5039ebfa736e"/>
         </insert>
+         <!-- Excel -->
         <insert tableName="reporting_report_design">
             <column name="uuid" value="3cac95d9-88c0-440c-a919-412559138f70"/>
             <column name="name" value="Excel"/>
@@ -352,7 +327,39 @@
             <column name="retired" value="0"/>
             <column name="report_definition_uuid" value="3959a398-0ec7-45df-9ae2-5039ebfa736e"/>
         </insert>
+      </changeSet>
+      <!-- Child Birth Registration -->
+      <changeSet id="report_update_202102270640" author="Bright">
+          <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                SELECT COUNT(*) FROM reporting_report_design WHERE uuid='eaabfbea-83c3-49a4-b1fb-25ac95391d7f';
+            </sqlCheck>
+          </preConditions>
+          <!-- Excel -->
+        <insert tableName="reporting_report_design">
+            <column name="uuid" value="f1bb404e-8d51-4d22-b6ff-f1482b2ada97"/>
+            <column name="name" value="Excel"/>
+            <column name="description" value="Excel Export"/>
+            <column name="renderer_type" value="org.openmrs.module.reporting.report.renderer.XlsReportRenderer"/>
+            <column name="properties" value="#Mon Jan 04 14:36:49 WAT 2021"/>
+            <column name="creator" value="1"/>
+            <column name="date_created" valueDate="2021-01-04 14:36:49"/>
+            <column name="retired" value="0"/>
+            <column name="report_definition_uuid" value="eaabfbea-83c3-49a4-b1fb-25ac95391d7f"/>
+        </insert>
+        <!-- CSV -->
+        <insert tableName="reporting_report_design">
+            <column name="uuid" value="2557b542-068d-45e1-a75f-f78af15c4b80"/>
+            <column name="name" value="CSV"/>
+            <column name="description" value="CSV Export"/>
+            <column name="renderer_type" value="org.openmrs.module.reporting.report.renderer.CsvReportRenderer"/>
+            <column name="properties" value="#Mon Jan 04 14:37:13 WAT 2021"/>
+            <column name="creator" value="1"/>
+            <column name="date_created" valueDate="2021-01-04 14:37:13"/>
+            <column name="retired" value="0"/>
+            <column name="report_definition_uuid" value="eaabfbea-83c3-49a4-b1fb-25ac95391d7f"/>
+        </insert>
+          
+      </changeSet>
        
-    </changeSet>
-
 </databaseChangeLog>
