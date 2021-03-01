@@ -17,6 +17,36 @@
                  splitStatements="true"
                  endDelimiter="/0xd"/>
     </changeSet>
+    <changeSet id="fn_getminconceptobsid_20210301_1127" author="Bright">
+        <sqlFile path="dataquality/functions/fn_getminconceptobsid.sql"
+                 stripComments="true"
+                 splitStatements="true"
+                 endDelimiter="/0xd"/>
+    </changeSet>
+    <changeSet id="fn_getmaxconceptobsid_20210301_1129" author="Bright">
+        <sqlFile path="dataquality/functions/fn_getmaxconceptobsid.sql"
+                 stripComments="true"
+                 splitStatements="true"
+                 endDelimiter="/0xd"/>
+    </changeSet>
+    <changeSet id="fn_getmaxconceptobsidwithformid_20210301_1130" author="Bright">
+        <sqlFile path="dataquality/functions/fn_getmaxconceptobsidwithformid.sql"
+                 stripComments="true"
+                 splitStatements="true"
+                 endDelimiter="/0xd"/>
+    </changeSet>
+    <changeSet id="fn_gettextvalueobsid_20210301_1134" author="Bright">
+        <sqlFile path="dataquality/functions/fn_gettextvalueobsid.sql"
+                 stripComments="true"
+                 splitStatements="true"
+                 endDelimiter="/0xd"/>
+    </changeSet>
+    <changeSet id="fn_getencounterid_20210301_1136" author="Bright">
+        <sqlFile path="dataquality/functions/fn_getencounterid.sql"
+                 stripComments="true"
+                 splitStatements="true"
+                 endDelimiter="/0xd"/>
+    </changeSet>
     <changeSet id="fn_getconceptval_20201112_1126" author="wande" runOnChange="true">
         <sqlFile path="dataquality/functions/fn_getconceptval.sql"
                  stripComments="true"
