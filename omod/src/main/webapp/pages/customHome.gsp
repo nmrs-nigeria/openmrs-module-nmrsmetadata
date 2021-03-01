@@ -1,14 +1,6 @@
 <% ui.decorateWith("appui", "standardEmrPage", [ title: ui.message("referenceapplication.home.title") ]) %>
 <% ui.includeCss("nmrsmetadata", "bootstrap.css") %>
 <% ui.includeJavascript("nmrsmetadata", "bootstrap.js") %>
-<style type="text/css">
-    .button, button, input[type="submit"], input[type="button"], input[type="submit"], a.button {
-        background: -webkit-linear-gradient(top, #ffffff, #ffffff) !important;
-    }
-    .button.app, button.app, input[type="submit"].app, input[type="button"].app, input[type="submit"].app, a.button.app {
-        box-shadow: 0px 1px 8px 0px rgba(158, 158, 158, 0.75) !important;
-    }
-</style>
 <%
     def htmlSafeId = { extension ->
         "${ extension.id.replace(".", "-") }-${ extension.id.replace(".", "-") }-extension"
