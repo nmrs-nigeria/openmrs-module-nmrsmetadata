@@ -188,7 +188,7 @@
             <tr>
                 <td class="alnleft"><obs conceptId="165739" style="checkbox" value="false" />VDRL </td>
                 <td><obs conceptId="299" answerConceptIds="1228,1229" answerLabels="Reactive,Non-Reactive"/></td>
-                <td class="alnleft"><obs conceptId="165756" style="checkbox" value="false" />Creatinine (µmol/l)</td>
+                <td class="alnleft"><obs conceptId="165756" style="checkbox" value="false" />Creatinine (Âµmol/l)</td>
                 <td><obs conceptId="164364"/></td>
             </tr>
             <tr>
@@ -198,14 +198,14 @@
                 <td><obs conceptId="165923"/></td>
             </tr>
             <tr>
-                <td class="alnleft"><obs conceptId="165757" style="checkbox" value="false" />AST/SGOT (µ/L)</td>
+                <td class="alnleft"><obs conceptId="165757" style="checkbox" value="false" />AST/SGOT (Âµ/L)</td>
                 <td><obs conceptId="653"/></td>
                 <td colspan="2"> </td>
             </tr>
             <tr>
                 <td class="alnleft"><obs conceptId="165741" style="checkbox" value="false" />Alk. Phosphate (U/l)</td>
                 <td><obs conceptId="785"/></td>
-                <td class="alnleft"><obs conceptId="165758" style="checkbox" value="false" />Total Bilirubin (µmol/l)</td>
+                <td class="alnleft"><obs conceptId="165758" style="checkbox" value="false" />Total Bilirubin (Âµmol/l)</td>
                 <td><obs conceptId="655"/></td>
             </tr>
             <tr>
@@ -311,8 +311,9 @@
                 <td><obs conceptId="165716"/></td>
             </tr>
             <tr>
+                
                 <td class="alnleft_s">Viral Load test result</td>
-                <td><obs conceptId="856" labelText=""/>copies/ml</td>
+                <td><obs conceptId="856" labelText="" id="resul" />copies/ml</td>
 
                  <td class="alnleft_s">Date result was sent from PCR Lab</td>
                  <td><obs conceptId="165989" /></td>
@@ -361,5 +362,20 @@
         </table>
     </fieldset>
     <submit/>
-
+   
+   <script type="text/javascript">
+    
+        jQuery(function() {
+            getField('resul.value').change(function() {
+                var changeinput = getValue('resul.value');
+                if ( changeinput == "TND" || changeinput == "tnd"  || changeinput == "Tnd" || changeinput == "&lt;20" || changeinput == "&lt;40" || changeinput == "&lt; 20" || changeinput == "&lt; 40") {
+                   
+                    setValue('resul.value', 0);
+                   
+                }
+                 changeinput = Math.round(getValue('resul.value'));
+                 setValue('resul.value', changeinput)
+            }  );
+        });
+    </script>
 </htmlform>
