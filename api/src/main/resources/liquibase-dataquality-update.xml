@@ -4,7 +4,6 @@
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog/1.9
                   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-1.9.xsd">
 
-    
     <changeSet id="fn_getobsdatetime_20210301_1044" author="Bright">
         <sqlFile path="dataquality/functions/fn_getobsdatetime.sql"
                  stripComments="true"
