@@ -255,6 +255,11 @@
                     <input type="hidden" name="pref_value" id="pref_value" />
                     <input type="hidden" name="pref_type" id="pref_type" value="4" />
                 </td>
+                <includeIf velocityTest="$patient.age &gt; 9">
+                    <includeIf velocityTest="$patient.age &lt; 25">
+                        <td class="alnleft_s" colspan="5" style="vertical-align: top;"><label><obs conceptId="165347" answerConceptId="1065" answerLabel="" style="checkbox"/>Enrolled into OVC Care ?</label></td>
+                    </includeIf>
+                </includeIf>
             </tr>
 
 
