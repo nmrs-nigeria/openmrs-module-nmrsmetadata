@@ -155,18 +155,18 @@
         <table class="" style="padding: 10px;">
             <tr>
                 <td width="50%">
-                    <obs conceptId="166272" answerConceptId="1065" answerLabel="Transitioned to Adult Clinic?" style="checkbox" toggle="specifyOther2" />
+                    <obs conceptId="166272" answerConceptId="1065" answerLabel="Transitioned to Adult Care?" style="checkbox" toggle="specifyOther2" />
 
                 </td>
-                <td width="50%"  id="specifyOther2">Date Transitioned to Adult Clinic: <obs conceptId="166273" allowFutureDates="False" /></td>
+                <td width="50%"  id="specifyOther2">Date Transitioned to Adult Care: <obs conceptId="166273" allowFutureDates="False" /></td>
             </tr>
         </table>
     </section>
 
-    <section headerLabel="2. Outcome">
+    <section headerLabel="2. OTZ Status. Note: Exited is the expected outcome while indicates that the patient has completed OTZ.">
         <table class="" style="padding: 10px;">
             <tr>
-                <td width="20%">Outcome:</td>
+                <td width="20%">OTZ Status:</td>
                 <td width="30%">
                     <obs conceptId="166275" id="otzOutcome" answerConceptIds="166351,166274">
                         <controls>
@@ -175,7 +175,7 @@
                         </controls>
                     </obs>
                 </td>
-                <td><span id="outDate">Outcome Date:
+                <td><span id="outDate">OTZ Status Date:
                        <obs conceptId="166008" allowFutureDates="false" />
                     </span>
                 </td>
@@ -185,12 +185,12 @@
         <table class="" style="padding: 10px;" id="exitedBy">
             <tr>
                 <td width="50%"><span id="eId">Exited</span><span id="oBy">Signed</span> By</td>
-                <td width="50%"><obs conceptId="166353" style="person" /></td>
+                <td width="50%"><obs conceptId="166353" style="person"/></td>
             </tr>
         </table>
     </section>
 
-    <section headerLabel="Reactivation" id="reactivation">
+    <section headerLabel="OTZ Reactivation" id="reactivation">
         <table class="" style="padding: 10px;">
             <tr>
                 <td width="50%">

@@ -255,6 +255,9 @@
                     <input type="hidden" name="pref_value" id="pref_value" />
                     <input type="hidden" name="pref_type" id="pref_type" value="4" />
                 </td>
+                <includeIf velocityTest="$patient.age &lt; 19">
+                        <td class="alnleft_s" colspan="5" style="vertical-align: top;"><label><obs conceptId="165347" answerConceptId="1065" answerLabel="" style="checkbox"/>Enrolled into OVC Care ?</label></td>
+                </includeIf>
             </tr>
 
 
@@ -331,6 +334,7 @@
                 <td class="alnleft_s"><obs conceptId="1712" answerLabels="No education,Primary Education,Secondary Education,Tertiary Education" answerConceptIds="1107,1713,1714,160292,5622" /></td>
 
             </tr>
+
             <includeIf velocityTest="$patient.gender == 'F' ">
                 <tr>
                     <td class="alnleft_s">Breast Feeding Status</td>

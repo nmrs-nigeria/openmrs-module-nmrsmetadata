@@ -138,7 +138,12 @@
       <tr><td>ART Program forms</td></tr>
       <tr>
           <td>
-              <div id="home-container">
+              <includeIf velocityTest="$fn.latestObs('165469').obsDatetime">
+                  <includeIf velocityTest="!$fn.latestObs('165775').obsDatetime">
+                      <p>Care Ended</p>
+                  </includeIf>
+                  <includeIf velocityTest="$fn.latestObs('165775').obsDatetime &amp; $date.difference($fn.latestObs('165469').obsDatetime, $fn.latestObs('165775').obsDatetime) &lt; 0 ">
+                    <div id="home-container">
                   <div id="apps">
                       <a id="enrollment"
                          href="/baseUrl/htmlformentryui/htmlform/enterHtmlFormWithStandardUi.page?patientId=&amp;visitId=&amp;formUuid=5d522e63-463e-4a9f-a2c1-7ebbe4069a49&amp;returnUrl=%2F+domain+%2Fcoreapps%2Fclinicianfacing%2Fpatient.page%3FpatientId%3Db050b4b9-6786-4e69-93b6-82b641cc4fc0%26encounterId%3D1242%26encounterId%3D1258%26"
@@ -271,6 +276,146 @@
 
                   </div>
               </div>
+                  </includeIf>
+                  <includeIf velocityTest="$fn.latestObs('165775').obsDatetime &amp; $date.difference($fn.latestObs('165469').obsDatetime, $fn.latestObs('165775').obsDatetime) &gt; -1 ">
+                      <p>Care Ended</p>
+                  </includeIf>
+              </includeIf>
+              <includeIf velocityTest="!$fn.latestObs('165469').obsDatetime">
+                  <div id="home-container">
+                      <div id="apps">
+                          <a id="enrollment"
+                             href="/baseUrl/htmlformentryui/htmlform/enterHtmlFormWithStandardUi.page?patientId=&amp;visitId=&amp;formUuid=5d522e63-463e-4a9f-a2c1-7ebbe4069a49&amp;returnUrl=%2F+domain+%2Fcoreapps%2Fclinicianfacing%2Fpatient.page%3FpatientId%3Db050b4b9-6786-4e69-93b6-82b641cc4fc0%26encounterId%3D1242%26encounterId%3D1258%26"
+                             class="button app big">
+                              <i class="icon-calendar"></i>
+                              Hiv enrollment
+                          </a>
+                          <a id="carecard"
+                             class="button app big art">
+                              <i class="icon-truck"></i>
+                              Care Card
+                          </a>
+                          <a id="lab"
+                             href="/baseUrl/htmlformentryui/htmlform/enterHtmlFormWithStandardUi.page?patientId=&amp;visitId=&amp;formUuid=029e5be3-051b-40cd-a578-a7bf33ade676&amp;returnUrl=%2F+domain+%2Fcoreapps%2Fclinicianfacing%2Fpatient.page%3FpatientId%3Db050b4b9-6786-4e69-93b6-82b641cc4fc0%26encounterId%3D1242%26encounterId%3D1258%26"
+                             class="button app big art">
+
+                              <i class="icon-truck"></i>
+
+                              Lab forms
+                          </a>
+
+                          <a id="pharm"
+                             href="/baseUrl/htmlformentryui/htmlform/enterHtmlFormWithStandardUi.page?patientId=&amp;visitId=&amp;formUuid=1ae18e30-31c6-4daf-87f2-6075d0a0b2df&amp;returnUrl=%2F+domain+%2Fcoreapps%2Fclinicianfacing%2Fpatient.page%3FpatientId%3Db050b4b9-6786-4e69-93b6-82b641cc4fc0%26encounterId%3D1242%26encounterId%3D1258%26"
+                             class="button app big art">
+
+                              <i class="icon-sort"></i>
+
+                              Pharmacy Order
+                          </a>
+
+                          <a id="adult"
+                             href="/baseUrl/htmlformentryui/htmlform/enterHtmlFormWithStandardUi.page?patientId=&amp;visitId=&amp;formUuid=2b8e038b-9b8d-4e73-b4ad-5f1d39499ff6&amp;returnUrl=%2F+domain+%2Fcoreapps%2Fclinicianfacing%2Fpatient.page%3FpatientId%3Db050b4b9-6786-4e69-93b6-82b641cc4fc0%26encounterId%3D1242%26encounterId%3D1258%26"
+                             class="button app big art">
+
+                              <i class="icon-signal"></i>
+
+                              Adult Initial Clinical Evaluation
+                          </a>
+
+                          <a id="pediatric"
+                             href="/baseUrl/htmlformentryui/htmlform/enterHtmlFormWithStandardUi.page?patientId=&amp;visitId=&amp;formUuid=9bacf7ac-93c9-4a01-b7b4-80cc74e7f6c0&amp;returnUrl=%2F+domain+%2Fcoreapps%2Fclinicianfacing%2Fpatient.page%3FpatientId%3Db050b4b9-6786-4e69-93b6-82b641cc4fc0%26encounterId%3D1242%26encounterId%3D1258%26"
+                             class="button app big art">
+
+                              <i class="icon-user"></i>
+
+                              Pediatric Initial Clinical Evaluation
+                          </a>
+
+                          <a id="ipt"
+                             href="/baseUrl/htmlformentryui/htmlform/enterHtmlFormWithStandardUi.page?patientId=&amp;visitId=&amp;formUuid=b5dfebb1-63af-4ecb-8322-a10e0c631a3c&amp;returnUrl=%2F+domain+%2Fcoreapps%2Fclinicianfacing%2Fpatient.page%3FpatientId%3Db050b4b9-6786-4e69-93b6-82b641cc4fc0%26encounterId%3D1242%26encounterId%3D1258%26"
+                             class="button app big art">
+
+                              <i class="icon-tasks"></i>
+
+                              Presumptive TB Screening
+                          </a>
+
+                          <a id="transfer"
+                             href="/baseUrl/htmlformentryui/htmlform/enterHtmlFormWithStandardUi.page?patientId=&amp;visitId=&amp;formUuid=4963a72c-4b0d-467a-a1d0-64d981ff585c&amp;returnUrl=%2F+domain+%2Fcoreapps%2Fclinicianfacing%2Fpatient.page%3FpatientId%3Db050b4b9-6786-4e69-93b6-82b641cc4fc0%26encounterId%3D1242%26encounterId%3D1258%26"
+                             class="button app big art">
+
+                              <i class="icon-arrow-right"></i>
+
+                              Transfer Form
+                          </a>
+
+                          <a id="referral"
+                             href="/baseUrl/htmlformentryui/htmlform/enterHtmlFormWithStandardUi.page?patientId=&amp;visitId=&amp;formUuid=8191c83b-2bee-4b50-8f15-bac832e0a2c7&amp;returnUrl=%2F+domain+%2Fcoreapps%2Fclinicianfacing%2Fpatient.page%3FpatientId%3Db050b4b9-6786-4e69-93b6-82b641cc4fc0%26encounterId%3D1242%26encounterId%3D1258%26"
+                             class="button app big art">
+
+                              <i class="icon-exchange"></i>
+
+                              Client Referral Form
+                          </a>
+                          <a id="eacform"
+                             href="/baseUrl/htmlformentryui/htmlform/enterHtmlFormWithStandardUi.page?patientId=&amp;visitId=&amp;formUuid=d42c5cf6-8722-4f32-8767-ec8df0a40094&amp;returnUrl=%2F+domain+%2Fcoreapps%2Fclinicianfacing%2Fpatient.page%3FpatientId%3Db050b4b9-6786-4e69-93b6-82b641cc4fc0%26encounterId%3D1242%26encounterId%3D1258%26"
+                             class="button app big art">
+
+                              <i class="icon-user"></i>
+
+                              Enhanced Adherence Counselling
+                          </a>
+
+                          <a id="commencement"
+                             href="/baseUrl/htmlformentryui/htmlform/enterHtmlFormWithStandardUi.page?patientId=&amp;visitId=&amp;formUuid=38d688ed-a569-4868-b5b2-a2f204a2e572&amp;returnUrl=%2F+domain+%2Fcoreapps%2Fclinicianfacing%2Fpatient.page%3FpatientId%3Db050b4b9-6786-4e69-93b6-82b641cc4fc0%26encounterId%3D1242%26encounterId%3D1258%26"
+                             class="button app big art">
+
+                              <i class="icon-legal"></i>
+
+                              ART Commencement
+                          </a>
+
+                          <a id="tracking"
+                             href="/baseUrl/htmlformentryui/htmlform/enterHtmlFormWithStandardUi.page?patientId=&amp;visitId=&amp;formUuid=5fbc99be-9aeb-4f94-85b0-b2fae88a0ced&amp;returnUrl=%2F+domain+%2Fcoreapps%2Fclinicianfacing%2Fpatient.page%3FpatientId%3Db050b4b9-6786-4e69-93b6-82b641cc4fc0%26encounterId%3D1242%26encounterId%3D1258%26"
+                             class="button app big art">
+
+                              <i class="icon-truck"></i>
+
+                              Client Tracking and Termination
+                          </a>
+
+
+                          <a id="otz_form"
+                             href="/baseUrl/htmlformentryui/htmlform/enterHtmlFormWithStandardUi.page?patientId=&amp;visitId=&amp;formUuid=5dfc3ea6-9783-44a3-a3fd-7249f4e313bc&amp;returnUrl=%2F+domain+%2Fcoreapps%2Fclinicianfacing%2Fpatient.page%3FpatientId%3Db050b4b9-6786-4e69-93b6-82b641cc4fc0%26encounterId%3D1242%26encounterId%3D1258%26"
+                             class="button app big art">
+
+                              <i class="icon-truck"></i>
+
+                              Operation Triple Zero (OTZ) Service
+                          </a>
+
+                          <a id="ipf_form"
+                             href="/baseUrl/htmlformentryui/htmlform/enterHtmlFormWithStandardUi.page?patientId=&amp;visitId=&amp;formUuid=f826d129-dea8-4b6b-86bc-1f448076615b&amp;returnUrl=%2F+domain+%2Fcoreapps%2Fclinicianfacing%2Fpatient.page%3FpatientId%3Db050b4b9-6786-4e69-93b6-82b641cc4fc0%26encounterId%3D1242%26encounterId%3D1258%26"
+                             class="button app big art">
+
+                              <i class="icon-legal"></i>
+
+                              Intensive Patient Follow Up
+                          </a>
+
+                          <a id="adr_form"
+                             href="/baseUrl/htmlformentryui/htmlform/enterHtmlFormWithStandardUi.page?patientId=&amp;visitId=&amp;formUuid=40a38992-18c1-463e-8413-cdaa29a9e420&amp;returnUrl=%2F+domain+%2Fcoreapps%2Fclinicianfacing%2Fpatient.page%3FpatientId%3Db050b4b9-6786-4e69-93b6-82b641cc4fc0%26encounterId%3D1242%26encounterId%3D1258%26"
+                             class="button app big art">
+
+                              <i class="icon-legal"></i>
+
+                              Adverse Drug Reaction
+                          </a>
+
+
+                      </div>
+                  </div>
+              </includeIf>
           </td>
       </tr>
   </table>
