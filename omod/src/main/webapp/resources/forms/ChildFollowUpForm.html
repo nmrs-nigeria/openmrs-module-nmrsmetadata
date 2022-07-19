@@ -101,11 +101,11 @@
     </style>
 <script type="text/javascript">
 
-	var $ = jQuery;
-	$(document).ready(function ()
-	{
-	   $('.hasDatepicker').attr('readonly', true)
-	});
+    var $ = jQuery;
+    $(document).ready(function ()
+    {
+       $('.hasDatepicker').attr('readonly', true)
+    });
 </script>
 
     <table style="margin-bottom: 20px;">
@@ -135,6 +135,20 @@
                 <td class="alnright_s">Timing of Mother's ART Initiation:</td>
                 <td><obs conceptId="165940"/></td>
             </tr>
+
+            <tr>
+                <td class="alnright">Mother's Address:</td>
+                <td class="value"><lookup complexExpression="#foreach ( $relationship in $relationshipList )
+        #if( $relationship.relationshipType.bIsToA == 'Child' )
+        #if( !($relationship.personA.patientId == $patient.patientId ))
+        #if( $relationship.personA.gender == 'F' )
+        $relationship.personA.personAddress.address2
+        #end
+        #end
+        #end
+        #end "/></td>
+            </tr>
+
             <tr>
                 <td class="alnright_s">Hepatitis B Status:</td>
                 <td  class="value"><lookup complexExpression="$fn.latestObs(159430).valueCoded.name"/></td>
@@ -198,9 +212,9 @@
                     <encounterDate default="now" showTime="false" allowFutureDates="false"/>
                 </td>
                 <td class="alnright_s">Weight(kg):</td>
-                <td class="alnleft_s"><obs conceptId="5916" id="childsWeight" /></td>
+                <td class="alnleft_s"><obs conceptId="5916"/></td>
                 <td class="alnright_s">Length(cm):</td>
-                <td class="alnleft_s"><obs conceptId="1503" id="childsLength" /></td>
+                <td class="alnleft_s"><obs conceptId="1503"/></td>
             </tr>
             <tr>
                 <td class="alnright_s">Head circumference(cm):</td>
@@ -208,12 +222,12 @@
                 <td class="alnright_s">Mid upper arm circumference(cm):</td>
                 <td class="alnleft_s"><obs conceptId="1343"/></td>
                 <td class="alnright_s">MUAC</td>
-                <td class="alnleft_s"><obs conceptId="165935" answerConceptIds="165932, 165933,165934" answerLabels="Over, Under, Normal" id="childsMUAC" /></td>
+                <td class="alnleft_s"><obs conceptId="165935" answerConceptIds="165932, 165933,165934" answerLabels="Over, Under, Normal"/></td>
 
             </tr>
             <tr>
                 <td class="alnright_s">BMI/MUAC</td>
-                <td class="alnleft_s"><obs conceptId="165243" id="BMIorMUAC"  /></td>
+                <td class="alnleft_s"><obs conceptId="165243" /></td>
                 <td class="alnright_s">CTX given to child</td>
                 <td class="alnleft_s"><obs conceptId="165837" style="yes_no_dropdown" answerLabel=""/></td>
                 <td class="alnright_s">Feeding method</td>
@@ -322,124 +336,58 @@
             </tr>
         </table>
         <table id="pcr_1" class="table" width="100%">
-             <tr>
-                <th>Sample ID.</th>
+            <tr>
                 <th>Date Sample Collected</th>
-                <th>Date Sample Sent to PCR Lab</th>
-                <th>Date sample received at PCR Lab</th>
-                <th>Date result was sent from PCR Lab</th>               
-            </tr>           
-            <obsgroup groupingConceptId="165875">
-                <tr>               
-                    <td><obs conceptId="165715"/></td>   
-                    <td><obs conceptId="159951"/></td>
-                    <td><obs conceptId="165988"/></td>
-                    <td><obs conceptId="165716" allowFutureDates="false" /></td>  
-                    <td><obs conceptId="165989" allowFutureDates="false" /></td>                            
-                </tr>
-                <tr>
-                    <th>Date Result Received at Facility</th>                
-                    <th>Date Caregiver Given Result</th>
-                    <th>PCR Result</th>      
-                    <th>Result Date</th>
-                    <th>Assay Date</th>
-                </tr>
-                <tr>                                   
-                    <td><obs conceptId="165987"/></td>
+                <th>Date Sample Sent</th>
+                <th>Date Result Received at Facility</th>
+                <th>Date Caregiver Given Result</th>
+                <th>PCR Result</th>
+            </tr>
+            <tr>
+                <obsgroup groupingConceptId="165875">
+                    <td><obs conceptId="165869"/></td>
+                    <td><obs conceptId="165870"/></td>
+                    <td><obs conceptId="165874"/></td>
                     <td><obs conceptId="165873"/></td>
-                    <td><obs conceptId="165872" answerConceptIds="703,664,165871" answerLabels="Positive, Negative, Not Processed"/></td> 
-                    <td><obs conceptId="166423" allowFutureDates="false" /></td>  
-                    <td><obs conceptId="166424" allowFutureDates="false" /></td>        
-                </tr>
-                <tr>
-                    <th>Approval Date</th>
-                    <th>Sample Order Date</th>
-                </tr>
-                <tr>               
-                    <td><obs conceptId="166425" allowFutureDates="false" /></td>  
-                    <td><obs conceptId="164989" allowFutureDates="false" /></td>  
-                </tr>
-            </obsgroup>
+                    <td><obs conceptId="165872" answerConceptIds="703,664,165871" answerLabels="Positive, Negative, Not Processed"/></td>
+                </obsgroup>
+            </tr>
         </table>
         <table id="pcr_2" class="table" width="100%">
-              <tr>
-                <th>Sample ID.</th>
+                  <tr>
                 <th>Date Sample Collected</th>
-                <th>Date Sample Sent to PCR Lab</th>
-                <th>Date sample received at PCR Lab</th>
-                <th>Date result was sent from PCR Lab</th>               
-            </tr>           
-            <obsgroup groupingConceptId="165875">
-                <tr>               
-                    <td><obs conceptId="165715"/></td>   
-                    <td><obs conceptId="159951"/></td>
-                    <td><obs conceptId="165988"/></td>
-                    <td><obs conceptId="165716" allowFutureDates="false" /></td>  
-                    <td><obs conceptId="165989" allowFutureDates="false" /></td>                            
-                </tr>
-                <tr>
-                    <th>Date Result Received at Facility</th>                
-                    <th>Date Caregiver Given Result</th>
-                    <th>PCR Result</th>      
-                    <th>Result Date</th>
-                    <th>Assay Date</th>
-                </tr>
-                <tr>                                   
-                    <td><obs conceptId="165987"/></td>
+                <th>Date Sample Sent</th>
+                <th>Date Result Received at Facility</th>
+                <th>Date Caregiver Given Result</th>
+                <th>PCR Result</th>
+            </tr>
+            <tr>
+                <obsgroup groupingConceptId="165875">
+                    <td><obs conceptId="165869"/></td>
+                    <td><obs conceptId="165870"/></td>
+                    <td><obs conceptId="165874"/></td>
                     <td><obs conceptId="165873"/></td>
-                    <td><obs conceptId="165872" answerConceptIds="703,664,165871" answerLabels="Positive, Negative, Not Processed"/></td> 
-                    <td><obs conceptId="166423" allowFutureDates="false" /></td>  
-                    <td><obs conceptId="166424" allowFutureDates="false" /></td>        
-                </tr>
-                <tr>
-                    <th>Approval Date</th>
-                    <th>Sample Order Date</th>
-                </tr>
-                <tr>               
-                    <td><obs conceptId="166425" allowFutureDates="false" /></td>  
-                    <td><obs conceptId="164989" allowFutureDates="false" /></td>  
-                </tr>
-            </obsgroup>
+                    <td><obs conceptId="165872" answerConceptIds="703,664,165871" answerLabels="Positive, Negative, Not Processed"/></td>
+                </obsgroup>
+            </tr>
         </table>
         <table id="confirmatory_pcr" class="table" width="100%">
-             <tr>
-                <th>Sample ID.</th>
+                  <tr>
                 <th>Date Sample Collected</th>
-                <th>Date Sample Sent to PCR Lab</th>
-                <th>Date sample received at PCR Lab</th>
-                <th>Date result was sent from PCR Lab</th>               
-            </tr>           
-            <obsgroup groupingConceptId="165875">
-                <tr>               
-                    <td><obs conceptId="165715"/></td>   
-                    <td><obs conceptId="159951"/></td>
-                    <td><obs conceptId="165988"/></td>
-                    <td><obs conceptId="165716" allowFutureDates="false" /></td>  
-                    <td><obs conceptId="165989" allowFutureDates="false" /></td>                            
-                </tr>
-                <tr>
-                    <th>Date Result Received at Facility</th>                
-                    <th>Date Caregiver Given Result</th>
-                    <th>PCR Result</th>      
-                    <th>Result Date</th>
-                    <th>Assay Date</th>
-                </tr>
-                <tr>                                   
-                    <td><obs conceptId="165987"/></td>
+                <th>Date Sample Sent</th>
+                <th>Date Result Received at Facility</th>
+                <th>Date Caregiver Given Result</th>
+                <th>PCR Result</th>
+            </tr>
+            <tr>
+                <obsgroup groupingConceptId="165875">
+                    <td><obs conceptId="165869"/></td>
+                    <td><obs conceptId="165870"/></td>
+                    <td><obs conceptId="165874"/></td>
                     <td><obs conceptId="165873"/></td>
-                    <td><obs conceptId="165872" answerConceptIds="703,664,165871" answerLabels="Positive, Negative, Not Processed"/></td> 
-                    <td><obs conceptId="166423" allowFutureDates="false" /></td>  
-                    <td><obs conceptId="166424" allowFutureDates="false" /></td>        
-                </tr>
-                <tr>
-                    <th>Approval Date</th>
-                    <th>Sample Order Date</th>
-                </tr>
-                <tr>               
-                    <td><obs conceptId="166425" allowFutureDates="false" /></td>  
-                    <td><obs conceptId="164989" allowFutureDates="false" /></td>  
-                </tr>
-            </obsgroup>
+                    <td><obs conceptId="165872" answerConceptIds="703,664,165871" answerLabels="Positive, Negative, Not Processed"/></td>
+                </obsgroup>
+            </tr>
         </table>
         <table class="table" width="100%">
             <tr>
@@ -484,62 +432,4 @@
     </fieldset><br/>
 
     <submit/>
-	<script>
-	 var $ = jQuery;
-   
-        $(document).ready(function ()
-        {
-           
-            $('#childsWeight').keyup(calBMIoverMUAC);
-            $('#childsLength').keyup(calBMIoverMUAC);
-			//$('#childsMUAC').keyup(calBMIoverMUAC);
-			getField('BMIorMUAC.value')[0].disabled = 'disabled';
-        });
-	
-function calBMIoverMUAC(){
-    var weight_val = getValue('childsWeight.value');
-    var length_val = getValue('childsLength.value');
-	//var childsMUAC_val = getValue('childsMUAC.value');
-	var BMIoverMUAC = null;
-    if(length_val == 0){
-        length_val = 1;
-		//childsMUAC_val =1;
-    }
-    if(weight_val == 0){
-        weight_val = 1;
-		//childsMUAC_val =1;
-    }
-	/*if(childsMUAC_val == 0){
-	weight_val = 1;
-	length_val = 1;
-	}*/
-    var weight_num = parseFloat(weight_val);
-    var length_num = parseFloat(length_val);
-	//var childsMUAC_num = parseFloat(childsMUAC_val);
-
-  if(!isNaN(length_num)){
-        if(!isNaN(weight_num)){
-            length_num  = length_num/100;
-            var bmi_val = weight_num / (length_num* length_num);
-            if(!isNaN(bmi_val)){
-                if(length_val == 1){
-                    setValue('BMIorMUAC.value',"");
-                }else if(weight_val == 1){
-                    setValue('BMIorMUAC.value',"");
-                }else if(length_val == 1){
-                    setValue('BMIorMUAC.value',"");
-                }else{
-                    setValue('BMIorMUAC.value',parseInt(bmi_val.toFixed(2)));
-                }
-            }
-        }else{
-
-        }
-    }else {
-
-    }
-
-   
-}
-</script>
 </htmlform>
