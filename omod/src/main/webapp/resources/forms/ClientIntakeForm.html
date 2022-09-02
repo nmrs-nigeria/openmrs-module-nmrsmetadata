@@ -135,8 +135,6 @@
 
 
     <script type="text/javascript">
-
-
         var $ = jQuery;
         var $j = jQuery;
 
@@ -666,7 +664,7 @@
                     var today = new Date();
                     var visitDate = new Date(getValue('date_of_visit.value'));
                     var testVal = new Date(getValue('hiv_test_date.value'));
-                    console.log("Encounter Date", visitDate)
+
                     if (testVal > today) {
                         const field = getField('hiv_test_date.error');
                         if (field != null) {
@@ -753,7 +751,6 @@
                     var today = new Date();
                     var testVal = new Date(getValue('hiv_test_date.value'));
                     var rctd = new Date(getValue('recency_test_date.value'));
-                    var recencyProgramDate = new Date('2019, 01, 01');
 
                     if (rctd > today) {
                         const field = getField('recency_test_date.error');
@@ -769,13 +766,6 @@
                         }
                     }
 
-                    if (recencyProgramDate > rctd) {
-                        const field = getField('recency_test_date.error');
-                        if (field != null) {
-                            getField('recency_test_date.error').html('Recency Test Date cannot be earlier than 01/01/2019').show();
-                        }
-
-                    }
                 });
             }
         });
@@ -1512,15 +1502,7 @@
                     }
                 });
             }
-            $('#recency_number_value').keypress(function (e) {
-                var regex = new RegExp("^[a-zA-Z0-9]+$");
-                var str = String.fromCharCode(!e.charCode ? e.key : e.charCode);
-                if (regex.test(str)) {
-                    return true;
-                }
-                e.preventDefault();
-                return false;
-            });
+
         });
     </script>
 
@@ -1598,7 +1580,7 @@
             <td class="alnleft_s"></td>
             <td class="alnleft_s">Others, Specify</td>
             <td class="alnleft_s">
-                <obs conceptId="165966" required="true"/>
+                <obs conceptId="165966" id="other_settings"/>
             </td>
         </tr>
 
@@ -1609,11 +1591,11 @@
             </td>
             <td class="alnleft_s">Type of Session</td>
             <td class="alnleft_s">
-                <obs answerConceptIds="165792,165789,165885" answerLabels="Individual, Couple, Previously self tested" conceptId="165793" required="true"/>
+                <obs answerConceptIds="165792,165789,165885" answerLabels="Individual, Couple, Previously self tested" conceptId="165793" required="true" />
             </td>
             <td class="alnleft_s">Referred from</td>
             <td class="alnleft_s">
-                <obs answerConceptIds="978,160529,160546,5271,160542,161629,165788,5622" answerLabels="Self,TB,STI,FP,OPD,Ward,Blood Bank,Others" conceptId="165480" required="true"/>
+                <obs answerConceptIds="978,160529,160546,5271,160542,161629,165788,5622" answerLabels="Self,TB,STI,FP,OPD,Ward,Blood Bank,Others" conceptId="165480" required="true" />
             </td>
         </tr>
         <tr id="marital_setting">
@@ -1632,9 +1614,9 @@
                 </obs>
             </td>
 
-            <td class="alnleft_s" id="no_children_label">No. of own children &lt; 5</td>
+            <td class="alnleft_s" id="no_children_label">No. of own children &lt;5</td>
             <td class="alnleft_s" id="no_children">
-                <obs conceptId="160312" id="no_children_less_than_5" />
+                <obs conceptId="160312" id="no_children_less_than_5"/>
             </td>
             <td class="alnleft_s" id="no_wives_label">Numbers of wives/Co-wives</td>
             <td class="alnleft_s" id="no_wives">
@@ -2504,7 +2486,7 @@
 
 
     <fieldset>
-        <legend class="legend_style">Signature and date: </legend>
+        <legend class="legend_style">Signature and date:</legend>
         <table class="table" width="100%">
             <tr>
                 <td class="alnleft">Date:</td>
@@ -2524,17 +2506,21 @@
     </fieldset>
     <submit/>
     <script type="text/javascript">
-
-        // document.getElementById("date_of_visit").addEventListener("click",function (){
-        //
-        // });
-        /*var artProgramStartDate = '<lookup expression="fn.globalProperty(&#39;art.program.start.date&#39;, &#39;01/01/2019&#39;)"/>';
-        var recency_test_date = getValue('recency_test_date.value');
-        console.log(artProgramStartDate);
-        console.log(recency_test_date);*/
-
-
         beforeSubmit.push(function() {
+
+            var setting = getValue('setting.value');
+            var other_settings = getValue('other_settings.value');
+            console.log("setting");
+            console.log("other_settings");
+
+            if (setting == 5622){
+                if(other_settings === ""){
+                    getField('other_settings.error').html('Cannot be blank').show();
+                    return false;
+                }
+
+            }
+
             var dob = '<lookup expression="patient.birthdate" />';
             var visitDate = new Date(getValue('date_of_visit.value'));
             var timeDiff =  visitDate.getTime() - new Date(dob).getTime();
@@ -2560,7 +2546,7 @@
                 }
             }
             if(no_children_less_than_5){
-                if(no_children_less_than_5 &gt; 19){
+                if(no_children_less_than_5 &gt; 20){
                     getField('no_children_less_than_5.error').html("Number must be between 1-20.").show();
                     return false;
                 }
@@ -2571,7 +2557,7 @@
                 getField('no_wives_obs.error').html('Number of wives cannot be a negative number').show();
                 return false;
             }
-            if(no_wives_obs &gt; 19){
+            if(no_wives_obs &gt; 20){
                 getField('no_wives_obs.error').html('Number must be between 1-20').show();
                 return false;
             }
@@ -2604,7 +2590,7 @@
             var final_recency_value = getValue('final_recency_value.value');
             var recency_test_date = getValue('recency_test_date.value');
             var test_name_dropdown = getValue('test_name_dropdown.value');
-            //var artProgramStartDate = '<lookup expression="fn.globalProperty(&#39;art.program.start.date&#39;, &#39;01/01/2019&#39;)"/>';
+
             //var vl_result_obs = getValue('vl_result_obs.value');
             //var longterm_line = getValue('longterm_line.value');
 
@@ -2614,11 +2600,14 @@
                 //var recencyNum= getValue('recency_number_value.value');
 
                 //var recencyNum= $('input:text', '#recency_number_value').eq(0).val();
-                //var artProgramStartDate = '<lookup expression="fn.globalProperty(&#39;art.program.start.date&#39;, &#39;01/01/2019&#39;)"/>';
                 var recencyVer = getValue('recency_number_verif_value.value');
 
                 var patientIdentifier_recency = $('input:text', '#recency_number_value').eq(0).val();
                 var userKeyRegExp = /^[A-Z][A-Z][0-9]{8}$/;
+                if (recencyProgramDate > rctd) {
+                    getField('recency_test_date.error').html('Recency Test Date cannot be earlier than 01/01/2019').show();
+                    return false;
+                }
 
                 var vlresultT = getValue('vl_result_clasification.value');
                 var vlresultobs = getValue('vl_result_obs.value');
@@ -2645,11 +2634,6 @@
                     getField('test_name_dropdown.error').html('Recency Test Name cannot be empty').show();
                     return false;
                 }
-
-                /*if (recency_test_date &lt; artProgramStartDate) {
-                    getField('recency_test_date.error').html('Recency date cannot be later than 01/01/2019').show();
-                    return false;
-                }*/
 
                 if (recency_test_date === "") {
                     getField('recency_test_date.error').html('Recency Test Date cannot be empty').show();
@@ -2681,6 +2665,13 @@
                     return false;
                 }
 
+                var rctd = new Date(getValue('recency_test_date.value'));
+                var recencyProgramDate = new Date('2019, 01, 01');
+                if (recencyProgramDate > rctd) {
+                    getField('recency_test_date.error').html('Recency').show();
+                    return false;
+                }
+
                 var testVal = new Date(getValue('hiv_test_date.value'));
                 var rctd = new Date(getValue('recency_test_date.value'));
 
@@ -2688,6 +2679,7 @@
                     getField('recency_test_date.error').html('Recency Test Date cannot be earlier than Screening Test Date').show();
                     return false;
                 }
+
 
                 var confirmVal = new Date(getValue('confirm_test_date.value'));
                 var visitVal = new Date(getValue('date_of_visit.value'));
@@ -2759,14 +2751,20 @@
                 return true;
             } else {
 
+                var rctd = new Date(getValue('recency_test_date.value'));
+                var recencyProgramDate = new Date('2019, 01, 01');
+                if (recencyProgramDate > rctd) {
+                    getField('recency_test_date.error').html('RecencyTest Date cannot be earlier than 01/01/2019').show();
+                    return false;
+                }
+
                 var testVal = new Date(getValue('hiv_test_date.value'));
                 var rctd = new Date(getValue('recency_test_date.value'));
 
-                if (getField('recency_test_date.error') != null)
-                    if(testVal > rctd) {
-                        getField('recency_test_date.error').html('RecencyTest Date cannot be earlier than Screening Test Date').show();
-                        return false;
-                    }
+                if (getField('recency_test_date.error') != null &amp;&amp; testVal > rctd) {
+                    getField('recency_test_date.error').html('RecencyTest Date cannot be earlier than Screening Test Date').show();
+                    return false;
+                }
 
                 var confirmVal = new Date(getValue('confirm_test_date.value'));
                 var visitVal = new Date(getValue('date_of_visit.value'));
@@ -2822,4 +2820,5 @@
             }
         });
     </script>
+
 </htmlform>
