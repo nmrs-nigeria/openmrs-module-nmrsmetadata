@@ -2506,6 +2506,21 @@
     </fieldset>
     <submit/>
     <script type="text/javascript">
+        document.querySelector("#vl_result_obs").children[0].addEventListener('keyup', function (e){
+            var value = parseInt(e.target.value);
+
+            if(!isNaN(value)){
+                if(value &lt; 1000){
+                    setValue('vl_result_clasification.value', "166238");
+                }else if(value &gt;= 1000){
+                    setValue('vl_result_clasification.value', "166239");
+                }else{
+                    setValue('vl_result_clasification.value', "");
+                }
+            }else{
+                setValue('vl_result_clasification.value', "");
+            }
+        });
         beforeSubmit.push(function() {
 
             var setting = getValue('setting.value');
