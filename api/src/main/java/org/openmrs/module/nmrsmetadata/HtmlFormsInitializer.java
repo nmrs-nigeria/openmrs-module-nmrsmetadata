@@ -4,20 +4,16 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openmrs.api.FormService;
 import org.openmrs.api.context.Context;
-import org.openmrs.module.formentryapp.page.controller.forms.ExtensionForm;
-import org.openmrs.module.htmlformentry.HtmlForm;
 import org.openmrs.module.htmlformentry.HtmlFormEntryService;
 import org.openmrs.module.htmlformentryui.HtmlFormUtil;
+import org.openmrs.module.nmrsmetadata.dao.Database;
 import org.openmrs.ui.framework.resource.ResourceFactory;
 import org.openmrs.ui.framework.resource.ResourceProvider;
-import org.openmrs.util.OpenmrsClassLoader;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class HtmlFormsInitializer implements Initializer {
 	
@@ -54,6 +50,11 @@ public class HtmlFormsInitializer implements Initializer {
 				}
 			}
 		}
+		
+		Database.initConnection();
+		
+		//sets set sql mode to no substitution
+		Database.setSQLMode("NO_ENGINE_SUBSTITUTION");
 	}
 	
 	@Override

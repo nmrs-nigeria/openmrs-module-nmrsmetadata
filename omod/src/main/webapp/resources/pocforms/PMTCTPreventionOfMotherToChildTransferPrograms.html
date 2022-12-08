@@ -3,7 +3,8 @@
    <macros>paperFormId = (Fill this in)
         headerColor =#009d8e
         fontOnHeaderColor = white</macros>
-   <style>.section {
+   <style>
+   .section {
             border: 1px solid $headerColor;
             padding: 2px;
             text-align: left;
@@ -24,8 +25,10 @@
         }
         .button.app, button.app, input[type="submit"].app, input[type="button"].app, input[type="submit"].app, a.button.app {
             width: 140px !important;
-        }</style>
-   <script type="text/javascript">jQuery(document).ready(function ($) {
+        }
+        </style>
+   <script type="text/javascript">
+   jQuery(document).ready(function ($) {
             var getUrl = window.location;
             var baseUrl = getUrl .protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
             var domain = getUrl.pathname.split('/')[1];
@@ -204,7 +207,7 @@
          </includeIf>
       </tr>
    </table>
-   <div class="show">General Antenatal Care form must be filled before you access other forms</div>
+   <div class="show">PMTCT Registration form must be filled before you access other forms</div>
    <ifMode mode="" include="false">
       <lookup complexExpression="             #set( $encounter = 0 )             #set( $encounter = $fn.latestEncounter('97735f91-bb8c-4b49-9409-d1bc2899d941'))             #if( $encounter == 0 )                 &lt;script type=&quot;text/javascript&quot;&gt;                        $('.pmtct').hide()                         $('.show').show();                 &lt;/script&gt;             #end" />
    </ifMode>
