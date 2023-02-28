@@ -9,7 +9,7 @@
             text-align: left;
             margin-bottom: 1em;
         }
-        
+
         .sectionHeader {
             background-color: #2f1c55;
             color: white;
@@ -17,55 +17,55 @@
             padding: 2px;
             font-weight: bold;
         }
-        
+
         table tr:nth-child(even) {
             background: #ffffff;
         }
-        
+
         .alnright {
             text-align: right;
             color: #000000;
             width: 25%;
         }
-        
+
         .alnright_s {
             text-align: right;
             color: #000000;
             width: 13%;
         }
-        
+
         .alnleft_s {
             text-align: left;
             color: #000000;
             width: 13%;
         }
-        
+
         .alnleft_f {
             text-align: left;
             color: #000000;
             width: 20%;
         }
-        
+
         .alnleft {
             text-align: left;
             color: #000000;
             width: 25%;
         }
-        
+
         .error {
             color: red;
         }
-        
+
         td {
             border: none;
         }
-        
+
         table th,
         table td {
             padding: 5px 10px;
             border: None;
         }
-        
+
         .legend_style {
             max-width: 35%;
             background: #FAFAFA;
@@ -77,24 +77,24 @@
             border-bottom-left-radius: 2px;
             text-transform: initial;
         }
-        
+
         form fieldset,
         .form fieldset {
             min-width: 98%;
             border: none;
             border-top: 1px solid #305a72;
         }
-        
+
         table th,
         table td {
             padding: 5px 10px;
             /* border: 1px solid #DDD; */
         }
-        
+
         table tr {
             border: None;
         }
-        
+
         ul.select,
         .form input,
         .form select,
@@ -102,7 +102,7 @@
         .form ul.select {
             padding: 2px 10px;
         }
-        
+
         form input,
         form select,
         form textarea,
@@ -113,18 +113,18 @@
         .form ul.select {
             padding: 2px 10px;
         }
-        
+
         form select,
         .form select {
             max-width: 200px;
             min-width: 150px;
         }
-        
+
         .standard {
             max-width: 200px;
             min-width: 150px;
         }
-        
+
         body {
             font-family: "OpenSans", Arial, sans-serif;
             color: #363463;
@@ -1555,13 +1555,112 @@
 
             <td class="alnleft_s" id="setting_name_pitc">Setting</td>
             <td class="alnleft_s" id="setting_pitc">
-                <obs answerConceptIds="160539,160529,160546,5271,160542,161629,160545,165838,166135,5622" answerLabels="VCT,TB,STI,FP,OPD,Ward,Outreach program,Standalone HTS, Community ART, Others" conceptId="165839" id="setting" required="true">
+               <!-- <obs answerConceptIds="160539,160529,160546,5271,160542,161629,160545,165838,5622" answerLabels="VCT,TB,STI,FP,OPD,Ward,Outreach program,Standalone HTS, Others" conceptId="165839" id="setting" required="true"> -->
+                    <obs answerConceptIds="160539,160529,160546,5271,160542,161629,160545,165838,166135,5622" answerLabels="VCT,TB,STI,FP,OPD,Ward,Outreach program,Standalone HTS, Community ART, Others" conceptId="165839" id="setting" required="true">
+
                     <controls>
+                        <when thenDisplay="#setting_CT" value="160539" />
+                        <when thenDisplay="#setting_TB" value="160529" />
+                        <when thenDisplay="#setting_STI" value="160546" />
+                        <when thenDisplay="#setting_FP" value="5271" />
+                        <when thenDisplay="#setting_OPD" value="160542" />
+                        <when thenDisplay="#setting_ward" value="161629" />
+                        <when thenDisplay="#setting_Outreach" value="160545" />
+                        <when thenDisplay="#setting_StandaloneHTS" value="165838" />
                         <when thenDisplay="#setting_other" value="5622" />
                     </controls>
                 </obs>
             </td>
 
+        </tr>
+
+
+        <tr id="setting_CT">
+            <td class="alnleft_s"> </td>
+            <td class="alnleft_s"> </td>
+            <td class="alnleft_s"> </td>
+            <td class="alnleft_s"></td>
+            <td class="alnleft_s">MER Modality</td>
+            <td class="alnleft_s">
+                <obs conceptId="167154"  answerConceptIds="160546,1882,166020,1896,5964,160539,167159 " answerLabels="STI, Emergency, Index, Inpatient, TB, VCT" />
+                <!-- The last concept ID (, PMTCT,) was delibrately left to pick the defualt concept name from the DB -->
+            </td>
+        </tr>
+
+        <tr id="setting_TB">
+            <td class="alnleft_s"> </td>
+            <td class="alnleft_s"> </td>
+            <td class="alnleft_s"> </td>
+            <td class="alnleft_s"></td>
+            <td class="alnleft_s">MER Modality</td>
+            <td class="alnleft_s">
+                <obs conceptId="167154"  answerConceptIds="5964" answerLabels="TB" />
+            </td>
+        </tr>
+
+        <tr id="setting_STI">
+            <td class="alnleft_s"> </td>
+            <td class="alnleft_s"> </td>
+            <td class="alnleft_s"> </td>
+            <td class="alnleft_s"></td>
+            <td class="alnleft_s">MER Modality</td>
+            <td class="alnleft_s">
+                <obs conceptId="167154"  answerConceptIds="160546" answerLabels="STI" />
+            </td>
+        </tr>
+
+        <tr id="setting_FP">
+            <td class="alnleft_s"> </td>
+            <td class="alnleft_s"> </td>
+            <td class="alnleft_s"> </td>
+            <td class="alnleft_s"></td>
+            <td class="alnleft_s">MER Modality</td>
+            <td class="alnleft_s">
+                <obs conceptId="167154"  answerConceptIds="167155" answerLabels="Other PITC" />
+            </td>
+        </tr>
+
+        <tr id="setting_OPD">
+            <td class="alnleft_s"> </td>
+            <td class="alnleft_s"> </td>
+            <td class="alnleft_s"> </td>
+            <td class="alnleft_s"></td>
+            <td class="alnleft_s">MER Modality</td>
+            <td class="alnleft_s">
+                <obs conceptId="167154"  answerConceptIds="1882, 68,167155,160546, 160539" answerLabels="Emergency, Malnutrition, Other PITC, STI, VCT" />
+            </td>
+        </tr>
+
+        <tr id="setting_ward">
+            <td class="alnleft_s"> </td>
+            <td class="alnleft_s"> </td>
+            <td class="alnleft_s"> </td>
+            <td class="alnleft_s"></td>
+            <td class="alnleft_s">MER Modality</td>
+            <td class="alnleft_s">
+                <obs conceptId="167154"  answerConceptIds="1882, 1896,68" answerLabels="Emergency, Inpatient, Malnutrition" />
+            </td>
+        </tr>
+        <tr id="setting_Outreach">
+            <td class="alnleft_s"> </td>
+            <td class="alnleft_s"> </td>
+            <td class="alnleft_s"> </td>
+            <td class="alnleft_s"></td>
+            <td class="alnleft_s">MER Modality</td>
+            <td class="alnleft_s">
+                <obs conceptId="167154"  answerConceptIds="167158, 167161,163488, 167160,160539" answerLabels="Index, Mobile, Other community, SNS, VCT" />
+            </td>
+        </tr>
+
+        <tr id="setting_StandaloneHTS">
+            <td class="alnleft_s"> </td>
+            <td class="alnleft_s"> </td>
+            <td class="alnleft_s"> </td>
+            <td class="alnleft_s"></td>
+            <td class="alnleft_s">MER Modality</td>
+            <td class="alnleft_s">
+                <obs conceptId="167154"  answerConceptIds="1882, 167158,1896,165685, 167160,160546, 5964,160539, 167159" answerLabels="Emergency, Index, Inpatient, PMTCT, SNS, STI, TB, VCT" />
+            </td>
         </tr>
 
 
@@ -1573,7 +1672,10 @@
             <td class="alnleft_s"></td>
             <td class="alnleft_s">Others, Specify</td>
             <td class="alnleft_s">
-                <obs conceptId="165966" />
+
+                <obs conceptId="167154"  answerConceptIds="167158,167157, 165685,167159" answerLabels="Index, Pediatric &lt; 5 Clinic, PMTCT" />
+
+
             </td>
         </tr>
 
@@ -1956,9 +2058,9 @@
                         <patient field="identifier" required="false" />
                     </td>
                     <td style="vertical-align: top;">
-                        <label id="preferred_recency_label" name="preferred_recency_label"> 
+                        <label id="preferred_recency_label" name="preferred_recency_label">
                           <input id="preferred_recency" name="preferred_recency" type="checkbox" />preferred
-                      </label>          
+                      </label>
                     </td>
 
                     <td colspan="2"> <span id="outrange" style="width:100%; color:red; font-weight:bold;"></span> </td>
@@ -2033,14 +2135,14 @@
                     </td>
                 </tr>
             </table>
-            
-             	
+
+
              <table id="new_tag">
                 	 <tr>
                         <td class="alnleft_f" id="vl_value"><b>Viral load confirmation</b></td>
-                        <td colspan="3"></td>                       
+                        <td colspan="3"></td>
                     </tr>
-                	
+
                     <tr>
                         <td class="alnleft_f" id="vl_value">Sample collection date</td>
                         <td class="alnleft_f">
@@ -2092,8 +2194,8 @@
                             <obs answerConceptIds="166238,166239,166240" answerLabels="&lt;1000,&gt;=1000,Failed VL" conceptId="166241" id="vl_result_clasification" />
                         </td>
                     </tr>
-    
-                    <tr>        
+
+                    <tr>
                         <td class="alnleft_f" id="vl_result">Result (copies/ml)</td>
                         <td class="alnleft_f">
                             <obs conceptId="856" id="vl_result_obs" name="vl_result_obs" />
@@ -2101,30 +2203,30 @@
                         <td class="alnleft_f" id="final_recency_label">Final Recency Result:</td>
                         <td class="alnleft_f">
                             <obs answerConceptIds="166236,166235,166237" answerLabels="RITA Recent,Long-Term Infection,Rita Inconclusive" conceptId="166214" id="final_recency_value" />
-                            
+
                         </td>
                     </tr>
                      <tr>
 			                <td class="alnleft_f">Assay Date</td>
                             <td class="alnleft_f">
                                 <obs conceptId="166424" allowFutureDates="false" />
-                            </td>   
+                            </td>
                             <td class="alnleft_f">Approval Date</td>
                             <td class="alnleft_f">
                                 <obs conceptId="166425" allowFutureDates="false" />
-                            </td> 
+                            </td>
                      </tr>
                      <tr>
                         <td class="alnleft_f">Result Date</td>
                         <td class="alnleft_f">
                             <obs conceptId="166423" allowFutureDates="false" />
-                        </td>  
+                        </td>
                         <td class="alnleft_f" id="vl_value">Sample test date</td>
                     	<td class="alnleft_f">
                         	<obs allowFutureDates="false" conceptId="165854" id="vl_value_obs" name="vl_value_obs" />
                     	</td>
                      </tr>
-                 
+
                 <tr>
                     <td colspan="4" id="another_recency_warning_label" style="width: 100%; color:red">Please verify the correctness of all fields from the paper form before submission.</td>
                 </tr>
