@@ -134,6 +134,7 @@
 
 
     <script type="text/javascript">
+        console.log('before next');
         var $ = jQuery;
         var $j = jQuery;
 
@@ -1333,7 +1334,8 @@
                     }
                     if (control_line == "1065") {
                         if (verification_line == "1066") {
-                            if (longterm_line == "1065") {
+                            if (                let setting = document.querySelector('#setting').children[0];
+                            longterm_line == "1065") {
                                 setValue('final_recency_test_recent.value', 163611);
                                 $('#final_recency_test_recent').attr("style", "pointer-events: none;");
                                 setValue('tb_vl_request.value', "");
@@ -1500,6 +1502,141 @@
     </script>
 
 
+    <script type="text/javascript">
+
+        var $ = jQuery;
+
+        $(document).ready(function(){
+
+            beforeSubmit.push(function (e){
+
+                console.log('before submit');
+                let setting = document.querySelector('#setting').children[0];
+                let ct_value = document.querySelector('#ct_value').children[0];
+                let tb_value = document.querySelector('#tb_value').children[0];
+                let sti_value = document.querySelector('#sti_value').children[0];
+                let fp_value = document.querySelector('#fp_value').children[0];
+                let opd_value = document.querySelector('#opd_value').children[0];
+                let ward_value = document.querySelector('#ward_value').children[0];
+                let outreach_value = document.querySelector('#outreach_value').children[0];
+                let standalonehts_value = document.querySelector('#standalonehts_value').children[0];
+                let others_value = document.querySelector('#others_value').children[0];
+
+                // let setting = document.querySelector('setting').children[0];
+                // let setting = document.querySelector('setting').children[0];
+                // var ct_value = getValue('ct_value.value');
+                // var tb_value = getValue('tb_value.value');
+                // var sti_value = getValue('sti_value.value');
+                // var fp_value = getValue('fp_value.value');
+                // var opd_value = getValue('opd_value.value');
+                // var ward_value = getValue('ward_value.value');
+                // var outreach_value = getValue('outreach_value.value');
+                // var standalonehts_value = getValue('standalonehts_value.value');
+                // var others_value = getValue('others_value.value');
+
+                if (setting.value == ""){
+                    console.log('check check');
+                    setting.focus();
+                    getField('setting.error').html('ensure this field is not empty').show();
+                    console.log('after');
+                    return false;
+                } else{
+                    getField('setting.error').hide();
+                    switch (true){
+
+
+                        case ((setting.value == "160539") &amp;&amp; (ct_value.value == "")):
+                            console.log('before submit 1');
+                            ct_value.focus();
+                            getField('ct_value.error').html('ensure this field is not empty').show();
+                            return false;
+                            break;
+
+                        case ((setting.value == "160529") &amp;&amp; (tb_value.value == "")):
+                            console.log('before submit 2');
+                            tb_value.focus();
+                            getField('tb_value.error').html('ensure this field is not empty').show();
+                            return false;
+                            break;
+
+                        case ((setting.value == "160546") &amp;&amp; (sti_value.value == "")):
+                            console.log('before submit 3');
+                            sti_value.focus();
+                            getField('sti_value.error').html('ensure this field is not empty').show();
+                            return false;
+                            break;
+
+                        case ((setting.value == "5271") &amp;&amp; (fp_value.value == "")):
+                            console.log('before submit 4');
+                            fp_value.focus();
+                            getField('fp_value.error').html('ensure this field is not empty').show();
+                            return false;
+                            break;
+
+                        case ((setting.value == "160542") &amp;&amp; (opd_value.value == "")):
+                            console.log('before submit 5');
+                            opd_value.focus();
+                            getField('opd_value.error').html('ensure this field is not empty').show();
+                            return false;
+                            break;
+
+                        case ((setting.value == "161629") &amp;&amp; (ward_value.value == "")):
+                            console.log('before submit 6');
+                            ward_value.focus();
+                            getField('ward_value.error').html('ensure this field is not empty').show();
+                            return false;
+                            break;
+
+                        case ((setting.value == "160545") &amp;&amp; (outreach_value.value == "")):
+                            console.log('before submit 7');
+                            opd_value.focus();
+                            getField('outreach_value.error').html('ensure this field is not empty').show();
+                            return false;
+                            break;
+
+                        case ((setting.value == "165838") &amp;&amp; (standalonehts_value.value == "")):
+                            console.log('before submit 8');
+                            standalonehts_value.focus();
+                            getField('standalonehts_value.error').html('ensure this field is not empty').show();
+                            return false;
+                            break;
+
+                        case ((setting.value == "5622") &amp;&amp; (others_value.value == "")):
+                            console.log('before submit 9');
+                            others_value.focus();
+                            getField('others_value.error').html('ensure this field is not empty').show();
+                            return false;
+                            break;
+
+                        default:
+                            console.log('before submit_____');
+                            getField('ct_value.error').hide();
+                            getField('tb_value.error').hide();
+                            getField('sti_value.error').hide();
+                            getField('fp_value.error').hide();
+                            getField('opd_value.error').hide();
+                            getField('ward_value.error').hide();
+                            getField('outreach_value.error').hide();
+                            getField('standalonehts_value.error').hide();
+                            getField('others_value.error').hide();
+
+                            return true;
+
+                            console.log('after return');
+                    }
+
+                    console.log('in else');
+                }
+
+                console.log('in submit check');
+            })
+
+        })
+
+    </script>
+
+
+
     <!--    <div class="hidden" headerLabel="Encounter Details" headerStyle="title" id="encounter-details" sectionTag="section">-->
     <!--        <fieldset>-->
     <!--            <legend class="legend_style">When?</legend>-->
@@ -1556,7 +1693,7 @@
             <td class="alnleft_s" id="setting_name_pitc">Setting</td>
             <td class="alnleft_s" id="setting_pitc">
                <!-- <obs answerConceptIds="160539,160529,160546,5271,160542,161629,160545,165838,5622" answerLabels="VCT,TB,STI,FP,OPD,Ward,Outreach program,Standalone HTS, Others" conceptId="165839" id="setting" required="true"> -->
-                    <obs answerConceptIds="160539,160529,160546,5271,160542,161629,160545,165838,166135,5622" answerLabels="VCT,TB,STI,FP,OPD,Ward,Outreach program,Standalone HTS, Community ART, Others" conceptId="165839" id="setting" required="true">
+                    <obs answerConceptIds="160539,160529,160546,5271,160542,161629,160545,165838,5622" answerLabels="CT,TB,STI,FP,OPD,Ward,Outreach program,Standalone HTS, Others" conceptId="165839" id="setting" required="true">
 
                     <controls>
                         <when thenDisplay="#setting_CT" value="160539" />
@@ -1582,7 +1719,7 @@
             <td class="alnleft_s"></td>
             <td class="alnleft_s">MER Modality</td>
             <td class="alnleft_s">
-                <obs conceptId="167154"  answerConceptIds="160546,1882,166020,1896,5964,160539,167159 " answerLabels="STI, Emergency, Index, Inpatient, TB, VCT" />
+                <obs id="ct_value" conceptId="167154"  answerConceptIds="160546,1882,166020,1896,5964,160539,167159 " answerLabels="STI, Emergency, Index, Inpatient, TB, VCT" />
                 <!-- The last concept ID (, PMTCT,) was delibrately left to pick the defualt concept name from the DB -->
             </td>
         </tr>
@@ -1594,7 +1731,7 @@
             <td class="alnleft_s"></td>
             <td class="alnleft_s">MER Modality</td>
             <td class="alnleft_s">
-                <obs conceptId="167154"  answerConceptIds="5964" answerLabels="TB" />
+                <obs id="tb_value" conceptId="167154"  answerConceptIds="5964" answerLabels="TB" />
             </td>
         </tr>
 
@@ -1605,7 +1742,7 @@
             <td class="alnleft_s"></td>
             <td class="alnleft_s">MER Modality</td>
             <td class="alnleft_s">
-                <obs conceptId="167154"  answerConceptIds="160546" answerLabels="STI" />
+                <obs id="sti_value" conceptId="167154"  answerConceptIds="160546" answerLabels="STI" />
             </td>
         </tr>
 
@@ -1616,7 +1753,7 @@
             <td class="alnleft_s"></td>
             <td class="alnleft_s">MER Modality</td>
             <td class="alnleft_s">
-                <obs conceptId="167154"  answerConceptIds="167155" answerLabels="Other PITC" />
+                <obs id="fp_value" conceptId="167154"  answerConceptIds="167155" answerLabels="Other PITC" />
             </td>
         </tr>
 
@@ -1627,7 +1764,7 @@
             <td class="alnleft_s"></td>
             <td class="alnleft_s">MER Modality</td>
             <td class="alnleft_s">
-                <obs conceptId="167154"  answerConceptIds="1882, 68,167155,160546, 160539" answerLabels="Emergency, Malnutrition, Other PITC, STI, VCT" />
+                <obs id="opd_value" conceptId="167154"  answerConceptIds="1882, 68,167155,160546, 160539" answerLabels="Emergency, Malnutrition, Other PITC, STI, VCT" />
             </td>
         </tr>
 
@@ -1638,7 +1775,7 @@
             <td class="alnleft_s"></td>
             <td class="alnleft_s">MER Modality</td>
             <td class="alnleft_s">
-                <obs conceptId="167154"  answerConceptIds="1882, 1896,68" answerLabels="Emergency, Inpatient, Malnutrition" />
+                <obs id="ward_value" conceptId="167154"  answerConceptIds="1882, 1896,68" answerLabels="Emergency, Inpatient, Malnutrition" />
             </td>
         </tr>
         <tr id="setting_Outreach">
@@ -1648,7 +1785,7 @@
             <td class="alnleft_s"></td>
             <td class="alnleft_s">MER Modality</td>
             <td class="alnleft_s">
-                <obs conceptId="167154"  answerConceptIds="167158, 167161,163488, 167160,160539" answerLabels="Index, Mobile, Other community, SNS, VCT" />
+                <obs id="outreach_value" conceptId="167154"  answerConceptIds="167158, 167161,163488, 167160,160539" answerLabels="Index, Mobile, Other community, SNS, VCT" />
             </td>
         </tr>
 
@@ -1659,7 +1796,7 @@
             <td class="alnleft_s"></td>
             <td class="alnleft_s">MER Modality</td>
             <td class="alnleft_s">
-                <obs conceptId="167154"  answerConceptIds="1882, 167158,1896,165685, 167160,160546, 5964,160539, 167159" answerLabels="Emergency, Index, Inpatient, PMTCT, SNS, STI, TB, VCT" />
+                <obs id="standalonehts_value" conceptId="167154"  answerConceptIds="1882, 167158,1896,165685, 167160,160546, 5964,160539, 167159" answerLabels="Emergency, Index, Inpatient, PMTCT (ANC1 Only), SNS, STI, TB, VCT" />
             </td>
         </tr>
 
@@ -1673,7 +1810,7 @@
             <td class="alnleft_s">Others, Specify</td>
             <td class="alnleft_s">
 
-                <obs conceptId="167154"  answerConceptIds="167158,167157, 165685,167159" answerLabels="Index, Pediatric &lt; 5 Clinic, PMTCT" />
+                <obs id="others_value" conceptId="167154"  answerConceptIds="167158,167157, 165685,167159" answerLabels="Index, Pediatric &lt; 5 Clinic, PMTCT (ANC1 Only)" />
 
 
             </td>
@@ -2402,7 +2539,7 @@
                 var testVal = new Date(getValue('hiv_test_date.value'));
                 var rctd = new Date(getValue('recency_test_date.value'));
 
-                if (getField('recency_test_date.error') != null &amp; &amp; testVal > rctd) {
+                if (getField('recency_test_date.error') != null &amp;&amp; testVal > rctd) {
                     getField('recency_test_date.error').html('RecencyTest Date cannot be earlier than Screening Test Date').show();
                     return false;
                 }

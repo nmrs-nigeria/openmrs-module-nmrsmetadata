@@ -22,6 +22,11 @@
         table tr:nth-child(even) {
         background: #ffffff;
         }
+
+        .error {
+            color: red;
+        }
+
         .alnright{
         text-align: right;
         color:#000000;
@@ -42,6 +47,7 @@
         color:#000000;
         width: 25%;
         }
+
         td {
         border: none;
         }
@@ -240,9 +246,9 @@
                 <td class="alnleft_s">
                     <obs conceptId="1504" />
                 </td>
-                <td class="alnright_s">Child given Hepatitis B Immunoglobulin (Hep B Ig)?:</td>
+                <td class="alnright_s">Child given Hepatitis B Immunoglobulin (Hep B Ig within 24 hrs of delivery)?:</td>
                 <td class="alnleft_s">
-                    <obs conceptId="165667" />
+                    <obs conceptId="165667" required="true"/>
                 </td>
             </tr>
             <tr>

@@ -13,6 +13,10 @@
             margin-bottom: 1em;
         }
 
+        .error {
+            color: red;
+        }
+
         .sectionHeader {
             background-color: $headerColor;
             color: $fontOnHeaderColor;
@@ -48,32 +52,70 @@
         });
     </script>
 
+    <script type="text/javascript">
 
-    <script>
-        // calculation for ARV Refill (js start)
-        // Get the date string from the lookup tag
-        const lookupTag = document.querySelector('#daysOfARVRefillDifference');
-        const dateString = lookupTag.textContent;
+        var $ = jQuery;
+        $(document).ready(function(){
 
-        // Convert the date string to a Date object
-        const targetDate = new Date(dateString);
+            beforeSubmit.push(function (e) {
 
-        // Calculate the difference in days between the target date and the current date
-        const today = new Date();
-        const timeDiff = today.getTime() - targetDate.getTime();
-        const daysDifference = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+                let dsdstatus = document.querySelector('#dsdstatus').children[0];
+                let service_delivery_model = document.querySelector('#service_delivery_model').children[0];
+                let community_based = document.querySelector('#community_based').children[0];
+                let facility_based = document.querySelector('#facility_based').children[0];
 
-        // Get the value numeric from the lookup tag
-        const valueTag = document.querySelector('#daysOfARVRefillValueNumber');
-        const valueNumeric = parseFloat(valueTag.textContent);
+                if (dsdstatus.value == "") {
+                    dsdstatus.focus();
+                    getField('dsdstatus.error').html('Ensure this field is not empty').show();
+                    return false;
+                } else if (dsdstatus.value == "167128"){
+                    return true;
+                }
 
-        // Subtract the days difference from the value numeric
-        const newValueNumeric = valueNumeric - daysDifference;
+                if (dsdstatus.value == "167127") {
 
-        // Update the content of the value tag with the new value
-        valueTag.textContent = newValueNumeric;
-        // calculation for ARV Refill (js end)
+                if (service_delivery_model.value == "") {
+                    service_delivery_model.focus();
+
+                    getField('service_delivery_model.error').html('Ensure this field is not empty').show();
+                    return false;
+                } else if (service_delivery_model.value == "166276") {
+
+                    getField('service_delivery_model.error').hide();
+
+
+                    if (facility_based.value == "") {
+                        facility_based.focus();
+                        getField('facility_based.error').html('Ensure this field is not empty').show();
+                        return false;
+                    } else {
+                        getField('facility_based.error').hide();
+                        return true;
+
+                    }
+                } else if (service_delivery_model.value == "166363") {
+
+                    getField('service_delivery_model.error').hide();
+
+                    if (community_based.value == "") {
+
+                        community_based.focus();
+                        getField('community_based.error').html('Ensure this field is not empty').show();
+                        return false;
+                    } else {
+                        getField('community_based.error').hide();
+                        return true;
+
+                    }
+                }
+            }
+            });
+
+        })
+
     </script>
+
+
 
     <span style="float:right">Paper Form ID: $paperFormId</span>
 
@@ -83,7 +125,7 @@
             <tr>
                 <td>Visit Date</td>
                 <td>
-                    <encounterDate class="datefield" showTime="false" allowFutureDates="false" />
+                    <encounterDate default="today" class="datefield" showTime="false" allowFutureDates="false" />
                 </td>
             </tr>
             <tr>
@@ -186,14 +228,66 @@
                     <font color='blue' style="display: none" id="daysOfARVRefillDifference">
                         <lookup expression="fn.latestObs(159368).obsDatetime" />
                     </font>
-                    <font color='blue' style="font-weight: bold" id="daysOfARVRefillValueNumber">
+                    <font style="font-weight: bold" id="daysOfARVLeft">
                         <lookup expression="fn.latestObs(159368).valueNumeric" />
-                    </font>
+                    </font><br />
+                    <b>Date of Next Refill: </b>
+                    <font style="font-weight: bold" id="dateOfNextRefill"></font>
                 </td>
             </tr>
-            <!-- calculation for ARV Refill (html end) -->
+            <!-- calculation for ARV Refill (html end) 165090 -->
+
+
         </table>
     </section>
+
+    <script>
+        // calculation for ARV Refill (js start)
+        // Get the date string from the lookup tag
+        const lookupTag = document.querySelector('#daysOfARVRefillDifference');
+        const dateString = lookupTag.textContent;
+
+        // Convert the date string to a Date object
+        const targetDate = new Date(dateString);
+
+        // Calculate the difference in days between the target date and the current date
+        const today = new Date();
+        const timeDiff = today.getTime() - targetDate.getTime();
+        const daysDifference = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+
+        // Get the value numeric from the lookup tag
+        const daysOfARVLeft = document.querySelector('#daysOfARVLeft');
+        const valueNumeric = parseFloat(daysOfARVLeft.textContent);
+
+        // Subtract the days difference from the value numeric
+        const newValueNumeric = valueNumeric - daysDifference;
+
+        // Update the content of the value tag with the new value
+        if (Math.sign(newValueNumeric) === 1) {
+            daysOfARVLeft.textContent = newValueNumeric;
+            daysOfARVLeft.style.color = "green";
+        } else if (Math.sign(newValueNumeric) === -1) {
+            daysOfARVLeft.textContent = newValueNumeric;
+            daysOfARVLeft.style.color = "red";
+        }
+
+        // Calculate the Date of Next ARVs Refill
+        const dateOfNextRefillTag = document.querySelector('#dateOfNextRefill');
+        const dateOfNextRefillValue = new Date(today.getTime() + newValueNumeric * 24 * 60 * 60 * 1000);
+        const options = { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' };
+        console.log(dateOfNextRefillValue);
+        console.log(today);
+        if (dateOfNextRefillValue > today) {
+            dateOfNextRefillTag.textContent = dateOfNextRefillValue.toLocaleDateString('en-US', options);
+            dateOfNextRefillTag.style.color = "green";
+        } else {
+            dateOfNextRefillTag.textContent = dateOfNextRefillValue.toLocaleDateString('en-US', options);
+            dateOfNextRefillTag.style.color = "red";
+        }
+
+        // calculation for ARV Refill (js end)
+    </script>
+
 
 
     <section headerLabel="Clinical Information">
@@ -283,14 +377,141 @@ At 32-36 weeks GA,Viral Load Other -
         </table>
     </section>
 
-    <section headerLabel="24. Health Facility Visits">
+
+
+    <!-- DSD section -->
+    <section headerLabel="24. DSD Model">
+
+        <table>
+            <tr>
+                <td class="alnleft_s">DSD Status</td>
+                <td class="alnleft_s">
+                    <obs id="dsdstatus" conceptId="167126" answerConceptIds="167127,167128" answerLabels="Devolved,Not Devolved" required="true">
+                        <controls>
+                            <when value="167127" thenDisplay="#devolved" />
+                        </controls>
+                    </obs>
+                </td>
+
+                <!--  <td class="alnleft_s">
+                      <table id="DSDstartDate" class="table">
+                          <tr>
+
+                          </tr>
+                      </table>
+                  </td>  -->
+            <tr id="devolved" >
+                <td class="alnleft_s">Dispensing Modality</td>
+                <td class="alnleft_s">
+                    <obs id="service_delivery_model" conceptId="166148" answerConceptIds="166276,166363" answerLabels="Facility Dispensing, Community Dispensing">
+                        <controls>
+                            <when value="166276" thenDisplay="#Facility_Dispensing" />
+                            <when value="166363" thenDisplay="#ddd_Dispensing" />
+                        </controls>
+                    </obs>
+                </td>
+                <td>
+                    <table  class="table" width="100%">
+                        <tr id="Facility_Dispensing">
+                            <td>Facility Dispensing </td>
+                            <td >
+
+                                <obs id="facility_based" conceptId='166276' answerConceptIds="166151,167107,167108,167109,167110,167111,167112,167112,167165" answerLabels="Fast Track, Facility ART group HCW led,Facility ART group Support group,Decentralization (Hub and Spoke),After hours,Weekend and Public holidays,Child/Teen/Adolescents club (Peer Managed),Mother infant pair/Mentor mother led,Out of school clinic hours managed by HCWs" />
+                            </td>
+<!--                            <td>DSD Start Date</td>-->
+<!--                            <td>-->
+<!--                                <obs id="f_dsd_date" conceptId="167129" />-->
+<!--                            </td>-->
+                        </tr>
+                    </table>
+                </td>
+
+                <td>
+                    <table  class="table" width="100%">
+                        <tr id="ddd_Dispensing">
+                            <td>Community Dispensing </td>
+                            <td >
+
+                                <obs id="community_based" conceptId='166363' answerConceptIds="166134,166135,167113,167166,167167,167168,167169,167170,167114,167115,166280,167112,167171" answerLabels="Community Pharmacy, Community ART Group (HCW-led), Community ART Refill Group (PLHIV-led), Community ART Refill Group: Non HCW/Non PLHIV led peer-led, Distribution group managed by Adolescents Peer, Ad-hoc healthcare worker-led in conflict prone areas, Cluster drug refill, PHC devolvement, Adolescent Community ART/ peer-led groups, One Stop Shop (OSS), Home/Courier Delivery,Mother infant pair/Mentor mother led, School-Based Clinics" />
+                            </td>
+<!--                            <td>DSD Start Date</td>-->
+<!--                            <td>-->
+<!--                                <obs id="c_dsd_date" conceptId="167129" />-->
+<!--                            </td>-->
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            </tr>
+        </table>
+    </section>
+
+<!--    <section headerLabel="DSD Model">-->
+<!--        <table>-->
+<!--            <tr>-->
+<!--                <td class="alnleft_s">DSD Status</td>-->
+<!--                <td class="alnleft_s"><obs conceptId="167126" answerConceptIds="167127,167128" answerLabels="Devolved,Not Devolved"/></td>-->
+
+<!--                &lt;!&ndash;  <td class="alnleft_s">-->
+<!--                      <table id="DSDstartDate" class="table">-->
+<!--                          <tr>-->
+
+<!--                          </tr>-->
+<!--                      </table>-->
+<!--                  </td>  &ndash;&gt;-->
+
+<!--                <td class="alnleft_s">Dispensing Modality</td>-->
+<!--                <td class="alnleft_s">-->
+<!--                    <obs id="ServiceDeliveryModel" conceptId="166148" answerConceptIds="166276,166363" answerLabels="Facility Dispensing, Decentralized Drug Delivery (DDD)">-->
+<!--                        <controls>-->
+<!--                            <when value="166276" thenDisplay="#Facility_Dispensing" />-->
+<!--                            <when value="166363" thenDisplay="#ddd_Dispensing" />-->
+<!--                        </controls>-->
+<!--                    </obs>-->
+<!--                </td>-->
+<!--                <td>-->
+<!--                    <table  class="table" width="100%">-->
+<!--                        <tr id="Facility_Dispensing">-->
+<!--                            <td>Facility Dispensing </td>-->
+<!--                            <td >-->
+
+<!--                                <obs conceptId='166276' answerConceptIds="166153,166151,167107,167108,167109,167110,167111,167112,167112" answerLabels="Not Differenciated, Fast Track, Facility ART group HCW led,Facility ART group Support group,Decentralization (Hub and Spoke),After hours,Weekend and Public holidays,Child/Teen/Adolescents club (Peer Managed),Mother infant pair/Mentor mother led" />-->
+<!--                            </td>-->
+<!--                       &lt;!&ndash;     <td>DSD Start Date</td>-->
+<!--                            <td>-->
+<!--                                <obs  conceptId="167129" />-->
+<!--                            </td>   &ndash;&gt;-->
+<!--                        </tr>-->
+<!--                    </table>-->
+<!--                </td>-->
+
+<!--                <td>-->
+<!--                    <table  class="table" width="100%">-->
+<!--                        <tr id="ddd_Dispensing">-->
+<!--                            <td>Community Dispensing (DDD)</td>-->
+<!--                            <td >-->
+
+<!--                                <obs conceptId='166363' answerConceptIds="166134,166135,167113,167114,167115,166280" answerLabels="Community Pharmacy, Community ART Group (HCW-led), Community ART Refill Group (PLHIV-led), Adolescent Community ART/ peer-led groups, One Stop Shop (OSS), Home/Courier Delivery" />-->
+<!--                            </td>-->
+<!--                       &lt;!&ndash;     <td>DSD Start Date</td>-->
+<!--                            <td>-->
+<!--                                <obs  conceptId="167129" />-->
+<!--                            </td>  &ndash;&gt;-->
+<!--                        </tr>-->
+<!--                    </table>-->
+<!--                </td>-->
+<!--            </tr>-->
+<!--        </table>-->
+<!--    </section>-->
+
+    <section headerLabel="25. Health Facility Visits">
         <table>
             <tr>
                 <td style="width: 20%;">Visit Status
-                    <obs conceptId="166129" answerConceptIds="166126,160563,159492,166127,166128,160031,5240,160432"
-                         answerLabels="A = Active in PMTCT cohort,TI = Transferred In,TO = Transferred Out,TP = Transferred to another PMTCT cohort (new pregnancy)
-,TA = Transitioned to ART clinic,X = Missed Appointment/Defaulted (assign at end of month)
-,LTFU = Lost to follow-up,D = Dead " />
+                    <obs conceptId="166129" answerConceptIds="166126,167174,160563,159492,166127,166128,160031,5240,160432"
+                         answerLabels="Active in PMTCT cohort, Still Breastfeeding, Transferred In, Transferred Out, Transferred to another PMTCT cohort (new pregnancy)
+, Transitioned to ART clinic, Missed Appointment/Defaulted (assign at end of month)
+, Lost to follow-up, Dead " />
                 </td>
                 <td>Regimen Line
                     <obs id="regimenline" conceptId="165708" answerConceptIds="164506,164513,165702">
