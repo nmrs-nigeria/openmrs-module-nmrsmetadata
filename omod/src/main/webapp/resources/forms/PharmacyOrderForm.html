@@ -300,11 +300,7 @@
 
             var tablestructure='<tr>';
 
-            fetch(url, {
-                headers: {
-                    Authorization: `Basic ${encodedAuth}`,
-                },
-            })
+            fetch(url)
                 .then(response => {
                 if (!response.ok) {
                 throw new Error('Network response was not ok');
@@ -383,11 +379,7 @@
             deptvalue = DSDArray[keyToFind];
             const url = '/openmrs/ws/rest/v2/inventory/inventoryStockTakeSummary?department_uuid='+deptvalue+'&amp;startIndex=NaN';
 
-            fetch(url, {
-                headers: {
-                    Authorization: `Basic ${encodedAuth}`,
-                },
-            })
+            fetch(url)
                 .then(response => {
                 if (!response.ok) {
                 throw new Error('Network response was not ok');
@@ -541,11 +533,6 @@
                 const url = '/openmrs/ws/rest/v2/inventory/pharmacyConsumption';
 
                 fetch(url, { method: "POST",
-                    headers: {
-                        Authorization: `Basic ${encodedAuth}`,
-                        'Accept': 'application/json',
-                        'Content-Type': 'application/json'
-                    },
                     body:JSON.stringify({consumptionDate:consumption_Date, item:itemUUID, department:departmentID, quantity:item_quantity, wastage:item_wastage, batchNumber:item_batchNumber})
                 })
                     .then(response => {
@@ -584,11 +571,6 @@
                 const url = '/openmrs/ws/rest/v2/inventory/pharmacyConsumption';
 
                 fetch(url, { method: "POST",
-                    headers: {
-                        Authorization: `Basic ${encodedAuth}`,
-                        'Accept': 'application/json',
-                        'Content-Type': 'application/json'
-                    },
                     body:JSON.stringify({consumptionDate:consumption_Date, item:itemUUID, department:departmentID, quantity:item_quantity, wastage:item_wastage, batchNumber:item_batchNumber})
                 })
                     .then(response => {
@@ -627,11 +609,6 @@
                 const url = '/openmrs/ws/rest/v2/inventory/pharmacyConsumption';
 
                 fetch(url, { method: "POST",
-                    headers: {
-                        Authorization: `Basic ${encodedAuth}`,
-                        'Accept': 'application/json',
-                        'Content-Type': 'application/json'
-                    },
                     body:JSON.stringify({consumptionDate:consumption_Date, item:itemUUID, department:departmentID, quantity:item_quantity, wastage:item_wastage, batchNumber:item_batchNumber})
                 })
                     .then(response => {
