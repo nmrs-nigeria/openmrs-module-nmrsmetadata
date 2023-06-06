@@ -118,7 +118,45 @@
             });
         });
     </script>
+    <script>
+        var keyToFind ='';
+        var deptvalue ='';
+        const username = 'admin';
+        const password = 'Phis3321';
+        const encodedAuth = btoa(`${username}:${password}`);
+        var Dispensing_modality='';
+        var drugselectedtd='';
+        var arrayitembatch = "";
+        var arrayitembatch_2 = "";
+        var arrayitembatch_3 = "";
+        var arrayitembatch_4 = "";
 
+        var arrayitembatch_error = "";
+        var arrayitembatch_2_error = "";
+        var arrayitembatch_3_error = "";
+        var arrayitembatch_4_error = "";
+
+        //DSD mapping
+        const DSDArray = {
+            "166134": "4e72896f-f8d4-493d-bf2c-11afd0c32da3", //Community Pharmacy
+            "166135": "1002b372-4ddc-41a7-9dc1-9afa966082fb", //Community ART Groups
+            "166280": "0ad65f22-a7db-4fc5-b8fc-9b3f197d3830",  //Courier delivery
+            "166153":"9e059670-5576-4e8a-b770-10f8cee9f36e",  //Facility dispensary
+            "166151":"9e059670-5576-4e8a-b770-10f8cee9f36e",  //Facility dispensary
+            "167107":"9e059670-5576-4e8a-b770-10f8cee9f36e",   //Facility dispensary
+            "167108":"9e059670-5576-4e8a-b770-10f8cee9f36e",   //Facility dispensary
+            "167109":"9e059670-5576-4e8a-b770-10f8cee9f36e",   //Facility dispensary
+            "167110":"9e059670-5576-4e8a-b770-10f8cee9f36e",   //Facility dispensary
+            "167111":"9e059670-5576-4e8a-b770-10f8cee9f36e",   //Facility dispensary
+            "167112":"9e059670-5576-4e8a-b770-10f8cee9f36e",   //Facility dispensary
+            "167124":"9e059670-5576-4e8a-b770-10f8cee9f36e",   //Facility dispensary
+            "167113":"484dceeb-41a1-43e3-bdd3-d6c3b9ea0aff",  //Community ART Refill Group (PLHIV-led)
+            "167114":"d2c866f9-458e-4a97-9d30-5bd4231a7a6c",   //Adolescent Community ART/ peer-led groups
+            "167115":"7589b863-ca10-4b27-808e-b04fd05e2ac4"   //One Stop Shop (OSS)
+
+        };
+
+    </script>
 
     <!-- UPDATED (ADDED) -->
     <script type="text/javascript">
@@ -192,8 +230,14 @@
                         error = true;
                         break;
 
+                    case ((arrayitembatch_error !="") || (arrayitembatch_2_error !="") || (arrayitembatch_3_error !="") || (arrayitembatch_3_error !="") || (arrayitembatch_4_error !="")):
+                        alert('Error: The quantity dispensed cannot be greater than the quantity at dispensary');
+                        error = true;
+                        break;
+
                     <!-- Adult1stLine -->
                     case ((Adult1stLine != "") || (Adult2ndLine != "") || (Ped1stLine != "") || (Ped2ndLine != "") || (Adult3rdLine != "") || (Ped3rdLine != "")):
+                        deductFromDispensary();
                         return true;
 
                     case (error == true):
@@ -204,10 +248,447 @@
                         window.alert('Patients Regimen Line MUST be entered and can not be empty')
                         break;
                 }
+
+
+
             }
         });
     </script>
+    <script>
+        $(document).ready(function (){
+            document.querySelector('#Facility_Dispensings').children[0].addEventListener('change', function(e){
 
+//Define the commodity algorithmn PHIS3
+                var dsdmodel = getValue('ServiceDeliveryModel.value');
+                console.log("Hi Toby: "+dsdmodel);
+                if(dsdmodel =='166276'){
+                    //var Facility_Dispensing = getValue('Facility_Dispensing.value');
+                    Dispensing_modality = getValue('Facility_Dispensing.value');
+                    // if(Facility_Dispensing != ""){
+                    // 	getItemsByDepartment(Facility_Dispensing);
+                    // }
+                }
+
+            });
+            document.querySelector('#ddd_Dispensings').children[0].addEventListener('change', function(e){
+
+                var dsdmodel = getValue('ServiceDeliveryModel.value');
+                console.log("Hi Toby: "+dsdmodel);
+                if(dsdmodel =='166363'){
+                    //var Community_Dispensing = getValue('ddd_Dispensings.value');
+                    Dispensing_modality = getValue('ddd_Dispensings.value');
+                    console.log("Dispensing_modality "+Dispensing_modality);
+                    // if(Community_Dispensing != ""){
+                    // 	getItemsByDepartment(Community_Dispensing);
+                    // }
+                }
+
+            });
+
+        });
+
+        function getItemsByDepartment(Dispensing,conceptIds,elem){
+            keyToFind = Dispensing;
+            deptvalue = DSDArray[keyToFind];
+            console.log("Department Id "+deptvalue);
+            const url = '/openmrs/ws/rest/v2/inventory/inventoryStockTakeSummary?department_uuid='+deptvalue+'&amp;startIndex=NaN';
+
+
+            var itembatchoptions='';
+            var itemqtyoptions='';
+            var itemexpireoptions='';
+
+            var tablestructure='<tr>';
+
+            fetch(url, {
+                headers: {
+                    Authorization: `Basic ${encodedAuth}`,
+                },
+            })
+                .then(response => {
+                if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+                // console.log(data);
+                for(i=0; i &#60; data.results.length; i++){
+                //   console.log("My qty "+data.results[i].quantity);
+                //   console.log("My itemBatch "+data.results[i].itemBatch);
+                //   console.log("My expiration "+data.results[i].expiration);
+                // console.log("regimenLine "+ data.results[i].item.regimenLine);
+                console.log("regimenLine 1 "+ data.results[i].item.regimenLine);
+                console.log("conceptId 1 "+ data.results[i].conceptId);
+                console.log("conceptId 2 "+ conceptIds);
+                if(parseInt(conceptIds) === parseInt(data.results[i].conceptId)){
+                    itembatchoptions +='<option value="'+data.results[i].itemBatch+'">'+data.results[i].itemBatch+'</option>';
+                    console.log("itembatchoptions "+ itembatchoptions);
+
+                }
+
+
+            }
+            tablestructure +='<td class="alnleft" width="30%">Item Batch Number<select  class="itemBatch" name="itemBatch" onchange="getItemBatch(this)">';
+            tablestructure +='<option value="">Select Batch</option>';
+            tablestructure +=itembatchoptions;
+            tablestructure +='</select>';
+            tablestructure +='<input type="hidden" class="itemUUID" name="itemUUID"/>';
+            tablestructure +='</td>';
+            tablestructure +='<td class="alnleft" width="30%">Quantiy Remaining';
+            tablestructure +='<p>';
+            tablestructure +=  '<span class="itemQuantity" name="itemQuantity"></span>';
+            tablestructure +='<input type="hidden" class="itemQuantity" id="itemQuantity"/>';
+            tablestructure +='</p>';
+            tablestructure +='</td>';
+            tablestructure +='<td class="alnleft" width="30%">Expiration Date';
+            tablestructure +='<p>';
+            tablestructure +=   '<span class="itemExpiration" name="itemExpiration"></span>';
+            tablestructure +='<input type="hidden" class="itemExpiration" id="itemExpiration"/>';
+            tablestructure +='</p>';
+            tablestructure +='</td>';
+            tablestructure +='</tr>';
+
+
+            console.log("tablestructure "+tablestructure);
+
+            // document.getElementById("itemDetails").style.display='block';
+            // document.getElementById("itemDetails").innerHTML+=tablestructure;
+            var tr = $(elem).closest('tr');
+            $('[id="batchtrid"]', tr).html(tablestructure);
+            //document.getElementById("itemBatch").innerHTML ='<option value="">Select Batch Number</option>'+itembatchoptions;
+            // document.getElementById("itemQuantity").innerHTML=data.results[0].quantity;
+            // var expirationDate = new Date(data.results[0].expiration);
+            // expirationDate = expirationDate.getDate()+"/"+expirationDate.getMonth()+"/"+expirationDate.getFullYear();
+            // document.getElementById("itemExpiration").innerHTML=expirationDate;
+            // document.getElementById("itemUUID").value =data.results[0].item.uuid;
+
+
+        }).catch(error => console.error('Error:', error));
+
+        }
+
+
+
+        function getItemBatch(elem){
+
+            //  $('.itemBatch').trigger('change', function (e) {
+            //  var elem = $(this);
+
+            var tr = $(elem).closest('tr');
+
+            console.log("Selected batch Number 1 "+$('[name="itemBatch"]', tr).val());
+            var selectedItemBatch = $('[name="itemBatch"]', tr).val();
+            //keyToFind = Dispensing;
+            deptvalue = DSDArray[keyToFind];
+            const url = '/openmrs/ws/rest/v2/inventory/inventoryStockTakeSummary?department_uuid='+deptvalue+'&amp;startIndex=NaN';
+
+            fetch(url, {
+                headers: {
+                    Authorization: `Basic ${encodedAuth}`,
+                },
+            })
+                .then(response => {
+                if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+// console.log(data);
+                for(i=0; i &#60; data.results.length; i++){
+                if(data.results[i].itemBatch == selectedItemBatch){
+                    // document.getElementById("itemQuantity").innerHTML=data.results[i].quantity;
+                    $('[name="itemQuantity"]', tr).html(data.results[i].quantity);
+                    $('[id="itemQuantity"]', tr).val(data.results[i].quantity);
+                    console.log("Selected itemQuantity "+data.results[i].quantity);
+                    var expirationDate = new Date(data.results[i].expiration);
+                    expirationDate = expirationDate.getDate()+"/"+expirationDate.getMonth()+"/"+expirationDate.getFullYear();
+                    //document.getElementById("itemExpiration").innerHTML=expirationDate;
+                    $('[name="itemExpiration"]', tr).html(expirationDate);
+                    $('[id="itemExpiration"]', tr).val(expirationDate);
+                    // document.getElementById("itemUUID").value =data.results[i].item.uuid;
+                    $('[name="itemUUID"]', tr).val(data.results[i].item.uuid);
+
+
+                }
+
+            }
+
+        }).catch(error => console.error('Error:', error));
+
+
+            //  });
+
+        }
+
+
+
+        jQuery(function() {
+
+            document.querySelectorAll('#qtyDispensed_s').forEach(input => {
+                input.addEventListener('focusout',function (e){
+                //qtyDispensedsCheck(this);
+                var elem = $(this);
+                var tr = $(elem).closest('tr');
+                console.log("qtyDispensedsCheck itemQuantity "+$('[id="itemQuantity"]', tr).val());
+                var qty = $('[id="itemQuantity"]', tr).val();
+                console.log("qtyDispensedsCheck "+e.target.value);
+                var qtydisp = e.target.value;
+                if (parseInt(qtydisp) > parseInt(qty) ){
+                    arrayitembatch_error ='error';
+                    alert("Error: The quantity dispensed cannot be greater than the quantity at dispensary");
+                }else{
+                    arrayitembatch_error ='';
+                    arrayitembatch =$('[name="itemBatch"]', tr).val()+","+qtydisp+","+$('[id="itemExpiration"]', tr).val()+","+$('[name="itemUUID"]', tr).val();
+                    console.log("arrayitembatch "+arrayitembatch);
+                }
+
+            })
+        });
+
+            document.querySelectorAll('.qtyDispensed_2').forEach(input => {
+                input.addEventListener('focusout',function (e){
+                //qtyDispensedsCheck(this);
+                var elem = $(this);
+                var tr = $(elem).closest('tr');
+                console.log("qtyDispensedsCheck itemQuantity "+$('[id="itemQuantity"]', tr).val());
+                var qty = $('[id="itemQuantity"]', tr).val();
+                console.log("qtyDispensedsCheck "+e.target.value);
+                var qtydisp = e.target.value;
+                if (parseInt(qtydisp) > parseInt(qty) ){
+                    arrayitembatch_2_error ='error';
+                    alert("Error: The quantity dispensed cannot be greater than the quantity at dispensary");
+                }else{
+                    arrayitembatch_2_error ='error';
+                    arrayitembatch_2 =$('[name="itemBatch"]', tr).val()+","+qtydisp+","+$('[id="itemExpiration"]', tr).val()+","+$('[name="itemUUID"]', tr).val();
+                    console.log("arrayitembatch_2 "+arrayitembatch_2);
+                }
+
+            })
+        });
+
+            document.querySelectorAll('.qtyDispensed_3').forEach(input => {
+                input.addEventListener('focusout',function (e){
+                //qtyDispensedsCheck(this);
+                var elem = $(this);
+                var tr = $(elem).closest('tr');
+                console.log("qtyDispensedsCheck itemQuantity "+$('[id="itemQuantity"]', tr).val());
+                var qty = $('[id="itemQuantity"]', tr).val();
+                console.log("qtyDispensedsCheck "+e.target.value);
+                var qtydisp = e.target.value;
+                if (parseInt(qtydisp) > parseInt(qty) ){
+                    arrayitembatch_3_error ='error';
+                    alert("Error: The quantity dispensed cannot be greater than the quantity at dispensary");
+                }else{
+                    arrayitembatch_3_error ='';
+                    arrayitembatch_3 =$('[name="itemBatch"]', tr).val()+","+qtydisp+","+$('[id="itemExpiration"]', tr).val()+","+$('[name="itemUUID"]', tr).val();
+                    console.log("arrayitembatch_3 "+arrayitembatch_3);
+                }
+
+            })
+        });
+
+            document.querySelectorAll('.qtyDispensed_4').forEach(input => {
+                input.addEventListener('focusout',function (e){
+                //qtyDispensedsCheck(this);
+                var elem = $(this);
+                var tr = $(elem).closest('tr');
+                console.log("qtyDispensedsCheck itemQuantity "+$('[id="itemQuantity"]', tr).val());
+                var qty = $('[id="itemQuantity"]', tr).val();
+                console.log("qtyDispensedsCheck "+e.target.value);
+                var qtydisp = e.target.value;
+                if (parseInt(qtydisp) > parseInt(qty) ){
+                    arrayitembatch_4_error ='error';
+                    alert("Error: The quantity dispensed cannot be greater than the quantity at dispensary");
+                }else{
+                    arrayitembatch_4_error ='';
+                    arrayitembatch_4 =$('[name="itemBatch"]', tr).val()+","+qtydisp+","+$('[id="itemExpiration"]', tr).val()+","+$('[name="itemUUID"]', tr).val();
+                    console.log("arrayitembatch_4 "+arrayitembatch_4);
+                }
+
+            })
+        });
+
+
+
+        });
+
+
+
+        function deductFromDispensary(){
+
+
+            if(arrayitembatch !== ''){
+
+                var nameArrSplit = arrayitembatch.split(',');
+                var consumption_Date= getCurrentDate();
+                var itemUUID =nameArrSplit[3];
+                var departmentID = deptvalue;
+                var item_quantity = nameArrSplit[1];
+                var item_wastage = 0;
+                var item_batchNumber=nameArrSplit[0];
+
+                ///////////////////Log variables////////////////
+                console.log(consumption_Date);
+                console.log(itemUUID);
+                console.log(departmentID);
+                console.log(item_quantity);
+                console.log(item_batchNumber);
+                /////////////////////////////////////////////////
+
+
+                const url = '/openmrs/ws/rest/v2/inventory/pharmacyConsumption';
+
+                fetch(url, { method: "POST",
+                    headers: {
+                        Authorization: `Basic ${encodedAuth}`,
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    body:JSON.stringify({consumptionDate:consumption_Date, item:itemUUID, department:departmentID, quantity:item_quantity, wastage:item_wastage, batchNumber:item_batchNumber})
+                })
+                    .then(response => {
+                    if (!response.ok) {
+                    // throw new Error('Network response was not ok');
+                    console.log("Error response " +response);
+                }
+
+                return response.json();
+            })
+            .then(data => {
+                    console.log(data);
+            }).catch(error => console.error('Error:', error));
+
+            }
+
+            if(arrayitembatch_2 !== ''){
+
+                var nameArrSplit = arrayitembatch_2.split(',');
+                var consumption_Date= getCurrentDate();
+                var itemUUID =nameArrSplit[3];
+                var departmentID = deptvalue;
+                var item_quantity = nameArrSplit[1];
+                var item_wastage = 0;
+                var item_batchNumber=nameArrSplit[0];
+
+                ///////////////////Log variables////////////////
+                console.log(consumption_Date);
+                console.log(itemUUID);
+                console.log(departmentID);
+                console.log(item_quantity);
+                console.log(item_batchNumber);
+                /////////////////////////////////////////////////
+
+
+                const url = '/openmrs/ws/rest/v2/inventory/pharmacyConsumption';
+
+                fetch(url, { method: "POST",
+                    headers: {
+                        Authorization: `Basic ${encodedAuth}`,
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    body:JSON.stringify({consumptionDate:consumption_Date, item:itemUUID, department:departmentID, quantity:item_quantity, wastage:item_wastage, batchNumber:item_batchNumber})
+                })
+                    .then(response => {
+                    if (!response.ok) {
+                    // throw new Error('Network response was not ok');
+                    console.log("Error response " +response);
+                }
+
+                return response.json();
+            })
+            .then(data => {
+                    console.log(data);
+            }).catch(error => console.error('Error:', error));
+
+            }
+
+            if(arrayitembatch_3 !== ''){
+
+                var nameArrSplit = arrayitembatch_3.split(',');
+                var consumption_Date= getCurrentDate();
+                var itemUUID =nameArrSplit[3];
+                var departmentID = deptvalue;
+                var item_quantity = nameArrSplit[1];
+                var item_wastage = 0;
+                var item_batchNumber=nameArrSplit[0];
+
+                ///////////////////Log variables////////////////
+                console.log(consumption_Date);
+                console.log(itemUUID);
+                console.log(departmentID);
+                console.log(item_quantity);
+                console.log(item_batchNumber);
+                /////////////////////////////////////////////////
+
+
+                const url = '/openmrs/ws/rest/v2/inventory/pharmacyConsumption';
+
+                fetch(url, { method: "POST",
+                    headers: {
+                        Authorization: `Basic ${encodedAuth}`,
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    body:JSON.stringify({consumptionDate:consumption_Date, item:itemUUID, department:departmentID, quantity:item_quantity, wastage:item_wastage, batchNumber:item_batchNumber})
+                })
+                    .then(response => {
+                    if (!response.ok) {
+                    // throw new Error('Network response was not ok');
+                    console.log("Error response " +response);
+                }
+
+                return response.json();
+            })
+            .then(data => {
+                    console.log(data);
+            }).catch(error => console.error('Error:', error));
+
+            }
+
+
+        }
+
+        function getCurrentDate(){
+            var currentdate = new Date();
+            var month ='';
+            var day ='';
+            var hours ='';
+            var minutes ='';
+            if ((currentdate.getMonth()+1) &#60;= 9){
+                month = "0"+(currentdate.getMonth()+1);
+            }else{
+                month = (currentdate.getMonth()+1);
+            }
+
+            if ((currentdate.getDate()) &#60;= 9){
+                day = "0"+(currentdate.getDate());
+            }else{
+                day = currentdate.getDate();
+            }
+
+            if ((currentdate.getHours()) &#60;= 9){
+                hours = "0"+(currentdate.getHours());
+            }else{
+                hours = currentdate.getHours();
+            }
+
+            if ((currentdate.getMinutes()) &#60;= 9){
+                minutes = "0"+(currentdate.getMinutes());
+            }else{
+                minutes = currentdate.getMinutes();
+            }
+
+            var datetime = currentdate.getFullYear() + "-" +month+"-"+day + " "
+                + hours + ":"
+                + minutes;
+
+            return datetime;
+        }
+
+    </script>
 
     <script type="text/javascript">
         var $ = jQuery;
@@ -336,16 +817,17 @@
     </script>
 
     <script type="text/javascript">
+        var conceptIds = '';
         let mapping = null;
         var $ = jQuery;
         $(document).ready(function (){
             let val = document.querySelectorAll(".drugsSelector")[0].children[0].value;
-            let regId = null; 
+            let regId = null;
             document.querySelectorAll('.lines').forEach(input => {
                 if(input.children[0].value){
-                    regId =  input.children[0].value;
-                }
-            });
+                regId =  input.children[0].value;
+            }
+        });
             if(val) {
                 getDrugs(regId);
             }else{
@@ -365,7 +847,7 @@
                 let regimenLine = document.querySelector('#RegimenLine').children[0];
                 let regimenLineValue = regimenLine.value;
                 regimenLine.innerHTML = '<option></option>';
-                
+
                 if(treatmentCategory == 1528) {
                     regimenLine.innerHTML += '<option value="164507">Child First Line</option>';
                     regimenLine.innerHTML += '<option value="164514">Child Second Line</option>';
@@ -406,72 +888,97 @@
         jQuery(function() {
             document.querySelectorAll('.lines').forEach(input => {
                 input.children[0].addEventListener('change',function (e){
-                    getDrugs(e.target.value);
-                })
-            });
+                getDrugs(e.target.value);
+            })
+        });
         });
 
         jQuery(function() {
             document.querySelectorAll('.drugsSelector').forEach(input => {
                 input.children[0].addEventListener('change',function (e){
-                    getStrength(e.target);
-                })
-            });
+                console.log("Drug "+e.target.value);
+                drugselectedtd = e.target.value;
+                getStrength(e.target);
+            })
+        });
+            document.querySelectorAll('.drugsStrength').forEach(input => {
+                input.children[0].addEventListener('change',function (e){
+                console.log("Strenght "+e.target.value);
+                console.log("Strenght 2 "+drugselectedtd);
+                conceptIds = drugselectedtd;
+                if(Dispensing_modality != ""){
+                    getItemsByDepartment(Dispensing_modality,conceptIds,this);
+                }
+
+            })
+        });
+
         });
 
         function getDrugs(regId){
+            document.querySelectorAll(".batchtrid").forEach(sel => {
+                sel.innerHTML = "";
+        });
 
             fetch(`/openmrs/ws/rest/v1/nmrsmetadata/drugs/${regId}`)
                 .then(response => response.json())
-                .then(result => {
-                    // console.log("Result", result);
-                     mapping = result;
-                     // console.log(mapping);
-                     // console.log(mapping.drugMappingList)
-                    // let response = result.drugs;
+        .then(result => {
+                // console.log("Result", result);
+                mapping = result;
+            console.log("Mapping of drug: "+JSON.stringify(mapping));
+            // console.log(mapping.drugMappingList)
+            // let response = result.drugs;
 
-                    document.querySelectorAll(".drugsSelector").forEach(sel => {
-                        let val = sel.children[0].value;
-                        sel.children[0].innerHTML = "<option></option>";
-                        mapping.drugMappingList.forEach(mapping => {
-                            if(isAdult &amp;&amp; mapping.adultStrengthId) {
-                                sel.children[0].innerHTML += '<option value="' + mapping.drugsConceptId + '" >' + mapping.drugName + '</option>';
-                            }else if(!isAdult &amp;&amp; mapping.pediatricStrengthId) {
-                                sel.children[0].innerHTML += '<option value="' + mapping.drugsConceptId + '" >' + mapping.drugName + '</option>';
-                            }
-                        });
-                            sel.children[0].value = val;
-                            getStrength(sel.children[0])
-                    });
+            document.querySelectorAll(".drugsSelector").forEach(sel => {
+
+                let val = sel.children[0].value;
+            sel.children[0].innerHTML = "<option></option>";
+            mapping.drugMappingList.forEach(mapping => {
+                if(isAdult &amp;&amp; mapping.adultStrengthId) {
+                sel.children[0].innerHTML += '<option value="' + mapping.drugsConceptId + '" >' + changeDrugNameUpperCase(mapping.drugName) + '</option>';
+            }else if(!isAdult &amp;&amp; mapping.pediatricStrengthId) {
+                sel.children[0].innerHTML += '<option value="' + mapping.drugsConceptId + '" >' + changeDrugNameUpperCase(mapping.drugName) + '</option>';
+            }
+
+        });
+            sel.children[0].value = val;
+            getStrength(sel.children[0])
+        });
 
 
-                    // document.querySelectorAll(".drugsStrength").forEach(sel => {
-                    //     let val = sel.children[0].value;
-                    //     sel.children[0].innerHTML = "<option></option>";
-                    //     Object.keys(strengths).forEach(k => {
-                    //         sel.children[0].innerHTML += '<option value="' + k + '" >' + strengths[k] + '</option>';
-                    //     });
-                    //     sel.children[0].value = val;
-                    // });
-                })
-                .catch(error => {
-                   clearElements();
-                    console.log('error', error)
-                });
+
+            // document.querySelectorAll(".drugsStrength").forEach(sel => {
+            //     let val = sel.children[0].value;
+            //     sel.children[0].innerHTML = "<option></option>";
+            //     Object.keys(strengths).forEach(k => {
+            //         sel.children[0].innerHTML += '<option value="' + k + '" >' + strengths[k] + '</option>';
+            //     });
+            //     sel.children[0].value = val;
+            // });
+        })
+        .catch(error => {
+                clearElements();
+            console.log('error', error)
+        });
+        }
+
+
+        function changeDrugNameUpperCase(drugname){
+            return drugname.toUpperCase();
         }
 
         function getStrength(e){
-           //console.log("Mapping", mapping);
-           let strength = e.parentNode.parentNode.parentNode.querySelector(".drugsStrength").children[0];
-           let val = strength.value;
+            //console.log("Mapping", mapping);
+            let strength = e.parentNode.parentNode.parentNode.querySelector(".drugsStrength").children[0];
+            let val = strength.value;
             let option = '<option></option>';
             let targetMap = null;
 
             mapping.drugMappingList.forEach(map => {
                 //console.log("DrugConcept", map.drugsConceptId, "e.value", e.value)
                 if(map.drugsConceptId == e.value)
-                    targetMap = map
-            });
+            targetMap = map
+        });
             if(targetMap) {
                 if (isAdult) {
                     option += '<option value="' + targetMap.adultStrengthId + '">' + targetMap.adultStrength + '</option>';
@@ -480,16 +987,17 @@
                 }
             }
             strength.innerHTML = option;
-           strength.value = val;
+            strength.value = val;
         }
 
         function clearElements(){
             document.querySelectorAll(".drugsSelector").forEach(sel => {
                 sel.children[0].innerHTML = "<option></option>";
-            });
+
+        });
             document.querySelectorAll(".drugsStrength").forEach(sel => {
                 sel.children[0].innerHTML = "<option></option>";
-            });
+        });
         }
 
     </script>
@@ -595,7 +1103,7 @@
                     <tr>
                         <td>
                             <label>Facility Dispensing </label>
-                            <obs conceptId='166276' answerConceptIds="166153,166151,167107,167108,167109,167110,167111,167112,167124" answerLabels="Not Differenciated, Fast Track, Facility ART group HCW led,Facility ART group Support group,Decentralization (Hub and Spoke),After hours,Weekend and Public holidays,Child/Teen/Adolescents club (Peer Managed),Mother infant pair/Mentor mother led" />
+                            <obs conceptId='166276' id="Facility_Dispensings" answerConceptIds="166153,166151,167107,167108,167109,167110,167111,167112,167124" answerLabels="Not Differenciated, Fast Track, Facility ART group HCW led,Facility ART group Support group,Decentralization (Hub and Spoke),After hours,Weekend and Public holidays,Child/Teen/Adolescents club (Peer Managed),Mother infant pair/Mentor mother led" />
                         </td>
                     </tr>
                 </table>
@@ -617,7 +1125,7 @@
                     <tr>
                         <td>
                             <label>Multi-Month Dispensing (MMD)</label>
-                            <obs id="mmd_Dispensings" conceptId='166278' answerConceptIds="166281,166282,166283" answerLabels="MMD &lt;= 3, MMD 3 to 5, MMD &gt;= 6" />
+                            <obs id="mmd_Dispensings" conceptId='166278' answerConceptIds="166281,166282,166283" answerLabels="MMD &lt;= 2, MMD 3 to 5, MMD &gt;= 6" />
                         </td>
                     </tr>
                 </table>
@@ -654,6 +1162,7 @@
     <!-- UPDATED -->
     <fieldset>
         <legend class="legend_style">ARV Medication</legend>
+
         <table class="table" width="100%">
             <tr>
                 <td class="alnleft">
@@ -752,6 +1261,8 @@
                 </td>
             </tr>
         </table>
+
+
     </fieldset>
 
     <fieldset>
@@ -762,6 +1273,9 @@
                 </td>
                 <td>
                     <label>Strength</label>
+                </td>
+                <td>
+
                 </td>
                 <td>
                     <label>Single Dose</label>
@@ -790,6 +1304,7 @@
                     <td>
                         <obs class='gridmenu drugsStrength' conceptId="165725" id="drugStrength" answerConceptIds="165618,166044,165633,165619,165620,165621,165622,165623,166080,165634,165707,5622" />
                     </td>
+                    <td id="batchtrid" class="batchtrid"></td>
                     <td>
                         <obs class='gridmenu' conceptId="166120" size="5" id="arvdosage" />
                     </td>
@@ -808,6 +1323,7 @@
                     </td>
                 </obsgroup>
             </tr>
+            <tr id="itemsbatchtr"></tr>
             <tr>
                 <obsgroup groupingConceptId="162240">
                     <td>
@@ -818,6 +1334,7 @@
                         <obs class='gridmenu drugsStrength' conceptId="165725" id="drugStrength" answerConceptIds="165635,165616,166045,165074,165707,165637,165076,166046,165624,165625,165638,165639,165640,165616,165705,165617,165706,166047,166048,166049,166050,166051,166052,166053,166054,166055,5622"
                         />
                     </td>
+                    <td id="batchtrid" class="batchtrid"></td>
                     <td>
                         <obs class='gridmenu' conceptId="166120" size="5" id="arvdosage" />
                     </td>
@@ -831,7 +1348,7 @@
                         <obs conceptId="160856" id="qtyPrescribed" />
                     </td>
                     <td>
-                        <obs conceptId="1443" id="qtyDispensed" />
+                        <obs conceptId="1443" id="qtyDispensed" class="qtyDispensed_2" />
                     </td>
                 </obsgroup>
             </tr>
@@ -845,6 +1362,7 @@
                         <obs class='gridmenu drugsStrength' conceptId="165725" id="drugStrength" answerConceptIds="165635,165616,166045,165074,165707,165637,165076,166046,165624,165625,165638,165639,165640,165616,165705,165617,165706,166047,166048,166049,166050,166051,166052,166053,166054,166055,5622"
                         />
                     </td>
+                    <td id="batchtrid" class="batchtrid"></td>
                     <td>
                         <obs class='gridmenu' conceptId="166120" size="5" id="arvdosage" />
                     </td>
@@ -858,7 +1376,7 @@
                         <obs conceptId="160856" id="qtyPrescribed" />
                     </td>
                     <td>
-                        <obs conceptId="1443" id="qtyDispensed" />
+                        <obs conceptId="1443" id="qtyDispensed" class="qtyDispensed_3" />
                     </td>
                 </obsgroup>
             </tr>
@@ -871,6 +1389,7 @@
                     <td>
                         <obs class='gridmenu drugsStrength' conceptId="165725" id="drugStrength" answerConceptIds="165635,165616,166045,165074,165707,165637,165076,166046,165624,165625,165638,165639,165640,165616,165705,165617,165706,166047,166048,166049,166050,166051,166052,166053,166054,166055,5622"
                         /> </td>
+                    <td id="batchtrid" class="batchtrid"></td>
                     <td>
                         <obs class='gridmenu' conceptId="166120" size="5" id="arvdosage" />
                     </td>
@@ -884,11 +1403,14 @@
                         <obs conceptId="160856" id="qtyPrescribed" />
                     </td>
                     <td>
-                        <obs conceptId="1443" id="qtyDispensed" />
+                        <obs conceptId="1443" id="qtyDispensed" class="qtyDispensed_4" />
                     </td>
                 </obsgroup>
             </tr>
         </table>
+
+
+
     </fieldset>
 
     <fieldset>
