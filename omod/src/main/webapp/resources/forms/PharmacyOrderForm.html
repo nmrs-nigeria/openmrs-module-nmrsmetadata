@@ -119,11 +119,11 @@
         });
     </script>
     <script>
+
+        // Variables defined by Tobechi PHIS3
         var keyToFind ='';
         var deptvalue ='';
-        const username = 'admin';
-        const password = 'Phis3321';
-        const encodedAuth = btoa(`${username}:${password}`);
+
         var Dispensing_modality='';
         var drugselectedtd='';
         var arrayitembatch = "";
@@ -136,7 +136,7 @@
         var arrayitembatch_3_error = "";
         var arrayitembatch_4_error = "";
 
-        //DSD mapping
+        //DSD mapping by Tobechi PHIS3
         const DSDArray = {
             "166134": "4e72896f-f8d4-493d-bf2c-11afd0c32da3", //Community Pharmacy
             "166135": "1002b372-4ddc-41a7-9dc1-9afa966082fb", //Community ART Groups
@@ -255,12 +255,12 @@
         });
     </script>
     <script>
+        //Define the commodity algorithmn by Tobechi PHIS3
         $(document).ready(function (){
             document.querySelector('#Facility_Dispensings').children[0].addEventListener('change', function(e){
 
-//Define the commodity algorithmn PHIS3
                 var dsdmodel = getValue('ServiceDeliveryModel.value');
-                console.log("Hi Toby: "+dsdmodel);
+                console.log("Hi Tobechi: "+dsdmodel);
                 if(dsdmodel =='166276'){
                     //var Facility_Dispensing = getValue('Facility_Dispensing.value');
                     Dispensing_modality = getValue('Facility_Dispensing.value');
@@ -273,7 +273,7 @@
             document.querySelector('#ddd_Dispensings').children[0].addEventListener('change', function(e){
 
                 var dsdmodel = getValue('ServiceDeliveryModel.value');
-                console.log("Hi Toby: "+dsdmodel);
+                console.log("Hi Tobechi: "+dsdmodel);
                 if(dsdmodel =='166363'){
                     //var Community_Dispensing = getValue('ddd_Dispensings.value');
                     Dispensing_modality = getValue('ddd_Dispensings.value');
@@ -287,6 +287,7 @@
 
         });
 
+        //Function definition by Tobechi PHIS3
         function getItemsByDepartment(Dispensing,conceptIds,elem){
             keyToFind = Dispensing;
             deptvalue = DSDArray[keyToFind];
@@ -365,7 +366,7 @@
         }
 
 
-
+        //Function definition by Tobechi PHIS3
         function getItemBatch(elem){
 
             //  $('.itemBatch').trigger('change', function (e) {
@@ -417,7 +418,7 @@
 
 
         jQuery(function() {
-
+        //Function definition by Tobechi PHIS3
             document.querySelectorAll('#qtyDispensed_s').forEach(input => {
                 input.addEventListener('focusout',function (e){
                 //qtyDispensedsCheck(this);
@@ -507,7 +508,7 @@
         });
 
 
-
+        //Function definition by Tobechi PHIS3
         function deductFromDispensary(){
 
 
@@ -939,7 +940,7 @@
         });
         }
 
-
+        //Function definition by Tobechi PHIS3
         function changeDrugNameUpperCase(drugname){
             return drugname.toUpperCase();
         }
