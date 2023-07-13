@@ -479,5 +479,237 @@
                  endDelimiter=";"/>
         <sql>SET FOREIGN_KEY_CHECKS=1;</sql>
     </changeSet>
+    
+    <changeSet id="202307131440_RegAppWithPopulationType" author="Toyeeb Abdulfatai" runOnChange="true">
+        <sql>
+            <![CDATA[
+        	SET FOREIGN_KEY_CHECKS = 0;
+REPLACE INTO `appframework_user_app` (`app_id`,`json`) VALUES
+(
+'referenceapplication.registrationapp.myRegisterPa',
+   '   {
+    "id": "referenceapplication.registrationapp.myRegisterPa",
+    "instanceOf": "registrationapp.registerPatient",
+    "label": "Register Patient",
+    "description": "Create a new Patient Record",
+    "extensions": [
+        {
+            "id": "referenceapplication.registrationapp.registerPatient.homepageLink",
+            "extensionPointId": "org.openmrs.referenceapplication.homepageLink",
+            "type": "link",
+            "label": "referenceapplication.app.registerPatient.label",
+            "url": "registrationapp/registerPatient.page?appId=referenceapplication.registrationapp.myRegisterPa",
+            "icon": "icon-user",
+            "order": 1,
+            "requiredPrivilege": "App: registrationapp.registerPatient"
+        }
+    ],
+    "config": {
+        "allowUnknownPatients":false,
+        "allowManualIdentifier":false,
+        "allowRetrospectiveEntry":true,
+        "afterCreatedUrl": "/htmlformentryui/htmlform/enterHtmlFormWithStandardUi.page?patientId={{patientId}}&formUuid=ba30ac98-1c5d-4e93-84b7-54e3f6e1796e&returnUrl=%2Fopenmrs%2Fcoreapps%2Fclinicianfacing%2Fpatient.page%3FpatientId%3Da2dde911-f71f-4a17-82c7-c171a704d44f%26",
+        "sections": [
+            {
+                "id": "population-type",
+                "label": "Population Type",
+                "questions": [
+                 {
+            "legend": "Population Type",
+            "fields": [{
+                "label": "Population Type",
+                "type": "personAttribute",
+                "formFieldName": "Population Type",
+                "uuid": "267fc2b8-5084-456d-9d81-229bea49b692",
+                "widget": {
+                    "providerName": "registrationapp",
+                    "fragmentId": "field/dropDown",
+                    "config": {
+                    "formFieldName": "Population Type",
+                        "options": [{
+                            "label": "",
+                            "value": ""
+                        },
+                        {
+                            "label": "General Population",
+                            "value": "166912"
+                        },
+                        {
+                            "label": "Key Population",
+                            "value": "166284"
+                        }],
+        
+                        "initialValue": "",
+                        "hideEmptyLabel": true,
+                        "expanded": false
+                    }
+                },
+                "cssClasses": ["required"]
+            },{
+                "label": "Key Population Type",
+                "type": "personAttribute",
+                "formFieldName": "Key Population Type",
+                "uuid": "fb2a8683-1009-4924-91b7-35159e077b3b",
+                "widget": {
+                    "providerName": "registrationapp",
+                    "fragmentId": "field/dropDown",
+                    "config": {
+                    "formFieldName": "Key Population Type",
+                        "options": [{
+                            "label": "",
+                            "value": ""
+                        },{
+                            "label": "None",
+                            "value": "None"
+                        },
+                        {
+                            "label": "FSW",
+                            "value": "166285"
+                        },
+                        {
+                            "label": "MSM",
+                            "value": "160578"
+                        },
+                        {
+                            "label": "PWID",
+                            "value": "166286"
+                        },
+                        {
+                            "label": "Transgender",
+                            "value": "166287"
+                        },
+                        {
+                            "label": "In prison",
+                            "value": "162277"
+                        }
+                    ],
+        
+                        "initialValue": "",
+                        "hideEmptyLabel": true,
+                        "expanded": false
+                    }
+                },
+                "cssClasses": ["required"]
+            }]
+                }   
+            ]
+        },
+            {
+                "id": "contactInfo",
+                "label": "registrationapp.patient.contactInfo.label",
+                "questions": [
+                    {
+                        "legend": "Person.address",
+                        "fields": [
+                            {
+                                "type": "personAddress",
+                                "label": "registrationapp.patient.address.question",
+                                "widget": {
+                                    "providerName": "registrationapp",
+                                    "fragmentId": "field/personAddressWithHierarchy",
+                                    "config" : {
+                                        "shortcutFor": "address1",
+                                        "manualFields": ["address2"],
+                                        "required": true
+                                        }
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "legend": "registrationapp.patient.phone.label",
+                        "id": "phoneNumberLabel",
+                        "fields": [
+                            {
+                                "type": "personAttribute",
+                                "label": "registrationapp.patient.phone.question",
+                                "formFieldName": "phoneNumber",
+                                "uuid": "14d4f066-15f5-102d-96e4-000c29c2a5d7",
+                                "widget": {
+                                    "providerName": "uicommons",
+                                    "fragmentId": "field/text"
+                                },
+                                "cssClasses": ["phone"]
+                            }]
+                    }
+
+                ]
+            },
+            {
+                "id": "relationships-info",
+                "label": "registrationapp.person.relationship",
+                "questions": [
+                    {
+                        "legend": "registrationapp.person.relationship.label",
+                        "header": "registrationapp.person.relationship.question",
+                        "fields": [
+                            {
+                                "type": "personRelationships",
+                                "widget": {
+                                    "providerName": "registrationapp",
+                                    "fragmentId": "field/personRelationship"
+                                }
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "id": "hospital-ids",
+                "label": "Patient Identifier",
+                "questions": [
+                    {
+                        "legend": "Hospital Number",
+                        "id": "OpenMRS_ID_patientIdentifier",
+                        "fields": [
+                            {
+                                "type": "patientIdentifier",
+                                "label": "Hospital Number",
+                                "formFieldName": "HospitalNumberId",
+                                "uuid": "fd0df06c-fcd4-4625-89b2-6b72ca44b8ed",
+                                "widget": {
+                                    "providerName": "uicommons",
+                                    "fragmentId": "field/text"
+                                },
+                                "cssClasses": [""]
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+}
+   
+   
+'
+);
+           	SET FOREIGN_KEY_CHECKS = 1;
+       	    ]]>
+        </sql>
+    </changeSet>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
 </databaseChangeLog>
