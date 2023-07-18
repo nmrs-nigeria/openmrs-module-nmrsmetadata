@@ -367,7 +367,7 @@
                 var duration_mmd = $('input:text', '#duration_s').eq(0).val();
                 var mmd_Dispensed = getValue('mmd_Dispensings.value');
 
-                if ((mmd_Dispensed == "166281") &amp;&amp; (duration_mmd &gt; "90")) {
+                if ((mmd_Dispensed == "166281") &amp;&amp; (duration_mmd &gt; "89")) {
                     window.alert('Duration for MMD &lt; 3 can not be ' + duration_mmd + ' please correct this entry');
                     setValue('duration_s.value', "")
                     return false;
@@ -396,9 +396,9 @@
             let regId = null;
             document.querySelectorAll('.lines').forEach(input => {
                 if(input.children[0].value){
-                    regId =  input.children[0].value;
-                }
-            });
+                regId =  input.children[0].value;
+            }
+        });
             if(val) {
                 getDrugs(regId);
             }else{
@@ -476,41 +476,41 @@
 
             fetch(`/openmrs/ws/rest/v1/nmrsmetadata/drugs/${regId}`)
                 .then(response => response.json())
-                .then(result => {
-                    // console.log("Result", result);
-                    mapping = result;
-                    // console.log(mapping);
-                    // console.log(mapping.drugMappingList)
-                    // let response = result.drugs;
+        .then(result => {
+                // console.log("Result", result);
+                mapping = result;
+            // console.log(mapping);
+            // console.log(mapping.drugMappingList)
+            // let response = result.drugs;
 
-                    document.querySelectorAll(".drugsSelector").forEach(sel => {
-                        let val = sel.children[0].value;
-                        sel.children[0].innerHTML = "<option></option>";
-                        mapping.drugMappingList.forEach(mapping => {
-                            if(isAdult &amp;&amp; mapping.adultStrengthId) {
-                                sel.children[0].innerHTML += '<option value="' + mapping.drugsConceptId + '" >' + mapping.drugName + '</option>';
-                            }else if(!isAdult &amp;&amp; mapping.pediatricStrengthId) {
-                                sel.children[0].innerHTML += '<option value="' + mapping.drugsConceptId + '" >' + mapping.drugName + '</option>';
-                            }
-                        });
-                        sel.children[0].value = val;
-                        getStrength(sel.children[0])
-                    });
+            document.querySelectorAll(".drugsSelector").forEach(sel => {
+                let val = sel.children[0].value;
+            sel.children[0].innerHTML = "<option></option>";
+            mapping.drugMappingList.forEach(mapping => {
+                if(isAdult &amp;&amp; mapping.adultStrengthId) {
+                sel.children[0].innerHTML += '<option value="' + mapping.drugsConceptId + '" >' + mapping.drugName + '</option>';
+            }else if(!isAdult &amp;&amp; mapping.pediatricStrengthId) {
+                sel.children[0].innerHTML += '<option value="' + mapping.drugsConceptId + '" >' + mapping.drugName + '</option>';
+            }
+        });
+            sel.children[0].value = val;
+            getStrength(sel.children[0])
+        });
 
 
-                    // document.querySelectorAll(".drugsStrength").forEach(sel => {
-                    //     let val = sel.children[0].value;
-                    //     sel.children[0].innerHTML = "<option></option>";
-                    //     Object.keys(strengths).forEach(k => {
-                    //         sel.children[0].innerHTML += '<option value="' + k + '" >' + strengths[k] + '</option>';
-                    //     });
-                    //     sel.children[0].value = val;
-                    // });
-                })
-                .catch(error => {
-                    clearElements();
-                    console.log('error', error)
-                });
+            // document.querySelectorAll(".drugsStrength").forEach(sel => {
+            //     let val = sel.children[0].value;
+            //     sel.children[0].innerHTML = "<option></option>";
+            //     Object.keys(strengths).forEach(k => {
+            //         sel.children[0].innerHTML += '<option value="' + k + '" >' + strengths[k] + '</option>';
+            //     });
+            //     sel.children[0].value = val;
+            // });
+        })
+        .catch(error => {
+                clearElements();
+            console.log('error', error)
+        });
         }
 
         function getStrength(e){
@@ -523,8 +523,8 @@
             mapping.drugMappingList.forEach(map => {
                 //console.log("DrugConcept", map.drugsConceptId, "e.value", e.value)
                 if(map.drugsConceptId == e.value)
-                    targetMap = map
-            });
+            targetMap = map
+        });
             if(targetMap) {
                 if (isAdult) {
                     option += '<option value="' + targetMap.adultStrengthId + '">' + targetMap.adultStrength + '</option>';
@@ -539,10 +539,10 @@
         function clearElements(){
             document.querySelectorAll(".drugsSelector").forEach(sel => {
                 sel.children[0].innerHTML = "<option></option>";
-            });
+        });
             document.querySelectorAll(".drugsStrength").forEach(sel => {
                 sel.children[0].innerHTML = "<option></option>";
-            });
+        });
         }
 
     </script>
@@ -678,8 +678,6 @@
 
         </table>
     </fieldset>
-
-
 
     <fieldset>
         <legend class="legend_style">ARV Medication Adherence</legend>
@@ -970,15 +968,56 @@
             <tr>
                 <obsgroup groupingConceptId="165726">
                     <td>
-                        <obs class='gridmenu' id="oi_drug" conceptId="165727" answerConceptIds="165257,76488,1679,80945" answerLabels="Cotrimoxazole,Fluconazole,Isoniazid (INH),Nystatin" />
+                        <obs class='gridmenu' id="oi_drug" conceptId="165727" answerConceptIds="167183,5087,167184,83360,767,1679,82912,165257,76488,80945" answerLabels="HP,HR,CTX/INH/P6, Rifapentine,Rifampicin, Isonaizid (INH), Pyridoxine, Cotrimoxazole,Fluconazole,Nystatin" >
+
+                            <controls>
+                                <when value="167183" thenDisplay="#hp_strength" />
+                                <when value="5087" thenDisplay="#hr_strength" />
+                                <when value="167184" thenDisplay="#CTX_INH_strength" />
+                                <when value="83360" thenDisplay="#Rifapentine_strength" />
+                                <when value="767" thenDisplay="#Rifampicin_strength" />
+                                <when value="1679" thenDisplay="#Isonaizid_strength" />
+                                <when value="82912" thenDisplay="#Pyridoxine_strength" />
+                                <!--- others strengths -->
+
+                                <when value="165257" thenDisplay=".other_strength1" />
+                                <when value="76488" thenDisplay=".other_strength2" />
+                                <when value="80945" thenDisplay=".other_strength3" />
+
+                            </controls>
+
+                        </obs>
                         <!--answerConceptIds="165257,76488,1679,80945" answerLabels="Cotrimoxazole,Fluconazole,Isoniazid,Nystatin"/>-->
                     </td>
                     <td>
-                        <obs class='gridmenu' conceptId="165725" answerConceptIds="165062,165060,165075,166095,165068,165992,165074,165076,166145,166146,166147,166050,166137,165617,165635,5622" />
+                        <!-- Strength for other class -->
+                        <obs class='gridmenu other_strength1' conceptId="165725" answerConceptIds="165062,165060,165075,166095,165068,165992,165074,165076,166145,166146,166147,166050,166137,165617,165635,1066,1066,1066,1066,1066,1066,1066,1066,1066,5622" answerLabels="960mg,480mg,150mg,240mg,120mg,1920mg,300mg,100mg,200_000 units,400_000 units, 500_000 units,40mg,80mg,50mg,200mg,25mg,600mg,900/900mg,600/600mg,300/300mg,300/600mg,150/300mg,75/150mg,960/300/50mg,Other" />
+                        <!-- Strength for -->
+                        <obs class='gridmenu other_strength2' conceptId="165725" answerConceptIds="165062,165060,165075,166095,165068,165992,165074,165076,166145,166146,166147,166050,166137,165617,165635,1066,1066,1066,1066,1066,1066,1066,1066,1066,5622" answerLabels="960mg,480mg,150mg,240mg,120mg,1920mg,300mg,100mg,200_000 units,400_000 units, 500_000 units,40mg,80mg,50mg,200mg,25mg,600mg,900/900mg,600/600mg,300/300mg,300/600mg,150/300mg,75/150mg,960/300/50mg,Other" />
+                        <!-- Strength for -->
+                        <obs class='gridmenu other_strength3' conceptId="165725" answerConceptIds="165062,165060,165075,166095,165068,165992,165074,165076,166145,166146,166147,166050,166137,165617,165635,1066,1066,1066,1066,1066,1066,1066,1066,1066,5622" answerLabels="960mg,480mg,150mg,240mg,120mg,1920mg,300mg,100mg,200_000 units,400_000 units, 500_000 units,40mg,80mg,50mg,200mg,25mg,600mg,900/900mg,600/600mg,300/300mg,300/600mg,150/300mg,75/150mg,960/300/50mg,Other" />
+                        <!-- Strength for -->
+
+
+                        <obs class='gridmenu' id="hp_strength" conceptId="165725" answerConceptIds="167180,167181,165621" answerLabels="900/900mg,600/600mg,300/300mg" />
+                        <!-- Strength for -->
+                        <obs class='gridmenu' id="hr_strength" conceptId="165725" answerConceptIds="167185,167186,167187" answerLabels="300/600mg,150/300mg,75/150mg" />
+                        <!-- Strength for -->
+                        <obs class='gridmenu' id="CTX_INH_strength" conceptId="165725" answerConceptIds="165062,165074, 165617" answerLabels="960mg,300mg,50mg" />
+                        <!-- Strength for Rifapentine_and_Rifampicin_strength -->
+                        <obs class='gridmenu' id="Rifapentine_strength" conceptId="165725" answerConceptIds="1066, 165074, 1066" answerLabels="600mg, 300mg, 150mg" />
+                        <!-- Strength for -->
+
+                        <obs class='gridmenu' id="Rifampicin_strength" conceptId="165725" answerConceptIds="165616, 165074, 165075" answerLabels="600mg, 300mg, 150mg" />
+                        <!-- Strength for -->
+
+                        <obs class='gridmenu' id="Isonaizid_strength" conceptId="165725" answerConceptIds="165074, 165075, 165076, 166076" answerLabels="300mg, 150mg, 100mg, 75mg " />
+                        <!-- Strength for -->
+                        <obs class='gridmenu' id="Pyridoxine_strength" conceptId="165725" answerConceptIds="165076,165617,165706" answerLabels="100mg, 50mg,25mg" />
                     </td>
 
                     <td>
-                        <obs class='gridmenu' conceptId="165723" answerConceptIds="160862,160858,165721,166056,166057,160870,165722,166058,5622" answerLabels="OD,BD,2 BD,3 BD,4 BD,QDS,3ce/week,Nocte,Others" />
+                        <obs class='gridmenu' conceptId="165723" answerConceptIds="160862,160858,165721,166056,166057,160870,165722,1099,166058,5622" answerLabels="OD,BD,2 BD,3 BD,4 BD,QDS,3ce/week,Weekly,Nocte,Others" />
                     </td>
                     <td>
                         <obs conceptId="159368" id="duration" />
