@@ -141,13 +141,59 @@
         {
           "label":"Service Delivery Model",
           "questions":[
+          
             {
-              "label":"Model of Care",
+              "label":"Dispensing Modality",
               "type":"obs",
-              "id":"Model_of_Care",
+              "id":"Dispensing_Modality",
               "questionOptions":{
                 "rendering":"select",
                 "concept":"ac14e589-f635-4d7a-b99e-d9cf2b37842d",
+                "answers":[
+                  {
+                    "concept":"60882cd1-1f42-485b-8afb-cd988282251e",
+                    "label":"Facility Dispensing"
+                  },
+                  {
+                    "concept":"01fe63b3-b308-4065-aa42-69d3fc57f3dc",
+                    "label":"Decentralized Drug Delivery (DDD)"
+                  } 
+                ]
+                
+              }
+            },
+            
+            {
+              "label":"Facility Dispensing",
+              "type":"obs",
+              "id":"Facility_Dispensing",
+              "questionOptions":{
+                "rendering":"select",
+                "concept":"60882cd1-1f42-485b-8afb-cd988282251e",
+                "answers":[
+                  {
+                    "concept":"b5fc10cb-c94e-4cc5-a664-2d033a9e2b6e",
+                    "label":"Not Differenciated"
+                  },
+                  {
+                    "concept":"03d6c319-3ed2-441f-bec4-9ebbedbcf9e4",
+                    "label":"Fast Track"
+                  },
+                  {
+                    "concept":"ca03c28c-a53d-4ba4-80ee-869303b7448c",
+                    "label":"Adolecent Clinic"
+                  }  
+                ]
+              }
+            }, 
+            
+            {
+              "label":"DDD Dispensing",
+              "type":"obs",
+              "id":"ddd_Dispensing",
+              "questionOptions":{
+                "rendering":"select",
+                "concept":"01fe63b3-b308-4065-aa42-69d3fc57f3dc",
                 "answers":[
                   {
                     "concept":"b5fc10cb-c94e-4cc5-a664-2d033a9e2b6e",
@@ -172,10 +218,55 @@
                   {
                     "concept":"b3f96ada-7712-4942-9ade-b825c84a4f34",
                     "label":"Family Drug Pickup"
+                  },
+                  {
+                    "concept":"90774ce1-d1b0-4a39-a8da-7f3f9cf5d7f4",
+                    "label":"Home/Courier Delivery"
+                  },
+                  {
+                    "concept":"b7442c57-c64e-403b-ad2e-8c28183d948b",
+                    "label":"Private Clinics"
+                  },
+                  {
+                    "concept":"5cea99b0-6150-4c59-82b5-7544439aa703",
+                    "label":"Patent Medicine Stores"
+                  },
+                  {
+                    "concept":"3d1fc78e-ca3b-4beb-98d2-17c84e531c66",
+                    "label":"ATM"
                   }
                 ]
               }
+            }, 
+
+            {
+              "label":"Multi-Month Dispensing (MMD)",
+              "type":"obs",
+              "id":"mmd_Dispensings",
+              "questionOptions":{
+                "rendering":"select",
+                "concept":"0613f7e8-6d43-42ae-9200-aa781f6d014b",
+                "answers":[
+                  {
+                    "concept":"add6ab10-b7eb-4e30-89cd-96356c668d44",
+                    "label":"MMD less than 3"
+                  },
+                  {
+                    "concept":"54a58fb0-ea48-4d0f-809e-d88f6b12b957",
+                    "label":"MMD 3 to 5"
+                  },
+                  {
+                    "concept":"c72823c5-4ff4-4baf-a4a7-0775b73f58be",
+                    "label":"MMD greater than or equal to 6"
+                  }  
+                ]
+              }
             }
+
+
+
+
+
           ]
         }
       ]
@@ -303,6 +394,58 @@
                 ]
               }
             },
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
             {
               "label":"Adult 1st Line Regimens (Choose if adult age group)",
               "type":"obs",
@@ -583,6 +726,76 @@
                 ]
               }
             },
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            
             {
               "type":"obsGroup",
               "label":"1. ARV Drugs",
@@ -600,6 +813,10 @@
                     "rendering":"select",
                     "concept":"c50dc847-e37e-40b1-92b9-408d9c93b858",
                     "answers":[
+                      {
+                        "concept":"5ec4bfef-2e06-43ea-83f0-51de36117824",
+                        "label":"Tenofovir/Lamivudine/Dolutegravir"
+                      }, 
                       {
                         "concept":"164505AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                         "label":"Lamivudine / Efavirenz / Tenofovir"
@@ -675,6 +892,10 @@
                     "rendering":"select",
                     "concept":"21ea74ee-f6fa-4c55-be36-6337a8f4086c",
                     "answers":[
+                      {
+                        "concept":"0cd9c98e-7f52-48b9-a987-404ec90cc5fe",
+                        "label":"300/300/50mg"
+                      },
                       {
                         "concept":"4db3bbfd-2e59-48af-ba55-1b6deed9ec32",
                         "label":"300/300/600mg"
@@ -899,6 +1120,10 @@
                     "concept":"c50dc847-e37e-40b1-92b9-408d9c93b858",
                     "answers":[
                       {
+                        "concept":"5ec4bfef-2e06-43ea-83f0-51de36117824",
+                        "label":"Tenofovir/Lamivudine/Dolutegravir"
+                      }, 
+                      {
                         "concept":"164505AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                         "label":"Lamivudine / Efavirenz / Tenofovir"
                       },
@@ -973,6 +1198,10 @@
                     "rendering":"select",
                     "concept":"21ea74ee-f6fa-4c55-be36-6337a8f4086c",
                     "answers":[
+                      {
+                        "concept":"0cd9c98e-7f52-48b9-a987-404ec90cc5fe",
+                        "label":"300/300/50mg"
+                      },
                       {
                         "concept":"4db3bbfd-2e59-48af-ba55-1b6deed9ec32",
                         "label":"300/300/600mg"
@@ -1197,6 +1426,10 @@
                     "concept":"c50dc847-e37e-40b1-92b9-408d9c93b858",
                     "answers":[
                       {
+                        "concept":"5ec4bfef-2e06-43ea-83f0-51de36117824",
+                        "label":"Tenofovir/Lamivudine/Dolutegravir"
+                      }, 
+                      {
                         "concept":"164505AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                         "label":"Lamivudine / Efavirenz / Tenofovir"
                       },
@@ -1271,6 +1504,10 @@
                     "rendering":"select",
                     "concept":"21ea74ee-f6fa-4c55-be36-6337a8f4086c",
                     "answers":[
+                      {
+                        "concept":"0cd9c98e-7f52-48b9-a987-404ec90cc5fe",
+                        "label":"300/300/50mg"
+                      },
                       {
                         "concept":"4db3bbfd-2e59-48af-ba55-1b6deed9ec32",
                         "label":"300/300/600mg"
@@ -1759,13 +1996,23 @@
                     "rendering":"select",
                     "concept":"21ea74ee-f6fa-4c55-be36-6337a8f4086c",
                     "answers":[
+
                       {
                         "concept":"c03561ed-1402-4bfe-b95d-9547fe6b9bf7",
                         "label":"960mg"
                       },
                       {
+                        "concept":"abbb66b8-61c9-4b58-bad6-edf1efa546e1",
+                        "label":"300mg"
+                      },
+                      {
                         "concept":"409fccb1-a7de-412f-9ee6-1e96d4b0b65a",
                         "label":"150mg"
+                      },
+                      
+                      {
+                        "concept":"27f5a185-9791-45b2-89e8-89df69fdac71",
+                        "label":"100mg"
                       }
                     ]
                   }
@@ -2070,7 +2317,7 @@
                   "id":"qty_dispensed_pharm",
                   "questionOptions":{
                     "rendering":"number",
-                    "concept":"160856AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "concept":"1443AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                     "max":"150",
                     "min":"0"
                   },
@@ -2194,7 +2441,7 @@
                   "id":"qty_dispensed_pharm",
                   "questionOptions":{
                     "rendering":"number",
-                    "concept":"160856AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "concept":"1443AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                     "max":"150",
                     "min":"0"
                   },
