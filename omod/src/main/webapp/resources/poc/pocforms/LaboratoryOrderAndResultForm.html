@@ -531,7 +531,7 @@
             </tr>
 
             <includeIf velocityTest="$user.hasRole('Lab')">
-             <tr>                
+             	<tr>                
                     <td class="alnleft_s" colspan="2">Sample collection date
                     <div class="enable_lab_control"  style="pointer-events: none"><obs conceptId="159951"/></div></td>
                     <td class="alnleft_s" colspan="2">Date sample sent to PCR Lab
@@ -577,7 +577,7 @@
 													 <!-- Id "viralLoadResultTest" Added by Ebuka" -->
 
 												  <td class="alnleft_s" colspan="2">Alphanumeric Viral Load Result
-												  <p><obs id="AlphanumericViralLoadResult" conceptId="166422" answerConceptIds="166407, 166408, 166409, 166410,166411,166412,166413,166414,166415,166416,166417,166418,166419,163611, 166420, 166421, 166426" answerLabels="&lt;20 , &lt;29 , &lt;40 , &lt;400 , &lt;80 , &gt;10 000 000 ,  Aborted, Double entry, Duplicate , Failed , Failed twice , Incomplete number , Incorrect entry , Invalid , Target Not Detected , Wrong entry, Numeric Value  " /></p>
+												  <p><obs id="AlphanumericViralLoadResult" conceptId="166422" answerConceptIds="166407, 166408, 167121, 166409, 166410,166411,166412,166413,166414,166415,166416,166417,166418,166419,163611, 166420, 166421, 166426" answerLabels="&lt;20 , &lt;29 , &lt;30 , &lt;40 , &lt;400 , &lt;80 , &gt;10 000 000 ,  Aborted, Double entry, Duplicate , Failed , Failed twice , Incomplete number , Incorrect entry , Invalid , Target Not Detected , Wrong entry, Numeric Value  " /></p>
 
 												  </td>
 												  <!-- Added by Ebuka -->
@@ -601,18 +601,17 @@
         </table>
     </fieldset>
     
-    
-      <!-- Added by Sunday -->
+    <!-- Added by Sunday -->
     <fieldset>
         <legend class="legend_style">HIV Drug Resistance</legend>
         <table>
             <tr>
                 <td class="alnright">
-                    <obs conceptId="167004" style="checkbox"  labelText="Sample Selected for HIVDR Study"  toggle="showHIVDR"  />
+                    <obs conceptId="167004" style="checkbox" value="false" labelText="Sample Selected for HIVDR Study"  toggle="showHIVDR"  />
                 </td>
             </tr>
         </table>
-        <div id="showHIVDR" style="display:none;">
+        <div id="showHIVDR">
             <table>
                 <tr>
                     <td class="alnleft_s">HIVDR Study ID.
@@ -738,8 +737,7 @@
         </div>
         <!-- Added by Ebuka -->
     </fieldset>
-    
-    
+
     
     
     <fieldset>
@@ -874,6 +872,12 @@ viralLoadInput = getValue('viralLoadResultTest.value');
 
 }else if(viralLoadInput == 166408){
 setValue('viralLoadResultTest.value', 28);
+var conceptID = viralLoadInput
+viralLoadInput = getValue('viralLoadResultTest.value');
+
+
+}else if(viralLoadInput == 167121){
+setValue('viralLoadResultTest.value', 29);
 var conceptID = viralLoadInput
 viralLoadInput = getValue('viralLoadResultTest.value');
 

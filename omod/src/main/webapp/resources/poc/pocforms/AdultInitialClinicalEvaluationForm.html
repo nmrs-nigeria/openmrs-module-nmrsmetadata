@@ -93,37 +93,37 @@
 		color: #363463;
 		font-size: 14px;
 		}
-
 	</style>
 	<script type="text/javascript">
 		beforeSubmit.push(function() {
 		var woman_pregnant = getValue('woman_pregnant.value');
 		var val_encounterDate = getValue('encounterDate.value');
 		var val_next_appointment = getValue('next_appointment.value');
-		var edd_val=getValue('edd.value');
-		var lmp_val=getValue('lmp.value');
+		var edd_val = getValue('edd.value');
+		var lmp_val = getValue('lmp.value');
 
-        console.log(woman_pregnant);
-        if (woman_pregnant === '165048' ) {
-            console.log(lmp_val);
-            if(! lmp_val) {
-                getField('lmp.error').html('LMP is required').show();
-                return false;
-            }else {
-                if (lmp_val > edd_val) {
-                    getField('lmp.error').html('EDD has to be later than LMP').show();
+
+            console.log(woman_pregnant);
+            if (woman_pregnant === '165048' ) {
+                console.log(lmp_val);
+                if(! lmp_val) {
+                    getField('lmp.error').html('LMP is required').show();
                     return false;
-                }
-			}
-        }
+                }else {
+                    if (lmp_val > edd_val) {
+                        getField('lmp.error').html('EDD has to be later than LMP').show();
+                        return false;
+                    }
+				}
+            }
 
-	if (val_encounterDate > val_next_appointment) {
-	getField('next_appointment.error').html('Next appointment date has to be later than visit date').show();
-	return false;
-	}
+		if (val_encounterDate > val_next_appointment) {
+		getField('next_appointment.error').html('Next appointment date has to be later than visit date').show();
+		return false;
+		}
 
-	return true;
-	});
+		return true;
+		});
 	</script>
 <script type="text/javascript">
 
@@ -485,7 +485,7 @@
 							<td >TB Status</td>
 							<td >
 								<obs conceptId="1659" answerConceptIds="1660,142177,166042,1661,1662"
-									 answerLabels="1. No Signs,2. Presumptive TB,3. TPT(IPT), 4. Confirmed TB, 5. Currently on TB treatment"/>
+									 answerLabels="1. No Signs,2. Presumptive TB,3. TPT(IPT), 4. Confirmed TB, 5. Currently on TB treatment"  required="true"/>
 							</td>
 						</tr>
 					</table>
@@ -703,7 +703,7 @@
 							<td class="alnright_s">Pulse(bpm)</td>
 							<td><obs conceptId="5087"/></td>
 							<td class="alnright_s">Weight(kg)</td>
-							<td><obs conceptId="5089"/></td>
+							<td><obs conceptId="5089"  required="true"/></td>
 							<td class="alnright_s">Blood Pressure (mmHg)</td>
 							<td>
 								<table>
@@ -1143,7 +1143,7 @@
 			<tr>
 				<td class="alnleft"><b>Plan for ARV therapy:</b> </td>
 				<td class="alnleft">
-					<obs id="art_plan" conceptId="165361" answerConceptIds="165356,162904,165357,165360,165358" answerLabel="Ongoing monitoring,Restart treatment,Start new treatment,Stop treatment,Change treatment">
+					<obs id="art_plan" conceptId="165361" answerConceptIds="165356,162904,165357,165360,165358" answerLabel="Ongoing monitoring,Restart treatment,Commence ART,Stop treatment,Change treatment">
 						<controls>
 							<when value="165360" thenDisplay="#stop"/>
 							<when value="165358" thenDisplay="#change"/>
@@ -1217,10 +1217,8 @@
 		<legend class="legend_style">Appointment and Signature</legend>
 		<table class="table" width="100%">
 			<tr>
-			<excludeIf velocityTest="$user.hasRole('Clinician')">
 				<td width="5%">Next appointment</td>				
-				<td colspan="alnleft"><obs conceptId="165036" id="next_appointment"  allowFutureDates="true"/></td>
-			</excludeIf>		
+				<td colspan="alnleft"><obs conceptId="165036" id="next_appointment"  allowFutureDates="true"/></td>	
 				<td>Clinician</td>
 				<td><encounterProviderAndRole default="currentUser" encounterRole="240b26f9-dd88-4172-823d-4a8bfeb7841f" required="true"/></td>
 
