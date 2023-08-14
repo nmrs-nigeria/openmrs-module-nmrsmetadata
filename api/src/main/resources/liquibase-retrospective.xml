@@ -501,9 +501,46 @@
         <sql>SET FOREIGN_KEY_CHECKS=1;</sql>
     </changeSet>
 	
+	<changeSet id="form_resource_sql_pharmacy20230811" author="Toyeeb" runOnChange="true">
+
+        <sqlFile path="json_forms/pharmacy_order_form.sql"
+                 stripComments="false"
+                 splitStatements="true"
+                 endDelimiter=";"/>
+    </changeSet>
 	
-	
-	
+	<changeSet id="form_resource_sql_pediatric_initial_clinical_evaluation20230811" author="Toyeeb" runOnChange="true">
+
+        <sqlFile path="json_forms/pediatric_initial_clinical_evaluation.sql"
+                 stripComments="false"
+                 splitStatements="true"
+                 endDelimiter=";"/>
+    </changeSet>
+    
+    <changeSet id="form_resource_sql_client_intake_form20230811" author="Toyeeb" runOnChange="true">
+
+        <sqlFile path="json_forms/client_intake_form.sql"
+                 stripComments="false"
+                 splitStatements="true"
+                 endDelimiter=";"/>
+    </changeSet>
+    
+    <changeSet id="form_resource_sql_care_card20230811" author="Toyeeb" runOnChange="true">
+
+        <sqlFile path="json_forms/care_card.sql"
+                 stripComments="false"
+                 splitStatements="true"
+                 endDelimiter=";"/>
+    </changeSet>
+    
+    <changeSet id="form_resource_sql_adult_initial_clinical_evaluation20230811" author="Toyeeb" runOnChange="true">
+
+        <sqlFile path="json_forms/adult_initial_clinical_evaluation.sql"
+                 stripComments="false"
+                 splitStatements="true"
+                 endDelimiter=";"/>
+    </changeSet>
+    
 	
    
 </databaseChangeLog>

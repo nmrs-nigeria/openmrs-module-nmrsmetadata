@@ -10,8 +10,11 @@ package org.openmrs.module.nmrsmetadata.dao;
  */
 
 import org.openmrs.api.context.Context;
+import org.openmrs.module.nmrsmetadata.model.RegimenDrugMapping;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author ihvn
@@ -36,7 +39,52 @@ public class Database {
 		catch (Exception ex) {
 			ex.printStackTrace();
 		}
+	}
+	
+	public List<RegimenDrugMapping> getRegimenDrugMapping(Integer regimenConceptId) {
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		Connection con = null;
 		
+		try {
+			
+			if(connectionPool == null) {
+				Database.initConnection();
+			}
+			
+			con = Database.connectionPool.getConnection();
+			
+			String query = "SELECT * FROM regimen_drug_mappings WHERE regimen_concept_id=?";
+			
+			int i = 1;
+			stmt = con.prepareStatement(query);
+			
+			stmt.setInt(i, regimenConceptId);
+			
+			rs = stmt.executeQuery();
+			
+			List<RegimenDrugMapping> regimenDrugMappings = new ArrayList<>();
+			while(rs.next()) {
+				RegimenDrugMapping regMap = new RegimenDrugMapping();
+				regMap.setRegimenDrugMappingId(rs.getInt("regimen_drug_mapping_id"));
+				regMap.setRegimenConceptId(rs.getInt("regimen_concept_id"));
+				regMap.setDrugsConceptId(rs.getInt("drugs_concept_id"));
+				regMap.setAdultStrength(rs.getInt("adult_strength"));
+				regMap.setPediatricStrength(rs.getInt("pediatric_strength"));
+
+				regimenDrugMappings.add(regMap);
+			}
+			
+			return regimenDrugMappings;
+		}
+		catch (SQLException ex) {
+			Database.handleException(ex);
+			return null;
+			
+		}
+		finally {
+			Database.cleanUp(rs, stmt, con);
+		}
 	}
 	
 	public static void closeConnection() {
@@ -76,7 +124,8 @@ public class Database {
 	public static void cleanUp(ResultSet rs, Statement stmt, Connection con) {
 		try {
 			Database.connectionPool.free(con);
-			stmt.close();
+			if (stmt != null)
+				stmt.close();
 			if (rs != null)
 				rs.close();
 			

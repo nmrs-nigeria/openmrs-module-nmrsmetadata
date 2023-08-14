@@ -18,40 +18,16 @@ public class RegimenDrugMappingDAO {
 	}
 	
 	public List<RegimenDrugMapping> getRegimenDrugMapping(Integer regimenConceptId) {
-		PreparedStatement stmt = null;
-		ResultSet rs = null;
-		Connection con = null;
-		
 		try {
-			con = Database.connectionPool.getConnection();
-			
-			String query = "SELECT * FROM regimen_drug_mappings WHERE regimen_concept_id=?";
-			
-			int i = 1;
-			stmt = con.prepareStatement(query);
-			stmt.setInt(i, regimenConceptId);
-			rs = stmt.executeQuery();
-			List<RegimenDrugMapping> regimenDrugMappings = new ArrayList<>();
-			while(rs.next()) {
-				RegimenDrugMapping regMap = new RegimenDrugMapping();
-				regMap.setRegimenDrugMappingId(rs.getInt("regimen_drug_mapping_id"));
-				regMap.setRegimenConceptId(rs.getInt("regimen_concept_id"));
-				regMap.setDrugsConceptId(rs.getInt("drugs_concept_id"));
-				regMap.setAdultStrength(rs.getInt("adult_strength"));
-				regMap.setPediatricStrength(rs.getInt("pediatric_strength"));
-
-				regimenDrugMappings.add(regMap);
-			}
-			return regimenDrugMappings;
+			return new Database().getRegimenDrugMapping(regimenConceptId);
 		}
-		catch (SQLException ex) {
-			Database.handleException(ex);
-			return null;
-			
+		catch (Exception ex) {
+			ex.printStackTrace();
 		}
 		finally {
-			Database.cleanUp(rs, stmt, con);
+			System.out.print("Done");
 		}
+		return null;
 	}
 	
 	public List<LocalConcept> searchConcept(String name) {

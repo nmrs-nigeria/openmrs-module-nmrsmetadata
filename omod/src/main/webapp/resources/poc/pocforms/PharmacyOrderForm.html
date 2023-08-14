@@ -464,14 +464,18 @@ beforeSubmit.push(function() {
             fetch(`/openmrs/ws/rest/v1/nmrsmetadata/drugs/${regId}`)
                 .then(response => response.json())
                 .then(result => {
-                    // console.log("Result", result);
+                     console.log("Result", result);
                      mapping = result;
-                     // console.log(mapping);
-                     // console.log(mapping.drugMappingList)
+                      console.log(mapping);
+                      console.log(mapping.drugMappingList)
                     // let response = result.drugs;
-
+                     // enable_disable_control
                     document.querySelectorAll(".drugsSelector").forEach(sel => {
-                        let val = sel.children[0].value;
+                    	console.log("Sel: " + sel);
+                    	console.log("sel.children[0]: " + sel.children[0]);
+                    	console.log("sel.children[0].value: " + sel.children[0].value);
+                    	// let val = sel.children[0].value;
+                        // console.log(val);
                         sel.children[0].innerHTML = "<option></option>";
                         mapping.drugMappingList.forEach(mapping => {
                             if(isAdult &amp;&amp; mapping.adultStrengthId) {
@@ -480,19 +484,12 @@ beforeSubmit.push(function() {
                                 sel.children[0].innerHTML += '<option value="' + mapping.drugsConceptId + '" >' + mapping.drugName + '</option>';
                             }
                         });
-                            sel.children[0].value = val;
-                            getStrength(sel.children[0])
+                        console.log("sel.children[0] 2: " + sel.children[0]);
+                        console.log("sel.children[0].value 2: " + sel.children[0].value);
+                    	
+                          //  sel.children[0].value = val;
+                          getStrength(sel.children[0])
                     });
-
-
-                    // document.querySelectorAll(".drugsStrength").forEach(sel => {
-                    //     let val = sel.children[0].value;
-                    //     sel.children[0].innerHTML = "<option></option>";
-                    //     Object.keys(strengths).forEach(k => {
-                    //         sel.children[0].innerHTML += '<option value="' + k + '" >' + strengths[k] + '</option>';
-                    //     });
-                    //     sel.children[0].value = val;
-                    // });
                 })
                 .catch(error => {
                    clearElements();
@@ -501,9 +498,13 @@ beforeSubmit.push(function() {
         }
 
         function getStrength(e){
-           //console.log("Mapping", mapping);
-           let strength = e.parentNode.parentNode.parentNode.querySelector(".drugsStrength").children[0];
-           let val = strength.value;
+            console.log("Mapping", mapping);
+  			console.log("E: "+ e.value);
+  			console.log("E.querySelector: " + document.querySelector('.drugsStrength').children[0]);
+  			
+  			let strength = document.querySelector('.drugsStrength').children[0];
+  			console.log("strength: "+ strength);
+  			let val = strength.value;
             let option = '<option></option>';
             let targetMap = null;
 
@@ -838,6 +839,7 @@ beforeSubmit.push(function() {
                     </td>
                     <td>
                         <div class="enable_disable_control" style="pointer-events: none">
+                    
                             <obs class='gridmenu drugsStrength' conceptId="165725" id="drugStrength" answerConceptIds="165618,166044,165633,165619,165620,165621,165622,165623,166080,165634,165707,5622" />
                         </div>
                     </td>
