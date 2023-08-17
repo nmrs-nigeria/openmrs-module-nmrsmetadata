@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>org.openmrs.module</groupId>
 		<artifactId>nmrsmetadata</artifactId>
-		<version>Unified-1.0</version>
+		<version>unified-1.0-beta</version>
 	</parent>
 
 	<artifactId>nmrsmetadata-api</artifactId>

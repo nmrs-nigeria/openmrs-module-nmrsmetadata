@@ -344,7 +344,9 @@ beforeSubmit.push(function() {
 
     <script>
    		const isAdult = parseFloat('<lookup expression="patient.getAge()" />') &gt; 14 || (parseFloat('<lookup expression="fn.latestObs(5089).valueNumeric"/>') &gt; 29);
-    
+   		console.log("isAdult: " + parseFloat('<lookup expression="patient.getAge()" />'))
+   		console.log("isAdult: " + parseFloat('<lookup expression="fn.latestObs(5089).valueNumeric"/>'))
+   		console.log("isAdult: " + isAdult)
         jQuery(function() {
 
             // MMD Compare with Duration and Quantiy dispensensed

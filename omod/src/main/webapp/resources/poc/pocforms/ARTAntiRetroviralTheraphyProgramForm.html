@@ -260,15 +260,8 @@
         ART Commencement
     </a>       
 </includeIf>
-<includeIf velocityTest="$user.hasRole('Adherence')">
-    <a id="medadherence"
-        href="/baseUrl/htmlformentryui/htmlform/enterHtmlFormWithStandardUi.page?patientId=&amp;visitId=&amp;formUuid=f826d129-dea8-4b6b-86bc-1f448076615b&amp;returnUrl=%2F+domain+%2Fcoreapps%2Fclinicianfacing%2Fpatient.page%3FpatientId%3Db050b4b9-6786-4e69-93b6-82b641cc4fc0%26encounterId%3D1242%26encounterId%3D1258%26"
-        class="button app big art">
-        <i class="icon-user"></i>
-        Medication Adherence
-    </a>       
-</includeIf>
-<includeIf velocityTest="$user.hasRole('Clinician')">
+
+<includeIf velocityTest="$user.hasRole('Clinician') || $user.hasRole('Adherence')">
    <a id="ipf_form"
        	href="/baseUrl/htmlformentryui/htmlform/enterHtmlFormWithStandardUi.page?patientId=&amp;visitId=&amp;formUuid=f826d129-dea8-4b6b-86bc-1f448076615b&amp;returnUrl=%2F+domain+%2Fcoreapps%2Fclinicianfacing%2Fpatient.page%3FpatientId%3Db050b4b9-6786-4e69-93b6-82b641cc4fc0%26encounterId%3D1242%26encounterId%3D1258%26"
        	class="button app big art">

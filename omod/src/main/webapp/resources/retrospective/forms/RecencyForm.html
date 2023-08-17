@@ -744,7 +744,7 @@
                     }
 
                     if (!userKeyRegExp.test(patientIdentifier_recency)) {
-                        window.alert('Please Participant ID should only contain alphanumeric inputs with no special character');
+                        window.alert('Please Participant ID should only contain alphanumeric inputs with no special character. First two alphabets must be in capital letter.');
                         success.textContent = "";
                         outrange.textContent = "";
                         $('input:text', '#recency_number_value').eq(0).val("").focus();
@@ -987,7 +987,7 @@
             if(Has_viral_load_request_been_made == 1065){
                 getField('reasonForNoVLColl.value')[0].required = false;
             }else if(Has_viral_load_request_been_made == 1066){
-                getField('reasonForNoVLColl.value')[0].required = true;
+                getField('reasonForNoVLColl.value')[0].required = false;
             }else{
                 getField('reasonForNoVLColl.value')[0].required = false;
             }
@@ -1033,10 +1033,10 @@
                 //}
 
             }else if(Has_viral_load_request_been_made == 1066){
-                if (getValue('reasonForNoVLColl.value') == null || getValue('reasonForNoVLColl.value') == ""){
-                    getField('reasonForNoVLColl.error').html('Reason for no viral load sample collection must be selected').show();
-                    return false;
-                }
+               // if (getValue('reasonForNoVLColl.value') == null || getValue('.value') == ""){
+               //     getField('reasonForNoVLColl.error').html('Reason for no viral load sample collection must be selected').show();
+               //     return false;
+               // }
             }else{
                 getField('reasonForNoVLColl.value')[0].required = false;
             }
@@ -1091,18 +1091,18 @@
                 <tr>
                     <td class="alnleft"><b>Test result</b></td>
                     <td class="alnleft">
-                        <obs answerConceptIds="703,664" answerLabels="Positive, Negative" conceptId="165840" id="screen_test_value" name="screen_test_value" />
+                        <obs answerConceptIds="703,664" answerLabels="Positive, Negative" conceptId="165840" id="screen_test_value" name="screen_test_value" required="true"/>
                     </td>
 
                     <td class="alnleft"><b>Test date</b></td>
                     <td class="alnleft">
-                        <obs allowFutureDates="false" conceptId="165844" id="hiv_test_date" showTime="false" />
+                        <obs allowFutureDates="false" conceptId="165844" id="hiv_test_date" showTime="false" required="true"/>
                     </td>
                 </tr>
                 <tr>
                     <td class="alnleft" id="result_label" name="result_label"><b>Recency Offered?</b></td>
                     <td class="alnleft">
-                        <obs answerConceptIds="1065,1066" answerLabels="Yes,No" conceptId="167204" id="recency_offered" name="result">
+                        <obs answerConceptIds="1065,1066" answerLabels="Yes,No" conceptId="167204" id="recency_offered" name="result" required="true">
                             <controls>
                                 <when thenDisplay="#recency" value="1065" />
                                 <when thenDisplay="#reason_here,#ntreasonlabel" value="1066" />
@@ -1110,7 +1110,7 @@
                         </obs>
                     </td>
                     <td class="alnleft" id="ntreasonlabel">
-                        <b>Recency Not Offered</b>
+                        <b>Reason for Recency not offered</b>
                     </td>
                     <td colspan="3" class="alnleft" id="reason_here">
                         <obs conceptId="167205" style="textarea" rows="2" />
@@ -1134,7 +1134,7 @@
                         <obs answerConceptIds="1066,1065" answerLabels="No,Yes" conceptId="165805" id="tb_optout">
 
                             <controls>
-                                <when thenDisplay="#control_line_label,#control_line,#verification_line_label,#verification_line,#longterm_line_label,#longterm_line,#recency_number_label,#recency_number_value, #recency_table, #recency_number_verif_label,#recency_number_verif_value,#recency_warning_label,#test_name_dropdown,#recency_test_date,#recency_test_date_label,#test_name_label,#preferred_recency,#preferred_recency_label,#identifier_label,#tab1,#tab2,#tab3,#tab4,#tab5,#tab6"
+                                <when thenDisplay="#control_line_label,#control_line,#verification_line_label,#verification_line,#longterm_line_label,#longterm_line,#recency_number_label,#recency_number_value,#viral_load_table,#recency_table, #recency_number_verif_label,#recency_number_verif_value,#recency_warning_label,#test_name_dropdown,#recency_test_date,#recency_test_date_label,#test_name_label,#preferred_recency,#preferred_recency_label,#identifier_label,#tab1,#tab2,#tab3,#tab4,#tab5,#tab6"
                                       value="1066" />
                             </controls>
 
@@ -1198,8 +1198,8 @@
                     </td>
                     <td colspan="2"> <span id="success" style="width:100%; color:green; font-weight:bold;"></span> </td>
                 </tr>
-
-
+                
+               
 
                 <tr>
                     <td id="control_line_label">Control Line</td>
@@ -1251,87 +1251,108 @@
                     <td>
                         <obs answerConceptIds="1066,1065" answerLabels="No,Yes" conceptId="166244" id="tb_vl_request">
                             <controls>
-                                <when thenDisplay="#vl_label,#vl_value,#vl_value_obs,#vlsample_value_obs,#vl_result,#vl_result_obs,#final_recency_label,#final_recency_value,#vl_dss,#vlpcr_value_obs,#vl_samplet,#sample_type,#vl_rpcr,#vl_rpcrlab,#receiving_lab,#sample_id,#sample_id_label, #vl_result_label,#vl_result_clasification"
+                                <when thenDisplay="#new_tag"
                                       value="1065" />
                             </controls>
 
                         </obs>
                     </td>
                 </tr>
+            </table>
+                
+           <table id="new_tag">
                 <tr>
-                    <td class="alnleft_f" id="vl_label"><b>Viral load confirmation:</b></td>
+                    <td class="alnleft_f" id="vl_value"><b>Viral load confirmation</b></td>
+                    <td colspan="3"></td>
+                </tr>
+
+                <tr>
                     <td class="alnleft_f" id="vl_value">Sample collection date</td>
                     <td class="alnleft_f">
                         <obs allowFutureDates="false" conceptId="159951" id="vlsample_value_obs" name="vlsample_value_obs" />
                     </td>
-
-
                     <td id="sample_id_label">Sample Reference Number:</td>
                     <td>
                         <obs conceptId="165715" id="sample_id" />
                     </td>
-
                 </tr>
                 <tr>
                     <td id="vl_samplet">Sample Type</td>
                     <td>
-                        <obs answerConceptIds="1000,165568" answerLabels="Plasma,DBS" conceptId="162476" id="sample_type" />
+                        <obs answerConceptIds="1000,1002,165568,166615" answerLabels="Whole Blood,Plasma,DBS,Plasma separation card(PSC)" conceptId="162476" id="sample_type" />
                     </td>
-                </tr>
-
-                <tr>
-
-
                     <td class="alnleft_f" id="vl_dss">Date Sample Sent to PCR Lab</td>
                     <td class="alnleft_f">
                         <obs allowFutureDates="false" conceptId="165988" id="vlpcr_value_obs" name="vlpcr_value_obs" />
                     </td>
-
+                </tr>
+                <tr>
+                    <td id="vl_samplet">Date sample received at PCR Lab</td>
+                    <td class="alnleft_f">
+                        <obs allowFutureDates="false" conceptId="165716" />
+                    </td>
+                    <td class="alnleft_f" id="vl_dss">Date result was sent from PCR Lab</td>
+                    <td class="alnleft_f">
+                        <obs allowFutureDates="false" conceptId="165989" />
+                    </td>
+                </tr>
+                <tr>
+                    <td class="alnleft_s">Date Sample Ordered</td>
+                    <td>
+                        <obs id="DateSampleOrdered" conceptId="164989" allowFutureDates="false" />
+                    </td>
+                    <td class="alnleft_s">Date result was received at the facility</td>
+                    <td>
+                        <obs conceptId="165987" allowFutureDates="false" />
+                    </td>
+                </tr>
+                <tr>
                     <td class="alnleft_f" id="vl_rpcr">Receiving PCR Lab</td>
                     <td class="alnleft_f">
                         <obs answerConceptIds="166234,166217,166218,166219,166220,166221,166232,166222,166223,166224,166225,166226,166227,166228,166229,166230,166231" answerLabels="68 NARH Yaba Lagos,Ahmadu Bello University Teaching Hospital (ABUTH),Chukwuemeka Odumegwu Ojukwu University Teaching Hospital (COOUTH),Rivers State University Hospital (RSUTH),Defence Reference laboratory (DRL) Abuja,Federal Medical Center Makurdi,Federal Medical Center Jalingo,Federal Teaching Hospital (FTH) Gombe,Jos University Teaching Hospital (JUTH) Jos,Lagos State University Teaching Hospital (LASUTH) Lagos,National Reference Laboratory Gaduwa (NRL) Abuja,Nigerian Institute of Medical Research (NIMR) Lagos,Nnamdi Azikiwe University Teaching Hospital (NAUTH),Obafemi Awolowo University Teaching Hospital (OAUTH) Ile-Ife,University of Maiduguri Teaching Hospital (UMTH) Maiduguri,University of Uyo teaching Hospital (UUTH) Uyo,Usman Danfodio University Teaching Hospital (UDUTH)"
                              conceptId="166233" id="receiving_lab" />
                     </td>
-
-
-
-                </tr>
-
-
-
-                <tr>
-                    <td class="alnleft_f" id="vl_value">Sample test date</td>
-                    <td class="alnleft_f">
-                        <obs allowFutureDates="false" conceptId="165854" id="vl_value_obs" name="vl_value_obs" />
-                    </td>
                     <td class="alnleft_f" id="vl_result_label">Viral Load Result Classification:</td>
-
-
                     <td class="alnleft_f">
-                        <obs answerConceptIds="166238,166239,166240" answerLabels="&lt;1000,&gt;=1000
-,Failed VL" conceptId="166241" id="vl_result_clasification" />
+                        <obs answerConceptIds="166238,166239,166240" answerLabels="&lt;1000,&gt;=1000,Failed VL" conceptId="166241" id="vl_result_clasification" />
                     </td>
-
                 </tr>
 
                 <tr>
-
                     <td class="alnleft_f" id="vl_result">Result (copies/ml)</td>
                     <td class="alnleft_f">
                         <obs conceptId="856" id="vl_result_obs" name="vl_result_obs" />
                     </td>
-
-
-                    <td class="alnleft_f" id="final_recency_label"><b>Final Recency Result:</b></td>
-
+                    <td class="alnleft_f" id="final_recency_label">Final Recency Result:</td>
                     <td class="alnleft_f">
                         <obs answerConceptIds="166236,166235,166237" answerLabels="RITA Recent,Long-Term Infection,Rita Inconclusive" conceptId="166214" id="final_recency_value" />
+
                     </td>
-
-                    <td id="another_recency_warning_label" style="width: 100%; color:red">Please verify the correctness of all fields from the paper form before submission.</td>
-
+                </tr>
+                <tr>
+                    <td class="alnleft_f">Assay Date</td>
+                    <td class="alnleft_f">
+                        <obs conceptId="166424" allowFutureDates="false" />
+                    </td>
+                    <td class="alnleft_f">Approval Date</td>
+                    <td class="alnleft_f">
+                        <obs conceptId="166425" allowFutureDates="false" />
+                    </td>
+                </tr>
+                <tr>
+                    <td class="alnleft_f">Result Date</td>
+                    <td class="alnleft_f">
+                        <obs conceptId="166423" allowFutureDates="false" />
+                    </td>
+                    <td class="alnleft_f" id="vl_value">Sample test date</td>
+                    <td class="alnleft_f">
+                        <obs allowFutureDates="false" conceptId="165854" id="vl_value_obs" name="vl_value_obs" />
+                    </td>
                 </tr>
 
+                <tr>
+                    <td colspan="4" id="another_recency_warning_label" style="width: 100%; color:red">Please verify the correctness of all fields from the paper form before submission.</td>
+                </tr>
 
             </table>
 
@@ -1445,7 +1466,7 @@
                 <tr id="achieved_vl">
                     <td class="alnleft_f" id="vl_value">VL Result (c/ml)</td>
                     <td class="alnleft_f">
-                        <obs conceptId="856" id="vl_result_obs" name="vl_result_obs" />
+                        <obs conceptId="856" id="vl_result_obs1" name="vl_result_obs1" />
                     </td>
                     <td class="alnleft_f" id="vls_achieved_after_6_months">Was VLS achieved after 6 months</td>
                     <td class="alnleft_f">
@@ -1508,7 +1529,7 @@
                 <tr>
                     <td class="alnleft_f" id="investigation_comments">Investigators comments</td>
                     <td class="alnleft_f">
-                        <obs conceptId="166917" id="vl_result_obs" name="investigation_comments_obs" />
+                        <obs conceptId="166917" id="investigation_comments_obs" name="investigation_comments_obs" />
                     </td>
                 </tr>
             </table>
@@ -1662,7 +1683,12 @@
                             <tr>
                                 <td class="alnleft_f" id="partner_tested_for_recency_">Was the partner tested for recency?</td>
                                 <td class="alnleft_f">
-                                    <obs answerConceptIds="1065,1066,1067" answerLabels="Yes,No,Don't Know" conceptId="166937" id="partner_tested_for_recency_obs" />
+                                  	<obs answerConceptIds="1065,1066,1067" answerLabels="Yes,No,Don't Know" conceptId="166937" id="partner_tested_for_recency_obs" >
+                                        <controls>
+                                            <when thenDisplay="#partner_recency_id,#partner_recency_id_obs,#partner_date_of_recency_test,#partner_date_of_recency_test_obs,#partner_recency_result,#partner_recency_result_obs" value="1065"/>
+                                        </controls>
+                                    </obs>
+                                
                                 </td>
                                 <td class="alnleft_f" id="partner_recency_id">Recency ID</td>
 
@@ -1775,7 +1801,7 @@
                                 <td class="alnleft_f" id="new_tag_link8">Is the partner engaged in HIV care and on ART?</td>
 
                                 <td class="alnleft_f"  id="new_tag_link9">
-                                    <obs conceptId="166959" id="vl_result_obs" name="Is_the_partner_engaged_in_HIV_care_and_on_ART_obs" />
+                                    <obs conceptId="166959" id="Is_the_partner_engaged_in_HIV_care_and_on_ART_obs15" name="Is_the_partner_engaged_in_HIV_care_and_on_ART_obs15" />
                                 </td>
                             </tr>
 
@@ -2032,14 +2058,14 @@
                                     <td class="alnleft_f">
                                         <obs answerConceptIds="166947,166948,166949,166950,159,5256" answerLabels="Previous Known HIV-positive Diagnosis,Refused,Not Located,Outside State LGA or Catchment Area, Deceased, Others" conceptId="166951" id="reason_for_partner_not_testing_or_not_knowing_if_tested_o">
                                             <controls>
-                                                <when thenDisplay="#new_tag_link811,#new_tag_link911,#new_tag_link1011,#new_tag_link1111,#new_tag_link1211" value="166947"/>
+                                                <when thenDisplay="#new_tag_link811,#new_tag_link911,#Is_the_partner_engaged_in_HIV_care_and_on_ART_obs1,#new_tag_link1011,#new_tag_link1111,#new_tag_link1211" value="166947"/>
                                             </controls>
                                         </obs>
                                     </td>
                                     <td class="alnleft_f" id="new_tag_link811">Is the partner engaged in HIV care and on ART?</td>
 
                                     <td class="alnleft_f"  id="new_tag_link911">
-                                        <obs conceptId="166959" id="vl_result_obs" name="Is_the_partner_engaged_in_HIV_care_and_on_ART_obs" />
+                                        <obs conceptId="166959" id="Is_the_partner_engaged_in_HIV_care_and_on_ART_obs1" name="Is_the_partner_engaged_in_HIV_care_and_on_ART_obs1" />
                                     </td>
                                 </tr>
 
@@ -2302,7 +2328,7 @@
                                     <td class="alnleft_f" id="new_tag_link812">Is the partner engaged in HIV care and on ART?</td>
 
                                     <td class="alnleft_f"  id="new_tag_link912">
-                                        <obs conceptId="166959" id="vl_result_obs" name="Is_the_partner_engaged_in_HIV_care_and_on_ART_obs" />
+                                        <obs conceptId="166959" id="Is_the_partner_engaged_in_HIV_care_and_on_ART_obs2" name="Is_the_partner_engaged_in_HIV_care_and_on_ART_obs2" />
                                     </td>
                                 </tr>
 
@@ -2567,7 +2593,7 @@
                                     <td class="alnleft_f" id="new_tag_link831">Is the partner engaged in HIV care and on ART?</td>
 
                                     <td class="alnleft_f"  id="new_tag_link931">
-                                        <obs conceptId="166959" id="vl_result_obs" name="Is_the_partner_engaged_in_HIV_care_and_on_ART_obs" />
+                                        <obs conceptId="166959" id="Is_the_partner_engaged_in_HIV_care_and_on_ART_obs3" name="Is_the_partner_engaged_in_HIV_care_and_on_ART_obs3" />
                                     </td>
                                 </tr>
 
@@ -2830,7 +2856,7 @@
                                     <td class="alnleft_f" id="new_tag_link832">Is the partner engaged in HIV care and on ART?</td>
 
                                     <td class="alnleft_f"  id="new_tag_link932">
-                                        <obs conceptId="166959" id="vl_result_obs" name="Is_the_partner_engaged_in_HIV_care_and_on_ART_obs" />
+                                        <obs conceptId="166959" id="Is_the_partner_engaged_in_HIV_care_and_on_ART_obs4" name="Is_the_partner_engaged_in_HIV_care_and_on_ART_obs4" />
                                     </td>
                                 </tr>
 
@@ -3093,7 +3119,7 @@
                                     <td class="alnleft_f" id="new_tag_link833">Is the partner engaged in HIV care and on ART?</td>
 
                                     <td class="alnleft_f"  id="new_tag_link933">
-                                        <obs conceptId="166959" id="vl_result_obs" name="Is_the_partner_engaged_in_HIV_care_and_on_ART_obs" />
+                                        <obs conceptId="166959" id="Is_the_partner_engaged_in_HIV_care_and_on_ART_obs5" name="Is_the_partner_engaged_in_HIV_care_and_on_ART_obs5" />
                                     </td>
                                 </tr>
 
@@ -3357,7 +3383,7 @@
                                     <td class="alnleft_f" id="new_tag_link841">Is the partner engaged in HIV care and on ART?</td>
 
                                     <td class="alnleft_f"  id="new_tag_link941">
-                                        <obs conceptId="166959" id="vl_result_obs" name="Is_the_partner_engaged_in_HIV_care_and_on_ART_obs" />
+                                        <obs conceptId="166959" id="Is_the_partner_engaged_in_HIV_care_and_on_ART_obs6" name="Is_the_partner_engaged_in_HIV_care_and_on_ART_obs6" />
                                     </td>
                                 </tr>
 
@@ -3620,7 +3646,7 @@
                                     <td class="alnleft_f" id="new_tag_link842">Is the partner engaged in HIV care and on ART?</td>
 
                                     <td class="alnleft_f"  id="new_tag_link942">
-                                        <obs conceptId="166959" id="vl_result_obs" name="Is_the_partner_engaged_in_HIV_care_and_on_ART_obs" />
+                                        <obs conceptId="166959" id="Is_the_partner_engaged_in_HIV_care_and_on_ART_obs7" name="Is_the_partner_engaged_in_HIV_care_and_on_ART_obs7" />
                                     </td>
                                 </tr>
 
@@ -3884,7 +3910,7 @@
                                     <td class="alnleft_f" id="new_tag_link843">Is the partner engaged in HIV care and on ART?</td>
 
                                     <td class="alnleft_f"  id="new_tag_link943">
-                                        <obs conceptId="166959" id="vl_result_obs" name="Is_the_partner_engaged_in_HIV_care_and_on_ART_obs" />
+                                        <obs conceptId="166959" id="Is_the_partner_engaged_in_HIV_care_and_on_ART_obs8" name="Is_the_partner_engaged_in_HIV_care_and_on_ART_obs8" />
                                     </td>
                                 </tr>
 
@@ -4147,7 +4173,7 @@
                                     <td class="alnleft_f" id="new_tag_link844">Is the partner engaged in HIV care and on ART?</td>
 
                                     <td class="alnleft_f"  id="new_tag_link944">
-                                        <obs conceptId="166959" id="vl_result_obs" name="Is_the_partner_engaged_in_HIV_care_and_on_ART_obs" />
+                                        <obs conceptId="166959" id="Is_the_partner_engaged_in_HIV_care_and_on_ART_obs9" name="Is_the_partner_engaged_in_HIV_care_and_on_ART_obs9" />
                                     </td>
                                 </tr>
 
@@ -4413,7 +4439,7 @@
                                     <td class="alnleft_f" id="new_tag_link851">Is the partner engaged in HIV care and on ART?</td>
 
                                     <td class="alnleft_f"  id="new_tag_link951">
-                                        <obs conceptId="166959" id="vl_result_obs" name="Is_the_partner_engaged_in_HIV_care_and_on_ART_obs" />
+                                        <obs conceptId="166959" id="Is_the_partner_engaged_in_HIV_care_and_on_ART_obs0" name="Is_the_partner_engaged_in_HIV_care_and_on_ART_obs0" />
                                     </td>
                                 </tr>
 
@@ -4678,7 +4704,7 @@
                                     <td class="alnleft_f" id="new_tag_link852">Is the partner engaged in HIV care and on ART?</td>
 
                                     <td class="alnleft_f"  id="new_tag_link952">
-                                        <obs conceptId="166959" id="vl_result_obs" name="Is_the_partner_engaged_in_HIV_care_and_on_ART_obs" />
+                                        <obs conceptId="166959" id="Is_the_partner_engaged_in_HIV_care_and_on_ART_obs01" name="Is_the_partner_engaged_in_HIV_care_and_on_ART_obs01" />
                                     </td>
                                 </tr>
 
@@ -4942,7 +4968,7 @@
                                     <td class="alnleft_f" id="new_tag_link853">Is the partner engaged in HIV care and on ART?</td>
 
                                     <td class="alnleft_f"  id="new_tag_link953">
-                                        <obs conceptId="166959" id="vl_result_obs" name="Is_the_partner_engaged_in_HIV_care_and_on_ART_obs" />
+                                        <obs conceptId="166959" id="Is_the_partner_engaged_in_HIV_care_and_on_ART_obs12" name="Is_the_partner_engaged_in_HIV_care_and_on_ART_obs12" />
                                     </td>
                                 </tr>
 
@@ -5207,7 +5233,7 @@
                                     <td class="alnleft_f" id="new_tag_link854">Is the partner engaged in HIV care and on ART?</td>
 
                                     <td class="alnleft_f"  id="new_tag_link954">
-                                        <obs conceptId="166959" id="vl_result_obs" name="Is_the_partner_engaged_in_HIV_care_and_on_ART_obs" />
+                                        <obs conceptId="166959" id="Is_the_partner_engaged_in_HIV_care_and_on_ART_obs13" name="Is_the_partner_engaged_in_HIV_care_and_on_ART_obs13" />
                                     </td>
                                 </tr>
 
@@ -5470,7 +5496,7 @@
                                     <td class="alnleft_f" id="new_tag_link855">Is the partner engaged in HIV care and on ART?</td>
 
                                     <td class="alnleft_f"  id="new_tag_link955">
-                                        <obs conceptId="166959" id="vl_result_obs" name="Is_the_partner_engaged_in_HIV_care_and_on_ART_obs" />
+                                        <obs conceptId="166959" id="Is_the_partner_engaged_in_HIV_care_and_on_ART_obs14" name="Is_the_partner_engaged_in_HIV_care_and_on_ART_obs14" />
                                     </td>
                                 </tr>
 
@@ -5543,7 +5569,7 @@
                     Facility Patient Was Referred From:
                 </td>
                 <td>
-                    <obs conceptId="165480" answerLabel="Facility Patient Was Referred From: " />
+                    <obs conceptId="161550" answerLabel="Facility Patient Was Referred From: " />
                     <!-- replace 160535 with a new concept-->
                 </td>
 

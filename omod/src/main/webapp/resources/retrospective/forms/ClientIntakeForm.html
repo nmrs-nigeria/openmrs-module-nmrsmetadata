@@ -1334,8 +1334,7 @@
                     }
                     if (control_line == "1065") {
                         if (verification_line == "1066") {
-                            if (                let setting = document.querySelector('#setting').children[0];
-                            longterm_line == "1065") {
+                            if (longterm_line == "1065") {
                                 setValue('final_recency_test_recent.value', 163611);
                                 $('#final_recency_test_recent').attr("style", "pointer-events: none;");
                                 setValue('tb_vl_request.value', "");
@@ -1685,7 +1684,7 @@
             <td class="alnleft_s" id="setting_name_pitc">Setting</td>
             <td class="alnleft_s" id="setting_pitc">
                 <!-- <obs answerConceptIds="160539,160529,160546,5271,160542,161629,160545,165838,5622" answerLabels="VCT,TB,STI,FP,OPD,Ward,Outreach program,Standalone HTS, Others" conceptId="165839" id="setting" required="true"> -->
-                <obs answerConceptIds="160539,160529,160546,5271,160542,161629,160545,165838,5622" answerLabels="CT,TB,STI,FP,OPD,Ward,Outreach program,Standalone HTS, Others" conceptId="165839" id="setting" required="true">
+                <obs answerConceptIds="160539,160529,160546,5271,160542,161629,160545,165838,5622" answerLabels="CT,TB,STI,FP,OPD,Ward,Outreach,Standalone HTS, Others" conceptId="165839" id="setting" required="true">
 
                     <controls>
                         <when thenDisplay="#setting_CT" value="160539" />
@@ -1711,7 +1710,7 @@
             <td class="alnleft_s"></td>
             <td class="alnleft_s">MER Modality</td>
             <td class="alnleft_s">
-                <obs id="ct_value" conceptId="167154"  answerConceptIds="160546,1882,166020,1896,5964,160539,167159 " answerLabels="STI, Emergency, Index, Inpatient, TB, VCT" />
+                <obs id="ct_value" conceptId="167154"  answerConceptIds="160546,1882,166020,1896,5964,160539,167159 " answerLabels="STI, Emergency, Index, Inpatient, TB, VCT" required="true"/>
                 <!-- The last concept ID (, PMTCT,) was delibrately left to pick the defualt concept name from the DB -->
             </td>
         </tr>
@@ -1723,7 +1722,7 @@
             <td class="alnleft_s"></td>
             <td class="alnleft_s">MER Modality</td>
             <td class="alnleft_s">
-                <obs id="tb_value" conceptId="167154"  answerConceptIds="5964" answerLabels="TB" />
+                <obs id="tb_value" conceptId="167154"  answerConceptIds="5964" answerLabels="TB" required="true"/>
             </td>
         </tr>
 
@@ -1734,7 +1733,7 @@
             <td class="alnleft_s"></td>
             <td class="alnleft_s">MER Modality</td>
             <td class="alnleft_s">
-                <obs id="sti_value" conceptId="167154"  answerConceptIds="160546" answerLabels="STI" />
+                <obs id="sti_value" conceptId="167154"  answerConceptIds="160546" answerLabels="STI" required="true"/>
             </td>
         </tr>
 
@@ -1745,7 +1744,7 @@
             <td class="alnleft_s"></td>
             <td class="alnleft_s">MER Modality</td>
             <td class="alnleft_s">
-                <obs id="fp_value" conceptId="167154"  answerConceptIds="167155" answerLabels="Other PITC" />
+                <obs id="fp_value" conceptId="167154"  answerConceptIds="167155" answerLabels="Other PITC" required="true"/>
             </td>
         </tr>
 
@@ -1756,7 +1755,7 @@
             <td class="alnleft_s"></td>
             <td class="alnleft_s">MER Modality</td>
             <td class="alnleft_s">
-                <obs id="opd_value" conceptId="167154"  answerConceptIds="1882, 68,167155,160546, 160539" answerLabels="Emergency, Malnutrition, Other PITC, STI, VCT" />
+                <obs id="opd_value" conceptId="167154"  answerConceptIds="1882, 68,167155,160546, 160539" answerLabels="Emergency, Malnutrition, Other PITC, STI, VCT" required="true"/>
             </td>
         </tr>
 
@@ -1767,7 +1766,7 @@
             <td class="alnleft_s"></td>
             <td class="alnleft_s">MER Modality</td>
             <td class="alnleft_s">
-                <obs id="ward_value" conceptId="167154"  answerConceptIds="1882, 1896,68" answerLabels="Emergency, Inpatient, Malnutrition" />
+                <obs id="ward_value" conceptId="167154"  answerConceptIds="1882, 1896,68" answerLabels="Emergency, Inpatient, Malnutrition" required="true"/>
             </td>
         </tr>
         <tr id="setting_Outreach">
@@ -1777,7 +1776,7 @@
             <td class="alnleft_s"></td>
             <td class="alnleft_s">MER Modality</td>
             <td class="alnleft_s">
-                <obs id="outreach_value" conceptId="167154"  answerConceptIds="167158, 167161,163488, 167160,160539" answerLabels="Index, Mobile, Other community, SNS, VCT" />
+                <obs id="outreach_value" conceptId="167154"  answerConceptIds="167158, 167161,163488, 167160,160539" answerLabels="Index, Mobile, Other community, SNS, VCT" required="true"/>
             </td>
         </tr>
 
@@ -1788,24 +1787,21 @@
             <td class="alnleft_s"></td>
             <td class="alnleft_s">MER Modality</td>
             <td class="alnleft_s">
-                <obs id="standalonehts_value" conceptId="167154"  answerConceptIds="1882, 167158,1896,165685, 167160,160546, 5964,160539, 167159" answerLabels="Emergency, Index, Inpatient, PMTCT (ANC1 Only), SNS, STI, TB, VCT" />
+                <obs id="standalonehts_value" conceptId="167154"  answerConceptIds="1882, 167158,1896,165685, 167160,160546, 5964,160539, 167159" answerLabels="Emergency, Index, Inpatient, PMTCT (ANC1 Only), SNS, STI, TB, VCT" required="true"/>
             </td>
         </tr>
 
 
 
         <tr id="setting_other">
-            <td class="alnleft_s"> </td>
-            <td class="alnleft_s"> </td>
+            <td class="alnleft_s">Specify</td>
+            <td class="alnleft_s"><obs conceptId="165904" /></td>
+            <td class="alnleft_s">MER Modality</td>
+            <td class="alnleft_s">
+                <obs id="others_value" conceptId="167154"  answerConceptIds="167158,167157, 165685,167159" answerLabels="Index, Pediatric &lt; 5 Clinic, PMTCT (ANC1 Only)" required="true"/>
+            </td>
             <td class="alnleft_s"> </td>
             <td class="alnleft_s"></td>
-            <td class="alnleft_s">Others, Specify</td>
-            <td class="alnleft_s">
-
-                <obs id="others_value" conceptId="167154"  answerConceptIds="167158,167157, 165685,167159" answerLabels="Index, Pediatric &lt; 5 Clinic, PMTCT (ANC1 Only)" />
-
-
-            </td>
         </tr>
 
         <tr>
@@ -2187,9 +2183,9 @@
                         <patient field="identifier" required="false" />
                     </td>
                     <td style="vertical-align: top;">
-                        <label id="preferred_recency_label" name="preferred_recency_label">
-                            <input id="preferred_recency" name="preferred_recency" type="checkbox" />preferred
-                        </label>
+                        <label id="preferred_recency_label" name="preferred_recency_label"> 
+                          <input id="preferred_recency" name="preferred_recency" type="checkbox" />preferred
+                      </label>          
                     </td>
 
                     <td colspan="2"> <span id="outrange" style="width:100%; color:red; font-weight:bold;"></span> </td>
@@ -2203,6 +2199,9 @@
                     </td>
                     <td colspan="2"> <span id="success" style="width:100%; color:green; font-weight:bold;"></span> </td>
                 </tr>
+              
+               
+               
 
 
 
@@ -2285,7 +2284,7 @@
                 <tr>
                     <td id="vl_samplet">Sample Type</td>
                     <td>
-                        <obs answerConceptIds="1002,165568" answerLabels="Plasma,DBS" conceptId="162476" id="sample_type" />
+                        <obs answerConceptIds="1000,1002,165568,166615" answerLabels="Whole Blood,Plasma,DBS,Plasma separation card(PSC)" conceptId="162476" id="sample_type" />
                     </td>
                     <td class="alnleft_f" id="vl_dss">Date Sample Sent to PCR Lab</td>
                     <td class="alnleft_f">
@@ -2305,7 +2304,7 @@
                 <tr>
                     <td class="alnleft_s">Date Sample Ordered</td>
                     <td>
-                        <obs conceptId="164989" allowFutureDates="false" />
+                        <obs id="DateSampleOrdered" conceptId="164989" allowFutureDates="false" />
                     </td>
                     <td class="alnleft_s">Date result was received at the facility</td>
                     <td>
@@ -2855,47 +2854,46 @@
     </fieldset>
 
 
-    <!-- UPDATED -->
-  <!--   <fieldset>  -->
-       <!--   <legend class="legend_style">Population Type</legend> -->
-        <!--  <table width="100%" border="0"> -->
-        <!--      <td> -->
-             <!--     <table> -->
-              <!--        <td> -->
-             <!--             <tr> -->
-              <!--                <td class="alnleft_s">Population Type</td> -->
-             <!--                 <td> -->
-            <!--                      <obs id="key_pop" conceptId="167207" answerLabels="Key Population,General Population" answerConceptIds="166910,166912"> -->
-            <!--                          <controls> -->
-            <!--                              <when value="166910" thenDisplay="#key_pop_type" /> -->
-           <!--                           </controls> -->
-          <!--                        </obs> -->
-          <!--                    </td> -->
-           <!--               </tr> -->
-           <!--           </td> -->
-           <!--       </table> -->
-          <!--    </td> -->
-
-          <!--  <td> -->
-          <!--      <table class="table" width="100%" id="key_pop_type"> -->
-          <!--              <tr> -->
-          <!--               <td>Key Population Type</td>  -->
-          <!--           <includeIf velocityTest="$patient.gender == 'F' ">  -->
-	      <!--            <td>  -->
-	      <!--             <obs conceptId="166369" answerLabels="FSW,PWID,TG,People in prisons and other enclosed settings" answerConceptIds="166285,160578,166286,166287,162277" />  -->
-	      <!--      </td>  -->
-          <!--    </includeIf>  -->
-          <!-- <includeIf velocityTest="$patient.gender == 'M' ">  -->
-	      <!--                      <td>  -->
-	      <!--                          <obs conceptId="166369" answerLabels="MSM,PWID,TG,People in prisons and other enclosed settings" answerConceptIds="166285,160578,166286,166287,162277" />  -->
-	      <!--                      </td>  -->
-          <!--                   </includeIf>  -->
-          <!--              </tr>  -->
-          <!--      </table>  -->
-          <!--  </td>  -->
-            
-       <!--   </table> -->
-    <!--  </fieldset> -->
+   <!-- UPDATED -->
+    <fieldset>
+        <legend class="legend_style">Population Type</legend>
+        <table width="100%" border="0">
+            <td>
+                <table>
+                    <td>
+                        <tr>
+                            <td class="alnleft_s">Population Type</td>
+                            <td>
+                                <obs id="key_pop" conceptId="167207" answerLabels="Key Population,General Population" answerConceptIds="166910,166912" required="true">
+                                    <controls>
+                                        <when value="166910" thenDisplay="#key_pop_type" />
+                                    </controls>
+                                </obs>
+                            </td>
+                        </tr>
+                    </td>
+                </table>
+            </td>
+			
+            <td>
+                <table class="table" width="100%" id="key_pop_type">
+                        <tr>
+                            <td>Key Population Type</td>
+                            <includeIf velocityTest="$patient.gender == 'F' ">
+	                            <td>
+	                                <obs conceptId="166369" answerLabels="FSW,PWID,TG,People in prisons and other enclosed settings" answerConceptIds="166285,160578,166286,166287,162277" />
+	                            </td>
+                             </includeIf>
+                             <includeIf velocityTest="$patient.gender == 'M' ">
+	                            <td>
+	                                <obs conceptId="166369" answerLabels="MSM,PWID,TG,People in prisons and other enclosed settings" answerConceptIds="166285,160578,166286,166287,162277" />
+	                            </td>
+                             </includeIf>
+                        </tr>
+                </table>
+            </td>
+        </table>
+    </fieldset>
 
     <fieldset>
         <legend class="legend_style">Signature and date</legend>
@@ -2917,5 +2915,6 @@
         </table>
     </fieldset>
     <submit/>
+    
 
 </htmlform>
