@@ -279,21 +279,21 @@
         </insert>
     </changeSet>
 
- <changeSet id="inslude_ABC-3TC-LPV/r_2020-09-15-14:16" author="tega" runOnChange="true">
- 		<preConditions onFail="MARK_RAN">
-            <sqlCheck expectedResult="0">
-                SELECT COUNT(*) FROM concept_answer WHERE concept_id='164507';
-            </sqlCheck>
-        </preConditions>
-        <insert tableName="concept_answer">
-            <column name="concept_id" valueNumeric="164507"/>
-            <column name="answer_concept" valueNumeric="162200"/>
-            <column name="creator" valueNumeric="1"/>
-            <column name="date_created" valueDate="now()"/>
-            <column name="uuid" value="7huveyx5-d050-4e99-4826-ccddc456b8rf"/>
-            <column name="sort_weight" valueNumeric="15"/>
-        </insert>
-    </changeSet>
+<!-- <changeSet id="inslude_ABC-3TC-LPV/r_2020-09-15-14:16" author="tega" runOnChange="true">-->
+<!-- 		<preConditions onFail="MARK_RAN">-->
+<!--            <sqlCheck expectedResult="0">-->
+<!--                SELECT COUNT(*) FROM concept_answer WHERE concept_id='164507';-->
+<!--            </sqlCheck>-->
+<!--        </preConditions>-->
+<!--        <insert tableName="concept_answer">-->
+<!--            <column name="concept_id" valueNumeric="164507"/>-->
+<!--            <column name="answer_concept" valueNumeric="162200"/>-->
+<!--            <column name="creator" valueNumeric="1"/>-->
+<!--            <column name="date_created" valueDate="now()"/>-->
+<!--            <column name="uuid" value="7huveyx5-d050-4e99-4826-ccddc456b8rf"/>-->
+<!--            <column name="sort_weight" valueNumeric="15"/>-->
+<!--        </insert>-->
+<!--    </changeSet>-->
     <changeSet id="update_form_resource_table_longtext_202012080400" author="wande">
         <sql>
             ALTER TABLE form_resource

@@ -32,7 +32,7 @@ public class NMRSMetatadatModuleActivator extends BaseModuleActivator {
 	 * @see #started()
 	 */
 	public void started() {
-		//new ReportsInitializer().started();
+		new ReportsInitializer().started();
 		new JsonFormsInitializer().started();
 		
 		// set visit handler
@@ -47,7 +47,7 @@ public class NMRSMetatadatModuleActivator extends BaseModuleActivator {
 			if (isNmrsDistribution != null) {
 				//its PoC
 				if (isNmrsDistribution.getPropertyValue().equalsIgnoreCase("true")) {
-					//its poc final - execute poc liquibase					
+					//its poc final - execute poc liquibase
 					log.info("Executing POC Liquibase  and forms A");
 					new PocHtmlFormsInitializer().started();
 					new PatientQueuingClinicianLocationUUIDUpdate().started();
@@ -58,7 +58,7 @@ public class NMRSMetatadatModuleActivator extends BaseModuleActivator {
 					DatabaseUpdater.executeChangelog("liquibase-retrospective.xml", null);
 				}
 			} else {
-				//its retrospective				
+				//its retrospective
 				log.info("Executing Retrospective Liquibase and forms C");
 				new HtmlFormsInitializer().started();
 				DatabaseUpdater.executeChangelog("liquibase-retrospective.xml", null);
