@@ -187,7 +187,7 @@ $('#next_appointment .hasDatepicker').attr('disabled', false);
     <table style="margin-bottom: 20px;">
         <thead>
             <tr>
-                <th style="text-align: center">PLHIV Presumptive TB Screening and INH Preventive Therapy (IPT) Monitoring </th>
+                <th style="text-align: center">PLHIV Presumptive TB Screening and TB Preventive Therapy (TPT) Monitoring </th>
             </tr>
         </thead>
     </table>
@@ -282,11 +282,11 @@ $('#next_appointment .hasDatepicker').attr('disabled', false);
             </table>
         </fieldset>
         <fieldset>
-            <legend class="legend_style">Section 2: IPT Screening</legend>
+            <legend class="legend_style">Section 2: TPT Screening</legend>
             <table>
                 <tr>
                     <td colspan="4">
-                        <b>Contraindications for IPT</b>
+                        <b>Contraindications for TPT</b>
                     </td>
                 </tr>
                 <tr>
@@ -340,10 +340,10 @@ $('#next_appointment .hasDatepicker').attr('disabled', false);
             </table>
         </fieldset>
         <fieldset>
-            <legend class="legend_style">Section 3: IPT monitoring</legend>
+            <legend class="legend_style">Section 3: TPT monitoring</legend>
             <table>
                 <tr>
-                    <td>Is Patient Eligible For IPT?</td>
+                    <td>Is Patient Eligible For TPT?</td>
                     <td >
                         <obs id="id_ipt" conceptId="165986" answerConceptIds="1066,1065" answerLabels="No,Yes">
                             <control>
@@ -356,11 +356,11 @@ $('#next_appointment .hasDatepicker').attr('disabled', false);
             </table>
             <table id="ipt_pat">
                 <tr >
-                    <td class="alnleft_s">Date IPT start</td>
+                    <td class="alnleft_s">Date TPT start</td>
                     <td class="alnleft_s">
                         <obs conceptId="165994"/>
                     </td>
-                    <td class="alnleft_s">Weight at start of IPT</td>
+                    <td class="alnleft_s">Weight at start of TPT</td>
                     <td class="alnleft_s">
                         <obs conceptId="165996" required="false"/>
                     </td>
@@ -450,7 +450,7 @@ $('#next_appointment .hasDatepicker').attr('disabled', false);
 
               </tr>
                 <tr>
-                    <td  class="alnleft_s">Outcome of IPT</td>
+                    <td  class="alnleft_s">Outcome of TPT</td>
                     <td class="alnleft_s">
                         <obs id ="tt" conceptId="166007">
                             <control>
@@ -462,7 +462,7 @@ $('#next_appointment .hasDatepicker').attr('disabled', false);
                     <td class="alnleft_s">
                         <obs conceptId="166008"/>
                     </td >
-                    <td id="stp_1"  class="alnleft_s">Reasons for stopping IPT</td>
+                    <td id="stp_1"  class="alnleft_s">Reasons for stopping TPT</td>
                     <td id="stp2" class="alnleft_s">
                         <obs conceptId="166012"/>
                     </td>
