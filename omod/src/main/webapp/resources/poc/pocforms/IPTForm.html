@@ -101,7 +101,17 @@
     <script type="text/javascript">
            beforeSubmit.push(function() 
         {
-		
+	
+		  	var wasi = $('#id_ipt select').val();
+            if(wasi == '1065')
+            {
+				var val_weight_at_start = getValue('weight_at_start.value');
+				if(val_weight_at_start == undefined || val_weight_at_start == ''){
+					window.alert('Please enter Weight at start of TPT.');
+                    return false;  
+				}    
+            }
+           
             var val = $('#tt select').val();
 				
 
@@ -127,6 +137,9 @@
                 return true;
         
             }
+            
+            
+           
       });
         </script>
     <script type="text/javascript">
@@ -362,12 +375,133 @@ $('#next_appointment .hasDatepicker').attr('disabled', false);
                     </td>
                     <td class="alnleft_s">Weight at start of TPT</td>
                     <td class="alnleft_s">
-                        <obs conceptId="165996" required="false"/>
+                        <obs conceptId="165996" id="weight_at_start" required="false"/>
                     </td>
-                    <td class="alnleft_s">INH daily dose</td>
-                    <td id="inh" class="alnleft_s">
-                        <obs conceptId="165997"/>
-                    </td>
+                    
+                    <td width="25%" class="td_overwrote">
+	                    <table id="TPT_Type_table">
+	                        <tr>
+	                            <!-- Non-pregnant TPT Type -->
+	                            <td id="TPT_Type_non_pregnant">
+	                                <label>TPT Type</label>
+	                                <!-- Observation for TPT Type -->
+	                                <obs id="" conceptId="167176" answerConceptIds="167208,167177,167178,167179" answerLabels="INH Once Daily, 3HP Weekly, 3HR Daily, 1HP Daily">
+	                                    <controls>
+	                                        <!-- Control for displaying when TPT Type is INH Once Daily -->
+	                                        <when value="167208" thenDisplay="#INH_Once_Daily" />
+	                                        <!-- Control for displaying when TPT Type is 3HP Weekly -->
+	                                        <when value="167177" thenDisplay="#3HP_Weekly" />
+	                                        <!-- Control for displaying when TPT Type is 3HR Daily -->
+	                                        <when value="167178" thenDisplay="#3HR_Daily" />
+	                                        <!-- Control for displaying when TPT Type is 1HP Daily -->
+	                                        <when value="167179" thenDisplay="#1HP_Daily" />
+	                                    </controls>
+	                                </obs>
+	                            </td>
+	                    
+	                            <excludeIf velocityTest="$patient.gender == 'M' ">
+	                                <!-- Pregnant TPT Type -->
+	                                <td id="TPT_Type_pregnant">
+	                                    <label>TPT Type</label>
+	                                    <!-- Observation for TPT Type -->
+	                                    <obs id="" conceptId="167176" answerConceptIds="167208,167178,167179" answerLabels="INH Once Daily, 3HR Daily, 1HP Daily">
+	                                        <controls>
+	                                            <!-- Control for displaying when TPT Type is INH Once Daily -->
+	                                            <when value="167208" thenDisplay="#INH_Once_Daily" />
+	                                            <!-- Control for displaying when TPT Type is 3HR Daily -->
+	                                            <when value="167178" thenDisplay="#3HR_Daily" />
+	                                            <!-- Control for displaying when TPT Type is 1HP Daily -->
+	                                            <when value="167179" thenDisplay="#1HP_Daily" />
+	                                        </controls>
+	                                    </obs>
+	                                </td>
+	                        
+	                                <!-- Breastfeeding TPT Type -->
+	                                <td id="TPT_Type_breastfeeding">
+	                                    <label>TPT Type</label>
+	                                    <!-- Observation for TPT Type -->
+	                                    <obs id="" conceptId="167176" answerConceptIds="167208,167178,167179" answerLabels="INH Once Daily, 3HR Daily, 1HP Daily">
+	                                        <controls>
+	                                            <!-- Control for displaying when TPT Type is INH Once Daily -->
+	                                            <when value="167208" thenDisplay="#INH_Once_Daily" />
+	                                            <!-- Control for displaying when TPT Type is 3HR Daily -->
+	                                            <when value="167178" thenDisplay="#3HR_Daily" />
+	                                            <!-- Control for displaying when TPT Type is 1HP Daily -->
+	                                            <when value="167179" thenDisplay="#1HP_Daily" />
+	                                        </controls>
+	                                    </obs>
+	                                </td>
+	                            </excludeIf>
+	                    
+	                            <td>
+	                                <!-- Table for 3HP Weekly -->
+	                                <table id="3HP_Weekly" width="100%">
+	                                    <tr>
+	                                        <td>
+	                                            <label>3HP Dose</label>
+	                                            <!-- Observation for 3HP Dose -->
+	                                            <obs conceptId="167177" answerConceptIds="167180,167181,165621" answerLabels="900/900mg, 600/600mg, 300/300mg" />
+	                                        </td>
+	                                    </tr>
+	                                </table>
+	                            </td>
+	                    
+	                            <td>
+	                                <!-- Table for 3HR Daily -->
+	                                <table id="3HR_Daily" width="100%">
+	                                    <tr>
+	                                        <td>
+	                                            <label>3HR Dose</label>
+	                                            <!-- Observation for 3HR Dose -->
+	                                            <obs conceptId="1754" answerConceptIds="167185,167182,167106" answerLabels="300/600mg, 150/600mg, 150/75mg" />
+	                                        </td>
+	                                    </tr>
+	                                </table>
+	                            </td>
+	                    
+	                            <td>
+	                                <!-- Table for 1HP Daily -->
+	                                <table id="1HP_Daily" width="100%">
+	                                    <tr>
+	                                        <td>
+	                                            <label>1HP Daily</label>
+	                                            <!-- Observation for 1HP Daily -->
+	                                            <obs conceptId="167179" answerConceptIds="167185" answerLabels="300/600mg" />
+	                                        </td>
+	                                    </tr>
+	                                </table>
+	                            </td>
+	                            
+	                             <td>
+	                                <!-- Table for INH Once Daily -->
+	                                <table id="INH_Once_Daily" width="100%">
+	                                    <tr>
+	                                        <td>
+	                                            <label>INH Dose</label>
+	                                            <!-- Observation for INH Dose -->
+	                                            <obs conceptId="165080" answerConceptIds="165076,165075,165074" answerLabels="100mg, 150mg, 300mg" />
+	                                        </td>
+	                                    </tr>
+	                                </table>
+	                            </td>
+	                        </tr>
+	                    </table>
+	                </td>             
+
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
                 </tr>
     
                 <tr>
