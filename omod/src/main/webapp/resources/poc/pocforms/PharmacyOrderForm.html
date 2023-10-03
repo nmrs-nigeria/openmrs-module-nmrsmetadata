@@ -103,14 +103,14 @@ else if(arvdos &gt; "10"){
          });
 });
     </script>
-    
+
     <!-- UPDATED (ADDED) -->
 <script type="text/javascript">
 <!-- Error Checking before Form Submit -->
 	// checking that line, age, regimen and duration are filled while allowing for OI flexibility
 
 beforeSubmit.push(function() {
-	
+
 	  let service_delivery_model = document.querySelector('#service_delivery_model').children[0];
       console.log('verify_66666');
       let community_based = document.querySelector('#community_based').children[0];
@@ -162,7 +162,7 @@ beforeSubmit.push(function() {
 
           }
       }
-	
+
 
 	if (((getValue('oi_drug.value') != "") || (getValue('tb_drug.value') != "")) &amp;&amp; ((getValue('TreatmentAgeCategory.value') == ""))) {
 
@@ -229,7 +229,7 @@ beforeSubmit.push(function() {
                 getField('qtyDispensed_s.error').html('This field cannot be empty').show();
                 error = true;
                 break;
-                
+
 			<!-- Adult1stLine -->
             case ((Adult1stLine != "") || (Adult2ndLine != "") || (Ped1stLine != "") || (Ped2ndLine != "") || (Adult3rdLine != "") || (Ped3rdLine != "")):
                 return true;
@@ -246,7 +246,7 @@ beforeSubmit.push(function() {
 });
 
 </script>
-    
+
 <script type="text/javascript">
 	var $ = jQuery;
 	$(document).ready(function ()
@@ -337,17 +337,23 @@ beforeSubmit.push(function() {
                     // console.log(calcNxtAppPill);
                     setValue('calcNxtAppDate.value', getCustomDate(new Date(calcNxtAppPill)));
                 }
-
             });
         });
     </script>
 
     <script>
    		const isAdult = parseFloat('<lookup expression="patient.getAge()" />') &gt; 14 || (parseFloat('<lookup expression="fn.latestObs(5089).valueNumeric"/>') &gt; 29);
-   		console.log("isAdult: " + parseFloat('<lookup expression="patient.getAge()" />'))
-   		console.log("isAdult: " + parseFloat('<lookup expression="fn.latestObs(5089).valueNumeric"/>'))
+   		console.log("isAdult: " + parseFloat('<lookup expression="patient.getAge()" />'));
+   		console.log("isAdult: " + parseFloat('<lookup expression="fn.latestObs(5089).valueNumeric"/>'));
    		console.log("isAdult: " + isAdult)
         jQuery(function() {
+
+            getField('mmd_Dispensings.value').change(function() {
+                setValue('duration_s.value', "");
+                setValue('duration_2.value', "");
+                setValue('duration_3.value', "");
+                setValue('duration_4.value', "");
+            });
 
             // MMD Compare with Duration and Quantiy dispensensed
             getField('duration_s.value').change(function() {
@@ -355,6 +361,7 @@ beforeSubmit.push(function() {
 
                 var duration_mmd = $('input:text', '#duration_s').eq(0).val();
                 var mmd_Dispensed = getValue('mmd_Dispensings.value');
+
 
 				if ((mmd_Dispensed == 166281) &amp;&amp; (duration_mmd &gt; 89)) {
                     window.alert('Duration for MMD &lt; 3 can not be ' + duration_mmd + ' please correct this entry');
@@ -376,13 +383,13 @@ beforeSubmit.push(function() {
             });
         });
     </script>
-    
+
      <script type="text/javascript">
         let mapping = null;
         var $ = jQuery;
         $(document).ready(function (){
             let val = document.querySelectorAll(".drugsSelector")[0].children[0].value;
-            let regId = null; 
+            let regId = null;
             document.querySelectorAll('.lines').forEach(input => {
                 if(input.children[0].value){
                     regId =  input.children[0].value;
@@ -407,7 +414,8 @@ beforeSubmit.push(function() {
                 let regimenLine = document.querySelector('#RegimenLine').children[0];
                 let regimenLineValue = regimenLine.value;
                 regimenLine.innerHTML = '<option></option>';
-                
+
+
                 if(treatmentCategory == 1528) {
                     regimenLine.innerHTML += '<option value="164507">Child First Line</option>';
                     regimenLine.innerHTML += '<option value="164514">Child Second Line</option>';
@@ -454,15 +462,15 @@ beforeSubmit.push(function() {
         });
 
         jQuery(function() {
-            document.querySelectorAll('.drugsSelector').forEach(input => {
-                input.children[0].addEventListener('change',function (e){
-                    getStrength(e.target);
-                })
-            });
+            for(var i=1; i &lt;= 4; i++){
+                const row = i;
+                document.getElementById('drugSelector'+i).addEventListener('change', function(e){
+                    getStrength(e.target.value, row)
+                });
+            }
         });
 
         function getDrugs(regId){
-
             fetch(`/openmrs/ws/rest/v1/nmrsmetadata/drugs/${regId}`)
                 .then(response => response.json())
                 .then(result => {
@@ -470,28 +478,27 @@ beforeSubmit.push(function() {
                      mapping = result;
                       console.log(mapping);
                       console.log(mapping.drugMappingList)
-                    // let response = result.drugs;
-                     // enable_disable_control
-                    document.querySelectorAll(".drugsSelector").forEach(sel => {
-                    	console.log("Sel: " + sel);
-                    	console.log("sel.children[0]: " + sel.children[0]);
-                    	console.log("sel.children[0].value: " + sel.children[0].value);
-                    	// let val = sel.children[0].value;
-                        // console.log(val);
-                        sel.children[0].innerHTML = "<option></option>";
-                        mapping.drugMappingList.forEach(mapping => {
-                            if(isAdult &amp;&amp; mapping.adultStrengthId) {
+
+                        for(var i=1; i &lt;= 4; i++){
+
+                            const row = i;
+                            var sel = document.getElementById('drugSelector'+i);
+                            const val = sel.children[0].value;
+
+                            console.log("for count "+ i + "  value: " + val);
+
+                            sel.children[0].innerHTML = "<option></option>";
+                            mapping.drugMappingList.forEach(mapping => {
+                                if(isAdult &amp;&amp; mapping.adultStrengthId) {
                                 sel.children[0].innerHTML += '<option value="' + mapping.drugsConceptId + '" >' + mapping.drugName + '</option>';
                             }else if(!isAdult &amp;&amp; mapping.pediatricStrengthId) {
                                 sel.children[0].innerHTML += '<option value="' + mapping.drugsConceptId + '" >' + mapping.drugName + '</option>';
                             }
-                        });
-                        console.log("sel.children[0] 2: " + sel.children[0]);
-                        console.log("sel.children[0].value 2: " + sel.children[0].value);
-                    	
-                          //  sel.children[0].value = val;
-                          getStrength(sel.children[0])
-                    });
+                             });
+
+                            getStrength(val, row)
+                            sel.children[0].value = val
+                        }
                 })
                 .catch(error => {
                    clearElements();
@@ -499,22 +506,17 @@ beforeSubmit.push(function() {
                 });
         }
 
-        function getStrength(e){
-            console.log("Mapping", mapping);
-  			console.log("E: "+ e.value);
-  			console.log("E.querySelector: " + document.querySelector('.drugsStrength').children[0]);
-  			
-  			let strength = document.querySelector('.drugsStrength').children[0];
-  			console.log("strength: "+ strength);
+        function getStrength(drugConceptId, row){
+  			let strength = document.getElementById('drugStrength'+row).children[0]
   			let val = strength.value;
             let option = '<option></option>';
             let targetMap = null;
 
             mapping.drugMappingList.forEach(map => {
-                //console.log("DrugConcept", map.drugsConceptId, "e.value", e.value)
-                if(map.drugsConceptId == e.value)
+                if(map.drugsConceptId == drugConceptId)
                     targetMap = map
             });
+
             if(targetMap) {
                 if (isAdult) {
                     option += '<option value="' + targetMap.adultStrengthId + '">' + targetMap.adultStrength + '</option>';
@@ -523,7 +525,7 @@ beforeSubmit.push(function() {
                 }
             }
             strength.innerHTML = option;
-           strength.value = val;
+            strength.value = val;
         }
 
         function clearElements(){
@@ -536,8 +538,6 @@ beforeSubmit.push(function() {
         }
 
     </script>
-    
-
 
     <table style="margin-bottom: 20px;">
         <thead>
@@ -609,7 +609,7 @@ beforeSubmit.push(function() {
         </table>
     </fieldset>
     <br/>
-    
+
   <!-- UPDATED -->
 <fieldset>
 	<legend class="legend_style">Service Delivery Model</legend>
@@ -722,7 +722,7 @@ beforeSubmit.push(function() {
 								</obs>
 								</div>
 							</td>
-	
+
 						</tr>
 					</table>
 				</td>
@@ -746,7 +746,7 @@ beforeSubmit.push(function() {
 									<label>Adult 2nd Line Regimens</label>
 									<div class="enable_disable_control" style="pointer-events: none">
 										<obs class="lines"  conceptId="164513" id="Adult2ndLine"/>
-									</div>	
+									</div>
 								</td>
 						</tr>
 				</table>
@@ -775,7 +775,7 @@ beforeSubmit.push(function() {
 							</td>
 					</tr>
 				</table>
-			</td>   
+			</td>
             <td>
 				<table style="display: none"  id="ped_second_line" class="table" width="100%">
 					<tr>
@@ -800,7 +800,7 @@ beforeSubmit.push(function() {
 								</td>
 							</tr>
 				</table>
-			</td>   
+			</td>
             </tr>
         </table>
 
@@ -835,14 +835,14 @@ beforeSubmit.push(function() {
                     <td>
                         <div class="enable_disable_control" style="pointer-events: none">
                             <!-- <obs class='gridmenu' conceptId="165724" answerConceptIds="166043,164505,1652,161364,630,103166,75523,86663,159809,794,74258,83412,162796,165631,103166,80586,70056,154378,84309,74807,83690,80487,77995,75628,795" answerLabels="Tenofovir/Lamivudine/Dolutegravir,Tenofovir/Lamivudine/Efavirenz,Lamivudine/Zidovudine/Nevirapine,Tenofovir/Lamivudine,Lamivudine/Zidovudine,Abacavir/Lamivudine,Efavirenz,Zidovudine,Atazanavir/Ritonavir,Lopinavir/Ritonavir,Darunavir,Ritonavir,Darunavir/Ritonavir,Dolutegravir,Abacavir/Lamivudine,Nevirapine,Abacavir,Raltegravir,Stavudine,Didanosine,Saquinavir,Nelfinavir,Indinavir,Emtricitabine,Ritonavir"/> -->
-	                        <obs class='gridmenu drugsSelector' conceptId="165724" answerConceptIds="166043,164505,1652,161364,630,103166" answerLabels="Tenofovir/Lamivudine/Dolutegravir,Tenofovir/Lamivudine/Efavirenz,Lamivudine/Zidovudine/Nevirapine,Tenofovir/Lamivudine,Lamivudine/Zidovudine,Abacavir/Lamivudine"
-	                        />   
+	                        <obs class='gridmenu drugsSelector' id="drugSelector1" conceptId="165724" answerConceptIds="166043,164505,1652,161364,630,103166" answerLabels="Tenofovir/Lamivudine/Dolutegravir,Tenofovir/Lamivudine/Efavirenz,Lamivudine/Zidovudine/Nevirapine,Tenofovir/Lamivudine,Lamivudine/Zidovudine,Abacavir/Lamivudine"
+	                        />
                         </div>
                     </td>
                     <td>
                         <div class="enable_disable_control" style="pointer-events: none">
-                    
-                            <obs class='gridmenu drugsStrength' conceptId="165725" id="drugStrength" answerConceptIds="165618,166044,165633,165619,165620,165621,165622,165623,166080,165634,165707,5622" />
+
+                            <obs class='gridmenu drugsStrength' conceptId="165725" id="drugStrength1" answerConceptIds="165618,166044,165633,165619,165620,165621,165622,165623,166080,165634,165707,5622" />
                         </div>
                     </td>
                     <td>
@@ -878,13 +878,13 @@ beforeSubmit.push(function() {
 
                     <td>
                         <div class="enable_disable_control" style="pointer-events: none">
-                            <obs class='gridmenu drugsSelector' conceptId="165724" answerConceptIds="75523,86663,80586,70056,159809,794,74258,162796,165631,154378,84309,74807,83690,80487,77995,75628,795" answerLabels="Efavirenz,Zidovudine,Nevirapine,Abacavir,Atazanivir/Ritonavir,Lopinavir/Ritonavir,Darunavir,Darunavir/Ritonavir,Dolutegravir,Raltegravir,Stavudine,Didanosine,Saquinavir,Nelfinavir,Indinavir,Emtricitabine,Ritonavir"
+                            <obs class='gridmenu drugsSelector' id="drugSelector2" conceptId="165724" answerConceptIds="75523,86663,80586,70056,159809,794,74258,162796,165631,154378,84309,74807,83690,80487,77995,75628,795" answerLabels="Efavirenz,Zidovudine,Nevirapine,Abacavir,Atazanivir/Ritonavir,Lopinavir/Ritonavir,Darunavir,Darunavir/Ritonavir,Dolutegravir,Raltegravir,Stavudine,Didanosine,Saquinavir,Nelfinavir,Indinavir,Emtricitabine,Ritonavir"
                         />
                        </div>
                     </td>
                     <td>
                         <div class="enable_disable_control" style="pointer-events: none">
-                             <obs class='gridmenu drugsStrength' conceptId="165725" id="drugStrength" answerConceptIds="165635,165616,166045,165074,165707,165637,165076,166046,165624,165625,165638,165639,165640,165616,165705,165617,165706,166047,166048,166049,166050,166051,166052,166053,166054,166055,5622"
+                             <obs class='gridmenu drugsStrength' conceptId="165725" id="drugStrength2" answerConceptIds="165635,165616,166045,165074,165707,165637,165076,166046,165624,165625,165638,165639,165640,165616,165705,165617,165706,166047,166048,166049,166050,166051,166052,166053,166054,166055,5622"
                         />
                         </div>
                     </td>
@@ -900,7 +900,7 @@ beforeSubmit.push(function() {
                     </td>
                     <td>
                         <div class="enable_disable_control" style="pointer-events: none">
-                            <obs conceptId="159368"  id="duration"/>
+                            <obs conceptId="159368"  id="duration_2"/>
                         </div>
                     </td>
                     <td>
@@ -920,13 +920,13 @@ beforeSubmit.push(function() {
                 <obsgroup groupingConceptId="162240">
                     <td>
                         <div class="enable_disable_control" style="pointer-events: none">
-                           <obs class='gridmenu drugsSelector' conceptId="165724" answerConceptIds="75523,86663,80586,70056,159809,794,74258,162796,165631,154378,84309,74807,83690,80487,77995,75628,795" answerLabels="Efavirenz,Zidovudine,Nevirapine,Abacavir,Atazanivir/Ritonavir,Lopinavir/Ritonavir,Darunavir,Darunavir/Ritonavir,Dolutegravir,Raltegravir,Stavudine,Didanosine,Saquinavir,Nelfinavir,Indinavir,Emtricitabine,Ritonavir"
+                           <obs class='gridmenu drugsSelector' id="drugSelector3" conceptId="165724" answerConceptIds="75523,86663,80586,70056,159809,794,74258,162796,165631,154378,84309,74807,83690,80487,77995,75628,795" answerLabels="Efavirenz,Zidovudine,Nevirapine,Abacavir,Atazanivir/Ritonavir,Lopinavir/Ritonavir,Darunavir,Darunavir/Ritonavir,Dolutegravir,Raltegravir,Stavudine,Didanosine,Saquinavir,Nelfinavir,Indinavir,Emtricitabine,Ritonavir"
                         />
                         </div>
                     </td>
                     <td>
                         <div class="enable_disable_control" style="pointer-events: none">
-                             <obs class='gridmenu drugsStrength' conceptId="165725" id="drugStrength" answerConceptIds="165635,165616,166045,165074,165707,165637,165076,166046,165624,165625,165638,165639,165640,165616,165705,165617,165706,166047,166048,166049,166050,166051,166052,166053,166054,166055,5622"
+                             <obs class='gridmenu drugsStrength' conceptId="165725" id="drugStrength3" answerConceptIds="165635,165616,166045,165074,165707,165637,165076,166046,165624,165625,165638,165639,165640,165616,165705,165617,165706,166047,166048,166049,166050,166051,166052,166053,166054,166055,5622"
                         />
                         </div>
                     </td>
@@ -942,7 +942,7 @@ beforeSubmit.push(function() {
                     </td>
                     <td>
                         <div class="enable_disable_control" style="pointer-events: none">
-                            <obs conceptId="159368" id="duration"/>
+                            <obs conceptId="159368" id="duration_3"/>
                         </div>
                     </td>
                     <td>
@@ -962,14 +962,14 @@ beforeSubmit.push(function() {
                 <obsgroup groupingConceptId="162240">
                     <td>
                         <div class="enable_disable_control" style="pointer-events: none">
-                           <obs class='gridmenu drugsSelector' conceptId="165724" answerConceptIds="75523,86663,80586,70056,159809,794,74258,162796,165631,154378,84309,74807,83690,80487,77995,75628,795" answerLabels="Efavirenz,Zidovudine,Nevirapine,Abacavir,Atazanivir/Ritonavir,Lopinavir/Ritonavir,Darunavir,Darunavir/Ritonavir,Dolutegravir,Raltegravir,Stavudine,Didanosine,Saquinavir,Nelfinavir,Indinavir,Emtricitabine,Ritonavir"
+                           <obs class='gridmenu drugsSelector' id="drugSelector4" conceptId="165724" answerConceptIds="75523,86663,80586,70056,159809,794,74258,162796,165631,154378,84309,74807,83690,80487,77995,75628,795" answerLabels="Efavirenz,Zidovudine,Nevirapine,Abacavir,Atazanivir/Ritonavir,Lopinavir/Ritonavir,Darunavir,Darunavir/Ritonavir,Dolutegravir,Raltegravir,Stavudine,Didanosine,Saquinavir,Nelfinavir,Indinavir,Emtricitabine,Ritonavir"
                         />
                         </div>
                     </td>
                     <td>
                         <div class="enable_disable_control" style="pointer-events: none">
-                             <obs class='gridmenu drugsStrength' conceptId="165725" id="drugStrength" answerConceptIds="165635,165616,166045,165074,165707,165637,165076,166046,165624,165625,165638,165639,165640,165616,165705,165617,165706,166047,166048,166049,166050,166051,166052,166053,166054,166055,5622"
-                        /> 
+                             <obs class='gridmenu drugsStrength' conceptId="165725" id="drugStrength4" answerConceptIds="165635,165616,166045,165074,165707,165637,165076,166046,165624,165625,165638,165639,165640,165616,165705,165617,165706,166047,166048,166049,166050,166051,166052,166053,166054,166055,5622"
+                        />
                         </div>
                     </td>
                     <td>
@@ -984,7 +984,7 @@ beforeSubmit.push(function() {
                     </td>
                     <td>
                         <div class="enable_disable_control" style="pointer-events: none">
-                            <obs conceptId="159368" id="duration"/>
+                            <obs conceptId="159368" id="duration_4"/>
                         </div>
                     </td>
                     <td>
@@ -1043,14 +1043,14 @@ beforeSubmit.push(function() {
 	                                <when value="1679" thenDisplay="#Isonaizid_strength" />
 	                                <when value="82912" thenDisplay="#Pyridoxine_strength" />
 	                                <!--- others strengths -->
-	
+
 	                                <when value="165257" thenDisplay=".other_strength1" />
 	                                <when value="76488" thenDisplay=".other_strength2" />
 	                                <when value="80945" thenDisplay=".other_strength3" />
-	
+
 	                            </controls>
-	
-	                        </obs>                           
+
+	                        </obs>
                         </div>
                     </td>
                     <td>
@@ -1062,8 +1062,8 @@ beforeSubmit.push(function() {
 	                        <!-- Strength for -->
 	                        <obs class='gridmenu other_strength3' conceptId="165725" answerConceptIds="165062,165060,165075,166095,165068,165992,165074,165076,166145,166146,166147,166050,166137,165617,165635,1066,1066,1066,1066,1066,1066,1066,1066,1066,5622" answerLabels="960mg,480mg,150mg,240mg,120mg,1920mg,300mg,100mg,200_000 units,400_000 units, 500_000 units,40mg,80mg,50mg,200mg,25mg,600mg,900/900mg,600/600mg,300/300mg,300/600mg,150/300mg,75/150mg,960/300/50mg,Other" />
 	                        <!-- Strength for -->
-	
-	
+
+
 	                        <obs class='gridmenu' id="hp_strength" conceptId="165725" answerConceptIds="167180,167181,165621" answerLabels="900/900mg,600/600mg,300/300mg" />
 	                        <!-- Strength for -->
 	                        <obs class='gridmenu' id="hr_strength" conceptId="165725" answerConceptIds="167185,167186,167187" answerLabels="300/600mg,150/300mg,75/150mg" />
@@ -1072,10 +1072,10 @@ beforeSubmit.push(function() {
 	                        <!-- Strength for Rifapentine_and_Rifampicin_strength -->
 	                        <obs class='gridmenu' id="Rifapentine_strength" conceptId="165725" answerConceptIds="1066, 165074, 1066" answerLabels="600mg, 300mg, 150mg" />
 	                        <!-- Strength for -->
-	
+
 	                        <obs class='gridmenu' id="Rifampicin_strength" conceptId="165725" answerConceptIds="165616, 165074, 165075" answerLabels="600mg, 300mg, 150mg" />
 	                        <!-- Strength for -->
-	
+
 	                        <obs class='gridmenu' id="Isonaizid_strength" conceptId="165725" answerConceptIds="165074, 165075, 165076, 166076" answerLabels="300mg, 150mg, 100mg, 75mg " />
 	                        <!-- Strength for -->
 	                        <obs class='gridmenu' id="Pyridoxine_strength" conceptId="165725" answerConceptIds="165076,165617,165706" answerLabels="100mg, 50mg,25mg" />
@@ -1554,7 +1554,7 @@ beforeSubmit.push(function() {
                 </td>
                 <td></td>
             </tr>
-         
+
         </table>
     </fieldset>
 
@@ -1575,5 +1575,5 @@ beforeSubmit.push(function() {
             }
         </script>
     </includeIf>
-	
+
 </htmlform>
