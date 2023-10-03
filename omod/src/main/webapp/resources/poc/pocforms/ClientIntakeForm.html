@@ -1710,7 +1710,7 @@
             <td class="alnleft_s"></td>
             <td class="alnleft_s">MER Modality</td>
             <td class="alnleft_s">
-                <obs id="ct_value" conceptId="167154"  answerConceptIds="160546,1882,166020,1896,5964,160539,167159 " answerLabels="STI, Emergency, Index, Inpatient, TB, VCT" required="true"/>
+                <obs id="ct_value" conceptId="167154"  answerConceptIds="160546,1882,166020,1896,5964,160539,167159 " answerLabels="STI, Emergency, Index, Inpatient, TB, VCT" />
                 <!-- The last concept ID (, PMTCT,) was delibrately left to pick the defualt concept name from the DB -->
             </td>
         </tr>
@@ -1722,7 +1722,7 @@
             <td class="alnleft_s"></td>
             <td class="alnleft_s">MER Modality</td>
             <td class="alnleft_s">
-                <obs id="tb_value" conceptId="167154"  answerConceptIds="5964" answerLabels="TB" required="true"/>
+                <obs id="tb_value" conceptId="167154"  answerConceptIds="5964" answerLabels="TB" />
             </td>
         </tr>
 
@@ -1733,7 +1733,7 @@
             <td class="alnleft_s"></td>
             <td class="alnleft_s">MER Modality</td>
             <td class="alnleft_s">
-                <obs id="sti_value" conceptId="167154"  answerConceptIds="160546" answerLabels="STI" required="true"/>
+                <obs id="sti_value" conceptId="167154"  answerConceptIds="160546" answerLabels="STI" />
             </td>
         </tr>
 
@@ -1744,7 +1744,7 @@
             <td class="alnleft_s"></td>
             <td class="alnleft_s">MER Modality</td>
             <td class="alnleft_s">
-                <obs id="fp_value" conceptId="167154"  answerConceptIds="167155" answerLabels="Other PITC" required="true"/>
+                <obs id="fp_value" conceptId="167154"  answerConceptIds="167155" answerLabels="Other PITC" />
             </td>
         </tr>
 
@@ -1755,7 +1755,7 @@
             <td class="alnleft_s"></td>
             <td class="alnleft_s">MER Modality</td>
             <td class="alnleft_s">
-                <obs id="opd_value" conceptId="167154"  answerConceptIds="1882, 68,167155,160546, 160539" answerLabels="Emergency, Malnutrition, Other PITC, STI, VCT" required="true"/>
+                <obs id="opd_value" conceptId="167154"  answerConceptIds="1882, 68,167155,160546, 160539" answerLabels="Emergency, Malnutrition, Other PITC, STI, VCT" />
             </td>
         </tr>
 
@@ -1766,7 +1766,7 @@
             <td class="alnleft_s"></td>
             <td class="alnleft_s">MER Modality</td>
             <td class="alnleft_s">
-                <obs id="ward_value" conceptId="167154"  answerConceptIds="1882, 1896,68" answerLabels="Emergency, Inpatient, Malnutrition" required="true"/>
+                <obs id="ward_value" conceptId="167154"  answerConceptIds="1882, 1896,68" answerLabels="Emergency, Inpatient, Malnutrition" />
             </td>
         </tr>
         <tr id="setting_Outreach">
@@ -1776,7 +1776,7 @@
             <td class="alnleft_s"></td>
             <td class="alnleft_s">MER Modality</td>
             <td class="alnleft_s">
-                <obs id="outreach_value" conceptId="167154"  answerConceptIds="167158, 167161,163488, 167160,160539" answerLabels="Index, Mobile, Other community, SNS, VCT" required="true"/>
+                <obs id="outreach_value" conceptId="167154"  answerConceptIds="167158, 167161,163488, 167160,160539" answerLabels="Index, Mobile, Other community, SNS, VCT" />
             </td>
         </tr>
 
@@ -1787,7 +1787,7 @@
             <td class="alnleft_s"></td>
             <td class="alnleft_s">MER Modality</td>
             <td class="alnleft_s">
-                <obs id="standalonehts_value" conceptId="167154"  answerConceptIds="1882, 167158,1896,165685, 167160,160546, 5964,160539, 167159" answerLabels="Emergency, Index, Inpatient, PMTCT (ANC1 Only), SNS, STI, TB, VCT" required="true"/>
+                <obs id="standalonehts_value" conceptId="167154"  answerConceptIds="1882, 167158,1896,165685, 167160,160546, 5964,160539, 167159" answerLabels="Emergency, Index, Inpatient, PMTCT (ANC1 Only), SNS, STI, TB, VCT" />
             </td>
         </tr>
 
@@ -1798,7 +1798,7 @@
             <td class="alnleft_s"><obs conceptId="165904" /></td>
             <td class="alnleft_s">MER Modality</td>
             <td class="alnleft_s">
-                <obs id="others_value" conceptId="167154"  answerConceptIds="167158,167157, 165685,167159" answerLabels="Index, Pediatric &lt; 5 Clinic, PMTCT (ANC1 Only)" required="true"/>
+                <obs id="others_value" conceptId="167154"  answerConceptIds="167158,167157, 165685,167159" answerLabels="Index, Pediatric &lt; 5 Clinic, PMTCT (ANC1 Only)" />
             </td>
             <td class="alnleft_s"> </td>
             <td class="alnleft_s"></td>
@@ -2114,481 +2114,481 @@
         </table>
     </fieldset>
 
-    <includeIf velocityTest="$patient.getAge($encounter.getEncounterDatetime()) > 14 ">
+<!--    <includeIf velocityTest="$patient.getAge($encounter.getEncounterDatetime()) > 14 ">-->
 
-        <fieldset id="recency" name="recency">
+<!--        <fieldset id="recency" name="recency">-->
 
 
-            <legend class="legend_style">HIV Recency Testing</legend>
+<!--            <legend class="legend_style">HIV Recency Testing</legend>-->
 
 
-            <table class="table" width="100%">
+<!--            <table class="table" width="100%">-->
 
-                <tr>
+<!--                <tr>-->
 
-                    <td>Opt Out of RTRI?</td>
+<!--                    <td>Opt Out of RTRI?</td>-->
 
-                    <td>
-                        <obs answerConceptIds="1066,1065" answerLabels="No,Yes" conceptId="165805" id="tb_optout">
+<!--                    <td>-->
+<!--                        <obs answerConceptIds="1066,1065" answerLabels="No,Yes" conceptId="165805" id="tb_optout">-->
 
-                            <controls>
-                                <when thenDisplay="#control_line_label,#control_line,#verification_line_label,#verification_line,#longterm_line_label,#longterm_line,#recency_number_label,#recency_number_value, #viral_load_table, #recency_table, #recency_number_verif_label,#recency_number_verif_value,#recency_warning_label,#test_name_dropdown,#recency_test_date,#recency_test_date_label,#test_name_label,#preferred_recency,#preferred_recency_label,#identifier_label"
-                                      value="1066" />
-                            </controls>
+<!--                            <controls>-->
+<!--                                <when thenDisplay="#control_line_label,#control_line,#verification_line_label,#verification_line,#longterm_line_label,#longterm_line,#recency_number_label,#recency_number_value, #viral_load_table, #recency_table, #recency_number_verif_label,#recency_number_verif_value,#recency_warning_label,#test_name_dropdown,#recency_test_date,#recency_test_date_label,#test_name_label,#preferred_recency,#preferred_recency_label,#identifier_label"-->
+<!--                                      value="1066" />-->
+<!--                            </controls>-->
 
-                        </obs>
-                    </td>
+<!--                        </obs>-->
+<!--                    </td>-->
 
-                </tr>
+<!--                </tr>-->
 
 
-                <tr>
-                    <td class="alnleft_s" id="test_name_label" name="test_name_label">Test name</td>
-                    <td class="alnleft">
-                        <obs answerConceptIds="166215, 5622" answerLabels="Asante, Others" conceptId="166216" id="test_name_dropdown" name="test_name_dropdown">
+<!--                <tr>-->
+<!--                    <td class="alnleft_s" id="test_name_label" name="test_name_label">Test name</td>-->
+<!--                    <td class="alnleft">-->
+<!--                        <obs answerConceptIds="166215, 5622" answerLabels="Asante, Others" conceptId="166216" id="test_name_dropdown" name="test_name_dropdown">-->
 
-                            <controls>
-                                <when thenDisplay="#test_name" value="5622" />
-                            </controls>
-                        </obs>
-                    </td>
+<!--                            <controls>-->
+<!--                                <when thenDisplay="#test_name" value="5622" />-->
+<!--                            </controls>-->
+<!--                        </obs>-->
+<!--                    </td>-->
 
-                    <td class="alnleft_s" id="recency_test_date_label" name="recency_test_date_label">Test date</td>
-                    <td class="alnleft_s">
-                        <obs allowFutureDates="false" conceptId="165850" id="recency_test_date" name="recency_test_date" />
-                    </td>
-                    <td class="alnright_s"></td>
-                    <td class="alnleft_s"></td>
+<!--                    <td class="alnleft_s" id="recency_test_date_label" name="recency_test_date_label">Test date</td>-->
+<!--                    <td class="alnleft_s">-->
+<!--                        <obs allowFutureDates="false" conceptId="165850" id="recency_test_date" name="recency_test_date" />-->
+<!--                    </td>-->
+<!--                    <td class="alnright_s"></td>-->
+<!--                    <td class="alnleft_s"></td>-->
 
 
-                </tr>
-                <tr>
+<!--                </tr>-->
+<!--                <tr>-->
 
-                    <td class="alnleft_s"></td>
-                    <td class="alnleft_s" id="test_name">
-                        <obs conceptId="165849" />
-                    </td>
+<!--                    <td class="alnleft_s"></td>-->
+<!--                    <td class="alnleft_s" id="test_name">-->
+<!--                        <obs conceptId="165849" />-->
+<!--                    </td>-->
 
-                </tr>
+<!--                </tr>-->
 
-                <tr>
+<!--                <tr>-->
 
-                    <td id="recency_warning_label" style="width: 100%; color:red">Participant ID must not be more than 10 characters with atleast 2 Uppercase Alphabets present</td>
+<!--                    <td id="recency_warning_label" style="width: 100%; color:red">Participant ID must not be more than 10 characters with atleast 2 Uppercase Alphabets present</td>-->
 
-                </tr>
-                <tr>
-                    <td id="recency_number_label">Participant ID:</td>
+<!--                </tr>-->
+<!--                <tr>-->
+<!--                    <td id="recency_number_label">Participant ID:</td>-->
 
-                    <td class="alnleft_s" id="recency_number_value">
-                        <patient field="identifier" required="false" />
-                    </td>
-                    <td style="vertical-align: top;">
-                        <label id="preferred_recency_label" name="preferred_recency_label"> 
-                          <input id="preferred_recency" name="preferred_recency" type="checkbox" />preferred
-                      </label>          
-                    </td>
+<!--                    <td class="alnleft_s" id="recency_number_value">-->
+<!--                        <patient field="identifier" required="false" />-->
+<!--                    </td>-->
+<!--                    <td style="vertical-align: top;">-->
+<!--                        <label id="preferred_recency_label" name="preferred_recency_label"> -->
+<!--                          <input id="preferred_recency" name="preferred_recency" type="checkbox" />preferred-->
+<!--                      </label>          -->
+<!--                    </td>-->
 
-                    <td colspan="2"> <span id="outrange" style="width:100%; color:red; font-weight:bold;"></span> </td>
-                </tr>
+<!--                    <td colspan="2"> <span id="outrange" style="width:100%; color:red; font-weight:bold;"></span> </td>-->
+<!--                </tr>-->
 
-                <tr>
-                    <td id="recency_number_verif_label">Verify Participant ID</td>
-
-                    <td class="alnleft_s">
-                        <obs conceptId="166210" id="recency_number_verif_value" required="false" />
-                    </td>
-                    <td colspan="2"> <span id="success" style="width:100%; color:green; font-weight:bold;"></span> </td>
-                </tr>
-              
-               
-               
-
-
-
-                <tr>
-                    <td id="control_line_label">Control Line</td>
-                    <td>
-                        <obs answerConceptIds="1066,1065" answerLabels="No,Yes" conceptId="166212" id="control_line" />
-                    </td>
-
-                    <td id="verification_line_label">Verification Line</td>
-                    <td>
-                        <obs answerConceptIds="1066,1065" answerLabels="No,Yes" conceptId="166243" id="verification_line" />
-                    </td>
-
-                    <td id="longterm_line_label">Long-Term Line</td>
-                    <td>
-                        <obs answerConceptIds="1066,1065" answerLabels="No,Yes" conceptId="166211" id="longterm_line" />
-                    </td>
-
-
-                </tr>
-            </table>
-            <table>
-                <tr>
-
-                    <td colspan="2"> </td>
-                </tr>
-            </table>
-            <table id="recency_table">
-
-                <tr>
-                    <td class="alnleft_f"><b>Recency Interpretation</b></td>
-
-                    <td class="alnleft_f">
-                        <obs answerConceptIds="165852,165851,664,163611" answerLabels="Recent,Long Term,Negative,Invalid" conceptId="166213" id="final_recency_test_recent">
-                            <controls>
-                                <when thenDisplay="#viral_load_table" value="165852" />
-                            </controls>
-                        </obs>
-                    </td>
-                    <td colspan="3"> </td>
-                </tr>
-
-            </table>
-
-
-            <table id="viral_load_table">
-
-                <td>Has viral load request been made?</td>
-                <tr>
-                    <td>
-                        <obs answerConceptIds="1066,1065" answerLabels="No,Yes" conceptId="166244" id="tb_vl_request">
-                            <controls>
-                                <when thenDisplay="#new_tag"
-                                      value="1065" />
-                            </controls>
-
-                        </obs>
-                    </td>
-                </tr>
-            </table>
-
-
-            <table id="new_tag">
-                <tr>
-                    <td class="alnleft_f" id="vl_value"><b>Viral load confirmation</b></td>
-                    <td colspan="3"></td>
-                </tr>
-
-                <tr>
-                    <td class="alnleft_f" id="vl_value">Sample collection date</td>
-                    <td class="alnleft_f">
-                        <obs allowFutureDates="false" conceptId="159951" id="vlsample_value_obs" name="vlsample_value_obs" />
-                    </td>
-                    <td id="sample_id_label">Sample Reference Number:</td>
-                    <td>
-                        <obs conceptId="165715" id="sample_id" />
-                    </td>
-                </tr>
-                <tr>
-                    <td id="vl_samplet">Sample Type</td>
-                    <td>
-                        <obs answerConceptIds="1000,1002,165568,166615" answerLabels="Whole Blood,Plasma,DBS,Plasma separation card(PSC)" conceptId="162476" id="sample_type" />
-                    </td>
-                    <td class="alnleft_f" id="vl_dss">Date Sample Sent to PCR Lab</td>
-                    <td class="alnleft_f">
-                        <obs allowFutureDates="false" conceptId="165988" id="vlpcr_value_obs" name="vlpcr_value_obs" />
-                    </td>
-                </tr>
-                <tr>
-                    <td id="vl_samplet">Date sample received at PCR Lab</td>
-                    <td class="alnleft_f">
-                        <obs allowFutureDates="false" conceptId="165716" />
-                    </td>
-                    <td class="alnleft_f" id="vl_dss">Date result was sent from PCR Lab</td>
-                    <td class="alnleft_f">
-                        <obs allowFutureDates="false" conceptId="165989" />
-                    </td>
-                </tr>
-                <tr>
-                    <td class="alnleft_s">Date Sample Ordered</td>
-                    <td>
-                        <obs id="DateSampleOrdered" conceptId="164989" allowFutureDates="false" />
-                    </td>
-                    <td class="alnleft_s">Date result was received at the facility</td>
-                    <td>
-                        <obs conceptId="165987" allowFutureDates="false" />
-                    </td>
-                </tr>
-                <tr>
-                    <td class="alnleft_f" id="vl_rpcr">Receiving PCR Lab</td>
-                    <td class="alnleft_f">
-                        <obs answerConceptIds="166234,166217,166218,166219,166220,166221,166232,166222,166223,166224,166225,166226,166227,166228,166229,166230,166231" answerLabels="68 NARH Yaba Lagos,Ahmadu Bello University Teaching Hospital (ABUTH),Chukwuemeka Odumegwu Ojukwu University Teaching Hospital (COOUTH),Rivers State University Hospital (RSUTH),Defence Reference laboratory (DRL) Abuja,Federal Medical Center Makurdi,Federal Medical Center Jalingo,Federal Teaching Hospital (FTH) Gombe,Jos University Teaching Hospital (JUTH) Jos,Lagos State University Teaching Hospital (LASUTH) Lagos,National Reference Laboratory Gaduwa (NRL) Abuja,Nigerian Institute of Medical Research (NIMR) Lagos,Nnamdi Azikiwe University Teaching Hospital (NAUTH),Obafemi Awolowo University Teaching Hospital (OAUTH) Ile-Ife,University of Maiduguri Teaching Hospital (UMTH) Maiduguri,University of Uyo teaching Hospital (UUTH) Uyo,Usman Danfodio University Teaching Hospital (UDUTH)"
-                             conceptId="166233" id="receiving_lab" />
-                    </td>
-                    <td class="alnleft_f" id="vl_result_label">Viral Load Result Classification:</td>
-                    <td class="alnleft_f">
-                        <obs answerConceptIds="166238,166239,166240" answerLabels="&lt;1000,&gt;=1000,Failed VL" conceptId="166241" id="vl_result_clasification" />
-                    </td>
-                </tr>
-
-                <tr>
-                    <td class="alnleft_f" id="vl_result">Result (copies/ml)</td>
-                    <td class="alnleft_f">
-                        <obs conceptId="856" id="vl_result_obs" name="vl_result_obs" />
-                    </td>
-                    <td class="alnleft_f" id="final_recency_label">Final Recency Result:</td>
-                    <td class="alnleft_f">
-                        <obs answerConceptIds="166236,166235,166237" answerLabels="RITA Recent,Long-Term Infection,Rita Inconclusive" conceptId="166214" id="final_recency_value" />
-
-                    </td>
-                </tr>
-                <tr>
-                    <td class="alnleft_f">Assay Date</td>
-                    <td class="alnleft_f">
-                        <obs conceptId="166424" allowFutureDates="false" />
-                    </td>
-                    <td class="alnleft_f">Approval Date</td>
-                    <td class="alnleft_f">
-                        <obs conceptId="166425" allowFutureDates="false" />
-                    </td>
-                </tr>
-                <tr>
-                    <td class="alnleft_f">Result Date</td>
-                    <td class="alnleft_f">
-                        <obs conceptId="166423" allowFutureDates="false" />
-                    </td>
-                    <td class="alnleft_f" id="vl_value">Sample test date</td>
-                    <td class="alnleft_f">
-                        <obs allowFutureDates="false" conceptId="165854" id="vl_value_obs" name="vl_value_obs" />
-                    </td>
-                </tr>
-
-                <tr>
-                    <td colspan="4" id="another_recency_warning_label" style="width: 100%; color:red">Please verify the correctness of all fields from the paper form before submission.</td>
-                </tr>
-
-            </table>
-
-
-        </fieldset>
-
-    </includeIf>
-    <script type="text/javascript">
-        beforeSubmit.push(function() {
-            var tb_optout = getValue('tb_optout.value');
-
-            //var recency_number_value= getValue('recency_number_value.value');
-            // var recency_number_value = $('input:text', '#recency_number_value').eq(0).val();
-            var recency_number_verif_value = getValue('recency_number_verif_value.value');
-            var control_line = getValue('control_line.value');
-            var verification_line = getValue('verification_line.value');
-            var longterm_line = getValue('longterm_line.value');
-            var final_recency_test_recent = getValue('final_recency_test_recent.value');
-            var final_recency_value = getValue('final_recency_value.value');
-            var recency_test_date = getValue('recency_test_date.value');
-            var test_name_dropdown = getValue('test_name_dropdown.value');
-            //var vl_result_obs = getValue('vl_result_obs.value');
-            //var longterm_line = getValue('longterm_line.value');
-
-            if (tb_optout === "1066") {
-
-                //var userKeyRegExp = /^[A-Z][A-Z][0-9]{8}$/;
-                //var recencyNum= getValue('recency_number_value.value');
-
-                //var recencyNum= $('input:text', '#recency_number_value').eq(0).val();
-                var recencyVer = getValue('recency_number_verif_value.value');
-
-                var patientIdentifier_recency = $('input:text', '#recency_number_value').eq(0).val();
-                var userKeyRegExp = /^[A-Z][A-Z][0-9]{8}$/;
-
-                var vlresultT = getValue('vl_result_clasification.value');
-                var vlresultobs = getValue('vl_result_obs.value');
-                if (vlresultT === "166239") {
-                    if (vlresultobs &lt; 1000) {
-                        getField('vl_result_obs.error').html('Result (copies/ml) cannot be less than 1000 if Viral Load Result Classification is greater than 1000').show();
-                        return false;
-                    }
-                }
-                if (vlresultT === "166238") {
-                    if (vlresultobs >= 1000) {
-                        getField('vl_result_obs.error').html('Result (copies/ml) cannot be  1000 or greater if Viral Load Result Classification is less than 1000').show();
-                        return false;
-                    }
-                }
-                if (vlresultT === "166240") {
-                    if (vlresultobs != "") {
-                        getField('vl_result_obs.error').html('Result (copies/ml) should be empty if Viral Load Result Classification is Failed VL').show();
-                        return false;
-                    }
-                }
-
-                if (test_name_dropdown === "") {
-                    getField('test_name_dropdown.error').html('Recency Test Name cannot be empty').show();
-                    return false;
-                }
-
-                if (recency_test_date === "") {
-                    getField('recency_test_date.error').html('Recency Test Date cannot be empty').show();
-                    return false;
-                }
-
-                if (recency_number_verif_value === "") {
-                    getField('recency_number_verif_value.error').html('Participant ID Verification cannot be empty').show();
-                    return false;
-                }
-
-                if (control_line === "") {
-                    getField('control_line.error').html('Control Line cannot be empty').show();
-                    return false;
-                }
-
-                if (verification_line === "") {
-                    getField('verification_line.error').html('Verification Line cannot be empty').show();
-                    return false;
-                }
-
-                if (longterm_line == "") {
-                    getField('longterm_line.error').html('Long Term cannot be empty').show();
-                    return false;
-                }
-
-                if (final_recency_test_recent == "") {
-                    getField('final_recency_test_recent.error').html('Recency Interpretation cannot be empty').show();
-                    return false;
-                }
-
-                var testVal = new Date(getValue('hiv_test_date.value'));
-                var rctd = new Date(getValue('recency_test_date.value'));
-
-                if (testVal > rctd) {
-                    getField('recency_test_date.error').html('Recency Test Date cannot be earlier than Screening Test Date').show();
-                    return false;
-                }
-
-                var confirmVal = new Date(getValue('confirm_test_date.value'));
-                var visitVal = new Date(getValue('date_of_visit.value'));
-
-                var tieVal = new Date(getValue('tie_test_date.value'));
-                var rctdd = new Date(getValue('recency_test_date.value'));
-                var vlpcr = new Date(getValue('vlpcr_value_obs.value'));
-
-                var vlvalue = new Date(getValue('vl_value_obs.value'));
-                var vlsamplev = new Date(getValue('vlsample_value_obs.value'));
-
-
-                if (confirmVal > rctd) {
-                    getField('recency_test_date.error').html('RecencyTest Date cannot be earlier than Confirmation Test Date').show();
-                    return false;
-                }
-
-                if (visitVal > testVal) {
-                    getField('hiv_test_date.error').html('Screening Test Date cannot be earlier than Visit Date').show();
-                    return false;
-                }
-
-                if (testVal > confirmVal) {
-                    getField('confirm_test_date.error').html('Confirmatory Test Date cannot be earlier than Screening Test Date').show();
-                    return false;
-                }
-
-                if (confirmVal > tieVal) {
-                    getField('tie_test_date.error').html('Tie Breaker Test Date cannot be earlier than Confirmatory Test Date').show();
-                    return false;
-                }
-
-                if (rctd > vlsamplev) {
-                    getField('vlsample_value_obs.error').html('Sample collection date cannot be earlier than Recency Test Date').show();
-                    return false;
-                }
-
-                if (vlsamplev > vlpcr) {
-                    getField('vlpcr_value_obs.error').html('Date Sample Sent to PCR Lab cannot be earlier than Sample collection date').show();
-                    return false;
-                }
-
-                if (vlpcr > vlvalue) {
-                    getField('vl_value_obs.error').html('Sample test date cannot be earlier than Date Sample Sent to PCR Lab').show();
-                    return false;
-                }
-
-                var vlresultT = getValue('vl_result_clasification.value');
-                var vlresultobs = getValue('vl_result_obs.value');
-                if (vlresultT == "166239") {
-                    if (vlresultobs &lt; 1000) {
-                        getField('vl_result_obs.error').html('Result (copies/ml) cannot be less than 1000 if Viral Load Result Classification is greater than 1000').show();
-                        return false;
-                    }
-                }
-                if (vlresultT == "166238") {
-                    if (vlresultobs > 1000) {
-                        getField('vl_result_obs.error').html('Result (copies/ml) cannot be greater than 1000 if Viral Load Result Classification is less than 1000').show();
-                        return false;
-                    }
-                }
-
-                if (confirm("Have you verified the correctness of all fields from the paper form? Are you sure you want to submit?")) {
-                    return true;
-                } else {
-                    return false;
-                }
-
-                return true;
-            } else {
-
-                var testVal = new Date(getValue('hiv_test_date.value'));
-                var rctd = new Date(getValue('recency_test_date.value'));
-
-                if (getField('recency_test_date.error') != null &amp;&amp; testVal > rctd) {
-                    getField('recency_test_date.error').html('RecencyTest Date cannot be earlier than Screening Test Date').show();
-                    return false;
-                }
-
-                var confirmVal = new Date(getValue('confirm_test_date.value'));
-                var visitVal = new Date(getValue('date_of_visit.value'));
-
-                var tieVal = new Date(getValue('tie_test_date.value'));
-
-                if (visitVal > testVal) {
-                    getField('hiv_test_date.error').html('Screening Test Date cannot be earlier than Visit Date').show();
-                    return false;
-                }
-
-                if (testVal > confirmVal) {
-                    getField('confirm_test_date.error').html('Confirmatory Test Date cannot be earlier than Screening Test Date').show();
-                    return false;
-                }
-
-                if (confirmVal > tieVal) {
-                    getField('tie_test_date.error').html('Tie Breaker Test Date cannot be earlier than Confirmatory Test Date').show();
-                    return false;
-                }
-                return true;
-            }
-
-            var scntest = getValue('screen_test_value.value');
-
-            if (scntest == "1228") {
-                if (test_name_dropdown === "") {
-                    getField('test_name_dropdown.error').html('Test Name cannot be empty').show();
-                    return false;
-                }
-                if (recency_test_date === "") {
-                    getField('recency_test_date.error').html('Test Date cannot be empty').show();
-                    return false;
-                }
-                if (tb_optout === "") {
-                    getField('tb_optout.error').html('Opt Out of RTRI cannot be empty').show();
-                    return false;
-                }
-                return true;
-            } else {
-                return true;
-            }
-            if (getField('tb_vl_request.value') != null) {
-                getField('tb_vl_request.value').change(function() {
-                    var tbvlresult = getValue('tb_vl_request.value');
-                    if (tbvlresult == "1066") {} else {
-                        if (final_recency_value == "") {
-                            getField('final_recency_value.error').html('Final Recency Result cannot be empty').show();
-                            return false;
-                        }
-                    }
-                });
-            }
-        });
-    </script>
+<!--                <tr>-->
+<!--                    <td id="recency_number_verif_label">Verify Participant ID</td>-->
+
+<!--                    <td class="alnleft_s">-->
+<!--                        <obs conceptId="166210" id="recency_number_verif_value" required="false" />-->
+<!--                    </td>-->
+<!--                    <td colspan="2"> <span id="success" style="width:100%; color:green; font-weight:bold;"></span> </td>-->
+<!--                </tr>-->
+<!--              -->
+<!--               -->
+<!--               -->
+
+
+
+<!--                <tr>-->
+<!--                    <td id="control_line_label">Control Line</td>-->
+<!--                    <td>-->
+<!--                        <obs answerConceptIds="1066,1065" answerLabels="No,Yes" conceptId="166212" id="control_line" />-->
+<!--                    </td>-->
+
+<!--                    <td id="verification_line_label">Verification Line</td>-->
+<!--                    <td>-->
+<!--                        <obs answerConceptIds="1066,1065" answerLabels="No,Yes" conceptId="166243" id="verification_line" />-->
+<!--                    </td>-->
+
+<!--                    <td id="longterm_line_label">Long-Term Line</td>-->
+<!--                    <td>-->
+<!--                        <obs answerConceptIds="1066,1065" answerLabels="No,Yes" conceptId="166211" id="longterm_line" />-->
+<!--                    </td>-->
+
+
+<!--                </tr>-->
+<!--            </table>-->
+<!--            <table>-->
+<!--                <tr>-->
+
+<!--                    <td colspan="2"> </td>-->
+<!--                </tr>-->
+<!--            </table>-->
+<!--            <table id="recency_table">-->
+
+<!--                <tr>-->
+<!--                    <td class="alnleft_f"><b>Recency Interpretation</b></td>-->
+
+<!--                    <td class="alnleft_f">-->
+<!--                        <obs answerConceptIds="165852,165851,664,163611" answerLabels="Recent,Long Term,Negative,Invalid" conceptId="166213" id="final_recency_test_recent">-->
+<!--                            <controls>-->
+<!--                                <when thenDisplay="#viral_load_table" value="165852" />-->
+<!--                            </controls>-->
+<!--                        </obs>-->
+<!--                    </td>-->
+<!--                    <td colspan="3"> </td>-->
+<!--                </tr>-->
+
+<!--            </table>-->
+
+
+<!--            <table id="viral_load_table">-->
+
+<!--                <td>Has viral load request been made?</td>-->
+<!--                <tr>-->
+<!--                    <td>-->
+<!--                        <obs answerConceptIds="1066,1065" answerLabels="No,Yes" conceptId="166244" id="tb_vl_request">-->
+<!--                            <controls>-->
+<!--                                <when thenDisplay="#new_tag"-->
+<!--                                      value="1065" />-->
+<!--                            </controls>-->
+
+<!--                        </obs>-->
+<!--                    </td>-->
+<!--                </tr>-->
+<!--            </table>-->
+
+
+<!--            <table id="new_tag">-->
+<!--                <tr>-->
+<!--                    <td class="alnleft_f" id="vl_value"><b>Viral load confirmation</b></td>-->
+<!--                    <td colspan="3"></td>-->
+<!--                </tr>-->
+
+<!--                <tr>-->
+<!--                    <td class="alnleft_f" id="vl_value">Sample collection date</td>-->
+<!--                    <td class="alnleft_f">-->
+<!--                        <obs allowFutureDates="false" conceptId="159951" id="vlsample_value_obs" name="vlsample_value_obs" />-->
+<!--                    </td>-->
+<!--                    <td id="sample_id_label">Sample Reference Number:</td>-->
+<!--                    <td>-->
+<!--                        <obs conceptId="165715" id="sample_id" />-->
+<!--                    </td>-->
+<!--                </tr>-->
+<!--                <tr>-->
+<!--                    <td id="vl_samplet">Sample Type</td>-->
+<!--                    <td>-->
+<!--                        <obs answerConceptIds="1000,1002,165568,166615" answerLabels="Whole Blood,Plasma,DBS,Plasma separation card(PSC)" conceptId="162476" id="sample_type" />-->
+<!--                    </td>-->
+<!--                    <td class="alnleft_f" id="vl_dss">Date Sample Sent to PCR Lab</td>-->
+<!--                    <td class="alnleft_f">-->
+<!--                        <obs allowFutureDates="false" conceptId="165988" id="vlpcr_value_obs" name="vlpcr_value_obs" />-->
+<!--                    </td>-->
+<!--                </tr>-->
+<!--                <tr>-->
+<!--                    <td id="vl_samplet">Date sample received at PCR Lab</td>-->
+<!--                    <td class="alnleft_f">-->
+<!--                        <obs allowFutureDates="false" conceptId="165716" />-->
+<!--                    </td>-->
+<!--                    <td class="alnleft_f" id="vl_dss">Date result was sent from PCR Lab</td>-->
+<!--                    <td class="alnleft_f">-->
+<!--                        <obs allowFutureDates="false" conceptId="165989" />-->
+<!--                    </td>-->
+<!--                </tr>-->
+<!--                <tr>-->
+<!--                    <td class="alnleft_s">Date Sample Ordered</td>-->
+<!--                    <td>-->
+<!--                        <obs id="DateSampleOrdered" conceptId="164989" allowFutureDates="false" />-->
+<!--                    </td>-->
+<!--                    <td class="alnleft_s">Date result was received at the facility</td>-->
+<!--                    <td>-->
+<!--                        <obs conceptId="165987" allowFutureDates="false" />-->
+<!--                    </td>-->
+<!--                </tr>-->
+<!--                <tr>-->
+<!--                    <td class="alnleft_f" id="vl_rpcr">Receiving PCR Lab</td>-->
+<!--                    <td class="alnleft_f">-->
+<!--                        <obs answerConceptIds="166234,166217,166218,166219,166220,166221,166232,166222,166223,166224,166225,166226,166227,166228,166229,166230,166231" answerLabels="68 NARH Yaba Lagos,Ahmadu Bello University Teaching Hospital (ABUTH),Chukwuemeka Odumegwu Ojukwu University Teaching Hospital (COOUTH),Rivers State University Hospital (RSUTH),Defence Reference laboratory (DRL) Abuja,Federal Medical Center Makurdi,Federal Medical Center Jalingo,Federal Teaching Hospital (FTH) Gombe,Jos University Teaching Hospital (JUTH) Jos,Lagos State University Teaching Hospital (LASUTH) Lagos,National Reference Laboratory Gaduwa (NRL) Abuja,Nigerian Institute of Medical Research (NIMR) Lagos,Nnamdi Azikiwe University Teaching Hospital (NAUTH),Obafemi Awolowo University Teaching Hospital (OAUTH) Ile-Ife,University of Maiduguri Teaching Hospital (UMTH) Maiduguri,University of Uyo teaching Hospital (UUTH) Uyo,Usman Danfodio University Teaching Hospital (UDUTH)"-->
+<!--                             conceptId="166233" id="receiving_lab" />-->
+<!--                    </td>-->
+<!--                    <td class="alnleft_f" id="vl_result_label">Viral Load Result Classification:</td>-->
+<!--                    <td class="alnleft_f">-->
+<!--                        <obs answerConceptIds="166238,166239,166240" answerLabels="&lt;1000,&gt;=1000,Failed VL" conceptId="166241" id="vl_result_clasification" />-->
+<!--                    </td>-->
+<!--                </tr>-->
+
+<!--                <tr>-->
+<!--                    <td class="alnleft_f" id="vl_result">Result (copies/ml)</td>-->
+<!--                    <td class="alnleft_f">-->
+<!--                        <obs conceptId="856" id="vl_result_obs" name="vl_result_obs" />-->
+<!--                    </td>-->
+<!--                    <td class="alnleft_f" id="final_recency_label">Final Recency Result:</td>-->
+<!--                    <td class="alnleft_f">-->
+<!--                        <obs answerConceptIds="166236,166235,166237" answerLabels="RITA Recent,Long-Term Infection,Rita Inconclusive" conceptId="166214" id="final_recency_value" />-->
+
+<!--                    </td>-->
+<!--                </tr>-->
+<!--                <tr>-->
+<!--                    <td class="alnleft_f">Assay Date</td>-->
+<!--                    <td class="alnleft_f">-->
+<!--                        <obs conceptId="166424" allowFutureDates="false" />-->
+<!--                    </td>-->
+<!--                    <td class="alnleft_f">Approval Date</td>-->
+<!--                    <td class="alnleft_f">-->
+<!--                        <obs conceptId="166425" allowFutureDates="false" />-->
+<!--                    </td>-->
+<!--                </tr>-->
+<!--                <tr>-->
+<!--                    <td class="alnleft_f">Result Date</td>-->
+<!--                    <td class="alnleft_f">-->
+<!--                        <obs conceptId="166423" allowFutureDates="false" />-->
+<!--                    </td>-->
+<!--                    <td class="alnleft_f" id="vl_value">Sample test date</td>-->
+<!--                    <td class="alnleft_f">-->
+<!--                        <obs allowFutureDates="false" conceptId="165854" id="vl_value_obs" name="vl_value_obs" />-->
+<!--                    </td>-->
+<!--                </tr>-->
+
+<!--                <tr>-->
+<!--                    <td colspan="4" id="another_recency_warning_label" style="width: 100%; color:red">Please verify the correctness of all fields from the paper form before submission.</td>-->
+<!--                </tr>-->
+
+<!--            </table>-->
+
+
+<!--        </fieldset>-->
+
+<!--    </includeIf>-->
+<!--    <script type="text/javascript">-->
+<!--        beforeSubmit.push(function() {-->
+<!--            var tb_optout = getValue('tb_optout.value');-->
+
+<!--            //var recency_number_value= getValue('recency_number_value.value');-->
+<!--            // var recency_number_value = $('input:text', '#recency_number_value').eq(0).val();-->
+<!--            var recency_number_verif_value = getValue('recency_number_verif_value.value');-->
+<!--            var control_line = getValue('control_line.value');-->
+<!--            var verification_line = getValue('verification_line.value');-->
+<!--            var longterm_line = getValue('longterm_line.value');-->
+<!--            var final_recency_test_recent = getValue('final_recency_test_recent.value');-->
+<!--            var final_recency_value = getValue('final_recency_value.value');-->
+<!--            var recency_test_date = getValue('recency_test_date.value');-->
+<!--            var test_name_dropdown = getValue('test_name_dropdown.value');-->
+<!--            //var vl_result_obs = getValue('vl_result_obs.value');-->
+<!--            //var longterm_line = getValue('longterm_line.value');-->
+
+<!--            if (tb_optout === "1066") {-->
+
+<!--                //var userKeyRegExp = /^[A-Z][A-Z][0-9]{8}$/;-->
+<!--                //var recencyNum= getValue('recency_number_value.value');-->
+
+<!--                //var recencyNum= $('input:text', '#recency_number_value').eq(0).val();-->
+<!--                var recencyVer = getValue('recency_number_verif_value.value');-->
+
+<!--                var patientIdentifier_recency = $('input:text', '#recency_number_value').eq(0).val();-->
+<!--                var userKeyRegExp = /^[A-Z][A-Z][0-9]{8}$/;-->
+
+<!--                var vlresultT = getValue('vl_result_clasification.value');-->
+<!--                var vlresultobs = getValue('vl_result_obs.value');-->
+<!--                if (vlresultT === "166239") {-->
+<!--                    if (vlresultobs &lt; 1000) {-->
+<!--                        getField('vl_result_obs.error').html('Result (copies/ml) cannot be less than 1000 if Viral Load Result Classification is greater than 1000').show();-->
+<!--                        return false;-->
+<!--                    }-->
+<!--                }-->
+<!--                if (vlresultT === "166238") {-->
+<!--                    if (vlresultobs >= 1000) {-->
+<!--                        getField('vl_result_obs.error').html('Result (copies/ml) cannot be  1000 or greater if Viral Load Result Classification is less than 1000').show();-->
+<!--                        return false;-->
+<!--                    }-->
+<!--                }-->
+<!--                if (vlresultT === "166240") {-->
+<!--                    if (vlresultobs != "") {-->
+<!--                        getField('vl_result_obs.error').html('Result (copies/ml) should be empty if Viral Load Result Classification is Failed VL').show();-->
+<!--                        return false;-->
+<!--                    }-->
+<!--                }-->
+
+<!--                if (test_name_dropdown === "") {-->
+<!--                    getField('test_name_dropdown.error').html('Recency Test Name cannot be empty').show();-->
+<!--                    return false;-->
+<!--                }-->
+
+<!--                if (recency_test_date === "") {-->
+<!--                    getField('recency_test_date.error').html('Recency Test Date cannot be empty').show();-->
+<!--                    return false;-->
+<!--                }-->
+
+<!--                if (recency_number_verif_value === "") {-->
+<!--                    getField('recency_number_verif_value.error').html('Participant ID Verification cannot be empty').show();-->
+<!--                    return false;-->
+<!--                }-->
+
+<!--                if (control_line === "") {-->
+<!--                    getField('control_line.error').html('Control Line cannot be empty').show();-->
+<!--                    return false;-->
+<!--                }-->
+
+<!--                if (verification_line === "") {-->
+<!--                    getField('verification_line.error').html('Verification Line cannot be empty').show();-->
+<!--                    return false;-->
+<!--                }-->
+
+<!--                if (longterm_line == "") {-->
+<!--                    getField('longterm_line.error').html('Long Term cannot be empty').show();-->
+<!--                    return false;-->
+<!--                }-->
+
+<!--                if (final_recency_test_recent == "") {-->
+<!--                    getField('final_recency_test_recent.error').html('Recency Interpretation cannot be empty').show();-->
+<!--                    return false;-->
+<!--                }-->
+
+<!--                var testVal = new Date(getValue('hiv_test_date.value'));-->
+<!--                var rctd = new Date(getValue('recency_test_date.value'));-->
+
+<!--                if (testVal > rctd) {-->
+<!--                    getField('recency_test_date.error').html('Recency Test Date cannot be earlier than Screening Test Date').show();-->
+<!--                    return false;-->
+<!--                }-->
+
+<!--                var confirmVal = new Date(getValue('confirm_test_date.value'));-->
+<!--                var visitVal = new Date(getValue('date_of_visit.value'));-->
+
+<!--                var tieVal = new Date(getValue('tie_test_date.value'));-->
+<!--                var rctdd = new Date(getValue('recency_test_date.value'));-->
+<!--                var vlpcr = new Date(getValue('vlpcr_value_obs.value'));-->
+
+<!--                var vlvalue = new Date(getValue('vl_value_obs.value'));-->
+<!--                var vlsamplev = new Date(getValue('vlsample_value_obs.value'));-->
+
+
+<!--                if (confirmVal > rctd) {-->
+<!--                    getField('recency_test_date.error').html('RecencyTest Date cannot be earlier than Confirmation Test Date').show();-->
+<!--                    return false;-->
+<!--                }-->
+
+<!--                if (visitVal > testVal) {-->
+<!--                    getField('hiv_test_date.error').html('Screening Test Date cannot be earlier than Visit Date').show();-->
+<!--                    return false;-->
+<!--                }-->
+
+<!--                if (testVal > confirmVal) {-->
+<!--                    getField('confirm_test_date.error').html('Confirmatory Test Date cannot be earlier than Screening Test Date').show();-->
+<!--                    return false;-->
+<!--                }-->
+
+<!--                if (confirmVal > tieVal) {-->
+<!--                    getField('tie_test_date.error').html('Tie Breaker Test Date cannot be earlier than Confirmatory Test Date').show();-->
+<!--                    return false;-->
+<!--                }-->
+
+<!--                if (rctd > vlsamplev) {-->
+<!--                    getField('vlsample_value_obs.error').html('Sample collection date cannot be earlier than Recency Test Date').show();-->
+<!--                    return false;-->
+<!--                }-->
+
+<!--                if (vlsamplev > vlpcr) {-->
+<!--                    getField('vlpcr_value_obs.error').html('Date Sample Sent to PCR Lab cannot be earlier than Sample collection date').show();-->
+<!--                    return false;-->
+<!--                }-->
+
+<!--                if (vlpcr > vlvalue) {-->
+<!--                    getField('vl_value_obs.error').html('Sample test date cannot be earlier than Date Sample Sent to PCR Lab').show();-->
+<!--                    return false;-->
+<!--                }-->
+
+<!--                var vlresultT = getValue('vl_result_clasification.value');-->
+<!--                var vlresultobs = getValue('vl_result_obs.value');-->
+<!--                if (vlresultT == "166239") {-->
+<!--                    if (vlresultobs &lt; 1000) {-->
+<!--                        getField('vl_result_obs.error').html('Result (copies/ml) cannot be less than 1000 if Viral Load Result Classification is greater than 1000').show();-->
+<!--                        return false;-->
+<!--                    }-->
+<!--                }-->
+<!--                if (vlresultT == "166238") {-->
+<!--                    if (vlresultobs > 1000) {-->
+<!--                        getField('vl_result_obs.error').html('Result (copies/ml) cannot be greater than 1000 if Viral Load Result Classification is less than 1000').show();-->
+<!--                        return false;-->
+<!--                    }-->
+<!--                }-->
+
+<!--                if (confirm("Have you verified the correctness of all fields from the paper form? Are you sure you want to submit?")) {-->
+<!--                    return true;-->
+<!--                } else {-->
+<!--                    return false;-->
+<!--                }-->
+
+<!--                return true;-->
+<!--            } else {-->
+
+<!--                var testVal = new Date(getValue('hiv_test_date.value'));-->
+<!--                var rctd = new Date(getValue('recency_test_date.value'));-->
+
+<!--                if (getField('recency_test_date.error') != null &amp;&amp; testVal > rctd) {-->
+<!--                    getField('recency_test_date.error').html('RecencyTest Date cannot be earlier than Screening Test Date').show();-->
+<!--                    return false;-->
+<!--                }-->
+
+<!--                var confirmVal = new Date(getValue('confirm_test_date.value'));-->
+<!--                var visitVal = new Date(getValue('date_of_visit.value'));-->
+
+<!--                var tieVal = new Date(getValue('tie_test_date.value'));-->
+
+<!--                if (visitVal > testVal) {-->
+<!--                    getField('hiv_test_date.error').html('Screening Test Date cannot be earlier than Visit Date').show();-->
+<!--                    return false;-->
+<!--                }-->
+
+<!--                if (testVal > confirmVal) {-->
+<!--                    getField('confirm_test_date.error').html('Confirmatory Test Date cannot be earlier than Screening Test Date').show();-->
+<!--                    return false;-->
+<!--                }-->
+
+<!--                if (confirmVal > tieVal) {-->
+<!--                    getField('tie_test_date.error').html('Tie Breaker Test Date cannot be earlier than Confirmatory Test Date').show();-->
+<!--                    return false;-->
+<!--                }-->
+<!--                return true;-->
+<!--            }-->
+
+<!--            var scntest = getValue('screen_test_value.value');-->
+
+<!--            if (scntest == "1228") {-->
+<!--                if (test_name_dropdown === "") {-->
+<!--                    getField('test_name_dropdown.error').html('Test Name cannot be empty').show();-->
+<!--                    return false;-->
+<!--                }-->
+<!--                if (recency_test_date === "") {-->
+<!--                    getField('recency_test_date.error').html('Test Date cannot be empty').show();-->
+<!--                    return false;-->
+<!--                }-->
+<!--                if (tb_optout === "") {-->
+<!--                    getField('tb_optout.error').html('Opt Out of RTRI cannot be empty').show();-->
+<!--                    return false;-->
+<!--                }-->
+<!--                return true;-->
+<!--            } else {-->
+<!--                return true;-->
+<!--            }-->
+<!--            if (getField('tb_vl_request.value') != null) {-->
+<!--                getField('tb_vl_request.value').change(function() {-->
+<!--                    var tbvlresult = getValue('tb_vl_request.value');-->
+<!--                    if (tbvlresult == "1066") {} else {-->
+<!--                        if (final_recency_value == "") {-->
+<!--                            getField('final_recency_value.error').html('Final Recency Result cannot be empty').show();-->
+<!--                            return false;-->
+<!--                        }-->
+<!--                    }-->
+<!--                });-->
+<!--            }-->
+<!--        });-->
+<!--    </script>-->
     <fieldset>
         <legend class="legend_style">Post Test Counseling</legend>
         <table class="table" width="100%">
