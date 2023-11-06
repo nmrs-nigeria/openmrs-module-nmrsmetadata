@@ -392,7 +392,7 @@
         let mapping = null;
         var $ = jQuery;
         $(document).ready(function (){
-            let val = document.querySelectorAll(".drugsSelector")[0].children[0].value;
+            let val = document.querySelectorAll(".")[0].children[0].value;
             let regId = null;
             document.querySelectorAll('.lines').forEach(input => {
                 if(input.children[0].value){
@@ -465,7 +465,7 @@
         });
 
         jQuery(function() {
-            document.querySelectorAll('.drugsSelector').forEach(input => {
+            document.querySelectorAll('.').forEach(input => {
                 input.children[0].addEventListener('change',function (e){
                     getStrength(e.target);
                 })
@@ -484,6 +484,7 @@
             // let response = result.drugs;
 
             document.querySelectorAll(".drugsSelector").forEach(sel => {
+            	console.log("sel.children[0].value: " + sel.children[0].value);
                 let val = sel.children[0].value;
             sel.children[0].innerHTML = "<option></option>";
             mapping.drugMappingList.forEach(mapping => {
@@ -493,6 +494,9 @@
                 sel.children[0].innerHTML += '<option value="' + mapping.drugsConceptId + '" >' + mapping.drugName + '</option>';
             }
         });
+            console.log("sel.children[0] 2: " + sel.children[0]);
+            console.log("sel.children[0].value 2: " + sel.children[0].value);
+        	
             sel.children[0].value = val;
             getStrength(sel.children[0])
         });
@@ -889,7 +893,7 @@
             <tr>
                 <obsgroup groupingConceptId="162240">
                     <td>
-                        <obs class='gridmenu drugsSelector' conceptId="165724" answerConceptIds="75523,86663,80586,70056,159809,794,74258,162796,165631,154378,84309,74807,83690,80487,77995,75628,795" answerLabels="Efavirenz,Zidovudine,Nevirapine,Abacavir,Atazanivir/Ritonavir,Lopinavir/Ritonavir,Darunavir,Darunavir/Ritonavir,Dolutegravir,Raltegravir,Stavudine,Didanosine,Saquinavir,Nelfinavir,Indinavir,Emtricitabine,Ritonavir"
+                        <obs class='gridmenu ' conceptId="165724" answerConceptIds="75523,86663,80586,70056,159809,794,74258,162796,165631,154378,84309,74807,83690,80487,77995,75628,795" answerLabels="Efavirenz,Zidovudine,Nevirapine,Abacavir,Atazanivir/Ritonavir,Lopinavir/Ritonavir,Darunavir,Darunavir/Ritonavir,Dolutegravir,Raltegravir,Stavudine,Didanosine,Saquinavir,Nelfinavir,Indinavir,Emtricitabine,Ritonavir"
                         />
                     </td>
                     <td>
@@ -916,7 +920,7 @@
             <tr>
                 <obsgroup groupingConceptId="162240">
                     <td>
-                        <obs class='gridmenu drugsSelector' conceptId="165724" answerConceptIds="75523,86663,80586,70056,159809,794,74258,162796,165631,154378,84309,74807,83690,80487,77995,75628,795" answerLabels="Efavirenz,Zidovudine,Nevirapine,Abacavir,Atazanivir/Ritonavir,Lopinavir/Ritonavir,Darunavir,Darunavir/Ritonavir,Dolutegravir,Raltegravir,Stavudine,Didanosine,Saquinavir,Nelfinavir,Indinavir,Emtricitabine,Ritonavir"
+                        <obs class='gridmenu ' conceptId="165724" answerConceptIds="75523,86663,80586,70056,159809,794,74258,162796,165631,154378,84309,74807,83690,80487,77995,75628,795" answerLabels="Efavirenz,Zidovudine,Nevirapine,Abacavir,Atazanivir/Ritonavir,Lopinavir/Ritonavir,Darunavir,Darunavir/Ritonavir,Dolutegravir,Raltegravir,Stavudine,Didanosine,Saquinavir,Nelfinavir,Indinavir,Emtricitabine,Ritonavir"
                         />
                     </td>
                     <td>
