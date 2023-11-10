@@ -99,4 +99,8 @@ UPDATE `concept_name` SET `name` = 'Enhanced Adherence Counseling Session' WHERE
 UPDATE concept SET datatype_id = 3 WHERE concept_id = 166773;
 UPDATE concept SET datatype_id = 3 WHERE concept_id = 166647;
 UPDATE concept SET datatype_id = 2 WHERE concept_id = 167125;
+
+UPDATE `concept_name` SET `name` = 'ATAZANAVIR/RITONAVIR' WHERE `concept_name`.`concept_name_id` = 107282; 
+UPDATE `concept_name` SET `name` = 'ATAZANAVIR/RITONAVIR' WHERE `concept_name`.`concept_name_id` = 135961;
+UPDATE `concept_name` SET `name` = 'Liposomal Amphotericin B Injection' WHERE `concept_name`.`concept_name_id` = 3814;
 SET FOREIGN_KEY_CHECKS=1;
