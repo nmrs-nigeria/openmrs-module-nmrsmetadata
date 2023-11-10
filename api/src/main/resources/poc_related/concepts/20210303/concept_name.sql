@@ -1059,8 +1059,7 @@ REPLACE INTO `concept_name` (`concept_id`, `name`, `locale`, `creator`, `date_cr
 REPLACE INTO `concept_name` (`concept_id`, `name`, `locale`, `creator`, `date_created`, `concept_name_id`, `voided`, `voided_by`, `date_voided`, `void_reason`, `uuid`, `concept_name_type`, `locale_preferred`) VALUES (167205, 'Reason for not offered', 'en', 1, '2023-06-05 16:50:11', 144056, 0, NULL, NULL, NULL, 'b10fe29e-bb2a-44c1-8afb-11c4c4b74bbe', 'FULLY_SPECIFIED', 1);
 REPLACE INTO `concept_name` (`concept_id`, `name`, `locale`, `creator`, `date_created`, `concept_name_id`, `voided`, `voided_by`, `date_voided`, `void_reason`, `uuid`, `concept_name_type`, `locale_preferred`) VALUES (167206, 'HH ID', 'en', 1, '2023-06-06 10:31:33', 144057, 0, NULL, NULL, NULL, 'f5f1e628-9265-420a-be22-f30aa3309c0e', 'FULLY_SPECIFIED', 1);
 REPLACE INTO `concept_name` (`concept_id`, `name`, `locale`, `creator`, `date_created`, `concept_name_id`, `voided`, `voided_by`, `date_voided`, `void_reason`, `uuid`, `concept_name_type`, `locale_preferred`) VALUES (167207, 'Population Type', 'en', 1, '2023-06-16 11:20:18', 144058, 0, NULL, NULL, NULL, '2c47a280-4aff-4e8a-af7a-99da64d2a8d8', 'FULLY_SPECIFIED', 1);
-
-
+REPLACE INTO `concept_name` (`concept_id`, `name`, `locale`, `creator`, `date_created`, `concept_name_id`, `voided`, `voided_by`, `date_voided`, `void_reason`, `uuid`, `concept_name_type`, `locale_preferred`) VALUES (167208, 'INH Once Daily', 'en', 1, '2023-09-28 11:23:38', 144059, 0, NULL, NULL, NULL, '0b145b28-a81d-417a-8c33-abe2ff738391', 'FULLY_SPECIFIED', 1);
 
 
 
