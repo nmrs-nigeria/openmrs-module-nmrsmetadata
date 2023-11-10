@@ -313,10 +313,11 @@
             var pillBallances;
             var duration_ss;
 
-
             // get and set duration and next appt date
-            getField('duration_s.value').change(function() {
-                var duration_sss =  $('input:text', '#duration_s').eq(0).val();
+            getField('qtyDispensed_s.value').change(function() {
+                // var duration_sss =  $('input:text', '#duration_s').eq(0).val();
+                // qtyDispensed_s
+                var duration_sss =  $('input:text', '#qtyDispensed_s').eq(0).val();
                 var pillBallances = $('input:text', '#pillBallance').eq(0).val();
                 var encounterDates = getValue('encounterDate.value');
 
@@ -335,7 +336,7 @@
             // get and add pills count to next appt date
             getField('pillBallance.value').change(function() {
                 var pillBallances = $('input:text', '#pillBallance').eq(0).val();
-                var duration_ssss = $('input:text', '#duration_s').eq(0).val();
+                var duration_ssss = $('input:text', '#qtyDispensed_s').eq(0).val();
                 var encounterDatess = getValue('encounterDate.value');
 
                 var pillBallances = parseInt(pillBallances);
@@ -379,19 +380,20 @@
                 var duration_mmd = $('input:text', '#duration_s').eq(0).val();
                 var mmd_Dispensed = getValue('mmd_Dispensings.value');
 
-                if ((mmd_Dispensed == "166281") &amp;&amp; (duration_mmd &gt; "89")) {
+
+                if ((mmd_Dispensed == 166281) &amp;&amp; (duration_mmd &gt; 89)) {
                     window.alert('Duration for MMD &lt; 3 can not be ' + duration_mmd + ' please correct this entry');
                     setValue('duration_s.value', "")
                     return false;
                 }
 
-                if ((mmd_Dispensed == "166282") &amp;&amp; (duration_mmd &lt;= "90" &amp;&amp; duration_mmd &gt; "150")) {
+                if ((mmd_Dispensed == 166282) &amp;&amp; (duration_mmd &lt; 90 || duration_mmd &gt; 179)) {
                     window.alert('Duration for MMD 3 to 5 can not be ' + duration_mmd + ' please correct this entry');
                     setValue('duration_s.value', "")
                     return false;
                 }
 
-                if ((mmd_Dispensed == "166283") &amp;&amp; (duration_mmd &lt; "180")) {
+                if ((mmd_Dispensed == 166283) &amp;&amp; (duration_mmd &lt; 180)) {
                     window.alert('Duration for MMD > 6 can not be ' + duration_mmd + ' please correct this entry');
                     setValue('duration_s.value', "")
                     return false;
@@ -484,6 +486,20 @@
             });
         });
 
+        function getUniqueObjects(list) {
+            const uniqueObjects = [];
+            const seenNames = new Set();
+
+            for (const obj of list) {
+                if (!seenNames.has(obj.drugName)) {
+                    seenNames.add(obj.drugName);
+                    uniqueObjects.push(obj);
+                }
+            }
+
+            return uniqueObjects;
+        }
+
         function getDrugs(regId){
 
             fetch(`/openmrs/ws/rest/v1/nmrsmetadata/drugs/${regId}`)
@@ -498,7 +514,11 @@
             document.querySelectorAll(".drugsSelector").forEach(sel => {
                 let val = sel.children[0].value;
             sel.children[0].innerHTML = "<option></option>";
-            mapping.drugMappingList.forEach(mapping => {
+
+            var uniqueDrugMappingList = getUniqueObjects(mapping.drugMappingList);
+            console.log(uniqueDrugMappingList);
+
+            uniqueDrugMappingList.forEach(mapping => {
                 if(isAdult &amp;&amp; mapping.adultStrengthId) {
                 sel.children[0].innerHTML += '<option value="' + mapping.drugsConceptId + '" >' + mapping.drugName + '</option>';
             }else if(!isAdult &amp;&amp; mapping.pediatricStrengthId) {
@@ -534,16 +554,16 @@
 
             mapping.drugMappingList.forEach(map => {
                 //console.log("DrugConcept", map.drugsConceptId, "e.value", e.value)
-                if(map.drugsConceptId == e.value)
-            targetMap = map
-        });
-            if(targetMap) {
+                if(map.drugsConceptId == e.value) {
+                targetMap = map;
+                console.log(targetMap.adultStrength);
                 if (isAdult) {
                     option += '<option value="' + targetMap.adultStrengthId + '">' + targetMap.adultStrength + '</option>';
                 } else {
                     option += '<option value="' + targetMap.pediatricStrengthId + '">' + targetMap.pediatricStrength + '</option>';
                 }
             }
+        });
             strength.innerHTML = option;
             strength.value = val;
         }
@@ -682,7 +702,7 @@
                     <tr>
                         <td>
                             <label>Multi-Month Dispensing (MMD)</label>
-                            <obs id="mmd_Dispensings" conceptId='166278' answerConceptIds="166281,166282,166283" answerLabels="MMD &lt;= 3, MMD 3 to 5, MMD &gt;= 6" />
+                            <obs id="mmd_Dispensings" conceptId='166278' answerConceptIds="166281,166282,166283" answerLabels="MMD &lt; 3, MMD 3 to 5, MMD &gt;= 6" />
                         </td>
                     </tr>
                 </table>
@@ -847,12 +867,16 @@
                 <td>
                     <label>Qty Prescribed</label>
                 </td>
-                <td>
-                    <label>Duration Dispensed (days)</label>
-                </td>
-                <td>
-                    <label>Qty Dispensed</label>
-                </td>
+
+                <includeIf velocityTest="$user.hasRole('Pharmacist')">
+                    <td>
+                        <label>Duration Dispensed (days)</label>
+                    </td>
+                    <td>
+                        <label>Qty Dispensed</label>
+                    </td>
+                </includeIf>
+
             </tr>
             <tr>
                 <obsgroup groupingConceptId="162240">
@@ -880,12 +904,16 @@
                     <td>
                         <obs conceptId="160856" id="qtyPrescribed_s" />
                     </td>
-                    <td>
-                        <obs conceptId="167209" class="duration_disp" />
-                    </td>
-                    <td>
-                        <obs conceptId="1443" id="qtyDispensed_s" />
-                    </td>
+
+                    <includeIf velocityTest="$user.hasRole('Pharmacist')">
+                        <td>
+                            <obs conceptId="167209" class="duration_disp" />
+                        </td>
+                        <td>
+                            <obs conceptId="1443" id="qtyDispensed_s" />
+                        </td>
+                    </includeIf>
+
                 </obsgroup>
             </tr>
             <tr>
@@ -913,12 +941,14 @@
                     <td>
                         <obs conceptId="160856" id="qtyPrescribed" />
                     </td>
-                    <td>
-                        <obs conceptId="167209" class="duration_disp" />
-                    </td>
-                    <td>
-                        <obs conceptId="1443" id="qtyDispensed" />
-                    </td>
+                    <includeIf velocityTest="$user.hasRole('Pharmacist')">
+                        <td>
+                            <obs conceptId="167209" class="duration_disp" />
+                        </td>
+                        <td>
+                            <obs conceptId="1443" id="qtyDispensed" />
+                        </td>
+                    </includeIf>
                 </obsgroup>
             </tr>
             <tr>
@@ -946,12 +976,14 @@
                     <td>
                         <obs conceptId="160856" id="qtyPrescribed" />
                     </td>
-                    <td>
-                        <obs conceptId="167209" class="duration_disp" />
-                    </td>
-                    <td>
-                        <obs conceptId="1443" id="qtyDispensed" />
-                    </td>
+                    <includeIf velocityTest="$user.hasRole('Pharmacist')">
+                        <td>
+                            <obs conceptId="167209" class="duration_disp" />
+                        </td>
+                        <td>
+                            <obs conceptId="1443" id="qtyDispensed" />
+                        </td>
+                    </includeIf>
                 </obsgroup>
             </tr>
             <tr>
@@ -978,12 +1010,14 @@
                     <td>
                         <obs conceptId="160856" id="qtyPrescribed" />
                     </td>
-                    <td>
-                        <obs conceptId="167209" class="duration_disp" />
-                    </td>
-                    <td>
-                        <obs conceptId="1443" id="qtyDispensed" />
-                    </td>
+                    <includeIf velocityTest="$user.hasRole('Pharmacist')">
+                        <td>
+                            <obs conceptId="167209" class="duration_disp" />
+                        </td>
+                        <td>
+                            <obs conceptId="1443" id="qtyDispensed" />
+                        </td>
+                    </includeIf>
                 </obsgroup>
             </tr>
         </table>
@@ -1000,6 +1034,9 @@
                     <label>Strength</label>
                 </td>
                 <td>
+                    <label>Drug Unit</label>
+                </td>
+                <td>
                     <label>Frequency</label>
                 </td>
                 <td>
@@ -1008,12 +1045,16 @@
                 <td>
                     <label>Qty Prescribed</label>
                 </td>
-                <td>
-                    <label>Duration Dispensed (days)</label>
-                </td>
-                <td>
-                    <label>Qty Dispensed</label>
-                </td>
+
+                <includeIf velocityTest="$user.hasRole('Pharmacist')">
+                    <td>
+                        <label>Duration Dispensed (days)</label>
+                    </td>
+                    <td>
+                        <label>Qty Dispensed</label>
+                    </td>
+                </includeIf>
+
             </tr>
             <tr>
                 <obsgroup groupingConceptId="165726">
@@ -1065,7 +1106,9 @@
                         <!-- Strength for -->
                         <obs class='gridmenu' id="Pyridoxine_strength" conceptId="165725" answerConceptIds="165076,165617,165706" answerLabels="100mg, 50mg,25mg" />
                     </td>
-
+                    <td>
+                        <obs class='unit_grid' conceptId="167218" answerConceptIds="162263,162380,162427,1513,1608" answerLabels="mL,Tube,Lotion,Tablet,Capsule" />
+                    </td>
                     <td>
                         <obs class='gridmenu' conceptId="165723" answerConceptIds="160862,160858,165721,166056,166057,160870,165722,1099,166058,5622" answerLabels="OD,BD,2 BD,3 BD,4 BD,QDS,3ce/week,Weekly,Nocte,Others" />
                     </td>
@@ -1075,12 +1118,15 @@
                     <td>
                         <obs conceptId="160856" id="qtyPrescribed" />
                     </td>
-                    <td>
-                        <obs conceptId="167209" class="duration_disp" />
-                    </td>
-                    <td>
-                        <obs conceptId="1443" id="qtyDispensed" />
-                    </td>
+                    <includeIf velocityTest="$user.hasRole('Pharmacist')">
+                        <td>
+                            <obs conceptId="167209" class="duration_disp" />
+                        </td>
+                        <td>
+                            <obs conceptId="1443" id="qtyDispensed" />
+                        </td>
+                    </includeIf>
+
                 </obsgroup>
             </tr>
             <tr>
@@ -1098,6 +1144,10 @@
                     </td>
 
                     <td>
+                        <obs class='unit_grid' conceptId="167218" answerConceptIds="162263,162380,162427,1513,1608" answerLabels="mL,Tube,Lotion,Tablet,Capsule" />
+                    </td>
+
+                    <td>
                         <obs class='gridmenu' conceptId="165723" answerConceptIds="160862,160858,165721,166056,166057,160870,165722,166058,5622" answerLabels="OD,BD,2 BD,3 BD,4 BD,QDS,3ce/week,Nocte,Others" />
                     </td>
                     <td>
@@ -1106,12 +1156,14 @@
                     <td>
                         <obs conceptId="160856" id="qtyPrescribed" />
                     </td>
-                    <td>
-                        <obs conceptId="167209" class="duration_disp" />
-                    </td>
-                    <td>
-                        <obs conceptId="1443" id="qtyDispensed" />
-                    </td>
+                    <includeIf velocityTest="$user.hasRole('Pharmacist')">
+                        <td>
+                            <obs conceptId="167209" class="duration_disp" />
+                        </td>
+                        <td>
+                            <obs conceptId="1443" id="qtyDispensed" />
+                        </td>
+                    </includeIf>
                 </obsgroup>
             </tr>
             <tr>
@@ -1128,6 +1180,9 @@
                         />
                     </td>
                     <td>
+                        <obs class='unit_grid' conceptId="167218" answerConceptIds="162263,162380,162427,1513,1608" answerLabels="mL,Tube,Lotion,Tablet,Capsule" />
+                    </td>
+                    <td>
                         <obs class='gridmenu' conceptId="165723" answerConceptIds="160862,160858,165721,166056,166057,160870,165722,166058,5622" answerLabels="OD,BD,2 BD,3 BD,4 BD,QDS,3ce/week,Nocte,Others" />
                     </td>
                     <td>
@@ -1136,12 +1191,14 @@
                     <td>
                         <obs conceptId="160856" id="qtyPrescribed" />
                     </td>
-                    <td>
-                        <obs conceptId="167209" class="duration_disp" />
-                    </td>
-                    <td>
-                        <obs conceptId="1443" id="qtyDispensed" />
-                    </td>
+                    <includeIf velocityTest="$user.hasRole('Pharmacist')">
+                        <td>
+                            <obs conceptId="167209" class="duration_disp" />
+                        </td>
+                        <td>
+                            <obs conceptId="1443" id="qtyDispensed" />
+                        </td>
+                    </includeIf>
                 </obsgroup>
             </tr>
             <tr>
@@ -1158,6 +1215,9 @@
                         />
                     </td>
                     <td>
+                        <obs class='unit_grid' conceptId="167218" answerConceptIds="162263,162380,162427,1513,1608" answerLabels="mL,Tube,Lotion,Tablet,Capsule" />
+                    </td>
+                    <td>
                         <obs class='gridmenu' conceptId="165723" answerConceptIds="160862,160858,165721,166056,166057,160870,165722,166058,5622" answerLabels="OD,BD,2 BD,3 BD,4 BD,QDS,3ce/week,Nocte,Others" />
                     </td>
                     <td>
@@ -1166,12 +1226,14 @@
                     <td>
                         <obs conceptId="160856" id="qtyPrescribed" />
                     </td>
-                    <td>
-                        <obs conceptId="167209" class="duration_disp" />
-                    </td>
-                    <td>
-                        <obs conceptId="1443" id="qtyDispensed" />
-                    </td>
+                    <includeIf velocityTest="$user.hasRole('Pharmacist')">
+                        <td>
+                            <obs conceptId="167209" class="duration_disp" />
+                        </td>
+                        <td>
+                            <obs conceptId="1443" id="qtyDispensed" />
+                        </td>
+                    </includeIf>
                 </obsgroup>
             </tr>
 
@@ -1191,6 +1253,9 @@
                     <label>Strength</label>
                 </td>
                 <td>
+                    <label>Drug Unit</label>
+                </td>
+                <td>
                     <label>Frequency</label>
                 </td>
                 <td>
@@ -1199,12 +1264,14 @@
                 <td>
                     <label>Qty Prescribed</label>
                 </td>
-                <td>
-                    <label>Duration Dispensed (days)</label>
-                </td>
-                <td>
-                    <label>Qty Dispensed</label>
-                </td>
+                <includeIf velocityTest="$user.hasRole('Pharmacist')">
+                    <td>
+                        <label>Duration Dispensed (days)</label>
+                    </td>
+                    <td>
+                        <label>Qty Dispensed</label>
+                    </td>
+                </includeIf>
             </tr>
             <tr>
                 <obsgroup groupingConceptId="165728">
@@ -1215,6 +1282,9 @@
                         <obs class='gridmenu' conceptId="165725" answerConceptIds="166061,165622,166062,162401,5622" answerLabels="150mg/75mg,300mg/150mg,150mg/75mg/40mg,Kit,Others" />
                     </td>
                     <td>
+                        <obs class='unit_grid' conceptId="167218" answerConceptIds="162263,162380,162427,1513,1608" answerLabels="mL,Tube,Lotion,Tablet,Capsule" />
+                    </td>
+                    <td>
                         <obs class='gridmenu' conceptId="165723" answerConceptIds="160862,160858,165721,166056,166057,160870,165722,166058,5622" answerLabels="OD,BD,2 BD,3 BD,4 BD,QDS,3ce/week,Nocte,Others" />
                     </td>
                     <td>
@@ -1223,12 +1293,14 @@
                     <td>
                         <obs conceptId="160856" id="qtyPrescribed" />
                     </td>
-                    <td>
-                        <obs conceptId="167209" class="duration_disp" />
-                    </td>
-                    <td>
-                        <obs conceptId="1443" id="qtyDispensed" />
-                    </td>
+                    <includeIf velocityTest="$user.hasRole('Pharmacist')">
+                        <td>
+                            <obs conceptId="167209" class="duration_disp" />
+                        </td>
+                        <td>
+                            <obs conceptId="1443" id="qtyDispensed" />
+                        </td>
+                    </includeIf>
                 </obsgroup>
             </tr>
             <tr>
@@ -1240,6 +1312,9 @@
                         <obs class='gridmenu' conceptId="165725" answerConceptIds="166063,165075,165074,165076,166054,5622" answerLabels="1g,150mg,300mg,100mg,400mg,Others" />
                     </td>
                     <td>
+                        <obs class='unit_grid' conceptId="167218" answerConceptIds="162263,162380,162427,1513,1608" answerLabels="mL,Tube,Lotion,Tablet,Capsule" />
+                    </td>
+                    <td>
                         <obs class='gridmenu' conceptId="165723" answerConceptIds="160862,160858,165721,166056,166057,160870,165722,166058,5622" answerLabels="OD,BD,2 BD,3 BD,4 BD,QDS,3ce/week,Nocte,Others" />
                     </td>
                     <td>
@@ -1248,16 +1323,20 @@
                     <td>
                         <obs conceptId="160856" id="qtyPrescribed" />
                     </td>
-                    <td>
-                        <obs conceptId="167209" class="duration_disp" />
-                    </td>
-                    <td>
-                        <obs conceptId="1443" id="qtyDispensed" />
-                    </td>
+                    <includeIf velocityTest="$user.hasRole('Pharmacist')">
+                        <td>
+                            <obs conceptId="167209" class="duration_disp" />
+                        </td>
+                        <td>
+                            <obs conceptId="1443" id="qtyDispensed" />
+                        </td>
+                    </includeIf>
                 </obsgroup>
             </tr>
         </table>
     </fieldset>
+
+
     <fieldset>
 
         <legend class="legend_style">Other Drugs</legend>
@@ -1271,6 +1350,9 @@
                     <label>Strength</label>
                 </td>
                 <td>
+                    <label>Drug Unit</label>
+                </td>
+                <td>
                     <label>Frequency</label>
                 </td>
                 <td>
@@ -1279,12 +1361,15 @@
                 <td>
                     <label>Qty Prescribed</label>
                 </td>
-                <td>
-                    <label>Duration Dispensed (days)</label>
-                </td>
-                <td>
-                    <label>Qty Dispensed</label>
-                </td>
+                <includeIf velocityTest="$user.hasRole('Pharmacist')">
+                    <td>
+                        <label>Duration Dispensed (days)</label>
+                    </td>
+                    <td>
+                        <label>Qty Dispensed</label>
+                    </td>
+                </includeIf>
+
             </tr>
             <tr>
                 <obsgroup groupingConceptId="166060">
@@ -1296,6 +1381,9 @@
                         <!--<obs conceptId="165725" answerConceptIds="162401"/>-->
                     </td>
                     <td>
+                        <obs class='unit_grid' conceptId="167218" answerConceptIds="162263,162380,162427,1513,1608" answerLabels="mL,Tube,Lotion,Tablet,Capsule" />
+                    </td>
+                    <td>
                         <obs conceptId="165723" answerConceptIds="160862,160858,165721,166056,166057,160870,165722,166058,5622" answerLabels="OD,BD,2 BD,3 BD,4 BD,QDS,3ce/week,Nocte,Others" />
                     </td>
                     <td>
@@ -1304,12 +1392,16 @@
                     <td>
                         <obs conceptId="160856" id="qtyPrescribed" />
                     </td>
-                    <td>
-                        <obs conceptId="167209" class="duration_disp" />
-                    </td>
-                    <td>
-                        <obs conceptId="1443" id="qtyDispensed" />
-                    </td>
+
+                    <includeIf velocityTest="$user.hasRole('Pharmacist')">
+                        <td>
+                            <obs conceptId="167209" class="duration_disp" />
+                        </td>
+                        <td>
+                            <obs conceptId="1443" id="qtyDispensed" />
+                        </td>
+                    </includeIf>
+
                 </obsgroup>
             </tr>
             <tr>
@@ -1322,6 +1414,9 @@
                         <!--<obs conceptId="165725" answerConceptIds="162401"/>-->
                     </td>
                     <td>
+                        <obs class='unit_grid' conceptId="167218" answerConceptIds="162263,162380,162427,1513,1608" answerLabels="mL,Tube,Lotion,Tablet,Capsule" />
+                    </td>
+                    <td>
                         <obs conceptId="165723" answerConceptIds="160862,160858,165721,166056,166057,160870,165722,166058,5622" answerLabels="OD,BD,2 BD,3 BD,4 BD,QDS,3ce/week,Nocte,Others" />
                     </td>
                     <td>
@@ -1330,12 +1425,14 @@
                     <td>
                         <obs conceptId="160856" id="qtyPrescribed" />
                     </td>
-                    <td>
-                        <obs conceptId="167209" class="duration_disp" />
-                    </td>
-                    <td>
-                        <obs conceptId="1443" id="qtyDispensed" />
-                    </td>
+                    <includeIf velocityTest="$user.hasRole('Pharmacist')">
+                        <td>
+                            <obs conceptId="167209" class="duration_disp" />
+                        </td>
+                        <td>
+                            <obs conceptId="1443" id="qtyDispensed" />
+                        </td>
+                    </includeIf>
                 </obsgroup>
             </tr>
             <tr>
@@ -1348,6 +1445,9 @@
                         <!--<obs conceptId="165725" answerConceptIds="162401"/>-->
                     </td>
                     <td>
+                        <obs class='unit_grid' conceptId="167218" answerConceptIds="162263,162380,162427,1513,1608" answerLabels="mL,Tube,Lotion,Tablet,Capsule" />
+                    </td>
+                    <td>
                         <obs conceptId="165723" answerConceptIds="160862,160858,165721,166056,166057,160870,165722,166058,5622" answerLabels="OD,BD,2 BD,3 BD,4 BD,QDS,3ce/week,Nocte,Others" />
                     </td>
                     <td>
@@ -1356,12 +1456,14 @@
                     <td>
                         <obs conceptId="160856" id="qtyPrescribed" />
                     </td>
-                    <td>
-                        <obs conceptId="167209" class="duration_disp" />
-                    </td>
-                    <td>
-                        <obs conceptId="1443" id="qtyDispensed" />
-                    </td>
+                    <includeIf velocityTest="$user.hasRole('Pharmacist')">
+                        <td>
+                            <obs conceptId="167209" class="duration_disp" />
+                        </td>
+                        <td>
+                            <obs conceptId="1443" id="qtyDispensed" />
+                        </td>
+                    </includeIf>
                 </obsgroup>
             </tr>
         </table>
