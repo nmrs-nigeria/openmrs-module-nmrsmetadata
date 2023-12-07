@@ -62,7 +62,6 @@
         .legend_style {
             max-width: 35%;
             background: #FAFAFA;
-        <!--padding: 5px;-->
             margin: 0px left;
             box-shadow: 1px 1px 25px rgba(0,0,0,0.10);
             border-radius: 2px;
@@ -89,7 +88,6 @@
         }
         form input, form select, form textarea, form ul.select, .form input, .form select, .form textarea, .form ul.select {
             padding: 2px 10px;
-        <!--min-width: 150px;-->
         }
         form select, .form select {
             max-width: 200px;
@@ -100,10 +98,8 @@
             color: #363463;
             font-size: 14px;
         }
-        <!--table.baseline-aligned td {-->
-            <!--vertical-align: baseline;-->
-            <!--}-->
     </style>
+
     <script type="text/javascript">
 
         var $ = jQuery;
@@ -112,6 +108,7 @@
             $('.hasDatepicker').attr('readonly', true)
         });
     </script>
+
     <script type="text/javascript">
         var $ = jQuery;
         $(document).ready(function(){
@@ -203,22 +200,6 @@
                 <td> </td>
             </tr>
         </table>
-        <!--<table width="100%">-->
-        <!--<tr>-->
-        <!--<td class="alnright">Mother's Address:</td>-->
-        <!--<td class="value"><lookup complexExpression="#foreach ( $relationship in $relationshipList )-->
-        <!--#if( $relationship.relationshipType.bIsToA == 'Child' )-->
-        <!--#if( !($relationship.personA.patientId == $patient.patientId ))-->
-        <!--#if( $relationship.personA.gender == 'F' )-->
-        <!--$relationship.personA.personAddress.address1-->
-        <!--#end-->
-        <!--#end-->
-        <!--#end-->
-        <!--#end "/></td>-->
-        <!--<td class="alnright">Timing of Mother's ART Initiation:</td>-->
-        <!--<td><obs conceptId="165940"/></td>-->
-        <!--</tr>-->
-        <!--</table>-->
     </fieldset><br/>
     <fieldset>
         <legend class="legend_style">Child Birth Details</legend>
@@ -291,24 +272,26 @@
                 <td class="alnleft_s">
                     <obs conceptId="165243" id="BMIorMUAC" />
                 </td>
-                <td class="alnright_s">CTX given to child</td>
-                <td class="alnleft_s">
-                    <obs id="ctx_control" conceptId="165837" answerConceptIds="1065,1066" answerLabel="" required="true">
-                        <control>
-                            <when value="1065" thenDisplay="#ageAtCotirmInitiation" />
-                        </control>
-                    </obs>
-                </td>
+                <td class="alnright_s">Child's Name:</td>
+                <td class="alnleft_s"><obs conceptId="1586" id="childsName" /></td>
                 <td class="alnright_s">Feeding method</td>
                 <td class="alnleft_s">
                     <obs conceptId="1151" answerConceptIds="5254,6046,5526"
                          answerLabels="Infant formula,Mixed feeding,Exclusively Breastfed" />
                 </td>
             </tr>
-            <tr id="ageAtCotirmInitiation">
-                <td class="alnright_s">Age at cotrim Initiation</td>
-                <td class="alnleft_s standard">
-                    <!--                    <obs conceptId="167125" />-->
+
+            <tr>
+                <td class="alnright_s">CTX given to child</td>
+                <td class="alnleft_s">
+                    <obs id="ctx_control" conceptId="165837" answerConceptIds="1065,1066" answerLabel="" required="true">
+                        <control>
+                            <when value="1065" thenDisplay="#ageAtCotirmInitiationLabel, #ageAtCotirmInitiationObs" />
+                        </control>
+                    </obs>
+                </td>
+                <td class="alnright_s" id="ageAtCotirmInitiationLabel">Age at cotrim Initiation</td>
+                <td class="alnleft_s standard" id="ageAtCotirmInitiationObs">
                     <obs id="agecotrim" conceptId="167125" answerConceptIds="167172,167175" answerLabels="&lt; 2months, &gt;=2months"/>
                 </td>
             </tr>
@@ -558,89 +541,6 @@
                 </tr>
             </obsgroup>
         </table>
-        <!--
-        <table id="pcr_2" class="table" width="100%">
-
-              <tr>
-                <th>Sample ID.</th>
-                <th>Date Sample Collected</th>
-                <th>Date Sample Sent to PCR Lab</th>
-                <th>Date sample received at PCR Lab</th>
-                <th>Date result was sent from PCR Lab</th>
-            </tr>
-            <obsgroup groupingConceptId="165875">
-                <tr>
-                    <td><obs conceptId="165715"/></td>
-                    <td><obs conceptId="159951"/></td>
-                    <td><obs conceptId="165988"/></td>
-                    <td><obs conceptId="165716" allowFutureDates="false" /></td>
-                    <td><obs conceptId="165989" allowFutureDates="false" /></td>
-                </tr>
-                <tr>
-                    <th>Date Result Received at Facility</th>
-                    <th>Date Caregiver Given Result</th>
-                    <th>PCR Result</th>
-                    <th>Result Date</th>
-                    <th>Assay Date</th>
-                </tr>
-                <tr>
-                    <td><obs conceptId="165987"/></td>
-                    <td><obs conceptId="165873"/></td>
-                    <td><obs conceptId="165872" answerConceptIds="703,664,165871" answerLabels="Positive, Negative, Not Processed"/></td>
-                    <td><obs conceptId="166423" allowFutureDates="false" /></td>
-                    <td><obs conceptId="166424" allowFutureDates="false" /></td>
-                </tr>
-                <tr>
-                    <th>Approval Date</th>
-                    <th>Sample Order Date</th>
-                </tr>
-                <tr>
-                    <td><obs conceptId="166425" allowFutureDates="false" /></td>
-                    <td><obs conceptId="164989" allowFutureDates="false" /></td>
-                </tr>
-            </obsgroup>
-        </table>
-        <table id="confirmatory_pcr" class="table" width="100%">
-             <tr>
-                <th>Sample ID.</th>
-                <th>Date Sample Collected</th>
-                <th>Date Sample Sent to PCR Lab</th>
-                <th>Date sample received at PCR Lab</th>
-                <th>Date result was sent from PCR Lab</th>
-            </tr>
-            <obsgroup groupingConceptId="165875">
-                <tr>
-                    <td><obs conceptId="165715"/></td>
-                    <td><obs conceptId="159951"/></td>
-                    <td><obs conceptId="165988"/></td>
-                    <td><obs conceptId="165716" allowFutureDates="false" /></td>
-                    <td><obs conceptId="165989" allowFutureDates="false" /></td>
-                </tr>
-                <tr>
-                    <th>Date Result Received at Facility</th>
-                    <th>Date Caregiver Given Result</th>
-                    <th>PCR Result</th>
-                    <th>Result Date</th>
-                    <th>Assay Date</th>
-                </tr>
-                <tr>
-                    <td><obs conceptId="165987"/></td>
-                    <td><obs conceptId="165873"/></td>
-                    <td><obs conceptId="165872" answerConceptIds="703,664,165871" answerLabels="Positive, Negative, Not Processed"/></td>
-                    <td><obs conceptId="166423" allowFutureDates="false" /></td>
-                    <td><obs conceptId="166424" allowFutureDates="false" /></td>
-                </tr>
-                <tr>
-                    <th>Approval Date</th>
-                    <th>Sample Order Date</th>
-                </tr>
-                <tr>
-                    <td><obs conceptId="166425" allowFutureDates="false" /></td>
-                    <td><obs conceptId="164989" allowFutureDates="false" /></td>
-                </tr>
-            </obsgroup>
-        </table>
-        -->
         <table class="table" width="100%">
             <tr>
                 <td class="alnleft_s">Rapid Test Antibody Lab Monitoring</td>
@@ -663,6 +563,7 @@
             </tr>
         </table>
     </fieldset>
+
     <fieldset>
         <legend class="legend_style">Comments and Signature</legend>
         <table width="100%">
@@ -692,7 +593,6 @@
 
             $('#childsWeight').keyup(calBMIoverMUAC);
             $('#childsLength').keyup(calBMIoverMUAC);
-            //$('#childsMUAC').keyup(calBMIoverMUAC);
             getField('BMIorMUAC.value')[0].disabled = 'disabled';
         });
 
@@ -738,8 +638,9 @@
             }else {
 
             }
-
-
         }
+
+
     </script>
+
 </htmlform>
