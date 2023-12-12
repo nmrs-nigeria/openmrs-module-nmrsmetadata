@@ -1,19 +1,19 @@
 <htmlform formUuid="5d522e63-463e-4a9f-a2c1-7ebbe4069a49" formName="Care Card"
-    formEncounterType="0b8d256c-e5df-4801-9653-b6ae5b6e906b" formVersion="1.0">
+          formEncounterType="0b8d256c-e5df-4801-9653-b6ae5b6e906b" formVersion="1.0">
     <style>
         .section {
             border: 1px solid $headerColor;
-        padding: 2px;
-        text-align: left;
-        margin-bottom: 1em;
+            padding: 2px;
+            text-align: left;
+            margin-bottom: 1em;
         }
 
         .sectionHeader {
             background - color: #2f1c55;
-        color: white;
-        /* display: block; */
-        padding: 2px;
-        font-weight: bold;
+            color: white;
+            /* display: block; */
+            padding: 2px;
+            font-weight: bold;
         }
 
         table tr:nth-child(even) {
@@ -22,32 +22,32 @@
 
         .alnright {
             text - align: right;
-        color: #000000;
-        width: 25%;
+            color: #000000;
+            width: 25%;
         }
 
         .alnright_s {
             text - align: right;
-        color: #000000;
-        width: 13%;
+            color: #000000;
+            width: 13%;
         }
 
         .alnleft_s {
             text - align: left;
-        color: #000000;
-        width: 13%;
+            color: #000000;
+            width: 13%;
         }
 
         .alnleft_j {
             text - align: left;
-        color: #000000;
-        width: 20%;
+            color: #000000;
+            width: 20%;
         }
 
         .alnleft {
             text - align: left;
-        color: #000000;
-        width: 25%;
+            color: #000000;
+            width: 25%;
         }
 
         .error {
@@ -60,25 +60,25 @@
 
         table th, table td {
             padding: 5px 10px;
-        border: None;
+            border: None;
         }
 
         .legend_style {
             max - width: 35%;
-        background: #FAFAFA;
+            background: #FAFAFA;
         <!-- padding: 5px; -->
-        margin: 0px left;
-        box-shadow: 1px 1px 25px rgba(0,0,0,0.10);
-        border-radius: 2px;
-        border: 1px solid #305a72;
-        border-bottom-left-radius: 2px;
-        text-transform: initial;
+            margin: 0px left;
+            box-shadow: 1px 1px 25px rgba(0,0,0,0.10);
+            border-radius: 2px;
+            border: 1px solid #305a72;
+            border-bottom-left-radius: 2px;
+            text-transform: initial;
         }
 
         form fieldset, .form fieldset {
             min - width: 98%;
-        border: none;
-        border-top: 1px solid #305a72;
+            border: none;
+            border-top: 1px solid #305a72;
         }
 
         table th, table td {
@@ -102,13 +102,13 @@
 
         form select, .form select {
             max - width: 150px;
-        min-width: 100px;
+            min-width: 100px;
         }
 
         body {
             font - family: "OpenSans", Arial, sans-serif;
-        color: #363463;
-        font-size: 14px;
+            color: #363463;
+            font-size: 14px;
         }
 
         .alnVertical {
@@ -129,130 +129,130 @@
         $(document).ready(function ()
         {
             $('#height').keyup(calBMI);
-        $('#weight').keyup(calBMI);
-        $('#length').keyup(calBMI);
+            $('#weight').keyup(calBMI);
+            $('#length').keyup(calBMI);
 
-        $('#lmp').change(function(e) {
-            calEDD();
+            $('#lmp').change(function(e) {
+                calEDD();
             });
 
-        $('#ge').keyup(function(e) {
-            calEDDwithGe();
+            $('#ge').keyup(function(e) {
+                calEDDwithGe();
             });
-            
+
         });
 
         function getCustomDate(date){
             console.log("Date:" + date);
-        var dd = date.getDate();
-        var mm = date.getMonth() + 1;
-        var yyyy = date.getFullYear();
-        console.log("Day: " + dd);
-        console.log(mm);
-        console.log(yyyy);
-        var d= dd;
-        var m = mm;
-        if(!isNaN(dd)){
+            var dd = date.getDate();
+            var mm = date.getMonth() + 1;
+            var yyyy = date.getFullYear();
+            console.log("Day: " + dd);
+            console.log(mm);
+            console.log(yyyy);
+            var d= dd;
+            var m = mm;
+            if(!isNaN(dd)){
                 if (10 > dd) {
-            d = "0" + dd;
+                    d = "0" + dd;
                 }
-        if(!isNaN(mm)){
+                if(!isNaN(mm)){
                     if (10 > mm) {
-            m = "0" + mm;
+                        m = "0" + mm;
                     }
                 }
-        return yyyy + "-" + m + "-" + d;
+                return yyyy + "-" + m + "-" + d;
             }
         }
         function calEDDwithGe(){
             setValue("edd.value", "");
-        if(!isNaN(getValue("ge.value"))) {
+            if(!isNaN(getValue("ge.value"))) {
                 var rWeeks = 40 - getValue("ge.value");
-        var edd = new Date();
-        var lmp = new Date();
-        edd = edd.setDate(edd.getDate() + (rWeeks * 7));
-        lmp = lmp.setDate(lmp.getDate() - (getValue("ge.value") * 7));
-        setValue('edd.value', getCustomDate(new Date(edd)));
-        setValue('lmp.value', getCustomDate(new Date(lmp)));
+                var edd = new Date();
+                var lmp = new Date();
+                edd = edd.setDate(edd.getDate() + (rWeeks * 7));
+                lmp = lmp.setDate(lmp.getDate() - (getValue("ge.value") * 7));
+                setValue('edd.value', getCustomDate(new Date(edd)));
+                setValue('lmp.value', getCustomDate(new Date(lmp)));
             }else{
-            setValue("ge.value", "");
+                setValue("ge.value", "");
             }
         }
         function calEDD() {
             var lmp = new Date(getValue('lmp.value'));
-        if (lmp != null) {
-            lmp = lmp.setDate(lmp.getDate() + 280);
-        var Difference_In_Time = new Date().getTime() - new Date(getValue('lmp.value')).getTime();
-        var Difference_In_Days = Difference_In_Time / (1000 * 3600 * 24);
-        setValue("ge.value", Math.round(Difference_In_Days / 7));
-        //setValue('edd.value', null);
-        setValue('edd.value', getCustomDate(new Date(lmp)));
+            if (lmp != null) {
+                lmp = lmp.setDate(lmp.getDate() + 280);
+                var Difference_In_Time = new Date().getTime() - new Date(getValue('lmp.value')).getTime();
+                var Difference_In_Days = Difference_In_Time / (1000 * 3600 * 24);
+                setValue("ge.value", Math.round(Difference_In_Days / 7));
+                //setValue('edd.value', null);
+                setValue('edd.value', getCustomDate(new Date(lmp)));
             }
         }
 
         function calBMI(){
             var height_val = getValue('height.value');
-        var weight_val = getValue('weight.value');
-        var length_val = getValue('length.value');
-        if(height_val == 0){
-            height_val = 1;
+            var weight_val = getValue('weight.value');
+            var length_val = getValue('length.value');
+            if(height_val == 0){
+                height_val = 1;
             }
-        if(weight_val == 0){
-            weight_val = 1;
+            if(weight_val == 0){
+                weight_val = 1;
             }
-        var height_num = parseFloat(height_val);
-        var weight_num = parseFloat(weight_val);
-        var length_num = parseFloat(length_val);
+            var height_num = parseFloat(height_val);
+            var weight_num = parseFloat(weight_val);
+            var length_num = parseFloat(length_val);
 
-        if(!isNaN(height_num)){
+            if(!isNaN(height_num)){
                 if(!isNaN(weight_num)){
-            height_num = height_num / 100;
-        var bmi_val = weight_num / (height_num * height_num);
-        if(!isNaN(bmi_val)){
+                    height_num = height_num / 100;
+                    var bmi_val = weight_num / (height_num * height_num);
+                    if(!isNaN(bmi_val)){
                         if(height_val == 1){
-            setValue('bmi.value', 0);
+                            setValue('bmi.value', 0);
                         }else if(weight_val == 1){
-            setValue('bmi.value', 0);
+                            setValue('bmi.value', 0);
                         }else{
-            setValue('bmi.value', bmi_val.toFixed(2));
+                            setValue('bmi.value', bmi_val.toFixed(2));
                         }
                     }
                 }else{
-        }
+                }
             }else if(!isNaN(length_num)){
                 if(!isNaN(weight_num)){
-            length_num = length_num / 100;
-        var bmi_val = weight_num / (length_num* length_num);
-        if(!isNaN(bmi_val)){
+                    length_num = length_num / 100;
+                    var bmi_val = weight_num / (length_num* length_num);
+                    if(!isNaN(bmi_val)){
                         if(height_val == 1){
-            setValue('bmi.value', 0);
+                            setValue('bmi.value', 0);
                         }else if(weight_val == 1){
-            setValue('bmi.value', 0);
+                            setValue('bmi.value', 0);
                         }else if(length_val == 1){
-            setValue('bmi.value', 0);
+                            setValue('bmi.value', 0);
                         }else{
-            setValue('bmi.value', bmi_val.toFixed(2));
+                            setValue('bmi.value', bmi_val.toFixed(2));
                         }
                     }
                 }else{
 
-        }
+                }
             }else {
 
-        }
+            }
 
             if(height_val.length > 0){
-            setValue('length.value', "");
-        $('#length').hide(200);
+                setValue('length.value', "");
+                $('#length').hide(200);
             }else{
-            $('#length').show(200);
+                $('#length').show(200);
             }
 
             if(length_val.length > 0){
-            setValue('height.value', "");
-        $('#height').hide(200);
+                setValue('height.value', "");
+                $('#height').hide(200);
             }else{
-            $('#height').show(200);
+                $('#height').show(200);
             }
         }
     </script>
@@ -292,100 +292,100 @@
                         break;
 
                     case ((diagnosis_method.value == "") &amp;&amp; (tbstatus.value == "1661")):
-        diagnosis_method.focus();
-        getField('diagnosis_method.error').html('Ensure this field is not empty').show();
-        return false;
-        break;
+                        diagnosis_method.focus();
+                        getField('diagnosis_method.error').html('Ensure this field is not empty').show();
+                        return false;
+                        break;
 
-        case ((treatment.value == "") &amp;&amp; (cryptococal.value == "167144")):
-        treatment.focus();
-        getField('treatment.error').html('Ensure this field is not empty').show();
-        return false;
-        break;
+                    case ((treatment.value == "") &amp;&amp; (cryptococal.value == "167144")):
+                        treatment.focus();
+                        getField('treatment.error').html('Ensure this field is not empty').show();
+                        return false;
+                        break;
 
-        case ((other_finding.value == "") &amp;&amp; (cryptococal.value == "167148")):
-        other_finding.focus();
-        getField('other_finding.error').html('Ensure this field is not empty').show();
-        return false;
-        break;
+                    case ((other_finding.value == "") &amp;&amp; (cryptococal.value == "167148")):
+                        other_finding.focus();
+                        getField('other_finding.error').html('Ensure this field is not empty').show();
+                        return false;
+                        break;
 
-        case (dsdstatus.value === ""):
-        dsdstatus.focus();
-        getField('dsdstatus.error').html('Ensure this field is not empty').show();
-        return false;
-        break;
+                    case (dsdstatus.value === ""):
+                        dsdstatus.focus();
+                        getField('dsdstatus.error').html('Ensure this field is not empty').show();
+                        return false;
+                        break;
 
                     case (val_encounterDate > val_next_appointment) :
-        getField('next_appointment.error').html('Next appointment date has to be later than visit date').show();
-        return false;
-        break;
+                        getField('next_appointment.error').html('Next appointment date has to be later than visit date').show();
+                        return false;
+                        break;
 
-        case (dsdstatus.value == "167127"):
+                    case (dsdstatus.value == "167127"):
 
-        if (service_delivery_model.value == "") {
-            service_delivery_model.focus();
+                        if (service_delivery_model.value == "") {
+                            service_delivery_model.focus();
 
-        getField('service_delivery_model.error').html('Ensure this field is not empty').show();
-        return false;
+                            getField('service_delivery_model.error').html('Ensure this field is not empty').show();
+                            return false;
                         } else if (service_delivery_model.value == "166276") {
 
-            getField('service_delivery_model.error').html('Ensure this field is not empty').hide();
-        switch (true) {
+                            getField('service_delivery_model.error').html('Ensure this field is not empty').hide();
+                            switch (true) {
 
                                 case (facility_based.value == ""):
-        facility_based.focus();
-        getField('facility_based.error').html('Ensure this field is not empty').show();
-        return false;
-        break;
+                                    facility_based.focus();
+                                    getField('facility_based.error').html('Ensure this field is not empty').show();
+                                    return false;
+                                    break;
 
-        case (f_dsd_date.value == ""):
-        f_dsd_date.focus();
-        getField('facility_based.error').hide();
-        getField('f_dsd_date.error').html('Ensure this field is not empty').show();
-        return false;
-        break;
+                                case (f_dsd_date.value == ""):
+                                    f_dsd_date.focus();
+                                    getField('facility_based.error').hide();
+                                    getField('f_dsd_date.error').html('Ensure this field is not empty').show();
+                                    return false;
+                                    break;
 
-        default:
-        getField('facility_based.error').hide();
-        getField('f_dsd_date.error').hide();
-        return true;
-        break;
+                                default:
+                                    getField('facility_based.error').hide();
+                                    getField('f_dsd_date.error').hide();
+                                    return true;
+                                    break;
 
                             }
                         } else  {
 
-            getField('service_delivery_model.error').html('Ensure this field is not empty').hide();
+                            getField('service_delivery_model.error').html('Ensure this field is not empty').hide();
 
-        switch (true) {
+                            switch (true) {
 
                                 case (community_based.value == ""):
-        community_based.focus();
-        getField('community_based.error').html('Ensure this field is not empty').show();
-        return false;
-        break;
+                                    community_based.focus();
+                                    getField('community_based.error').html('Ensure this field is not empty').show();
+                                    return false;
+                                    break;
 
-        case (c_dsd_date.value == ""):
-        c_dsd_date.focus();
-        getField('community_based.error').html('Ensure this field is not empty').hide();
-        getField('c_dsd_date.error').html('Ensure this field is not empty').show();
-        return false;
-        break;
+                                case (c_dsd_date.value == ""):
+                                    c_dsd_date.focus();
+                                    getField('community_based.error').html('Ensure this field is not empty').hide();
+                                    getField('c_dsd_date.error').html('Ensure this field is not empty').show();
+                                    return false;
+                                    break;
 
-        default:
-        getField('community_based.error').html('Ensure this field is not empty').hide();
-        getField('c_dsd_date.error').html('Ensure this field is not empty').hide();
-        return true;
-        break;
+                                default:
+                                    getField('community_based.error').html('Ensure this field is not empty').hide();
+                                    getField('c_dsd_date.error').html('Ensure this field is not empty').hide();
+                                    return true;
+                                    break;
 
                             }
                         }
-        break;
+                        break;
 
-        default:
-        return true;
+                    default:
+                        return true;
                 }
 
-        return true;
+                return true;
             });
 
         })
@@ -394,9 +394,9 @@
 
     <table style="margin-bottom: 20px;">
         <thead>
-            <tr>
-                <th style="text-align: center">HIV Treatment Follow up form (Care Card - Center Spread)</th>
-            </tr>
+        <tr>
+            <th style="text-align: center">HIV Treatment Follow up form (Care Card - Center Spread)</th>
+        </tr>
         </thead>
     </table>
 
@@ -423,7 +423,7 @@
                 </excludeIf>
 
                 <td><b>Regimen: </b></td><td><b>ART Start Date: </b><font color='blue' style="font-weight: bold"><lookup expression="fn.latestObs(159599).getValueDatetime()" /></font>
-                </td>
+            </td>
             </tr>
         </table>
     </fieldset>
@@ -452,7 +452,7 @@
                                 <p>
                                     <!-- Observation for pregnancy/breastfeeding status -->
                                     <obs id="woman_pregnant" conceptId="165050" answerConceptIds="165048,165049,165047"
-                                        answerLabels="Pregnant, Breastfeeding, Not Pregnant" required="true">
+                                         answerLabels="Pregnant, Breastfeeding, Not Pregnant" required="true">
                                         <controls>
                                             <!-- Display when patient is pregnant -->
                                             <when value="165048" thenDisplay="#cur_pregnant_result, #pregn, #TPT_Type_pregnant" />
@@ -542,7 +542,7 @@
                 <td class="alnright_s">MUAC Interpretation</td>
                 <td class="alnright_s">
                     <obs conceptId="165935" answerConceptIds="165932, 165933,165934"
-                        answerLabels="Overweight, Underweight, Normal" />
+                         answerLabels="Overweight, Underweight, Normal" />
                 </td>
 
 
@@ -579,7 +579,7 @@
             </tr>
         </table>
     </fieldset>
-    
+
     <fieldset style="width: -webkit-fill-available">
         <legend class="legend_style">Clinical Information</legend>
         <table>
@@ -587,7 +587,7 @@
                 <td class="alnleft_s">Functional Status</td>
                 <td class="alnleft_s">
                     <obs conceptId="165039" answerConceptIds="159468,162752,160026"
-                        answerLabels="1. Working,2. Bedridden,3. Patient Ambulatory" />
+                         answerLabels="1. Working,2. Bedridden,3. Patient Ambulatory" />
                 </td>
                 <td class="alnleft_s">WHO Clinical stage</td>
                 <td class="alnleft_s">
@@ -596,7 +596,7 @@
                 <td class="alnleft_s">TB Status</td>
                 <td class="alnleft_s">
                     <obs id="tbstatus" conceptId="1659" answerConceptIds="1660,142177,166042,1661,1662"
-                        answerLabels="1. No Signs,2. Presumptive TB,3. TPT, 4. Confirmed TB,5. TB Treatment" required="true">
+                         answerLabels="1. No Signs,2. Presumptive TB,3. TPT, 4. Confirmed TB,5. TB Treatment" required="true">
                         <controls>
                             <controls>
                                 <when value="1662" thenDisplay="#ipt" />
@@ -612,7 +612,7 @@
                 <td class="alnleft_s">Method of Diagnosis</td>
                 <td class="alnleft_s">
                     <obs id="diagnosis_method" conceptId="165995" answerConceptIds="165990,165991,165991"
-                        answerLabels="Confirmed with GeneXpert,Confirmed with CXR,Confirmed with LF LAM " />
+                         answerLabels="Confirmed with GeneXpert,Confirmed with CXR,Confirmed with LF LAM " />
                 </td>
             </tr>
         </table>
@@ -635,18 +635,18 @@
                         </controls>
                     </obs>
                 </td>
-                <tr id="otherfindings" class="alnleft_s">
-                    <td>Specify:</td>
-                    <td>
-                        <obs id="other_finding" conceptId="167149" />
-                    </td>
-                </tr>
-                <tr id="cv_treatment" class="alnleft_s">
-                    <td class="alnleft_s">Treatment Provided</td>
-                    <td>
-                        <obs id="treatment" conceptId="167150" answerConceptIds="167151,167152,167153" answerLabels="Cryotherapy,Thermal ablation,LEEP" />
-                    </td>
-                </tr>
+            <tr id="otherfindings" class="alnleft_s">
+                <td>Specify:</td>
+                <td>
+                    <obs id="other_finding" conceptId="167149" />
+                </td>
+            </tr>
+            <tr id="cv_treatment" class="alnleft_s">
+                <td class="alnleft_s">Treatment Provided</td>
+                <td>
+                    <obs id="treatment" conceptId="167150" answerConceptIds="167151,167152,167153" answerLabels="Cryotherapy,Thermal ablation,LEEP" />
+                </td>
+            </tr>
             </tr>
         </table>
     </fieldset>
@@ -743,48 +743,48 @@
                         </tr>
                     </table>
                 </td>  -->
-                <tr id="devolved" >
-                    <td class="alnleft_s">Dispensing Modality</td>
-                    <td class="alnleft_s">
-                        <obs id="service_delivery_model" conceptId="166148" answerConceptIds="166276,166363" answerLabels="Facility Dispensing, Community Dispensing">
-                            <controls>
-                                <when value="166276" thenDisplay="#Facility_Dispensing" />
-                                <when value="166363" thenDisplay="#ddd_Dispensing" />
-                            </controls>
-                        </obs>
-                    </td>
-                    <td>
-                        <table class="table" width="100%">
-                            <tr id="Facility_Dispensing">
-                                <td>Facility Dispensing </td>
-                                <td >
+            <tr id="devolved" >
+                <td class="alnleft_s">Dispensing Modality</td>
+                <td class="alnleft_s">
+                    <obs id="service_delivery_model" conceptId="166148" answerConceptIds="166276,166363" answerLabels="Facility Dispensing, Community Dispensing">
+                        <controls>
+                            <when value="166276" thenDisplay="#Facility_Dispensing" />
+                            <when value="166363" thenDisplay="#ddd_Dispensing" />
+                        </controls>
+                    </obs>
+                </td>
+                <td>
+                    <table class="table" width="100%">
+                        <tr id="Facility_Dispensing">
+                            <td>Facility Dispensing </td>
+                            <td >
 
-                                    <obs id="facility_based" conceptId='166276' answerConceptIds="166151,167107,167108,167109,167110,167111,167112,167112" answerLabels="Fast Track, Facility ART group HCW led,Facility ART group Support group,Decentralization (Hub and Spoke),After hours,Weekend and Public holidays,Child/Teen/Adolescents club (Peer Managed),Mother infant pair/Mentor mother led" />
-                                </td>
-                                <td>DSD Start Date</td>
-                                <td>
-                                    <obs id="f_dsd_date" conceptId="167129" />
-                                </td>
-                            </tr>
-                        </table>
-                    </td>
+                                <obs id="facility_based" conceptId='166276' answerConceptIds="166151,167107,167108,167109,167110,167111,167112,167112" answerLabels="Fast Track, Facility ART group HCW led,Facility ART group Support group,Decentralization (Hub and Spoke),After hours,Weekend and Public holidays,Child/Teen/Adolescents club (Peer Managed),Mother infant pair/Mentor mother led" />
+                            </td>
+                            <td>DSD Start Date</td>
+                            <td>
+                                <obs id="f_dsd_date" conceptId="167129" />
+                            </td>
+                        </tr>
+                    </table>
+                </td>
 
-                    <td>
-                        <table class="table" width="100%">
-                            <tr id="ddd_Dispensing">
-                                <td>Community Dispensing </td>
-                                <td >
+                <td>
+                    <table class="table" width="100%">
+                        <tr id="ddd_Dispensing">
+                            <td>Community Dispensing </td>
+                            <td >
 
-                                    <obs id="community_based" conceptId='166363' answerConceptIds="166134,166135,167113,167114,167115,166280" answerLabels="Community Pharmacy, Community ART Group (HCW-led), Community ART Refill Group (PLHIV-led), Adolescent Community ART/ peer-led groups, One Stop Shop (OSS), Home/Courier Delivery" />
-                                </td>
-                                <td>DSD Start Date</td>
-                                <td>
-                                    <obs id="c_dsd_date" conceptId="167129" />
-                                </td>
-                            </tr>
-                        </table>
-                    </td>
-                </tr>
+                                <obs id="community_based" conceptId='166363' answerConceptIds="166134,166135,167113,167114,167115,166280" answerLabels="Community Pharmacy, Community ART Group (HCW-led), Community ART Refill Group (PLHIV-led), Adolescent Community ART/ peer-led groups, One Stop Shop (OSS), Home/Courier Delivery" />
+                            </td>
+                            <td>DSD Start Date</td>
+                            <td>
+                                <obs id="c_dsd_date" conceptId="167129" />
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
             </tr>
         </table>
     </fieldset>
@@ -796,7 +796,7 @@
                 <td>ARV Medication Plan</td>
                 <td>
                     <obs id="reg_plan" conceptId="165771" answerConceptIds="1257,165769,165768,165770,162904,165357"
-                        answerLabels="Continue regimen, Substitute regimen, Switch regimen, Stop regimen, Restart medication,Commence ART">
+                         answerLabels="Continue regimen, Substitute regimen, Switch regimen, Stop regimen, Restart medication,Commence ART">
                         <controls>
                             <when value="165769" thenDisplay="#reg_plan_response" />
                             <when value="165768" thenDisplay="#reg_plan_response2" />
@@ -885,7 +885,7 @@
                             <td>
                                 ARV Adherence
                                 <obs conceptId="165290" id="ARV Drugs Adherence" answerLabels="G (Good) &#8805; 95%,F (Fair) 85-94%,P (Poor) &#60; 85% "
-                                    answerConceptIds="165287,165288,165289">
+                                     answerConceptIds="165287,165288,165289">
                                     <controls>
                                         <when value="165288" thenDisplay="#reasonfairarvadh" />
                                         <when value="165289" thenDisplay="#reasonpoorarvadh" />
@@ -965,7 +965,7 @@
                                 </obs>
                             </td>
                         </tr>
-                        
+
                         <tr>
                             <td>
                                 <span id="reasonfairinhadh">
@@ -998,7 +998,7 @@
                                     </controls>
                                 </obs>
                             </td>
-                    
+
                             <excludeIf velocityTest="$patient.gender == 'M' ">
                                 <!-- Pregnant TPT Type -->
                                 <td id="TPT_Type_pregnant">
@@ -1015,7 +1015,7 @@
                                         </controls>
                                     </obs>
                                 </td>
-                        
+
                                 <!-- Breastfeeding TPT Type -->
                                 <td id="TPT_Type_breastfeeding">
                                     <label>TPT Type</label>
@@ -1032,7 +1032,7 @@
                                     </obs>
                                 </td>
                             </excludeIf>
-                    
+
                             <td>
                                 <!-- Table for 3HP Weekly -->
                                 <table id="3HP_Weekly" width="100%">
@@ -1045,7 +1045,7 @@
                                     </tr>
                                 </table>
                             </td>
-                    
+
                             <td>
                                 <!-- Table for 3HR Daily -->
                                 <table id="3HR_Daily" width="100%">
@@ -1058,7 +1058,7 @@
                                     </tr>
                                 </table>
                             </td>
-                    
+
                             <td>
                                 <!-- Table for 1HP Daily -->
                                 <table id="1HP_Daily" width="100%">
@@ -1086,8 +1086,7 @@
                             </td>
                         </tr>
                     </table>
-                </td>             
-
+                </td>
             </tr>
             <tr>
                 <td style="text-align: left;"> Other Drugs Prescribed <obs conceptId="163101" /></td>
@@ -1188,7 +1187,7 @@
             </tr>
         </table>
     </fieldset>-->
-    
+
     <fieldset style="width: -webkit-fill-available">
         <legend class="legend_style">Additional Comments/Clinical Notes</legend>
         <obs conceptId="165045" style="textarea" rows="10" cols="10" />
@@ -1205,7 +1204,7 @@
                 <td>Signature:</td>
                 <td>
                     <encounterProviderAndRole default="currentUser" encounterRole="240b26f9-dd88-4172-823d-4a8bfeb7841f"
-                        required="true" />
+                                              required="true" />
                 </td>
                 <td>Facility:</td>
                 <td>

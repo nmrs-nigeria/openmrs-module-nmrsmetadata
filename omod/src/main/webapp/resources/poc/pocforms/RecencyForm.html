@@ -477,7 +477,7 @@
 
                     if (optoutv == "1066") {
                         $('#test_name_dropdown').show();
-                        setValue('test_name_dropdown.value', 166215);
+                        //setValue('test_name_dropdown.value', 166215);
 
                         if (getField('control_line.error') != null) {
                             getField('control_line.error').html('*').show();
@@ -927,11 +927,7 @@
                     }
                 });
             }
-
         });
-
-
-
 
         jQuery(function() {
             if (getField('recency_number_verif_value.value') != null) {
@@ -972,13 +968,30 @@
     <!-- Add event listeners to dynamical add required attribues based on input selection -->
     <script>
         jQuery(function() {
+
             if (document.getElementById("tb_vl_request") != null) {
                 document.getElementById("tb_vl_request").addEventListener("change", function() {
                     var Has_viral_load_request_been_made = $('input:select', '#tb_vl_request').eq(0).val();
-
                     addRequiredAttribute(Has_viral_load_request_been_made);
                 });
             }
+
+            document.getElementById('recency_offered').addEventListener('change', function(e){
+                if(e.target.value == 1066){
+                    getField('recency_reason_not_offered.value')[0].required = true;
+                }else{
+                    getField('recency_reason_not_offered.value')[0].required = false;
+                }
+            });
+
+            document.getElementById('final_recency_test_recent').addEventListener('keydown', function(e){
+                e.preventDefault();
+                return false;
+            });
+            document.getElementById('final_recency_test_recent').addEventListener('keyup', function(e){
+                e.preventDefault();
+                return false;
+            });
         });
 
         function addRequiredAttribute(){
@@ -1026,17 +1039,19 @@
                         "Date Sample Ordered\n" +
                         "Sample collection date\n" +
                         "Sample Type\n" +
-                        "Sample Reference Number")
+                        "Sample Reference Number");
                     return false;
                 }//else{
                 //return true;
                 //}
 
             }else if(Has_viral_load_request_been_made == 1066){
-               // if (getValue('reasonForNoVLColl.value') == null || getValue('.value') == ""){
-               //     getField('reasonForNoVLColl.error').html('Reason for no viral load sample collection must be selected').show();
-               //     return false;
-               // }
+                const reasonForNoVLColl = getValue('reasonForNoVLColl.value');
+                if (reasonForNoVLColl == null || reasonForNoVLColl == ""){
+                    getField('reasonForNoVLColl.error').html('Reason for no viral load sample collection must be selected').show();
+                    return false;
+                }
+
             }else{
                 getField('reasonForNoVLColl.value')[0].required = false;
             }
@@ -1075,14 +1090,6 @@
         });
     </script>
 
-    <script type="text/javascript">
-        // beforeSubmit.push(function() {
-
-        // return true;
-
-        // });
-    </script>
-
     <includeIf velocityTest="$patient.getAge($encounter.getEncounterDatetime()) > 14 ">
 
         <fieldset id="hiv_result">
@@ -1113,7 +1120,13 @@
                         <b>Reason for Recency not offered</b>
                     </td>
                     <td colspan="3" class="alnleft" id="reason_here">
-                        <obs conceptId="167205" style="textarea" rows="2" />
+                        <obs
+                                id="recency_reason_not_offered"
+                                rows="2"
+                                answerConceptIds="167211,167212,165475,167213,167214,167215,167216"
+                                answerLabels="Site not activated, Kit stock out, Previously Know Positive, Not ART Naive, Trained staff not available, Clinically evaluated as AHD, No reason"
+                                conceptId="167217"
+                                name="result"></obs>
                     </td>
                     <td></td>
                 </tr>
@@ -1127,7 +1140,6 @@
             <table class="table" width="100%">
 
                 <tr>
-
                     <td>Opt Out of RTRI?</td>
 
                     <td>
@@ -1147,7 +1159,7 @@
                 <tr>
                     <td class="alnleft_s" id="test_name_label" name="test_name_label">Test name</td>
                     <td class="alnleft">
-                        <obs answerConceptIds="166215, 5622" answerLabels="Asante, Others" conceptId="166216" id="test_name_dropdown" name="test_name_dropdown" required="true">
+                        <obs answerConceptIds="166215" answerLabels="Asante" conceptId="166216" id="test_name_dropdown" name="test_name_dropdown" required="true">
                             <controls>
                                 <when thenDisplay="#test_name" value="5622" />
                             </controls>
@@ -1198,8 +1210,8 @@
                     </td>
                     <td colspan="2"> <span id="success" style="width:100%; color:green; font-weight:bold;"></span> </td>
                 </tr>
-                
-               
+
+
 
                 <tr>
                     <td id="control_line_label">Control Line</td>
@@ -1232,7 +1244,7 @@
                     <td class="alnleft_f"><b>Recency Interpretation</b></td>
 
                     <td class="alnleft_f">
-                        <obs answerConceptIds="165852,165851,664,163611" answerLabels="Recent,Long Term,Negative,Invalid" conceptId="166213" id="final_recency_test_recent">
+                        <obs answerConceptIds="165852,165851,664,163611" answerLabels="Recent,Long Term,Negative,Invalid" conceptId="166213" id="final_recency_test_recent" readonly="readonly">
                             <controls>
                                 <when thenDisplay="#viral_load_table" value="165852" />
                             </controls>
@@ -1251,16 +1263,24 @@
                     <td>
                         <obs answerConceptIds="1066,1065" answerLabels="No,Yes" conceptId="166244" id="tb_vl_request">
                             <controls>
-                                <when thenDisplay="#new_tag"
-                                      value="1065" />
+                                <when thenDisplay="#new_tag,#new_table2,#tab1,#tab2,#tab3,#tab4"
+                                      value="1065"/>
+                                <when thenDisplay="#reason_for_no_sample_collection"
+                                      value="1066"/>
                             </controls>
 
                         </obs>
                     </td>
                 </tr>
+                <tr id="reason_for_no_sample_collection">
+                    <td class="alnleft_f" id="vl_resul">Reason for no viral load collection</td>
+                    <td class="alnleft_f">
+                        <obs id="reasonForNoVLColl" conceptId="167189"  answerConceptIds="166351,167190,167191,167192,167193" answerLabels="Opted out, No consumables, No trained staff available, Client presented after close of work, No reason" />
+                    </td>
+                </tr>
             </table>
-                
-           <table id="new_tag">
+
+            <table id="new_tag">
                 <tr>
                     <td class="alnleft_f" id="vl_value"><b>Viral load confirmation</b></td>
                     <td colspan="3"></td>
@@ -1683,12 +1703,12 @@
                             <tr>
                                 <td class="alnleft_f" id="partner_tested_for_recency_">Was the partner tested for recency?</td>
                                 <td class="alnleft_f">
-                                  	<obs answerConceptIds="1065,1066,1067" answerLabels="Yes,No,Don't Know" conceptId="166937" id="partner_tested_for_recency_obs" >
+                                    <obs answerConceptIds="1065,1066,1067" answerLabels="Yes,No,Don't Know" conceptId="166937" id="partner_tested_for_recency_obs" >
                                         <controls>
                                             <when thenDisplay="#partner_recency_id,#partner_recency_id_obs,#partner_date_of_recency_test,#partner_date_of_recency_test_obs,#partner_recency_result,#partner_recency_result_obs" value="1065"/>
                                         </controls>
                                     </obs>
-                                
+
                                 </td>
                                 <td class="alnleft_f" id="partner_recency_id">Recency ID</td>
 
@@ -5543,10 +5563,6 @@
 
             </fieldset>
 
-
-
-
-
         </fieldset>
 
         <hr style="border: solid 0.5px gray;" />
@@ -5554,7 +5570,7 @@
             <tr>
                 <td class="alnleft_s"  name="recency_test_date_label"> Is Patient Referred from Another facility?</td>
                 <td>
-                    <obs answerConceptIds="1066,1065" answerLabels="No,Yes" conceptId="166244" id="patientReferred" required="true">
+                    <obs answerConceptIds="1066,1065" answerLabels="No,Yes" conceptId="167220" id="patientReferred" required="true">
                         <!-- replace 166244 with a new concept-->
                         <controls>
                             <when thenDisplay="#patient_referred"
