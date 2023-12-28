@@ -195,11 +195,11 @@
 
         <table>
             <tr>
-                <td class="alnleft" width="25%"> Select partner CBO </td>
+                <td class="alnleft" width="25%"> Partner CBO Name</td>
                 <td style="float: left">
 <!--                    <obs conceptId="167197-->
 <!--" labelText="" answerConceptIds="159405,159406,159407" answerLabels="Rosita Unique Care Foundation (RUCF),Justice and Peace Development Caritas (JDPC Orlu),Peoples Health Economic Development and Enhancement Centre PHEDEC" required="true" />-->
-                    <obs conceptId="167149" />
+                    <obs conceptId="167197" />
                 </td>
             </tr>
 
@@ -238,7 +238,7 @@
                 <td class="alnleft" width="25%" >Should I share your contact/address with the selected CBO for possible enrolment on the OVC program</td>
                 <td style="float: left">
                     <!-- There was no suitable conceptId, so i created one "Missed Medication" (166254) -->
-                    <obs id="missed_med" conceptId="167198" answerConceptIds="1065,1066" answerLabels="Yes,No" required="true">
+                    <obs id="missed_med" conceptId="167198" answerConceptIds="1065,1066" answerLabels="Yes,No" >
                         <controls>
                             <when value="1066" thenDisplay="#ys1, #ysss" />
                             <when value="1065" thenDisplay="#ys12" />
@@ -279,7 +279,7 @@
                     <tr >
                         <td  style="float: left; margin-top: 5px"> Enrolled into the OVC program </td>
                         <td >
-                            <obs id="ovc_program" conceptId="166221" answerConceptIds="1065,1066" answerLabels="Yes,No" >
+                            <obs id="ovc_program" conceptId="165347" answerConceptIds="1065,1066" answerLabels="Yes,No" >
                                 <controls>
                                     <when value="1065" thenDisplay="#yesss" />
                                 </controls>

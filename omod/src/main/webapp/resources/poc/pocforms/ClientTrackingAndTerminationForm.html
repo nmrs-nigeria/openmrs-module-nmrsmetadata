@@ -247,7 +247,7 @@
                 <td class="alnleft">Client Verification:</td>
                 <td>
                     <!--  Client Verification Coded Question Yes / No -->
-                    <obs id="client_Verification" conceptId="167221" answerConceptIds="1066,1065">
+                    <obs id="client_Veerification" conceptId="167221" answerConceptIds="1066,1065">
                         <controls>
                             <when value="1065" thenDisplay="#yes_client_Verification" />
                             <when value="1066" thenDisplay="#no_client_Verification" />
@@ -257,26 +257,52 @@
 
                 <!-- Column for displaying additional information when client verification is 'Yes' -->
                 <td colspan="2" id="yes_client_Verification">
-                    <!-- Text indicating the indication for client verification -->
-                    <span class="alnleft d-flex text-center align-content-center">Indication for Client Verification:</span>
-                    <!-- added on 08/12/2023 New 167222	Indication for Client Verification	Coded	Question
-                    New	167223	Consistently had drug pickup by proxy without viral load sample collection for two quarters
-                    New	167224	Duplicated demographic and clinical variables
-                    New	167225	No biometrics recapture
-                    New	167226	Batched ARV pickup dates
-                    New	167227	Last clinical visit is over 18 months prior
-                    New	167228	Batched ART start and pickup dates -->
+                    <!-- section indicating the indication for client verification -->
+                    <span class="checkz alnleft d-flex text-center align-content-center font-weight-bold "> Indication for Client Verification: </span>
+                    <table>
+                        <tr>
+                            <td>Consistently had drug pickup by proxy without viral load sample collection for two quarters</td>
+                            <td><obs id="pickup_noVL" conceptId="167222" answerConceptId="167223" answerLabel=""/></td>
+                        </tr>
+                        <tr>
+                            <td>duplicated demographic and clinical variables</td>
+                            <td><obs id="duplicate" conceptId="167222" answerConceptId="167224" answerLabel=""/></td>
+                        </tr>
+                        <tr>
+                            <td>No biometrics recapture</td>
+                            <td><obs id="no_pbs" conceptId="167222" answerConceptId="167225" answerLabel=""/></td>
+                        </tr>
+ <tr>
+                            <td>Batched ARV pickup dates</td>
+                            <td><obs id="batched_ARV" conceptId="167222" answerConceptId="167226" answerLabel=""/></td>
+                        </tr>
+ <tr>
+                            <td>Last clinical visit is over 18 months prior</td>
+                            <td><obs id="visit_over18" conceptId="167222" answerConceptId="167227" answerLabel=""/></td>
+                        </tr>
+ <tr>
+                            <td>Batched ART start and pickup dates</td>
+                            <td><obs id="batched_ARTpickup" conceptId="167222" answerConceptId="167228" answerLabel=""/></td>
+                        </tr>
+<tr>
+                            <td>No initial biometric capture</td>
+                            <td><obs id="batched_ARTpickup" conceptId="167222" answerConceptId="167229" answerLabel=""/></td>
+                        </tr>
+
+                    </table>
 
                     <!-- below are Observation input for specific indications when client verification is 'Yes' -->
-                    <obs id="" conceptId="167222" answerConceptIds="167223,167224,167225,167226,167227,167228,167229" answerLabels="Consistently had drug pickup by proxy without viral load sample collection for two quarters,
-                                            duplicated demographic and clinical variables,
-                                            No biometrics recapture,
-                                            Batched ARV pickup dates,
-                                            Last clinical visit is over 18 months prior,
-                                            Batched ART start and pickup dates,
-                                            No initial biometric capture">
-                    </obs>
+<!--                    <obs id="" conceptId="167222" answerConceptIds="167223,167224,167225,167226,167227,167228,167229" answerLabels="Consistently had drug pickup by proxy without viral load sample collection for two quarters,-->
+<!--                                            duplicated demographic and clinical variables,-->
+<!--                                            No biometrics recapture,-->
+<!--                                            Batched ARV pickup dates,-->
+<!--                                            Last clinical visit is over 18 months prior,-->
+<!--                                            Batched ART start and pickup dates,-->
+<!--                                            No initial biometric capture">-->
+<!--                    </obs>-->
                 </td>
+
+                <!--End of Column for displaying additional information when client verification is 'Yes' -->
             </tr>
         </table>
     </fieldset>
@@ -451,27 +477,41 @@
         <legend class="legend_style mb-0">Client Discontinuation</legend>
         <table style="width: 100%" class="table table-bordered table-secondary">
             <!-- Row for capturing Lost to Follow Up details -->
-            <tr>
+<!--            <tr>-->
 
-                <td class="alnleft">
-                    <label for="ltfu">Lost to Follow Up:</label>
-                    <obs conceptId="5240" style="checkbox" id="ltfu" toggle="ltfu_details" />
-                </td>
+<!--                <td class="alnleft">-->
+<!--                    <label for="ltfu">Lost to Follow Up:</label>-->
+<!--                    <obs conceptId="5240" style="checkbox" id="ltfu" toggle="ltfu_details" />-->
+<!--                </td>-->
 
-                <!-- Details for Lost to Follow Up, initially hidden -->
-                <td class="alnleft" colspan="3" id="ltfu_details">
-                    <!-- the drop down for Reason for Lost to follow up is coded into the concept id (166157), -->
-                    <!-- Answers are Tracked but unable to locate (166154),Did not attempt to track patient (166155),Patient Moved (165433),Pill burden (160588),Toxicity, drug (102),Concerned about privacy/stigma (160589),LACK OF MONEY FOR TRANSPORT (1737),Refusal of Treatment for Reasons of Religion or Conscience (151231),Specify (167149) -->
-                    Reason for Lost to follow up:
-                    <!-- <obs conceptId="166157" /> -->
-                    <obs id="client_Verification" conceptId="166157"
-                         answerConceptIds="166154,166155,165433,160588,102,160589,1737,151231,167149"
-                         answerLabels=" Tracked but unable to locate,Did not attempt to track patient,Travel/Relocation,Spiritual/Cultural beliefs,Pill burden/ARV side effects,Stigma/Conduct of staff,Distance/Economic reasons,Others">
-                    </obs>
-                    Date of Lost to follow up:
-                    <obs conceptId="166152" />
-                </td>
-            </tr>
+<!--                &lt;!&ndash; Details for Lost to Follow Up, initially hidden &ndash;&gt;-->
+<!--                <td class="alnleft" id="ltfu_details">-->
+<!--                    &lt;!&ndash; the drop down for Reason for Lost to follow up is coded into the concept id (166157), &ndash;&gt;-->
+<!--                    &lt;!&ndash; Answers are Tracked but unable to locate (166154),Did not attempt to track patient (166155),Patient Moved (165433),Pill burden (160588),Toxicity, drug (102),Concerned about privacy/stigma (160589),LACK OF MONEY FOR TRANSPORT (1737),Refusal of Treatment for Reasons of Religion or Conscience (151231),Specify (167149) &ndash;&gt;-->
+<!--                    Reason for Lost to follow up:-->
+<!--                    &lt;!&ndash; <obs conceptId="166157" /> &ndash;&gt;-->
+<!--                    <obs id="client_Verification" conceptId="166157"-->
+<!--                         answerConceptIds="166154,166155,165433,151231,160588,102,160589,1737,167149"-->
+<!--                         answerLabels=" Tracked but unable to locate,Did not attempt to track patient,Travel/Relocation,Spiritual/Cultural beliefs,Pill burden,ARV side effects,Stigma/Conduct of staff,Distance/Economic reasons,Others">-->
+<!--                        <controls>-->
+<!--                            <when value="167149" thenDisplay="#others_" />-->
+<!--                        </controls>-->
+<!--                    </obs>-->
+<!--                    Date of Lost to follow up:-->
+<!--                    <obs conceptId="166152" />-->
+<!--                </td>-->
+<!--                <td class="alnleft">-->
+<!--                <table>-->
+<!--                    &lt;!&ndash; Section for displaying details when Other Cause of Death is chosen &ndash;&gt;-->
+<!--                    <tr id="others_">-->
+<!--                        <td>Specify</td>-->
+<!--                        <td>-->
+<!--                            <obs conceptId="165904" />-->
+<!--                        </td>-->
+<!--                    </tr>-->
+<!--                </table>-->
+<!--            </td>-->
+<!--            </tr>-->
 
             <!-- Row for capturing Patient Care in Facility Discontinued details -->
             <tr id="no_termination_section">
@@ -497,8 +537,8 @@
                 <td class="alnleft">Reason for Discontinuation</td>
                 <td>
                     <!-- added on 08/12/2023 New 167231	Could not verify client	N/A	Findings, New 167149 Others (LTFU)	Text Findings -->
-                    <obs id="death_cause" conceptId="165470" answerConceptIds="159492,165889,165916,167230,167231"
-                         answerLabels="Transferred out to another facility,Death,Discontinued care,Duplicate record,Could not verify client">
+                    <obs id="death_cause" conceptId="165470" answerConceptIds="159492,165889,165916,167230,167231,5240"
+                         answerLabels="Transferred out to another facility,Death,Discontinued care,Duplicate record,Could not verify client,Lost_to_followup">
                         <controls>
                             <when value="165889" thenDisplay="#cause_death" />
                             <when value="159492" thenDisplay="#Transferred_out_to" />
@@ -518,6 +558,40 @@
             </tr>
 
             <!-- Section for displaying details when Cause of Death is chosen -->
+
+            <tr id="Lost_to_followup">
+                <td class="alnleft">Date of Lost to follow up</td>
+                <td>
+                    <obs conceptId="166152" />
+
+                </td>
+                <td class="alnleft">Reason for Lost to follow up:</td>
+                <td>
+                    <obs id="LTFU_group" conceptId="166157"
+                         answerConceptIds="166154,166155,165433,151231,160588,102,160589,1737,167149"
+                         answerLabels=" Tracked but unable to locate,Did not attempt to track patient,Travel/Relocation,Spiritual/Cultural beliefs,Pill burden,ARV side effects,Stigma/Conduct of staff,Distance/Economic reasons,Others">
+                        <controls>
+                            <when value="167149" thenDisplay="#others_" />
+                        </controls>
+                    </obs>
+                </td>
+                <td class="alnleft">
+                    <table>
+                        <!-- Section for displaying details when Other Cause of Death is chosen -->
+                        <tr id="others_">
+                            <td>Specify</td>
+                            <td>
+                                <obs conceptId="167149" />
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+                <td></td>
+            </tr>
+
+<!--            end of LTFU-->
+
+
             <tr id="cause_death">
                 <td class="alnleft">Cause of Death</td>
                 <td>
@@ -661,6 +735,9 @@
                     return false;
                 }
             }
+
+
+
 
             // Return true to allow form submission if validation passes
             return true;

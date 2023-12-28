@@ -907,11 +907,11 @@
     </changeSet>
 
     <changeSet id="Regimen_table_update_12_12_2023_poc" author="Adeyemi" runOnChange="true">
-                <preConditions onFail="MARK_RAN">
-                    <sqlCheck expectedResult="0">
-                        SELECT COUNT(*) FROM regimen_drug_mappings WHERE regimen_drug_mapping_id=424;
-                    </sqlCheck>
-                </preConditions>
+<!--                <preConditions onFail="MARK_RAN">-->
+<!--                    <sqlCheck expectedResult="0">-->
+<!--                        SELECT COUNT(*) FROM regimen_drug_mappings WHERE regimen_drug_mapping_id=427;-->
+<!--                    </sqlCheck>-->
+<!--                </preConditions>-->
         <sql>SET FOREIGN_KEY_CHECKS=0;</sql>
         <sqlFile path="poc_related/regimendrugmappingsql/regimen_update.sql"
                  stripComments="true"

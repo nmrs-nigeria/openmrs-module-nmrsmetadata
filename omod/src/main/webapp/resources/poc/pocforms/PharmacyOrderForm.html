@@ -137,13 +137,14 @@
         // checking that line, age, regimen and duration are filled while allowing for OI flexibility.
 
         beforeSubmit.push(function() {
-
+            // to get input from the DSD models
             let service_delivery_model = document.querySelector('#service_delivery_model').children[0];
             console.log('verify_66666');
             let community_based = document.querySelector('#community_based').children[0];
             console.log('verify_777777');
             let facility_based = document.querySelector('#facility_based').children[0];
 
+            // check if service delivery model is empty
             if (service_delivery_model.value == "") {
                 console.log('verify6');
                 service_delivery_model.focus();
@@ -1139,7 +1140,7 @@
                         <!--answerConceptIds="165257,76488,1679,80945" answerLabels="Cotrimoxazole,Fluconazole,Isoniazid,Nystatin"/>-->
                     </td>
                     <td>
-                        <obs class='gridmenu' conceptId="165725" id="drugStrength" answerConceptIds="165635,165616,166045,165074,165707,165637,165076,166046,165624,165625,165638,165639,165640,165616,165705,165617,165706,166047,166048,166049,166050,166051,166052,166053,166054,166055,165074,165076,166145,166146,166147,166137,5622"
+                        <obs class='gridmenu' conceptId="165725" id="drugStrength" answerConceptIds="165062,165060,165635,165616,166045,165074,165707,165637,165076,166046,165624,165625,165638,165639,165640,165616,165705,165617,165706,166047,166048,166049,166050,166051,166052,166053,166054,166055,165074,165076,166145,166146,166147,166137,5622"
                         />
                     </td>
 
@@ -1176,7 +1177,7 @@
                         <!--answerConceptIds="165257,76488,1679,80945" answerLabels="Cotrimoxazole,Fluconazole,Isoniazid,Nystatin"/>-->
                     </td>
                     <td>
-                        <obs class='gridmenu' conceptId="165725" id="drugStrength" answerConceptIds="165635,165616,166045,165074,165707,165637,165076,166046,165624,165625,165638,165639,165640,165616,165705,165617,165706,166047,166048,166049,166050,166051,166052,166053,166054,166055,165074,165076,166145,166146,166147,166137,5622"
+                        <obs class='gridmenu' conceptId="165725" id="drugStrength" answerConceptIds="165062,165060,165635,165616,166045,165074,165707,165637,165076,166046,165624,165625,165638,165639,165640,165616,165705,165617,165706,166047,166048,166049,166050,166051,166052,166053,166054,166055,165074,165076,166145,166146,166147,166137,5622"
                         />
                     </td>
                     <td>
@@ -1211,7 +1212,7 @@
                         <!--answerConceptIds="165257,76488,1679,80945" answerLabels="Cotrimoxazole,Fluconazole,Isoniazid,Nystatin"/>-->
                     </td>
                     <td>
-                        <obs class='gridmenu' conceptId="165725" id="drugStrength" answerConceptIds="165635,165616,166045,165074,165707,165637,165076,166046,165624,165625,165638,165639,165640,165616,165705,165617,165706,166047,166048,166049,166050,166051,166052,166053,166054,166055,165074,165076,166145,166146,166147,166137,5622"
+                        <obs class='gridmenu' conceptId="165725" id="drugStrength" answerConceptIds="165062,165060,165635,165616,166045,165074,165707,165637,165076,166046,165624,165625,165638,165639,165640,165616,165705,165617,165706,166047,166048,166049,166050,166051,166052,166053,166054,166055,165074,165076,166145,166146,166147,166137,5622"
                         />
                     </td>
                     <td>
