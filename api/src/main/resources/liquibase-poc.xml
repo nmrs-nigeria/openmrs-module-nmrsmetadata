@@ -731,7 +731,7 @@
                  splitStatements="true"
                  encoding="UTF-8"
                  endDelimiter=";"/>
-        <sql>SET FOREIGN_KEY_CHECKS=1;</sql>
+        <sql>SET FOREIGN_KEY_CHECKS = 1;</sql>
     </changeSet>
 
  	<changeSet id="20210521100138" author="Toyeeb" runOnChange="true">
@@ -943,7 +943,7 @@
                  splitStatements="true"
                  endDelimiter=";"/>
     </changeSet>
-	
+
 	<changeSet id="form_resource_sql_pediatric_initial_clinical_evaluation20230811" author="Toyeeb" runOnChange="true">
 
         <sqlFile path="json_forms/pediatric_initial_clinical_evaluation.sql"
@@ -951,7 +951,15 @@
                  splitStatements="true"
                  endDelimiter=";"/>
     </changeSet>
-    
+
+    <changeSet id="form_resource_sql_client_tracking_and_discontinuation20240116" author="Adeyemi" runOnChange="true">
+
+        <sqlFile path="json_forms/client_tracking_and_discontinuation.sql"
+                 stripComments="false"
+                 splitStatements="true"
+                 endDelimiter=";"/>
+    </changeSet>
+
     <changeSet id="form_resource_sql_client_intake_form20230811" author="Toyeeb" runOnChange="true">
 
         <sqlFile path="json_forms/client_intake_form.sql"

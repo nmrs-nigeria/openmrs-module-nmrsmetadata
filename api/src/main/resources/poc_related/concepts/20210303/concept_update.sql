@@ -107,6 +107,6 @@ UPDATE `concept_name` SET `name` = 'ATAZANAVIR/RITONAVIR' WHERE `concept_name`.`
 UPDATE `concept_name` SET `name` = 'Liposomal Amphotericin B Injection' WHERE `concept_name`.`concept_name_id` = 3814;
 UPDATE `concept` SET `datatype_id` = 3, `class_id` = 11  WHERE `concept`.`concept_id` = 167197;
 UPDATE `concept_name` SET `name` = 'Partner CBO Name' WHERE `concept_name`.`concept_name_id` = 167197;
-
+UPDATE `concept_name` SET `name` = 'Last clinical visit is over 15 months prior' WHERE `concept_name`.`concept_name_id` = 144078;
 
 SET FOREIGN_KEY_CHECKS=1;

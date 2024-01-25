@@ -150,3 +150,10 @@ REPLACE INTO `concept_set` (`concept_id`, `concept_set`, `sort_weight`, `creator
 REPLACE INTO `concept_set` (`concept_id`, `concept_set`, `sort_weight`, `creator`, `date_created`, `uuid`) VALUES (1138, 167119, 22, 1, '2022-09-20 13:19:31', '77d335bc-4b1c-4fe2-ae6f-5db4c40b303e');
 REPLACE INTO `concept_set` (`concept_id`, `concept_set`, `sort_weight`, `creator`, `date_created`, `uuid`) VALUES (1118, 167119, 23, 1, '2022-09-20 13:19:31', 'a32ada86-076f-413a-b840-7c1c1bde5a64');
 
+REPLACE INTO `concept_set` (`concept_id`, `concept_set`, `sort_weight`, `creator`, `date_created`, `uuid`) VALUES (167241, 167242, 0, 1, '2024-01-22 16:01:53', 'de827e2a-3afe-4253-9213-950d45f58db1');
+REPLACE INTO `concept_set` (`concept_id`, `concept_set`, `sort_weight`, `creator`, `date_created`, `uuid`) VALUES (167240, 167242, 1, 1, '2024-01-22 16:01:53', '3b150b14-5ba6-451b-8b1c-1a8094e3341d');
+REPLACE INTO `concept_set` (`concept_id`, `concept_set`, `sort_weight`, `creator`, `date_created`, `uuid`) VALUES (167239, 167242, 2, 1, '2024-01-22 16:01:53', 'c26f927e-2b42-44a0-9f84-9449c5173c50');
+REPLACE INTO `concept_set` (`concept_id`, `concept_set`, `sort_weight`, `creator`, `date_created`, `uuid`) VALUES (167238, 167242, 3, 1, '2024-01-22 16:01:53', '7c40f9dc-6209-4fa0-b2e6-daa6499050db');
+REPLACE INTO `concept_set` (`concept_id`, `concept_set`, `sort_weight`, `creator`, `date_created`, `uuid`) VALUES (167237, 167242, 4, 1, '2024-01-22 16:01:53', '319d44f8-b737-4b87-8662-7a86c3d64cb7');
+
+

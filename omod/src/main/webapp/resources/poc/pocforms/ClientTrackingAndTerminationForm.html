@@ -64,6 +64,16 @@
             text-transform: initial;
         }
 
+        .legend_style_none {
+            max-width: 35%;
+            /* background: #d6d8db; */
+            /* box-shadow: 1px 1px 25px rgba(0, 0, 0, 0.2); */
+            border-radius: 2px;
+            border: 1px solid #305a72;
+            border-bottom-left-radius: 2px;
+            text-transform: initial;
+        }
+
         /* Style for a form fieldset */
         form fieldset,
         .form fieldset {
@@ -139,8 +149,52 @@
 
             // Set 'readonly' attribute to 'true' for elements with the class 'hasDatepicker'
             $(".hasDatepicker").attr("readonly", true);
-        });
 
+            // // one
+            // const attemptedContactB = $('#attemptedContactB');
+            // const attemptedContactC = $('#attemptedContactC');
+            // const attemptedContactDate1 = $('#attemptedContactDate1');
+            // const elementsToShowHide = $('#verificationAttempts1, #verificationStatus1, #verificationOutcome1, #verificationComments1');
+
+            // // Initially hide the elements
+            // elementsToShowHide.hide();
+            // attemptedContactB.hide();
+            // attemptedContactC.hide();
+
+            // attemptedContactDate1.on('change', function () {
+            //     // Check if the size of the value is 10
+            //         elementsToShowHide.show();
+            //         attemptedContactB.show();
+            // });
+
+            // two
+            // const attemptedContactDate2 = $('#attemptedContactDate2');
+            // const elementsToShowHide2 = $('#verificationAttempts2, #verificationStatus2, #verificationOutcome2, #verificationComments2');
+
+            // // Initially hide the elements
+            // elementsToShowHide2.hide();
+
+            // attemptedContactDate2.on('change', function () {
+            //     // Check if the size of the value is 10
+            //         elementsToShowHide2.show();
+            //         attemptedContactC.show();
+            // });
+
+            // // three
+            // const attemptedContactDate3 = $('#attemptedContactDate3');
+            // const elementsToShowHide3 = $('#verificationAttempts3, #verificationStatus3, #verificationOutcome3, #verificationComments3');
+
+            // // Initially hide the elements
+            // elementsToShowHide3.hide();
+
+            // attemptedContactDate3.on('change', function () {
+            //     // Check if the size of the value is 10
+            //         elementsToShowHide3.show();
+            // });
+
+
+
+        });
     </script>
 
     <!-- Table holding the form title -->
@@ -156,33 +210,290 @@
 
     <!-- i added Last Clinical Parameters to lookup some data-->
     <fieldset>
-        <legend class="legend_style">Last Clinical Parameters</legend>
+        <legend class="legend_style_none">Last Clinical Parameters</legend>
         <table class="table table-bordered table-secondary text-dark" cellspacing="10" cellpadding="5">
-            <tr style="text-align-last: center;">
-                <td><b>Last Pick Up Date:</b>
+            <tr style="text-align-last: center">
+                <td>
+                    <b>Last Pick Up Date:</b>
                     <span class="font-weight-bold text-primary">
                         <lookup expression="fn.latestObs('164506').obsDatetime" />
                     </span>
                 </td>
-                <td><b>Next Clinic Visit:</b>
+                <td>
+                    <b>Next Clinic Visit:</b>
                     <span class="font-weight-bold text-primary">
                         <lookup expression="fn.latestObs('5096').valueDatetime" />
                     </span>
                 </td>
-                <td><b>Duration on ART:</b>
+                <td>
+                    <b>Duration on ART:</b>
                     <span id="durationOnArt" class="font-weight-bold text-primary"></span>
                 </td>
-                <td><b>DSD Status:</b>
+                <td>
+                    <b>DSD Status:</b>
                     <span class="font-weight-bold text-primary">
                         <lookup expression="fn.latestObs('167126').valueCoded.name" />
                     </span>
                 </td>
-                <td><b>DSD Model:</b>
+                <td>
+                    <b>DSD Model:</b>
                     <span class="font-weight-bold text-primary">
                         <lookup expression="fn.latestObs('166148').valueCoded.name" />
                     </span>
                 </td>
             </tr>
+        </table>
+    </fieldset>
+
+    <!-- the newly added Fieldset for Client Verification section -->
+    <fieldset>
+        <legend class="legend_style">Client Verification</legend>
+        <table class="table table-bordered table-secondary text-dark">
+            <!-- Row for capturing Client Verification information with conditional display -->
+            <tr id="client_Verification" class="text-dark">
+                <!-- <td class="w-50 fw-bold font-weight-bold">Client Verification: -->
+                <!--  Client Verification Coded Question Yes / No -->
+                <!-- <obs id="client_Veerification" conceptId="167221" answerConceptIds="1066,1065"> -->
+                <!-- <controls> -->
+                <!-- <when value="1065" thenDisplay="#yes_client_Verification" /> -->
+                <!-- <when value="1066" thenDisplay="#no_client_Verification" /> -->
+                <!-- </controls> -->
+                <!-- </obs> -->
+                <!-- </td>
+                <td></td> -->
+
+                <td class="w-50 fw-bold font-weight-bold">Client Verification:</td>
+                <td class="w-50">
+                    <!--  Client Verification Coded Question Yes / No -->
+                    <obs id="client_Veerification" conceptId="167221" answerConceptIds="1066,1065">
+                        <controls>
+                            <when value="1065" thenDisplay="#yes_client_Verification" />
+                            <when value="1066" thenDisplay="#no_client_Verification" />
+                        </controls>
+                    </obs>
+                </td>
+            </tr>
+        </table>
+
+        <table style="width: 100%; background-color: #d6d8db4a" id="yes_client_Verification"
+               class="table table-bordered text-dark">
+            <tr>
+                <caption class="d-flex text-dark font-weight-bold h6 small p-0 m-3" style="white-space: nowrap">
+                    Indication for Client Verification: (Reason /Trigger/Indication for Client Verification, you can select multiple triggers)
+                </caption>
+
+                <td class="">
+                    <table>
+                        <tr>
+                            <td>Consistently had drug pickup by proxy without viral load sample  collection for two quarters</td>
+                            <td>
+                                <obs id="pickup_noVL" conceptId="167222" answerConceptId="167223" answerLabel="" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>duplicated demographic and clinical variables</td>
+                            <td>
+                                <obs id="duplicate" conceptId="167222" answerConceptId="167224" answerLabel="" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>No biometrics recapture</td>
+                            <td>
+                                <obs id="no_pbs" conceptId="167222" answerConceptId="167225" answerLabel="" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Batched ARV pickup dates</td>
+                            <td>
+                                <obs id="batched_ARV" conceptId="167222" answerConceptId="167226" answerLabel="" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Last clinical visit is over 15 months prior</td>
+                            <td>
+                                <obs id="visit_over18" conceptId="167222" answerConceptId="167227" answerLabel="" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Batched ART start and pickup dates</td>
+                            <td>
+                                <obs id="batched_ARTpickup" conceptId="167222" answerConceptId="167228" answerLabel="" />
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+
+                <td class="">
+                    <table>
+                        <tr>
+                            <td>No initial biometric capture</td>
+                            <td>
+                                <obs id="batched_ARTpickup" conceptId="167222" answerConceptId="167229" answerLabel="" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Incomplete visit data on the care card or pharmacy forms or EMR
+                            </td>
+                            <td>
+                                <obs id="pickup_noVL" conceptId="167222" answerConceptId="167232" answerLabel="" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Records of repeated clinical encounters, with no fingerprint recapture.
+                            </td>
+                            <td>
+                                <obs id="duplicate" conceptId="167222" answerConceptId="167233" answerLabel="" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Long intervals between ARV pick-ups (pick-ups more than one year apart in the same facility)
+                            </td>
+                            <td>
+                                <obs id="no_pbs" conceptId="167222" answerConceptId="167234" answerLabel="" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Same sex, DOB and ART start date</td>
+                            <td>
+                                <obs id="batched_ARV" conceptId="167222" answerConceptId="167235" answerLabel="" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 5px" class="d-flex justify-content-between">
+                                <label for="">Others (Specify)</label>
+                                <obs conceptId="167236" />
+                            </td>
+                            <td></td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+
+            <!-- this section  contains the table for the verification - Verification Attempts and Steps -->
+            <caption>
+                <table style="width: 100%; background-color: #d6d8db4a"
+                       class="table table-bordered text-dark text-center">
+                    <caption class="d-flex text-dark font-weight-bold h6 small p-0 m-3" style="white-space: nowrap">Verification Attempts and Steps</caption>
+                    <tr>
+                        <td class="alnleft_s"></td>
+                        <td class="alnleft_s">Date of Client tracking</td>
+                        <td class="" style="width: 40%;">Verification Attempts (you can select multiple triggers)</td>
+                        <td class="alnleft_s">Verification Status</td>
+                        <td class="" style="width: 5px;">Outcome</td>
+                        <td class="w-100">Comments (Provide reason for records discontinuation)</td>
+                    </tr>
+
+                    <!-- Row for capturing details of the 1st Attempted contact -->
+                    <tr id="attemptedContactA" class="">
+                        <obsgroup groupingConceptId="167242">  <!-- Verification Attempts and Steps is coded datatype and an ObsGroup -->
+                            <td class="alnleft_s">a. 1st Attempted contact</td>
+                            <!-- date -->
+                            <td id="attemptedContactDate1" class="alnleft_s">
+                                <obs conceptId="167241" />
+                            </td>
+
+                            <!-- Verification Attempts -->
+                            <td id="verificationAttempts1" style="width: 40%;" class="p-0 m-0">
+                                <!-- <obs conceptId="167240"> -->
+                                <obs class="d-block m-0" id="attemptsA" conceptId="167240" answerConceptId="167249" answerLabel="Physical document audited-folder/document review" type="checkbox" name="verificationAttempt" />
+                                <obs class="d-block m-0" id="attemptsB" conceptId="167240" answerConceptId="167251" answerLabel="Client contacted" type="checkbox" name="verificationAttempt" />
+                                <obs class="d-block m-0" id="attemptsC" conceptId="167240" answerConceptId="167247" answerLabel="1st biometric capture" type="checkbox" name="verificationAttempt" />
+                                <obs class="d-block m-0" id="attemptsD" conceptId="167240" answerConceptId="167250" answerLabel="Facility visit" type="checkbox" name="verificationAttempt" />
+                                <obs class="d-block m-0" id="attemptsE" conceptId="167240" answerConceptId="167248" answerLabel="Biometric recapture" type="checkbox" name="verificationAttempt" />
+                                <!-- </obs> -->
+                            </td>
+
+                            <!-- Verification Status -->
+                            <td id="verificationStatus1" class="alnleft_s">
+                                <obs conceptId="167239" answerConceptIds="167243,167244,167245" answerLabels="Verification ongoing, Records discontinued and archieved, Records verified" />
+                            </td>
+                            <!-- Outcome -->
+                            <td id="verificationOutcome1" class="" style="width: 5px;">
+                                <obs conceptId="167238" readonly="true" answerConceptIds="167246,163611" answerLabels="Valid, Invalid" />
+                            </td>
+                            <!-- Comments -->
+                            <td id="verificationComments1" class="w-100 comments">
+                                <textarea class="w-100" conceptId="167237" cols="30" rows="5"> </textarea>
+                            </td>
+                        </obsgroup>
+                    </tr>
+
+                    <!-- Row for capturing details of other attempted contact (b) -->
+                    <tr id="attemptedContactB" class="">
+                        <obsgroup groupingConceptId="165902">
+                            <td class="alnleft_s">b. Other attempted contact</td>
+                            <!-- date -->
+                            <td id="attemptedContactDate2" class="alnleft_s">
+                                <obs conceptId="167241" />
+                            </td>
+
+                            <!-- Verification Attempts -->
+                            <td id="verificationAttempts2" style="width: 40%;" class="p-0 m-0">
+                                <!-- <obs conceptId="167240"> -->
+                                <obs class="d-block m-0" id="attemptsA" conceptId="167240" answerConceptId="167249" answerLabel="Physical document audited-folder/document review" type="checkbox" name="verificationAttempt" />
+                                <obs class="d-block m-0" id="attemptsB" conceptId="167240" answerConceptId="167251" answerLabel="Client contacted" type="checkbox" name="verificationAttempt" />
+                                <obs class="d-block m-0" id="attemptsC" conceptId="167240" answerConceptId="167247" answerLabel="1st biometric capture" type="checkbox" name="verificationAttempt" />
+                                <obs class="d-block m-0" id="attemptsD" conceptId="167240" answerConceptId="167250" answerLabel="Facility visit" type="checkbox" name="verificationAttempt" />
+                                <obs class="d-block m-0" id="attemptsE" conceptId="167240" answerConceptId="167248" answerLabel="Biometric recapture" type="checkbox" name="verificationAttempt" />
+                                <!-- </obs> -->
+                            </td>
+
+                            <!-- Verification Status -->
+                            <td id="verificationStatus2" class="alnleft_s">
+                                <obs conceptId="167239" answerConceptIds="167243,167244,167245" answerLabels="Verification ongoing, Records discontinued and archieved, Records verified" />
+                            </td>
+                            <!-- Outcome -->
+                            <td id="verificationOutcome2" class="" style="width: 5px;">
+                                <obs conceptId="167238" readonly="true" answerConceptIds="167246,163611" answerLabels="Valid, Invalid" />
+                            </td>
+                            <!-- Comments -->
+                            <td id="verificationComments2" class="w-100">
+                                <textarea class="w-100" conceptId="167237" cols="30" rows="5"> </textarea>
+                            </td>
+                        </obsgroup>
+                    </tr>
+
+                    <!-- Row for capturing details of other attempted contact (c) -->
+                    <tr id="attemptedContactC" class="">
+                        <obsgroup groupingConceptId="165902">
+                            <td class="alnleft_s">
+                                c. Last attempted contact (after 28 days)
+                            </td>
+                            <!-- date -->
+                            <td id="attemptedContactDate3" class="alnleft_s">
+                                <obs conceptId="167241" />
+                            </td>
+
+                            <!-- Verification Attempts -->
+                            <td id="verificationAttempts3" style="width: 40%;" class="p-0 m-0">
+                                <!-- <obs conceptId="167240"> -->
+                                <obs class="d-block m-0" id="attemptsA" conceptId="167240" answerConceptId="167249" answerLabel="Physical document audited-folder/document review" type="checkbox" name="verificationAttempt" />
+                                <obs class="d-block m-0" id="attemptsB" conceptId="167240" answerConceptId="167251" answerLabel="Client contacted" type="checkbox" name="verificationAttempt" />
+                                <obs class="d-block m-0" id="attemptsC" conceptId="167240" answerConceptId="167247" answerLabel="1st biometric capture" type="checkbox" name="verificationAttempt" />
+                                <obs class="d-block m-0" id="attemptsD" conceptId="167240" answerConceptId="167250" answerLabel="Facility visit" type="checkbox" name="verificationAttempt" />
+                                <obs class="d-block m-0" id="attemptsE" conceptId="167240" answerConceptId="167248" answerLabel="Biometric recapture" type="checkbox" name="verificationAttempt" />
+                                <!-- </obs> -->
+                            </td>
+
+                            <!-- Verification Status -->
+                            <td id="verificationStatus3" class="alnleft_s">
+                                <obs conceptId="167239" answerConceptIds="167243,167244,167245" answerLabels="Verification ongoing, Records discontinued and archieved, Records verified" />
+                            </td>
+                            <!-- Outcome -->
+                            <td id="verificationOutcome3" class="" style="width: 5px;">
+                                <obs conceptId="167238" readonly="true" answerConceptIds="167246,163611" answerLabels="Valid, Invalid" />
+                            </td>
+                            <!-- Comments -->
+                            <td id="verificationComments3" class="w-100">
+                                <textarea class="w-100" conceptId="167237" cols="30" rows="5"> </textarea>
+                            </td>
+                        </obsgroup>
+                    </tr>
+                </table>
+            </caption>
         </table>
     </fieldset>
 
@@ -240,69 +551,6 @@
                 <td>
                     <obs conceptId="165778" style="padding: 5px; width: 150px" />
                 </td>
-            </tr>
-
-            <!-- Row for capturing Client Verification information with conditional display -->
-            <tr id="client_Verification" class="text-dark">
-                <td class="alnleft">Client Verification:</td>
-                <td>
-                    <!--  Client Verification Coded Question Yes / No -->
-                    <obs id="client_Veerification" conceptId="167221" answerConceptIds="1066,1065">
-                        <controls>
-                            <when value="1065" thenDisplay="#yes_client_Verification" />
-                            <when value="1066" thenDisplay="#no_client_Verification" />
-                        </controls>
-                    </obs>
-                </td>
-
-                <!-- Column for displaying additional information when client verification is 'Yes' -->
-                <td colspan="2" id="yes_client_Verification">
-                    <!-- section indicating the indication for client verification -->
-                    <span class="checkz alnleft d-flex text-center align-content-center font-weight-bold "> Indication for Client Verification: </span>
-                    <table>
-                        <tr>
-                            <td>Consistently had drug pickup by proxy without viral load sample collection for two quarters</td>
-                            <td><obs id="pickup_noVL" conceptId="167222" answerConceptId="167223" answerLabel=""/></td>
-                        </tr>
-                        <tr>
-                            <td>duplicated demographic and clinical variables</td>
-                            <td><obs id="duplicate" conceptId="167222" answerConceptId="167224" answerLabel=""/></td>
-                        </tr>
-                        <tr>
-                            <td>No biometrics recapture</td>
-                            <td><obs id="no_pbs" conceptId="167222" answerConceptId="167225" answerLabel=""/></td>
-                        </tr>
- <tr>
-                            <td>Batched ARV pickup dates</td>
-                            <td><obs id="batched_ARV" conceptId="167222" answerConceptId="167226" answerLabel=""/></td>
-                        </tr>
- <tr>
-                            <td>Last clinical visit is over 18 months prior</td>
-                            <td><obs id="visit_over18" conceptId="167222" answerConceptId="167227" answerLabel=""/></td>
-                        </tr>
- <tr>
-                            <td>Batched ART start and pickup dates</td>
-                            <td><obs id="batched_ARTpickup" conceptId="167222" answerConceptId="167228" answerLabel=""/></td>
-                        </tr>
-<tr>
-                            <td>No initial biometric capture</td>
-                            <td><obs id="batched_ARTpickup" conceptId="167222" answerConceptId="167229" answerLabel=""/></td>
-                        </tr>
-
-                    </table>
-
-                    <!-- below are Observation input for specific indications when client verification is 'Yes' -->
-<!--                    <obs id="" conceptId="167222" answerConceptIds="167223,167224,167225,167226,167227,167228,167229" answerLabels="Consistently had drug pickup by proxy without viral load sample collection for two quarters,-->
-<!--                                            duplicated demographic and clinical variables,-->
-<!--                                            No biometrics recapture,-->
-<!--                                            Batched ARV pickup dates,-->
-<!--                                            Last clinical visit is over 18 months prior,-->
-<!--                                            Batched ART start and pickup dates,-->
-<!--                                            No initial biometric capture">-->
-<!--                    </obs>-->
-                </td>
-
-                <!--End of Column for displaying additional information when client verification is 'Yes' -->
             </tr>
         </table>
     </fieldset>
@@ -477,41 +725,41 @@
         <legend class="legend_style mb-0">Client Discontinuation</legend>
         <table style="width: 100%" class="table table-bordered table-secondary">
             <!-- Row for capturing Lost to Follow Up details -->
-<!--            <tr>-->
+            <!--            <tr>-->
 
-<!--                <td class="alnleft">-->
-<!--                    <label for="ltfu">Lost to Follow Up:</label>-->
-<!--                    <obs conceptId="5240" style="checkbox" id="ltfu" toggle="ltfu_details" />-->
-<!--                </td>-->
+            <!--                <td class="alnleft">-->
+            <!--                    <label for="ltfu">Lost to Follow Up:</label>-->
+            <!--                    <obs conceptId="5240" style="checkbox" id="ltfu" toggle="ltfu_details" />-->
+            <!--                </td>-->
 
-<!--                &lt;!&ndash; Details for Lost to Follow Up, initially hidden &ndash;&gt;-->
-<!--                <td class="alnleft" id="ltfu_details">-->
-<!--                    &lt;!&ndash; the drop down for Reason for Lost to follow up is coded into the concept id (166157), &ndash;&gt;-->
-<!--                    &lt;!&ndash; Answers are Tracked but unable to locate (166154),Did not attempt to track patient (166155),Patient Moved (165433),Pill burden (160588),Toxicity, drug (102),Concerned about privacy/stigma (160589),LACK OF MONEY FOR TRANSPORT (1737),Refusal of Treatment for Reasons of Religion or Conscience (151231),Specify (167149) &ndash;&gt;-->
-<!--                    Reason for Lost to follow up:-->
-<!--                    &lt;!&ndash; <obs conceptId="166157" /> &ndash;&gt;-->
-<!--                    <obs id="client_Verification" conceptId="166157"-->
-<!--                         answerConceptIds="166154,166155,165433,151231,160588,102,160589,1737,167149"-->
-<!--                         answerLabels=" Tracked but unable to locate,Did not attempt to track patient,Travel/Relocation,Spiritual/Cultural beliefs,Pill burden,ARV side effects,Stigma/Conduct of staff,Distance/Economic reasons,Others">-->
-<!--                        <controls>-->
-<!--                            <when value="167149" thenDisplay="#others_" />-->
-<!--                        </controls>-->
-<!--                    </obs>-->
-<!--                    Date of Lost to follow up:-->
-<!--                    <obs conceptId="166152" />-->
-<!--                </td>-->
-<!--                <td class="alnleft">-->
-<!--                <table>-->
-<!--                    &lt;!&ndash; Section for displaying details when Other Cause of Death is chosen &ndash;&gt;-->
-<!--                    <tr id="others_">-->
-<!--                        <td>Specify</td>-->
-<!--                        <td>-->
-<!--                            <obs conceptId="165904" />-->
-<!--                        </td>-->
-<!--                    </tr>-->
-<!--                </table>-->
-<!--            </td>-->
-<!--            </tr>-->
+            <!--                &lt;!&ndash; Details for Lost to Follow Up, initially hidden &ndash;&gt;-->
+            <!--                <td class="alnleft" id="ltfu_details">-->
+            <!--                    &lt;!&ndash; the drop down for Reason for Lost to follow up is coded into the concept id (166157), &ndash;&gt;-->
+            <!--                    &lt;!&ndash; Answers are Tracked but unable to locate (166154),Did not attempt to track patient (166155),Patient Moved (165433),Pill burden (160588),Toxicity, drug (102),Concerned about privacy/stigma (160589),LACK OF MONEY FOR TRANSPORT (1737),Refusal of Treatment for Reasons of Religion or Conscience (151231),Specify (167149) &ndash;&gt;-->
+            <!--                    Reason for Lost to follow up:-->
+            <!--                    &lt;!&ndash; <obs conceptId="166157" /> &ndash;&gt;-->
+            <!--                    <obs id="client_Verification" conceptId="166157"-->
+            <!--                         answerConceptIds="166154,166155,165433,151231,160588,102,160589,1737,167149"-->
+            <!--                         answerLabels=" Tracked but unable to locate,Did not attempt to track patient,Travel/Relocation,Spiritual/Cultural beliefs,Pill burden,ARV side effects,Stigma/Conduct of staff,Distance/Economic reasons,Others">-->
+            <!--                        <controls>-->
+            <!--                            <when value="167149" thenDisplay="#others_" />-->
+            <!--                        </controls>-->
+            <!--                    </obs>-->
+            <!--                    Date of Lost to follow up:-->
+            <!--                    <obs conceptId="166152" />-->
+            <!--                </td>-->
+            <!--                <td class="alnleft">-->
+            <!--                <table>-->
+            <!--                    &lt;!&ndash; Section for displaying details when Other Cause of Death is chosen &ndash;&gt;-->
+            <!--                    <tr id="others_">-->
+            <!--                        <td>Specify</td>-->
+            <!--                        <td>-->
+            <!--                            <obs conceptId="165904" />-->
+            <!--                        </td>-->
+            <!--                    </tr>-->
+            <!--                </table>-->
+            <!--            </td>-->
+            <!--            </tr>-->
 
             <!-- Row for capturing Patient Care in Facility Discontinued details -->
             <tr id="no_termination_section">
@@ -563,7 +811,6 @@
                 <td class="alnleft">Date of Lost to follow up</td>
                 <td>
                     <obs conceptId="166152" />
-
                 </td>
                 <td class="alnleft">Reason for Lost to follow up:</td>
                 <td>
@@ -589,8 +836,7 @@
                 <td></td>
             </tr>
 
-<!--            end of LTFU-->
-
+            <!-- end of LTFU-->
 
             <tr id="cause_death">
                 <td class="alnleft">Cause of Death</td>
@@ -678,9 +924,10 @@
                     <obs conceptId="165775" />
                 </td>
                 <td class="alnleft">Referred for</td>
+
+                <!-- remember to add the real concepts for viral load, tb screening -->
                 <td>
-                    <obs conceptId="165776" answerConceptIds="5488,5622"
-                         answerLabels="Adherence counselling, Others (Specify)" />
+                    <obs conceptId="165776" answerConceptIds="5488,166160,166800,5622" answerLabels="Adherence counselling, viral load, tb screening, Others (Specify)" />
                 </td>
             </tr>
         </table>
@@ -710,7 +957,7 @@
         </table>
     </fieldset>
 
-    <submit class="btn btn-success"/>
+    <submit class="btn btn-success" />
 
     <!-- custom JavaScript Code -->
     <script type="text/javascript">
@@ -735,9 +982,6 @@
                     return false;
                 }
             }
-
-
-
 
             // Return true to allow form submission if validation passes
             return true;
@@ -764,6 +1008,29 @@
             // Duration is 3 months or more
             durationOnArtElement.innerText = "3 months or more";
         }
+
+        // document.addEventListener('DOMContentLoaded', function () {
+        //     const attemptedContactDate1 = document.getElementById('attemptedContactDate1');
+        //     const elementsToShowHide = document.querySelectorAll('#verificationAttempts1, #verificationStatus1, #verificationOutcome1, #verificationComments1');
+
+        //     // Initially hide the elements
+        //     elementsToShowHide.forEach(function (element) {
+        //         element.style.display = 'none';
+        //     });
+
+        //     attemptedContactDate1.addEventListener("click", function () {
+        //         if (attemptedContactDate1.value) {
+        //             elementsToShowHide.forEach(function (element) {
+        //                 element.style.display = 'block';
+        //             });
+        //         } else {
+        //             elementsToShowHide.forEach(function (element) {
+        //                 element.style.display = 'none';
+        //             });
+        //         }
+        //     });
+        // });
+
     </script>
 
 </htmlform>
