@@ -124,6 +124,59 @@
             color: #363463;
             font-size: 20px;
         }
+
+
+        /* #verificationCommentsStyle {
+            display: block;
+            width: 100%;
+            height: 150px;
+            padding: 8px;
+            font-size: 14px;
+            border: 1px solid #c2c2c2;
+            border-radius: 4px;
+            box-sizing: border-box;
+            margin: 10px 0;
+            resize: vertical;
+            overflow: auto;
+        } */
+
+        #verificationCommentsStyle input[type="text"] {
+            border: 1px solid #000000;
+            padding: 8px;
+            border-radius: 4px;
+            box-sizing: border-box;
+            width: 100%;
+            font-size: 14px;
+        }
+
+        /* #verificationCommentsStyle input[type="text"]:focus {
+            outline: none;
+            border: 2px solid #000000;
+        } */
+
+        .submitButton{
+            color: white !important;
+            background: green !important;
+            border: green !important;
+            margin: 0 20px;
+        }
+
+        .submitButton:hover{
+            color: green !important;
+            background: white !important;
+            font-weight: bold !important;
+            border: 1px solid green !important;
+        }
+
+        .empty-value {
+            border: 1px solid #000000;
+        }
+
+        .fullWidth input[type="text"] {
+            width: 100%;
+            box-sizing: border-box; /* Include padding and border in the width */
+        }
+
     </style>
 
     <script type="text/javascript">
@@ -150,49 +203,240 @@
             // Set 'readonly' attribute to 'true' for elements with the class 'hasDatepicker'
             $(".hasDatepicker").attr("readonly", true);
 
-            // // one
-            // const attemptedContactB = $('#attemptedContactB');
-            // const attemptedContactC = $('#attemptedContactC');
-            // const attemptedContactDate1 = $('#attemptedContactDate1');
-            // const elementsToShowHide = $('#verificationAttempts1, #verificationStatus1, #verificationOutcome1, #verificationComments1');
+            // a. 1st Attempted contact, based on the Date of Client tracking.
 
-            // // Initially hide the elements
-            // elementsToShowHide.hide();
-            // attemptedContactB.hide();
-            // attemptedContactC.hide();
+            // global variables
+            const requiredTextWarning = $('#requiredTextWarning');
+            const submitButton = $('.submitButton');
 
-            // attemptedContactDate1.on('change', function () {
-            //     // Check if the size of the value is 10
-            //         elementsToShowHide.show();
-            //         attemptedContactB.show();
-            // });
+            // variables for the 1st attempt row
+            const attemptedContactDate1 = $('#attemptedContactDate1');
+            const attemptedContactDate1Input = attemptedContactDate1.find('input')[0];
 
-            // two
-            // const attemptedContactDate2 = $('#attemptedContactDate2');
-            // const elementsToShowHide2 = $('#verificationAttempts2, #verificationStatus2, #verificationOutcome2, #verificationComments2');
+            const verificationStatus1 = $('#verificationStatus1').find('select')[0];
+            // const verificationOutcome1 = $('#verificationOutcome1').find('select')[0];
 
-            // // Initially hide the elements
-            // elementsToShowHide2.hide();
-
-            // attemptedContactDate2.on('change', function () {
-            //     // Check if the size of the value is 10
-            //         elementsToShowHide2.show();
-            //         attemptedContactC.show();
-            // });
-
-            // // three
-            // const attemptedContactDate3 = $('#attemptedContactDate3');
-            // const elementsToShowHide3 = $('#verificationAttempts3, #verificationStatus3, #verificationOutcome3, #verificationComments3');
-
-            // // Initially hide the elements
-            // elementsToShowHide3.hide();
-
-            // attemptedContactDate3.on('change', function () {
-            //     // Check if the size of the value is 10
-            //         elementsToShowHide3.show();
-            // });
+            // Disable the select elements
+            $(verificationStatus1).prop('disabled', true);
+            // $(verificationOutcome1).prop('disabled', true);
 
 
+            const verificationStatus1Required = $('#verificationStatus1Required');
+            // const verificationOutcome1Required = $('#verificationOutcome1Required');
+
+            // Function to check a field and update UI accordingly
+            function checkField(field, requiredElement, valueCheck) {
+                if (field.value === valueCheck) {
+                    console.log(`${field.id} value is empty, button should disappear`);
+
+                    submitButton.hide();
+                    requiredTextWarning.removeClass('d-none');
+                    requiredElement.removeClass('d-none');
+                    $(field).addClass('empty-value');
+                } else {
+                    console.log(`${field.id} value is inputted, button should appear`);
+
+                    submitButton.show();
+                    requiredTextWarning.addClass('d-none');
+                    requiredElement.addClass('d-none');
+                    $(field).removeClass('empty-value');
+                }
+            }
+
+            // Function to check verificationStatus1 and set outcome to "" if status is empty
+            function checkVerificationStatus1() {
+                if (attemptedContactDate1Input.value !== "") {
+                    // Enable the select elements when date is entered
+                    $(verificationStatus1).prop('disabled', false);
+                    // $(verificationOutcome1).prop('disabled', false);
+
+                    // if (verificationStatus1.value === "") {
+                    //     // If status is empty, set outcome to ""
+                    //     verificationOutcome1.value = "";
+                    // }
+
+                    // // if status is ongoing, set outcome to valid
+                    // if (verificationStatus1.value === "167243") {
+                    //     verificationOutcome1.value = "167246";
+                    // }
+
+                    // // if status is discontinued and archieved, set outcome to invalid
+                    // if (verificationStatus1.value === "167244") {
+                    //     verificationOutcome1.value = "163611";
+                    // }
+
+                    // // if status is Records verified, set outcome to valid
+                    // if (verificationStatus1.value === "167245") {
+                    //     verificationOutcome1.value = "167246";
+                    // }
+
+                    // Check fields after possible modification of outcome
+                    checkField(verificationStatus1, verificationStatus1Required, "");
+                    // checkField(verificationOutcome1, verificationOutcome1Required, "");
+                }
+            }
+
+            // Initial check
+            checkVerificationStatus1();
+
+            // Add 'change' events for verificationStatus1, verificationOutcome1, and attemptedContactDate1
+            $(verificationStatus1).on('change', checkVerificationStatus1);
+            // $(verificationOutcome1).on('change', checkVerificationStatus1);
+            $(attemptedContactDate1).on('change', checkVerificationStatus1);
+
+
+            // a. 2nd/other Attempted contact, based on the Date of Client tracking.
+
+            // variables for the 1st attempt row
+            const attemptedContactDate2 = $('#attemptedContactDate2');
+            const attemptedContactDate2Input = attemptedContactDate2.find('input')[0];
+
+            const verificationStatus2 = $('#verificationStatus2').find('select')[0];
+            // const verificationOutcome2 = $('#verificationOutcome2').find('select')[0];
+
+            // Disable the select elements
+            $(verificationStatus2).prop('disabled', true);
+            // $(verificationOutcome2).prop('disabled', true);
+
+            const verificationStatus2Required = $('#verificationStatus2Required');
+            // const verificationOutcome2Required = $('#verificationOutcome2Required');
+
+            // Function to check a field and update UI accordingly
+            function checkField(field, requiredElement, valueCheck) {
+                if (field.value === valueCheck) {
+                    console.log(`${field.id} value is empty, button should disappear`);
+
+                    submitButton.hide();
+                    requiredTextWarning.removeClass('d-none');
+                    requiredElement.removeClass('d-none');
+                    $(field).addClass('empty-value');
+                } else {
+                    console.log(`${field.id} value is inputted, button should appear`);
+
+                    submitButton.show();
+                    requiredTextWarning.addClass('d-none');
+                    requiredElement.addClass('d-none');
+                    $(field).removeClass('empty-value');
+                }
+            }
+
+            // Function to check verificationStatus2 and set outcome to "" if status is empty
+            function checkVerificationStatus2() {
+                if (attemptedContactDate2Input.value !== "") {
+                    // Enable the select elements when date is entered
+                    $(verificationStatus2).prop('disabled', false);
+                    // $(verificationOutcome2).prop('disabled', false);
+
+                    // if (verificationStatus2.value === "") {
+                    //     // If status is empty, set outcome to ""
+                    //     verificationOutcome2.value = "";
+                    // }
+
+                    // // if status is ongoing, set outcome to valid
+                    // if (verificationStatus2.value === "167243") {
+                    //     verificationOutcome2.value = "167246";
+                    // }
+
+                    // // if status is discontinued and archieved, set outcome to invalid
+                    // if (verificationStatus2.value === "167244") {
+                    //     verificationOutcome2.value = "163611";
+                    // }
+
+                    // // if status is Records verified, set outcome to valid
+                    // if (verificationStatus2.value === "167245") {
+                    //     verificationOutcome2.value = "167246";
+                    // }
+
+                    // Check fields after possible modification of outcome
+                    checkField(verificationStatus2, verificationStatus2Required, "");
+                    // checkField(verificationOutcome2, verificationOutcome2Required, "");
+                }
+            }
+
+            // Initial check
+            checkVerificationStatus2();
+
+            // Add 'change' events for verificationStatus2, verificationOutcome2, and attemptedContactDate2
+            $(verificationStatus2).on('change', checkVerificationStatus2);
+            // $(verificationOutcome2).on('change', checkVerificationStatus2);
+            $(attemptedContactDate2).on('change', checkVerificationStatus2);
+
+
+            // a. 3rd/last Attempted contact, based on the Date of Client tracking.
+
+            // variables for the 1st attempt row
+            const attemptedContactDate3 = $('#attemptedContactDate3');
+            const attemptedContactDate3Input = attemptedContactDate3.find('input')[0];
+
+            const verificationStatus3 = $('#verificationStatus3').find('select')[0];
+            // const verificationOutcome3 = $('#verificationOutcome3').find('select')[0];
+
+            // Disable the select elements
+            $(verificationStatus3).prop('disabled', true);
+            // $(verificationOutcome3).prop('disabled', true);
+
+            const verificationStatus3Required = $('#verificationStatus3Required');
+            // const verificationOutcome3Required = $('#verificationOutcome3Required');
+
+            // Function to check a field and update UI accordingly
+            function checkField(field, requiredElement, valueCheck) {
+                if (field.value === valueCheck) {
+                    console.log(`${field.id} value is empty, button should disappear`);
+
+                    submitButton.hide();
+                    requiredTextWarning.removeClass('d-none');
+                    requiredElement.removeClass('d-none');
+                    $(field).addClass('empty-value');
+                } else {
+                    console.log(`${field.id} value is inputted, button should appear`);
+
+                    submitButton.show();
+                    requiredTextWarning.addClass('d-none');
+                    requiredElement.addClass('d-none');
+                    $(field).removeClass('empty-value');
+                }
+            }
+
+            // Function to check verificationStatus3 and set outcome to "" if status is empty
+            function checkVerificationStatus3() {
+                if (attemptedContactDate3Input.value !== "") {
+                    // Enable the select elements when date is entered
+                    $(verificationStatus3).prop('disabled', false);
+                    // $(verificationOutcome3).prop('disabled', false);
+
+                    // if (verificationStatus3.value === "") {
+                    //     // If status is empty, set outcome to ""
+                    //     verificationOutcome3.value = "";
+                    // }
+
+                    // // if status is ongoing, set outcome to valid
+                    // if (verificationStatus3.value === "167243") {
+                    //     verificationOutcome3.value = "167246";
+                    // }
+
+                    // // if status is discontinued and archieved, set outcome to invalid
+                    // if (verificationStatus3.value === "167244") {
+                    //     verificationOutcome3.value = "163611";
+                    // }
+
+                    // // if status is Records verified, set outcome to valid
+                    // if (verificationStatus3.value === "167245") {
+                    //     verificationOutcome3.value = "167246";
+                    // }
+
+                    // Check fields after possible modification of outcome
+                    checkField(verificationStatus3, verificationStatus3Required, "");
+                    // checkField(verificationOutcome3, verificationOutcome3Required, "");
+                }
+            }
+
+            // Initial check
+            checkVerificationStatus3();
+
+            // Add 'change' events for verificationStatus3, verificationOutcome3, and attemptedContactDate3
+            $(verificationStatus3).on('change', checkVerificationStatus3);
+            // $(verificationOutcome3).on('change', checkVerificationStatus3);
+            $(attemptedContactDate3).on('change', checkVerificationStatus3);
 
         });
     </script>
@@ -285,9 +529,9 @@
                 <td class="">
                     <table>
                         <tr>
-                            <td>Consistently had drug pickup by proxy without viral load sample  collection for two quarters</td>
+                            <td>No initial fingerprint was captured</td>
                             <td>
-                                <obs id="pickup_noVL" conceptId="167222" answerConceptId="167223" answerLabel="" />
+                                <obs id="batched_ARTpickup" conceptId="167222" answerConceptId="167229" answerLabel="" />
                             </td>
                         </tr>
                         <tr>
@@ -297,38 +541,15 @@
                             </td>
                         </tr>
                         <tr>
-                            <td>No biometrics recapture</td>
-                            <td>
-                                <obs id="no_pbs" conceptId="167222" answerConceptId="167225" answerLabel="" />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Batched ARV pickup dates</td>
-                            <td>
-                                <obs id="batched_ARV" conceptId="167222" answerConceptId="167226" answerLabel="" />
-                            </td>
-                        </tr>
-                        <tr>
                             <td>Last clinical visit is over 15 months prior</td>
                             <td>
                                 <obs id="visit_over18" conceptId="167222" answerConceptId="167227" answerLabel="" />
                             </td>
                         </tr>
                         <tr>
-                            <td>Batched ART start and pickup dates</td>
+                            <td>Same sex, DOB and ART start date</td>
                             <td>
-                                <obs id="batched_ARTpickup" conceptId="167222" answerConceptId="167228" answerLabel="" />
-                            </td>
-                        </tr>
-                    </table>
-                </td>
-
-                <td class="">
-                    <table>
-                        <tr>
-                            <td>No initial biometric capture</td>
-                            <td>
-                                <obs id="batched_ARTpickup" conceptId="167222" answerConceptId="167229" answerLabel="" />
+                                <obs id="batched_ARV" conceptId="167222" answerConceptId="167235" answerLabel="" />
                             </td>
                         </tr>
                         <tr>
@@ -339,6 +560,17 @@
                                 <obs id="pickup_noVL" conceptId="167222" answerConceptId="167232" answerLabel="" />
                             </td>
                         </tr>
+                        <tr>
+                            <td>Batched ARV pickup dates</td>
+                            <td>
+                                <obs id="batched_ARV" conceptId="167222" answerConceptId="167226" answerLabel="" />
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+
+                <td class="">
+                    <table>
                         <tr>
                             <td>
                                 Records of repeated clinical encounters, with no fingerprint recapture.
@@ -356,9 +588,15 @@
                             </td>
                         </tr>
                         <tr>
-                            <td>Same sex, DOB and ART start date</td>
+                            <td>Records with same services e.g ART start date and at least 3 consecutive last ART pickup dates,  VL result etc)</td>
                             <td>
-                                <obs id="batched_ARV" conceptId="167222" answerConceptId="167235" answerLabel="" />
+                                <obs id="batched_ARTpickup" conceptId="167222" answerConceptId="167228" answerLabel="" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Consistently had drug pickup by proxy without viral load sample collection for two quarters</td>
+                            <td>
+                                <obs id="pickup_noVL" conceptId="167222" answerConceptId="167223" answerLabel="" />
                             </td>
                         </tr>
                         <tr>
@@ -382,7 +620,7 @@
                         <td class="alnleft_s">Date of Client tracking</td>
                         <td class="" style="width: 40%;">Verification Attempts (you can select multiple triggers)</td>
                         <td class="alnleft_s">Verification Status</td>
-                        <td class="" style="width: 5px;">Outcome</td>
+                        <!-- <td class="" style="width: 5px;">Outcome</td> -->
                         <td class="w-100">Comments (Provide reason for records discontinuation)</td>
                     </tr>
 
@@ -396,7 +634,7 @@
                             </td>
 
                             <!-- Verification Attempts -->
-                            <td id="verificationAttempts1" style="width: 40%;" class="p-0 m-0">
+                            <td id="verificationAttempts1" style="width: 35%;" class="p-0 m-0">
                                 <!-- <obs conceptId="167240"> -->
                                 <obs class="d-block m-0" id="attemptsA" conceptId="167240" answerConceptId="167249" answerLabel="Physical document audited-folder/document review" type="checkbox" name="verificationAttempt" />
                                 <obs class="d-block m-0" id="attemptsB" conceptId="167240" answerConceptId="167251" answerLabel="Client contacted" type="checkbox" name="verificationAttempt" />
@@ -409,14 +647,17 @@
                             <!-- Verification Status -->
                             <td id="verificationStatus1" class="alnleft_s">
                                 <obs conceptId="167239" answerConceptIds="167243,167244,167245" answerLabels="Verification ongoing, Records discontinued and archieved, Records verified" />
+                                <span id="verificationStatus1Required" class="d-none text-danger">*</span>
                             </td>
                             <!-- Outcome -->
-                            <td id="verificationOutcome1" class="" style="width: 5px;">
-                                <obs conceptId="167238" readonly="true" answerConceptIds="167246,163611" answerLabels="Valid, Invalid" />
-                            </td>
+                            <!-- <td id="verificationOutcome1" class="" style="width: 10px;">
+                                <obs conceptId="167238" answerConceptIds="167246,163611" answerLabels="Valid, Invalid" />
+                                <span id="verificationOutcome1Required" class="d-none text-danger">*</span>
+                            </td> -->
                             <!-- Comments -->
                             <td id="verificationComments1" class="w-100 comments">
-                                <textarea class="w-100" conceptId="167237" cols="30" rows="5"> </textarea>
+                                <!-- <textarea class="w-100" conceptId="167237" cols="30" rows="5"> </textarea> -->
+                                <obs id="verificationCommentsStyle" conceptId="167237" />
                             </td>
                         </obsgroup>
                     </tr>
@@ -431,7 +672,7 @@
                             </td>
 
                             <!-- Verification Attempts -->
-                            <td id="verificationAttempts2" style="width: 40%;" class="p-0 m-0">
+                            <td id="verificationAttempts2" style="width: 35%;" class="p-0 m-0">
                                 <!-- <obs conceptId="167240"> -->
                                 <obs class="d-block m-0" id="attemptsA" conceptId="167240" answerConceptId="167249" answerLabel="Physical document audited-folder/document review" type="checkbox" name="verificationAttempt" />
                                 <obs class="d-block m-0" id="attemptsB" conceptId="167240" answerConceptId="167251" answerLabel="Client contacted" type="checkbox" name="verificationAttempt" />
@@ -444,14 +685,18 @@
                             <!-- Verification Status -->
                             <td id="verificationStatus2" class="alnleft_s">
                                 <obs conceptId="167239" answerConceptIds="167243,167244,167245" answerLabels="Verification ongoing, Records discontinued and archieved, Records verified" />
+                                <span id="verificationStatus2Required" class="d-none text-danger">*</span>
                             </td>
                             <!-- Outcome -->
-                            <td id="verificationOutcome2" class="" style="width: 5px;">
+                            <!-- <td id="verificationOutcome2" class="" style="width: 10px;">
                                 <obs conceptId="167238" readonly="true" answerConceptIds="167246,163611" answerLabels="Valid, Invalid" />
-                            </td>
+                                <span id="verificationOutcome2Required" class="d-none text-danger">*</span>
+                            </td> -->
                             <!-- Comments -->
                             <td id="verificationComments2" class="w-100">
-                                <textarea class="w-100" conceptId="167237" cols="30" rows="5"> </textarea>
+                                <!-- <textarea class="w-100" conceptId="167237" cols="30" rows="5"> </textarea> -->
+                                <obs id="verificationCommentsStyle" conceptId="167237" />
+
                             </td>
                         </obsgroup>
                     </tr>
@@ -468,7 +713,7 @@
                             </td>
 
                             <!-- Verification Attempts -->
-                            <td id="verificationAttempts3" style="width: 40%;" class="p-0 m-0">
+                            <td id="verificationAttempts3" style="width: 35%;" class="p-0 m-0">
                                 <!-- <obs conceptId="167240"> -->
                                 <obs class="d-block m-0" id="attemptsA" conceptId="167240" answerConceptId="167249" answerLabel="Physical document audited-folder/document review" type="checkbox" name="verificationAttempt" />
                                 <obs class="d-block m-0" id="attemptsB" conceptId="167240" answerConceptId="167251" answerLabel="Client contacted" type="checkbox" name="verificationAttempt" />
@@ -481,14 +726,17 @@
                             <!-- Verification Status -->
                             <td id="verificationStatus3" class="alnleft_s">
                                 <obs conceptId="167239" answerConceptIds="167243,167244,167245" answerLabels="Verification ongoing, Records discontinued and archieved, Records verified" />
+                                <span id="verificationStatus3Required" class="d-none text-danger">*</span>
                             </td>
                             <!-- Outcome -->
-                            <td id="verificationOutcome3" class="" style="width: 5px;">
+                            <!-- <td id="verificationOutcome3" class="" style="width: 10px;">
                                 <obs conceptId="167238" readonly="true" answerConceptIds="167246,163611" answerLabels="Valid, Invalid" />
-                            </td>
+                                <span id="verificationOutcome3Required" class="d-none text-danger">*</span>
+                            </td> -->
                             <!-- Comments -->
                             <td id="verificationComments3" class="w-100">
-                                <textarea class="w-100" conceptId="167237" cols="30" rows="5"> </textarea>
+                                <!-- <textarea class="w-100" conceptId="167237" cols="30" rows="5"> </textarea> -->
+                                <obs id="verificationCommentsStyle" conceptId="167237" />
                             </td>
                         </obsgroup>
                     </tr>
@@ -936,11 +1184,11 @@
     <!-- Signature Fieldset -->
     <fieldset>
         <legend class="legend_style mb-0">Signature</legend>
-        <table width="100%" class="table table-bordered table-secondary">
+        <table width="100%" class="table table-bordered table-secondary mb-0">
             <tr>
                 <td class="alnleft">Name of Contact Tracker:</td>
                 <td>
-                    <obs conceptId="165459" />
+                    <obs conceptId="165459" class="w-100 fullWidth" />
                 </td>
 
                 <td class="alnleft">Date:</td>
@@ -958,6 +1206,7 @@
     </fieldset>
 
     <submit class="btn btn-success" />
+    <p id="requiredTextWarning" title="you cannot save this form because an input is required" class="d-none btn btn-danger w-100 text-center">Please review the form and complete the required fields.</p>
 
     <!-- custom JavaScript Code -->
     <script type="text/javascript">
@@ -1008,29 +1257,6 @@
             // Duration is 3 months or more
             durationOnArtElement.innerText = "3 months or more";
         }
-
-        // document.addEventListener('DOMContentLoaded', function () {
-        //     const attemptedContactDate1 = document.getElementById('attemptedContactDate1');
-        //     const elementsToShowHide = document.querySelectorAll('#verificationAttempts1, #verificationStatus1, #verificationOutcome1, #verificationComments1');
-
-        //     // Initially hide the elements
-        //     elementsToShowHide.forEach(function (element) {
-        //         element.style.display = 'none';
-        //     });
-
-        //     attemptedContactDate1.addEventListener("click", function () {
-        //         if (attemptedContactDate1.value) {
-        //             elementsToShowHide.forEach(function (element) {
-        //                 element.style.display = 'block';
-        //             });
-        //         } else {
-        //             elementsToShowHide.forEach(function (element) {
-        //                 element.style.display = 'none';
-        //             });
-        //         }
-        //     });
-        // });
-
     </script>
 
 </htmlform>
