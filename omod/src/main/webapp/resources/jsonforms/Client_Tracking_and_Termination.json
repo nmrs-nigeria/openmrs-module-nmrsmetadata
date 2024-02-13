@@ -4,7 +4,7 @@
   "processor":"EncounterFormProcessor",
   "pages":[
     {
-      "label":"Client Tracking and Termination",
+      "label":"Client Tracking and Discontinuation",
       "sections":[
         {
           "label":"Client Tracking and Termination Form",

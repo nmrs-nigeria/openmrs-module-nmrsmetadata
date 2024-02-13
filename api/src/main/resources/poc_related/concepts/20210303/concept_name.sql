@@ -1084,6 +1084,8 @@ REPLACE INTO `concept_name` (`concept_id`, `name`, `locale`, `creator`, `date_cr
 REPLACE INTO `concept_name` (`concept_id`, `name`, `locale`, `creator`, `date_created`, `concept_name_id`, `voided`, `voided_by`, `date_voided`, `void_reason`, `uuid`, `concept_name_type`, `locale_preferred`, `date_changed`, `changed_by`) VALUES (167229, 'No initial biometric capture', 'en', 1, '2023-12-08 12:07:40', 144080, 0, NULL, NULL, NULL, 'a3e71e0e-b584-4f5c-9ef0-6d7b61999c20', 'FULLY_SPECIFIED', 1, NULL, NULL);
 REPLACE INTO `concept_name` (`concept_id`, `name`, `locale`, `creator`, `date_created`, `concept_name_id`, `voided`, `voided_by`, `date_voided`, `void_reason`, `uuid`, `concept_name_type`, `locale_preferred`, `date_changed`, `changed_by`) VALUES (167230, 'Duplicate record', 'en', 1, '2023-12-08 12:08:27', 144081, 0, NULL, NULL, NULL, '8843bfc0-d37b-475c-80fe-0cec23042ad5', 'FULLY_SPECIFIED', 1, NULL, NULL);
 REPLACE INTO `concept_name` (`concept_id`, `name`, `locale`, `creator`, `date_created`, `concept_name_id`, `voided`, `voided_by`, `date_voided`, `void_reason`, `uuid`, `concept_name_type`, `locale_preferred`, `date_changed`, `changed_by`) VALUES (167231, 'Could not verify client', 'en', 1, '2023-12-08 12:08:56', 144082, 0, NULL, NULL, NULL, 'aaabb591-b783-43f5-922b-2a2c7015b32e', 'FULLY_SPECIFIED', 1, NULL, NULL);
+
+
 REPLACE INTO `concept_name` (`concept_id`, `name`, `locale`, `creator`, `date_created`, `concept_name_id`, `voided`, `voided_by`, `date_voided`, `void_reason`, `uuid`, `concept_name_type`, `locale_preferred`, `date_changed`, `changed_by`) VALUES (167232, 'Incomplete visit data', 'en', 1, '2024-01-22 15:37:48', 144083, 0, NULL, NULL, NULL, 'da2e94d4-27f9-45c3-9431-d7b7e433b514', 'FULLY_SPECIFIED', 1, NULL, NULL);
 REPLACE INTO `concept_name` (`concept_id`, `name`, `locale`, `creator`, `date_created`, `concept_name_id`, `voided`, `voided_by`, `date_voided`, `void_reason`, `uuid`, `concept_name_type`, `locale_preferred`, `date_changed`, `changed_by`) VALUES (167233, 'Records of repeated clinical encounters with no fingerprint recapture', 'en', 1, '2024-01-22 15:43:20', 144084, 0, NULL, NULL, NULL, '6a875d84-ab16-47ff-a499-85207c74821b', 'FULLY_SPECIFIED', 1, NULL, NULL);
 REPLACE INTO `concept_name` (`concept_id`, `name`, `locale`, `creator`, `date_created`, `concept_name_id`, `voided`, `voided_by`, `date_voided`, `void_reason`, `uuid`, `concept_name_type`, `locale_preferred`, `date_changed`, `changed_by`) VALUES (167234, 'Long intervals between ARV pick-ups (pick-ups more than one year apart in the same facility)', 'en', 1, '2024-01-22 15:44:18', 144085, 0, NULL, NULL, NULL, 'eb2aa394-f6d1-444c-bd6e-589a429ab047', 'FULLY_SPECIFIED', 1, NULL, NULL);
@@ -1104,63 +1106,6 @@ REPLACE INTO `concept_name` (`concept_id`, `name`, `locale`, `creator`, `date_cr
 REPLACE INTO `concept_name` (`concept_id`, `name`, `locale`, `creator`, `date_created`, `concept_name_id`, `voided`, `voided_by`, `date_voided`, `void_reason`, `uuid`, `concept_name_type`, `locale_preferred`, `date_changed`, `changed_by`) VALUES (167249, 'Physical document audited-folder register review', 'en', 1, '2024-01-22 16:21:09', 144100, 0, NULL, NULL, NULL, '63fb39bf-537e-4581-8a84-1936ad5d8ad2', 'FULLY_SPECIFIED', 1, NULL, NULL);
 REPLACE INTO `concept_name` (`concept_id`, `name`, `locale`, `creator`, `date_created`, `concept_name_id`, `voided`, `voided_by`, `date_voided`, `void_reason`, `uuid`, `concept_name_type`, `locale_preferred`, `date_changed`, `changed_by`) VALUES (167250, 'Facility Visit', 'en', 1, '2024-01-22 16:21:44', 144101, 0, NULL, NULL, NULL, 'de420d02-571e-4ab8-aa30-048acbc5762c', 'FULLY_SPECIFIED', 1, NULL, NULL);
 REPLACE INTO `concept_name` (`concept_id`, `name`, `locale`, `creator`, `date_created`, `concept_name_id`, `voided`, `voided_by`, `date_voided`, `void_reason`, `uuid`, `concept_name_type`, `locale_preferred`, `date_changed`, `changed_by`) VALUES (167251, 'Client contacted', 'en', 1, '2024-01-22 16:22:17', 144102, 0, NULL, NULL, NULL, 'ebae3009-600f-4999-98a1-d13f28b6946c', 'FULLY_SPECIFIED', 1, NULL, NULL);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 REPLACE INTO `concept_name` (`concept_id`, `name`, `locale`, `creator`, `date_created`, `concept_name_id`, `voided`, `voided_by`, `date_voided`, `void_reason`, `uuid`, `concept_name_type`, `locale_preferred`) VALUES (166799, 'Day\'s', 'en', 1, '2022-01-11 11:41:37', 143650, 0, NULL, NULL, NULL, '5dac12a8-c9da-48ff-9f8b-34ad023f4388', 'FULLY_SPECIFIED', 1);
