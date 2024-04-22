@@ -48,10 +48,25 @@
         {
             $('.hasDatepicker').attr('readonly', true)
         });
+
+        function checkARTStartDate() {
+                var artStartDate = document.getElementById("ARTStartDateLookup").innerText.trim();
+                if (artStartDate === "") {
+                    alert("clients without an ART start date cannot be enrolled into OTZ.");
+                    window.history.back();
+                }
+            }
+            document.addEventListener("DOMContentLoaded", function () {
+                checkARTStartDate();
+            });
     </script>
 
     <span style="float:right">Paper Form ID: $paperFormId</span>
     <h2>Operation Triple Zero (OTZ) Service (v1.0)</h2>
+    <!-- <lookup complexExpression="#set ($checkdate = 0) #set( $checkdate = $fn.latestEncounter('11eb2647-91b4-482a-9cb3-08573e0d219b').encounterDatetime)"/> -->
+    <span id="malecheck" style="display: none" ><lookup expression="patient.gender" codePrefix="gender_"/></span>
+
+    <!-- <includeIf velocityTest="$checkdate != 0 "> -->
     <section headerLabel="Clinical Summary">
 
         <table id="dashboard" cellspacing="10" cellpadding="5" align="center">
@@ -64,11 +79,15 @@
                 copies/ml <lookup expression="fn.latestObs('856').obsDatetime"/></td><td><b>Current Regimen:</b>
                 <font color='blue' style="font-weight: bold"><lookup expression="fn.latestObs('164506').valueCoded.name"/></font> <lookup expression="fn.latestObs('164506').obsDatetime"/>
             </td><td><b>ART Start Date:</b>
-                <font color='blue' style="font-weight: bold"><lookup expression="fn.latestObs(159599).getValueDatetime()"/></font></td></tr>
-            <tr><td></td><td></td></tr>
+                <font color='blue' id="ARTStartDateLookup" style="font-weight: bold"><lookup expression="fn.latestObs(159599).getValueDatetime()"/></font></td></tr>
+            <tr><td></td><td>
+            </td></tr>
+
         </table>
 
     </section>
+
+
     <section headerLabel="1. Encounter Details">
         <table>
             <tr>
@@ -84,17 +103,21 @@
         <table class="" style="padding: 10px;">
 
             <tbody>
+
             <tr>
                 <td width="30%">
                     Date Enrolled into OTZ: <encounterDate default="today"/>
                     <enrollInProgram programId="5" showDate="false" />
                 </td>
-                <td width="30%">
-                    <!--<obs conceptId="166269" style="checkbox"/> -->
-                    <obs conceptId="166269" answerConceptId="1065" answerLabel="OTZ Plus?" style="checkbox" toggle="specifyOther" />
-                </td>
-                <td width="40%"  id="specifyOther">Date Enrolled into OTZ Plus: <obs conceptId="166350" allowFutureDates="False" /></td>
+                <includeIf velocityTest="$patient.gender == 'F' ">
+                    <td width="30%">
+                        <!--<obs conceptId="166269" style="checkbox"/> -->
+                        <obs conceptId="166269" answerConceptId="1065" answerLabel="OTZ Plus?" style="checkbox" toggle="specifyOther" />
+                    </td>
+                    <td width="40%"  id="specifyOther">Date Enrolled into OTZ Plus: <obs conceptId="166350" allowFutureDates="False" id="otzplus"/></td>
+                </includeIf>
             </tr>
+
             <tr>
                 <td width="50%"><obs conceptId="166270" answerConceptId="1065" style="checkbox" answerLabel="Full Disclosure?" toggle="specifydisclosureDate"/></td>
                 <td width="50%" id="specifydisclosureDate">
@@ -130,7 +153,7 @@
             </tr>
             <tr>
                 <td><obs conceptId="166258" style="checkbox" answerConceptId="1065" answerLabel="Adolescents Participation" id="adoPart" toggle="adoPartDate"/></td>
-                <td><span id="adoPartDate">Adolescents Participation Completion Date: <obs id="adoPartDat" conceptId="166263" allowFutureDates="false" /></span></td>
+                <td><span id="adoPartDate">Adolescents Participation Completion Date: <obs id="adoPartDat" conceptId="166263"  /></span></td>
             </tr>
             <tr>
                 <td><obs conceptId="166259" style="checkbox" answerConceptId="1065" answerLabel="Leadership Training" id="leadTrain" toggle="leadTrainDate"/></td>
@@ -152,6 +175,8 @@
         </table>
     </section>
     <section>
+
+
         <table class="" style="padding: 10px;">
             <tr>
                 <td width="50%">
@@ -227,9 +252,16 @@
         </table>
     </section>
     <submit/>
-
+    <!-- </includeIf> -->
+    <!-- <includeIf velocityTest="$checkdate == 0 ">
+        <b><font color='#8b0000' style="font-weight: bold; font-size:25px; padding: 35px 0px">
+            This client needs to be enrolled on ART for this form to be active</font></b>
+    </includeIf> -->
     <script type="text/javascript">
+
         beforeSubmit.push(function() {
+            var val_encounterDate = getValue('encounterDate.value');
+            var val_otzplus = getValue('otzplus.value');
             var val_posLiving = getValue('posLiving.value');
             var val_posLivingDate = getValue('posLivingDat.value');
             var val_treatLit = getValue('treatLit.value');
@@ -242,89 +274,212 @@
             var val_peerMentorDate = getValue('peerMentorDat.value');
             var val_role95 = getValue('role95.value');
             var val_role95Date = getValue('role95Dat.value');
-            if (val_posLiving) {
-                if(val_posLivingDate === "") {
-                    getField('posLivingDat.error').html('Module/Activity end date required').show();
-                    getField('posLiving.error').html('').hide();
+            var val_orientationDate = getValue('orientationDat.value');
+            var malecheck = document.getElementById("malecheck").innerText;
+
+            if (malecheck != "M") {
+            if(val_otzplus){
+
+            console.log('val_otzplus');
+                if ((val_otzplus &lt; val_encounterDate) || (val_otzplus == val_encounterDate)) {
+                    console.log('heck1val_otzplus');
+                    getField('otzplus.error').html('Date Enrolled into OTZ Plus cannot be earlier than or same as OTZ Enrolment date').show();
                     return false;
+                    }
                 }
-            } else if (!val_posLiving) {
-                if(val_posLivingDate !== "") {
-                    getField('posLiving.error').html('Module/Activity must be selected').show();
-                    getField('posLivingDat.error').html('').hide();
-                    return false;
-                }
+
             }
 
-            if (val_treatLit) {
-                if(val_treatLitDate === "") {
-                    getField('treatLitDat.error').html('Module/Activity end date required').show();
-                    getField('treatLit.error').html('').hide();
-                    return false;
-                }
-            } else if (!val_treatLit) {
-                if(val_treatLitDate !== "") {
-                    getField('treatLit.error').html('Module/Activity must be selected').show();
-                    getField('treatLitDat.error').html('').hide();
-                    return false;
-                }
-            }
+                    if (val_posLiving) {
 
-            if (val_adoPart) {
-                if(val_adoPartDate === "") {
-                    getField('adoPartDat.error').html('Module/Activity end date required').show();
-                    getField('adoPart.error').html('').hide();
-                    return false;
-                }
-            } else if (!val_adoPart) {
-                if(val_adoPartDate !== "") {
-                    getField('adoPart.error').html('Module/Activity must be selected').show();
-                    getField('adoPartDat.error').html('').hide();
-                    return false;
-                }
-            }
+                    console.log('val_posLiving');
+                        if(val_posLivingDate === "") {
+                            console.log('val_posLivingDate');
+                            getField('posLivingDat.error').html('Module/Activity end date required').show();
+                            getField('posLiving.error').html('').hide();
+                            return false;
+                        }
 
-            if (val_leadTrain) {
-                if(val_leadTrainDate === "") {
-                    getField('leadTrainDat.error').html('Module/Activity end date required').show();
-                    getField('leadTrain.error').html('').hide();
-                    return false;
-                }
-            } else if (!val_leadTrain) {
-                if(val_leadTrainDate !== "") {
-                    getField('leadTrain.error').html('Module/Activity must be selected').show();
-                    getField('leadTrainDat.error').html('').hide();
-                    return false;
-                }
-            }
+                    if ((val_posLivingDate &lt; val_encounterDate) || (val_posLivingDate == val_encounterDate)){
 
-            if (val_peerMentor) {
-                if(val_peerMentorDate === "") {
-                    getField('peerMentorDat.error').html('Module/Activity end date required').show();
-                    getField('peerMentor.error').html('').hide();
-                    return false;
-                }
-            } else if (!val_peerMentor) {
-                if(val_peerMentorDate !== "") {
-                    getField('peerMentor.error').html('Module/Activity must be selected').show();
-                    getField('peerMentorDat.error').html('').hide();
-                    return false;
-                }
-            }
+                    console.log('check1val_posLivingDate');
+                        getField('posLivingDat.error').html('Positive Living Completion Date cannot be earlier than or same as OTZ  Enrolment date').show();
+                        getField('posLiving.error').html('').hide();
+                        return false;
+                        }
 
-            if (val_role95) {
-                if(val_role95Date === "") {
-                    getField('role95Dat.error').html('Module/Activity end date required').show();
-                    getField('role95.error').html('').hide();
-                    return false;
-                }
-            } else if (!val_role95) {
-                if(val_role95Date !== "") {
-                    getField('role95.error').html('Module/Activity must be selected').show();
-                    getField('role95Dat.error').html('').hide();
-                    return false;
-                }
-            }
+                    } else if (!val_posLiving) {
+
+                    console.log('elseval_posLiving');
+                        if(val_posLivingDate !== "") {
+
+                    console.log('elseval_posLivingDate1');
+                            getField('posLiving.error').html('Module/Activity must be selected').show();
+                            getField('posLivingDat.error').html('').hide();
+                            console.log('elseval_posLivingDate2');
+                            return false;
+                            console.log('elseval_posLivingDate3');
+                        }
+                        console.log('elseval_posLivingDate4');
+                    }
+
+                    if (val_treatLit) {
+
+                    console.log('val_treatLit');
+                        if(val_treatLitDate === "") {
+
+                    console.log('val_treatLitDate');
+                            getField('treatLitDat.error').html('Module/Activity end date required').show();
+                            getField('treatLit.error').html('').hide();
+                            return false;
+                        }
+
+                    if ((val_treatLitDate &lt; val_encounterDate) || (val_treatLitDate == val_encounterDate)){
+
+                    console.log('check1val_treatLitDate');
+                        getField('treatLitDat.error').html('Treatment Literacy Completion Date cannot be earlier than or same as OTZ Enrolment date').show();
+                        getField('treatLit.error').html('').hide();
+                        return false;
+                        }
+
+                    } else if (!val_treatLit) {
+
+                    console.log('elseval_treatLit');
+                        if(val_treatLitDate !== "") {
+
+                    console.log('elseval_treatLitDate');
+                            getField('treatLit.error').html('Module/Activity must be selected').show();
+                            getField('treatLitDat.error').html('').hide();
+                            return false;
+                        }
+                    }
+
+                    if (val_adoPart) {
+
+                    console.log('val_adoPart');
+                        if(val_adoPartDate === "") {
+
+                    console.log('val_adoPartDate');
+                            getField('adoPartDat.error').html('Module/Activity end date required').show();
+                            getField('adoPart.error').html('').hide();
+                            return false;
+                        }
+
+                    if ((val_adoPartDate &lt; val_encounterDate) || (val_adoPartDate == val_encounterDate)){
+
+                    console.log('check1val_adoPartDate');
+                        getField('adoPartDat.error').html('Adolescents Participation Completion Date cannot be earlier than or same as OTZ Enrolment date').show();
+                        getField('adoPart.error').html('').hide();
+                        return false;
+                        }
+
+                    } else if (!val_adoPart) {
+                    console.log('elseval_adoPart');
+                        if(val_adoPartDate !== "") {
+                    console.log('elseval_adoPartDate');
+                            getField('adoPart.error').html('Module/Activity must be selected').show();
+                            getField('adoPartDat.error').html('').hide();
+                            return false;
+                        }
+                    }
+
+
+                    if (val_leadTrain) {
+                    console.log('val_leadTrain');
+                        if(val_leadTrainDate === "") {
+                    console.log('val_leadTrainDate');
+                            getField('leadTrainDat.error').html('Module/Activity end date required').show();
+                            getField('leadTrain.error').html('').hide();
+                            return false;
+                        }
+
+                        if ((val_leadTrainDate &lt; val_encounterDate) || (val_leadTrainDate == val_encounterDate)){
+                        console.log('check1val_leadTrainDate');
+                        getField('leadTrainDat.error').html('Leadership Training Completed Date cannot be earlier than or same as OTZ Enrolment date').show();
+                        getField('leadTrain.error').html('').hide();
+                        return false;
+                        }
+
+
+                    } else if (!val_leadTrain) {
+
+                    console.log('elseval_leadTrain');
+                        if(val_leadTrainDate !== "") {
+                    console.log('elseval_leadTrainDate');
+                            getField('leadTrain.error').html('Module/Activity must be selected').show();
+                            getField('leadTrainDat.error').html('').hide();
+                            return false;
+                        }
+                    }
+
+
+
+                    if (val_peerMentor) {
+                    console.log('val_peerMentor');
+                        if(val_peerMentorDate === "") {
+                    console.log('val_peerMentorDate');
+                            getField('peerMentorDat.error').html('Module/Activity end date required').show();
+                            getField('peerMentor.error').html('').hide();
+                            return false;
+                        }
+                        if ((val_peerMentorDate &lt; val_encounterDate) || (val_peerMentorDate == val_encounterDate)){
+
+                    console.log('check1val_peerMentorDate');
+                            getField('peerMentorDat.error').html('Peer-to-Peer Mentorship Completed Date cannot be earlier than or same as OTZ Enrolment date').show();
+                        getField('peerMentor.error').html('').hide();
+                        return false;
+                        }
+
+                    } else if (!val_peerMentor) {
+                    console.log('elseval_peerMentor');
+                        if(val_peerMentorDate !== "") {
+                    console.log('elseval_peerMentorDate');
+                            getField('peerMentor.error').html('Module/Activity must be selected').show();
+                            getField('peerMentorDat.error').html('').hide();
+                            return false;
+                        }
+                    }
+
+                    if (val_role95) {
+                    console.log('val_role95');
+                        if(val_role95Date === "") {
+                    console.log('val_role95Date');
+                            getField('role95Dat.error').html('Module/Activity end date required').show();
+                            getField('role95.error').html('').hide();
+                            return false;
+                        }
+
+                    if ((val_role95Date &lt; val_encounterDate) || (val_role95Date == val_encounterDate)){
+
+                    console.log('check1val_role95Date');
+                        getField('role95Dat.error').html('Role of OTZ in 95-95-95 Completed Date cannot be earlier than or same as OTZ Enrolment date').show();
+                        getField('role95.error').html('').hide();
+                        return false;
+                        }
+
+                    } else if (!val_role95) {
+                    console.log('elseval_role95');
+                        if(val_role95Date !== "") {
+                    console.log('elseval_role95Date');
+                            getField('role95.error').html('Module/Activity must be selected').show();
+                            getField('role95Dat.error').html('').hide();
+                            return false;
+                        }
+                    }
+
+                    if(val_orientationDate){
+
+                    console.log('orientationDate');
+                    if ((val_orientationDate &lt; val_encounterDate) || (val_orientationDate == val_encounterDate)){
+
+                    console.log('orientationDat');
+                        getField('orientationDat.error').html('OTZ Champion Orientation Completed Date cannot be earlier than or same as OTZ Enrolment date').show();
+                        getField('role95Dat.error').html('').hide();
+                        return false;
+                        }
+                    }
+
+
 
             return true;
         });
