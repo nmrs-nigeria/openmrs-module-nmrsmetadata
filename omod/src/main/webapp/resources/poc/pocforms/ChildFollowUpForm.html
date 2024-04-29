@@ -273,12 +273,17 @@
                     <obs conceptId="165243" id="BMIorMUAC" />
                 </td>
                 <td class="alnright_s">Child's Name:</td>
-                <td class="alnleft_s"><obs conceptId="1586" id="childsName" /></td>
+                <td class="alnleft_s"><obs conceptId="1586" id="childsName" required="true"/></td>
                 <td class="alnright_s">Child's Surname:</td>
-                <td class="alnleft_s"><obs conceptId="166432" id="childsSurname" /></td>
+                <td class="alnleft_s"><obs conceptId="166432" id="childsSurname" required="true"/></td>
             </tr>
 
             <tr>
+            	<td class="alnright_s">Childs Date of Birth</td>
+                <td class="alnleft_s">
+                    <obs conceptId="166433" showTime="false" allowFutureDates="false" required="true"/>
+                </td>            
+            
              	<td class="alnright_s">Feeding method</td>
                 <td class="alnleft_s">
                     <obs conceptId="1151" answerConceptIds="5254,6046,5526"
