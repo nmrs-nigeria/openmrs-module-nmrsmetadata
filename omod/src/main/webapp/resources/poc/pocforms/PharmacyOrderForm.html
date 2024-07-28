@@ -55,6 +55,7 @@
             min-width: 98%;
             border: none;
             border-top: 1px solid #305a72;
+            margin-bottom: 30px;
         }
 
         table th,
@@ -86,15 +87,15 @@
         }
 
         span.unit_grid select {
-            min-width: 50px !important;
+            /* min-width: 50px !important; */
         }
 
         span.frequency_grid select {
-            min-width: 50px !important;
+            /* min-width: 50px !important; */
         }
 
         span.calcNxtAppDate input {
-            min-width: 200px !important;
+            /* min-width: 200px !important; */
         }
 
         .error {
@@ -106,6 +107,27 @@
             color: #363463;
             font-size: 14px;
         }
+
+        .border{
+            border: 1px solid #000000 !important;
+        }
+
+        .hasDatepicker{
+            width: 100%;
+        }
+
+        form input, form select, form textarea, form ul.select, .form input, .form select, .form textarea, .form ul.select {
+            min-width: 100%;
+            color: #000000;
+            display: block;
+            padding: 5px 10px;
+            margin: 0;
+            margin-top: 5px;
+            background-color: #fff;
+            border: 1px solid #dddddd;
+        }
+
+
     </style>
 
 
@@ -580,6 +602,45 @@
 
     </script>
 
+    <script>
+        $(document).ready(function () {
+
+            const birthdateString = $('.birthdate').text().trim();
+            const birthdate = new Date(birthdateString);
+
+            const today = new Date();
+            const timeDiff = today.getTime() - birthdate.getTime();
+
+            const ageInYears = Math.floor(timeDiff / (1000 * 60 * 60 * 24 * 365.25));
+
+            console.log("Age:", ageInYears);
+            $('#age-display').text("Age: " + ageInYears);
+
+            const pharmacyWeight = document.getElementById("pharmacy-weight").innerText;
+
+            console.log(pharmacyWeight);
+            console.log(ageInYears);
+
+            if (Number(pharmacyWeight) &lt; 30 &amp;&amp; ageInYears &lt; 15) {
+                $('#Ped1stLine select option[value="165681"]').hide();
+            }
+
+
+            const reproductiveSelect = $('#validateReproductiveAgeWomen select');
+
+            if (ageInYears &gt; 15) {
+                reproductiveSelect.prop('required', true); // Set required attribute
+                reproductiveSelect.siblings('.required').show(); // Show required asterisk
+            } else {
+                reproductiveSelect.prop('required', false); // Remove required attribute
+                reproductiveSelect.siblings('.required').hide(); // Hide required asterisk
+            }
+        });
+
+    </script>
+
+
+
 
     <!-- UPDATED -->
     <table style="margin-bottom: 20px;">
@@ -591,10 +652,9 @@
     </table>
 
 
-    <!-- UPDATED -->
-    <fieldset style="border: 1px solid #305a72; min-width: 90%; margin-left:5%; padding: 6px; margin-bottom: 2%; border-radius: 9px;">
+    <fieldset class="border p-4 rounded" style="border-color: #000000;">
         <legend class="legend_style">Last Clinical Parameters</legend>
-        <table id="dashboard" cellspacing="10" cellpadding="5" align="center">
+        <table class="table table-bordered">
             <tr>
                 <td><b>Treat Age:</b>
                     <font color='blue' style="font-weight: bold">
@@ -614,24 +674,36 @@
                     <font color='blue' style="font-weight: bold">
                         <lookup complexExpression="$fn.latestObs('164506').valueCoded.name" /> </font>
                 </td>
+                <td>
+                    <b>Weight:</b>
+                    <font color='blue' style="font-weight: bold" class="pharmacy-weight" id="pharmacy-weight">
+                        <lookup expression="fn.latestObs('5089').valueNumeric" /></font>kg
+                </td>
             </tr>
-
+            <tr class="d-none">
+                <td><b>Birthdate</b></td>
+                <td class="birthdate"><lookup class="value" id="birthdate" expression="patient.person.birthdate"/></td>
+            </tr>
         </table>
+        <p class="age-display d-none" id="age-display"></p>
     </fieldset>
 
     <!-- UPDATED -->
-    <table class="baseline-aligned">
-        <tr>
-            <td></td>
-            <td style="alnright">
-                <label>Visit Date (Dispensed Date):</label>
-                <encounterDate id="encounterDate" />
-            </td>
-        </tr>
-    </table>
+    <fieldset class="border p-4 rounded" style="border-color: #000000;">
+        <legend class="legend_style">Visit Date</legend>
+        <table class="baseline-aligned">
+            <tr>
+                <td class="w-100">
+                    <label>Dispensed Date:</label>
+                    <encounterDate id="encounterDate" />
+                </td>
+            </tr>
+        </table>
+    </fieldset>
 
-    <fieldset>
-        <table>
+    <fieldset class="border p-4 rounded">
+        <legend class="legend_style">Treatment</legend>
+        <table class="table table-bordered">
             <tr>
                 <td>
                     <label>Treatment type</label>
@@ -644,7 +716,7 @@
                 <includeIf velocityTest="$patient.gender == 'F' ">
                     <td>
                         <label>Pregnancy Status</label>
-                        <obs conceptId="165050" answerLabel="" />
+                        <obs class="" id="validateReproductiveAgeWomen" conceptId="165050" answerLabel="" required="true" />
                     </td>
                 </includeIf>
                 <td>
@@ -657,11 +729,11 @@
     <br/>
 
     <!-- UPDATED -->
-    <fieldset>
+    <fieldset class="border p-4 rounded">
         <legend class="legend_style">Service Delivery Model</legend>
-        <table class="table" width="100%">
+        <table class="">
             <td>
-                <table id="ServiceDeliveryModel" class="table" width="100%">
+                <table id="ServiceDeliveryModel" class="table table-bordered" width="100%">
                     <tr>
                         <td>
                             <label>Dispensing Modality</label>
@@ -677,7 +749,7 @@
             </td>
 
             <td>
-                <table id="Facility_Dispensing" class="table" width="100%">
+                <table id="Facility_Dispensing" class="table table-bordered" width="100%">
                     <tr>
                         <td>
                             <label>Facility Dispensing </label>
@@ -688,7 +760,7 @@
             </td>
 
             <td>
-                <table id="ddd_Dispensing" class="table" width="100%">
+                <table id="ddd_Dispensing" class="table table-bordered" width="100%">
                     <tr>
                         <td>
                             <label>Community Dispensing (DDD)</label>
@@ -699,7 +771,7 @@
             </td>
 
             <td>
-                <table id="Multi_Month_Dispensing" class="table" width="100%">
+                <table id="Multi_Month_Dispensing" class="table table-bordered" width="100%">
                     <tr>
                         <td>
                             <label>Multi-Month Dispensing (MMD)</label>
@@ -712,7 +784,7 @@
         </table>
     </fieldset>
 
-    <fieldset>
+    <fieldset class="border p-4 rounded">
         <legend class="legend_style">ARV Medication Adherence</legend>
         <table class="baseline-aligned">
             <tr>
@@ -736,9 +808,10 @@
 
 
     <!-- UPDATED -->
-    <fieldset>
+    <fieldset class="border p-4 rounded">
         <legend class="legend_style">ARV Medication</legend>
-        <table class="table" width="100%">
+
+        <table class="border-0" width="100%">
             <tr>
                 <td class="alnleft">
                     <b>Treatment Age category</b>
@@ -747,26 +820,18 @@
                 </td>
 
                 <td>
-                    <table class="table" width="100%">
-                        <tr>
-                            <td><label>Regimen Line</label></td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <obs id="RegimenLine" conceptId="165708" answerConceptIds="164507,164514,165703,164506,164513,165702"
-                                     answerLabels="Child First Line, Child Second Line, Child Salvage, Adult First Line, Adult Second Line, Adult Salvage">
-                                    <controls>
-                                        <when value="164507" thenDisplay="#ped_first_line" />
-                                        <when value="164514" thenDisplay="#ped_second_line" />
-                                        <when value="165703" thenDisplay="#ped_salvage" />
-                                        <when value="164506" thenDisplay="#adult_first_line" />
-                                        <when value="164513" thenDisplay="#adult_second_line" />
-                                        <when value="165702" thenDisplay="#adult_salvage" />
-                                    </controls>
-                                </obs>
-                            </td>
-                        </tr>
-                    </table>
+                    <b>Regimen Line</b>
+                    <obs id="RegimenLine" conceptId="165708" answerConceptIds="164507,164514,165703,164506,164513,165702"
+                         answerLabels="Child First Line, Child Second Line, Child Salvage, Adult First Line, Adult Second Line, Adult Salvage">
+                        <controls>
+                            <when value="164507" thenDisplay="#ped_first_line" />
+                            <when value="164514" thenDisplay="#ped_second_line" />
+                            <when value="165703" thenDisplay="#ped_salvage" />
+                            <when value="164506" thenDisplay="#adult_first_line" />
+                            <when value="164513" thenDisplay="#adult_second_line" />
+                            <when value="165702" thenDisplay="#adult_salvage" />
+                        </controls>
+                    </obs>
                 </td>
 
                 <td>
@@ -802,16 +867,11 @@
                     </table>
                 </td>
 
-                <td>
-                    <table id="ped_first_line" class="table" width="100%">
-                        <tr>
-                            <td>
-                                <label>Pediatric 1st Line Regimens</label>
-                                <obs class="lines" conceptId="164507" id="Ped1stLine" />
-                            </td>
-                        </tr>
-                    </table>
+                <td id="ped_first_line">
+                    <label>Pediatric 1st Line Regimens</label>
+                    <obs class="lines" conceptId="164507" id="Ped1stLine" />
                 </td>
+
 
                 <td>
                     <table style="display: none" id="ped_second_line" class="table" width="100%">
@@ -834,17 +894,15 @@
                         </tr>
                     </table>
                 </td>
-            </tr>
-            <tr>
+
                 <td>
                     <label>Duration Of ARV Balance (In Days):</label>
                     <obs conceptId="166406" id="pillBallance" required="false" />
                 </td>
             </tr>
-        </table>
-    </fieldset>
 
-    <fieldset>
+        </table>
+
         <table class="baseline-aligned">
             <tr>
                 <td>
@@ -1024,7 +1082,7 @@
         </table>
     </fieldset>
 
-    <fieldset>
+    <fieldset class="border p-4 rounded">
         <legend class="legend_style">Drugs for OI Prophylaxis/Treatment</legend>
         <table class="baseline-aligned">
             <tr>
@@ -1242,7 +1300,7 @@
     </fieldset>
     <br/>
 
-    <fieldset>
+    <fieldset class="border p-4 rounded">
         <legend class="legend_style">Anti-TB Drugs</legend>
         <table class="baseline-aligned">
             <tr>
@@ -1338,7 +1396,7 @@
     </fieldset>
 
 
-    <fieldset>
+    <fieldset class="border p-4 rounded">
 
         <legend class="legend_style">Other Drugs</legend>
 
@@ -1471,20 +1529,19 @@
     </fieldset>
 
     <!-- ADDED -->
-    <fieldset>
+    <fieldset class="border p-4 rounded">
         <legend class="legend_style">Next Appointment</legend>
         <table class="baseline-aligned">
             <tr>
                 <td>
                     <label>Calculated Next Appointment Date:</label>
-                    <obs conceptId="5096" id="calcNxtAppDate" class="calcNxtAppDate" allowFutureDates="true"  style="min-width: 200px"/>
+                    <obs conceptId="5096" id="calcNxtAppDate" class="calcNxtAppDate" allowFutureDates="true"/>
                 </td>
-                <td>
-                    <!--  <label>Current Duration:</label> -->
-                    <!-- <obs conceptId="159368" id="currentDuration" /> -->
-                </td>
-                <td>
-                </td>
+                <!-- <td> -->
+                <!--  <label>Current Duration:</label> -->
+                <!-- <obs conceptId="159368" id="currentDuration" /> -->
+                <!-- </td> -->
+                <!-- <td></td> -->
             </tr>
         </table>
     </fieldset>
@@ -1492,9 +1549,9 @@
     <br/>
 
     <!-- UPDATED -->
-    <fieldset>
+    <fieldset class="border p-4 rounded">
         <legend class="legend_style">Signature</legend>
-        <table>
+        <table class="table table-bordered">
             <tr>
                 <td>
                     <label>Ordered By:</label>
@@ -1508,10 +1565,10 @@
                     <label>Dispensed By:</label>
                     <encounterProviderAndRole default="currentUser" encounterRole="240b26f9-dd88-4172-823d-4a8bfeb7841f" required="true" />
                 </td>
-                <td>
-                    <!-- Duplication of Date Ordered <label>Date dispensed:</label>
-					<obs conceptId="164989" id="dateDrugOrdered" required="true"/>-->
-                </td>
+                <!-- <td> -->
+                <!-- Duplication of Date Ordered <label>Date dispensed:</label>
+                <obs conceptId="164989" id="dateDrugOrdered" required="true"/>-->
+                <!-- </td> -->
 
             </tr>
         </table>
@@ -1520,8 +1577,8 @@
     <br/>
 
     <!-- UPDATED -->
-    <fieldset>
-        <th>Feedback from the Pharmacist in case of any observed medication error </th>
+    <fieldset class="border p-4 rounded">
+        <legend class="legend_style">Feedback from the Pharmacist in case of any observed medication error</legend>
         <table class="baseline-aligned">
             <br/>
             <tr>
