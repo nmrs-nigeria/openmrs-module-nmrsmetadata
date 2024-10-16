@@ -626,6 +626,8 @@
             <tr>
                 <td class="alnleft_s">Cryptococcal Screening status</td>
                 <td class="alnleft_s"> <obs conceptId="167130" answerConceptIds="167131,167132,167133,167134,167135,167136,167137,167138" answerLabels="Not screened,Screened for Cryptococcus Ag,Cr Ag negative,Cr Ag positive,Cr Ag positive commenced on pre-emptive therapy,Diagnosed with Cryptococcal meningitis,Commenced treatment for cryptococcal meningitis,Completed treatment for cryptococcal meningitis" /> </td>
+
+            <includeIf velocityTest="$patient.gender == 'F' ">
                 <td class="alnleft_s">Cervical Cancer Screening Status</td>
                 <td class="alnleft_s">
                     <obs id="cryptococal" conceptId="167139" answerConceptIds="167140,167141,167142,167143,167144,167145,167146,167147,167148" answerLabels="Not ordered,Ordered yet to screen,Screened negative,Screened positive yet to treat,Screened positive and treated,Screened positive and referred,Screened positive and declined treatment,Suspicious for cancer,Other findings" >
@@ -647,6 +649,8 @@
                     <obs id="treatment" conceptId="167150" answerConceptIds="167151,167152,167153" answerLabels="Cryotherapy,Thermal ablation,LEEP" />
                 </td>
             </tr>
+            </includeIf>
+
             </tr>
         </table>
     </fieldset>
