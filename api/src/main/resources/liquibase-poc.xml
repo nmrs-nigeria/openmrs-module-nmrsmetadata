@@ -714,16 +714,6 @@
         <sql>SET FOREIGN_KEY_CHECKS=1;</sql>
     </changeSet>
 
-	 <changeSet author="Toyeeb" id="070920211233000000" runOnChange="true">
-        <sql>SET FOREIGN_KEY_CHECKS=0;</sql>
-        <sqlFile path="poc_related/forms/forms/form_resource.sql"
-                 stripComments="true"
-                 splitStatements="true"
-                 encoding="UTF-8"
-                 endDelimiter=";"/>
-        <sql>SET FOREIGN_KEY_CHECKS=1;</sql>
-    </changeSet>
-
 	 <changeSet author="Toyeeb" id="0809202119110000" runOnChange="true">
         <sql>SET FOREIGN_KEY_CHECKS=0;</sql>
         <sqlFile path="poc_related/concepts/20210303/concept_update.sql"
@@ -991,10 +981,47 @@
                  splitStatements="true"
                  endDelimiter=";"/>
     </changeSet>
+	
+	<changeSet id="truncate_form_resource_clob_data_150520250504" author="Toyeeb">
+		<sql>
+        <![CDATA[
+        	SET FOREIGN_KEY_CHECKS = 0;
+			TRUNCATE TABLE form_resource;
+			TRUNCATE TABLE clob_datatype_storage;
+			SET FOREIGN_KEY_CHECKS = 1;
+		]]>
+        </sql>
+	</changeSet>
+	
+	 <changeSet author="Toyeeb" id="070920211233000000" runOnChange="true">
+        <sql>SET FOREIGN_KEY_CHECKS=0;</sql>
+        <sqlFile path="poc_related/forms/forms/form_resource.sql"
+                 stripComments="true"
+                 splitStatements="true"
+                 encoding="UTF-8"
+                 endDelimiter=";"/>
+        <sql>SET FOREIGN_KEY_CHECKS=1;</sql>
+    </changeSet>
+    
+ 	<changeSet id="clob_datatype_storage_creation_20251505052522" author="Toyeeb" runOnChange="true">
+        <sql>SET FOREIGN_KEY_CHECKS=0;</sql>
+        <sqlFile path="poc_related/forms/forms/clob_datatype_storage.sql"
+                 stripComments="true"
+                 splitStatements="true"
+                 encoding="UTF-8"
+                 endDelimiter=";"/>
+        <sql>SET FOREIGN_KEY_CHECKS=1;</sql>
+    </changeSet>
 
-
-
-
+	<changeSet id="global_property_max_resultset_update_20251505606" author="Toyeeb">
+		<sql>
+        <![CDATA[
+        	SET FOREIGN_KEY_CHECKS = 0;
+			UPDATE `global_property` SET `property_value` = '150' WHERE `global_property`.`property` = 'webservices.rest.maxResultsDefault';
+			SET FOREIGN_KEY_CHECKS = 1;
+		]]>
+        </sql>
+	</changeSet>
 
        <!--   <changeSet id="population_type_on_patient_registration20230815" author="Toyeeb">  -->
 	<!-- 	<sql>  -->
