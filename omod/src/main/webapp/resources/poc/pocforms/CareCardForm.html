@@ -263,8 +263,15 @@
         $(document).ready(function(){
 
             beforeSubmit.push(function (e) {
-                let val_encounterDate = document.querySelector('#encounterDate').children[0];
-                let val_next_appointment = document.querySelector('#next_appointment').children[0];
+                // let val_encounterDate = document.querySelector('#encounterDate').children[0];
+
+                let val_encounterDate = document.querySelector('#encounterDate input[type="hidden"]').value;
+
+                // let val_next_appointment = document.querySelector('#next_appointment').children[0];
+
+                let val_next_appointment = document.querySelector('#next_appointment input[type="hidden"]').value;
+
+
                 let diagnosis_method = document.querySelector('#diagnosis_method').children[0];
                 let tbstatus = document.querySelector('#tbstatus').children[0];
                 let other_finding = document.querySelector('#other_finding').children[0];
@@ -275,6 +282,39 @@
                 let c_dsd_date = document.querySelector('#c_dsd_date').children[0];
                 let facility_based = document.querySelector('#facility_based').children[0];
                 let f_dsd_date = document.querySelector('#f_dsd_date').children[0];
+
+                console.log("next visit date is : ", val_next_appointment);
+                console.log("encounter date is : ", val_encounterDate);
+
+
+                console.log("next visit date is : ", val_next_appointment);
+                console.log("encounter date is : ", val_encounterDate);
+
+                // Convert strings to Date objects
+                let nextDate = new Date(val_next_appointment);
+                let encounterDate = new Date(val_encounterDate);
+
+                // Calculate the difference in days
+                let diffTime = nextDate - encounterDate;
+                let diffDays = diffTime / (1000 * 60 * 60 * 24);
+
+                // Use switch-case with 'true' to handle range-based conditions
+                switch (true) {
+                    case (diffDays &gt; 180):
+                        getField('next_appointment.error')
+                            .html('Next appointment date must not be more than 6 months (180 days) after the encounter date.')
+                            .show();
+                        return false;
+
+                    default:
+                        console.log("Date is valid. Proceed.");
+                        // Proceed with form submission or next logic
+                        break;
+                }
+
+
+
+
 
 
                 getField('diagnosis_method.error').hide();
@@ -314,6 +354,11 @@
                         getField('dsdstatus.error').html('Ensure this field is not empty').show();
                         return false;
                         break;
+
+                    // case (val_next_appointment) :
+                    //     getField('next_appointment.error').html('Next appointment date cannot be more than 6 months').show();
+                    //     return false;
+                    //     break;
 
                     case (val_encounterDate > val_next_appointment) :
                         getField('next_appointment.error').html('Next appointment date has to be later than visit date').show();
@@ -400,7 +445,7 @@
         </thead>
     </table>
 
-    <fieldset style="border: 1px solid #305a72; min-width: 90%; margin-left:5%; padding: 6px; margin-bottom: 2%; border-radius: 9px;">
+    <fieldset style="width: -webkit-fill-available">
         <legend class="legend_style">Last Clinical Parameters</legend>
         <table id="dashboard" cellSpacing="10" cellPadding="5" align="center">
 
@@ -428,8 +473,9 @@
         </table>
     </fieldset>
 
-    <table>
-        <tr class="text-center">
+
+    <table class="mb-4 px-4">
+        <tr class="text-left">
             <td class="d-inline-flex">
                 <label for="encounterDate">Visit Date</label>
                 <encounterDate class="form-control" id="encounterDate" showTime="false" allowFutureDates="false" required="true" />
@@ -626,17 +672,15 @@
             <tr>
                 <td class="alnleft_s">Cryptococcal Screening status</td>
                 <td class="alnleft_s"> <obs conceptId="167130" answerConceptIds="167131,167132,167133,167134,167135,167136,167137,167138" answerLabels="Not screened,Screened for Cryptococcus Ag,Cr Ag negative,Cr Ag positive,Cr Ag positive commenced on pre-emptive therapy,Diagnosed with Cryptococcal meningitis,Commenced treatment for cryptococcal meningitis,Completed treatment for cryptococcal meningitis" /> </td>
-                <includeIf velocityTest="$patient.gender == 'F' ">
-	                <td class="alnleft_s">Cervical Cancer Screening Status</td>
-	                <td class="alnleft_s">
-	                    <obs id="cryptococal" conceptId="167139" answerConceptIds="167140,167141,167142,167143,167144,167145,167146,167147,167148" answerLabels="Not ordered,Ordered yet to screen,Screened negative,Screened positive yet to treat,Screened positive and treated,Screened positive and referred,Screened positive and declined treatment,Suspicious for cancer,Other findings" >
-	                        <controls>
-	                            <when value="167148" thenDisplay="#otherfindings" />
-	                            <when value="167144" thenDisplay="#cv_treatment" />
-	                        </controls>
-	                    </obs>
-	                </td>
-                </includeIf>
+                <td class="alnleft_s">Cervical Cancer Screening Status</td>
+                <td class="alnleft_s">
+                    <obs id="cryptococal" conceptId="167139" answerConceptIds="167140,167141,167142,167143,167144,167145,167146,167147,167148" answerLabels="Not ordered,Ordered yet to screen,Screened negative,Screened positive yet to treat,Screened positive and treated,Screened positive and referred,Screened positive and declined treatment,Suspicious for cancer,Other findings" >
+                        <controls>
+                            <when value="167148" thenDisplay="#otherfindings" />
+                            <when value="167144" thenDisplay="#cv_treatment" />
+                        </controls>
+                    </obs>
+                </td>
             <tr id="otherfindings" class="alnleft_s">
                 <td>Specify:</td>
                 <td>
@@ -1218,4 +1262,4 @@
     </fieldset>
 
     <submit />
-</htmlform>
+</htmlform>1
