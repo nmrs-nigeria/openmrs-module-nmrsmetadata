@@ -23,7 +23,7 @@ UPDATE `form` SET `published` = '1' WHERE (`form_id` = '45');
 UPDATE `form` SET `published` = '1' WHERE (`form_id` = '8');
 
 -- Client Intake Form
-UPDATE `form` SET `published` = '1' WHERE (`form_id` = '8');
+UPDATE `form` SET `published` = '1' WHERE (`form_id` = '10');
 
 -- Covid19 Contact Investigation Form
 UPDATE `form` SET `published` = '1' WHERE (`form_id` = '80');
@@ -97,9 +97,6 @@ UPDATE `form` SET `published` = '1' WHERE (`form_id` = '79');
 -- Client Referral Form
 UPDATE `form` SET `published` = '1' WHERE (`form_id` = '52');
 
--- DR-TB In-Patient Discharge Form
-UPDATE `form` SET `published` = '1' WHERE (`form_id` = '91');
-
 -- General Antenatal Care
 UPDATE `form` SET `published` = '1' WHERE (`form_id` = '16');
 
@@ -108,9 +105,6 @@ UPDATE `form` SET `published` = '1' WHERE (`form_id` = '76');
 
 -- Specimen Examination Request Form
 UPDATE `form` SET `published` = '1' WHERE (`form_id` = '94');
-
--- Covid19 case Identification Form
-UPDATE `form` SET `published` = '1' WHERE (`form_id` = '79');
 
 
 
