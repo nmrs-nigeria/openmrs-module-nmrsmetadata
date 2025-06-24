@@ -734,6 +734,17 @@
         <sql>SET FOREIGN_KEY_CHECKS = 1;</sql>
     </changeSet>
 
+
+    <changeSet author="Adeyemi" id="O3forms_23_06_2025" runOnChange="true">
+        <sql>SET FOREIGN_KEY_CHECKS=0;</sql>
+        <sqlFile path="poc_related/forms/forms/conceptId_n_FormPublishing.sql"
+                 stripComments="true"
+                 splitStatements="true"
+                 encoding="UTF-8"
+                 endDelimiter=";"/>
+        <sql>SET FOREIGN_KEY_CHECKS=1;</sql>
+    </changeSet>
+
  	<changeSet id="20210521100138" author="Toyeeb" runOnChange="true">
         <sql>
         <![CDATA[
