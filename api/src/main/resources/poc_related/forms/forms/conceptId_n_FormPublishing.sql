@@ -1,6 +1,7 @@
 UPDATE `concept` SET `datatype_id` = '3' WHERE (`concept_id` = '167197');
 UPDATE `concept` SET `changed_by` = '1' WHERE (`concept_id` = '164971');
 
+UPDATE `concept` SET `class_id` = '5' WHERE (`concept_id` = '166388'); -- fix for the ADR form
 
 -- PUBLISHING THE FORMS
 
