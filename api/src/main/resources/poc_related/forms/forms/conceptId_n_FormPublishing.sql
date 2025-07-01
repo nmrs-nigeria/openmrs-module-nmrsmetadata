@@ -107,7 +107,11 @@ UPDATE `form` SET `published` = '1' WHERE (`form_id` = '76');
 -- Specimen Examination Request Form
 UPDATE `form` SET `published` = '1' WHERE (`form_id` = '94');
 
+-- Adverse Drug Reaction Form
+UPDATE `form` SET `published` = '1' WHERE (`form_id` = '78');
 
+-- Transfer Form
+UPDATE `form` SET `published` = '1' WHERE (`form_id` = '30');
 
 
 
