@@ -1,6 +1,7 @@
 UPDATE `concept` SET `datatype_id` = '3' WHERE (`concept_id` = '167197');
 UPDATE `concept` SET `changed_by` = '1' WHERE (`concept_id` = '164971');
 
+UPDATE `concept` SET `class_id` = '5' WHERE (`concept_id` = '166388'); -- fix for the ADR form
 
 -- PUBLISHING THE FORMS
 
@@ -106,7 +107,11 @@ UPDATE `form` SET `published` = '1' WHERE (`form_id` = '76');
 -- Specimen Examination Request Form
 UPDATE `form` SET `published` = '1' WHERE (`form_id` = '94');
 
+-- Adverse Drug Reaction Form
+UPDATE `form` SET `published` = '1' WHERE (`form_id` = '78');
 
+-- Transfer Form
+UPDATE `form` SET `published` = '1' WHERE (`form_id` = '30');
 
 
 
