@@ -387,8 +387,8 @@
                  stripComments="true"
                  splitStatements="true"
                  encoding="UTF-8"
-                 endDelimiter=";"/>        
-         <sql>SET FOREIGN_KEY_CHECKS=1;</sql>             
+                 endDelimiter=";"/>
+         <sql>SET FOREIGN_KEY_CHECKS=1;</sql>
     </changeSet>
     
     <changeSet id="20042021134230" author="Toyeeb" runOnChange="true">
@@ -714,6 +714,16 @@
         <sql>SET FOREIGN_KEY_CHECKS=1;</sql>
     </changeSet>
 
+<!--	 <changeSet author="Toyeeb" id="070920211233000000" runOnChange="true">-->
+<!--        <sql>SET FOREIGN_KEY_CHECKS=0;</sql>-->
+<!--        <sqlFile path="poc_related/forms/forms/form_resource.sql"-->
+<!--                 stripComments="true"-->
+<!--                 splitStatements="true"-->
+<!--                 encoding="UTF-8"-->
+<!--                 endDelimiter=";"/>-->
+<!--        <sql>SET FOREIGN_KEY_CHECKS=1;</sql>-->
+<!--    </changeSet>-->
+
 	 <changeSet author="Toyeeb" id="0809202119110000" runOnChange="true">
         <sql>SET FOREIGN_KEY_CHECKS=0;</sql>
         <sqlFile path="poc_related/concepts/20210303/concept_update.sql"
@@ -722,6 +732,17 @@
                  encoding="UTF-8"
                  endDelimiter=";"/>
         <sql>SET FOREIGN_KEY_CHECKS = 1;</sql>
+    </changeSet>
+
+
+    <changeSet author="Adeyemi" id="O3forms_23_06_2025" runOnChange="true">
+        <sql>SET FOREIGN_KEY_CHECKS=0;</sql>
+        <sqlFile path="poc_related/forms/forms/conceptId_n_FormPublishing.sql"
+                 stripComments="true"
+                 splitStatements="true"
+                 encoding="UTF-8"
+                 endDelimiter=";"/>
+        <sql>SET FOREIGN_KEY_CHECKS=1;</sql>
     </changeSet>
 
  	<changeSet id="20210521100138" author="Toyeeb" runOnChange="true">
@@ -1024,6 +1045,58 @@
 	<changeSet id="global_property_max_resultset_update_20251505606" author="Toyeeb">
 		<sql>
         <![CDATA[
+    <changeSet id="create_clob_table_IF_NOT_EXIST_202507020521" author="Adeyemi">
+        <sql>
+            <![CDATA[
+        	SET FOREIGN_KEY_CHECKS = 0;
+
+        	CREATE TABLE IF NOT EXISTS `clob_datatype_storage` (
+              `id` int(11) NOT NULL AUTO_INCREMENT,
+              `uuid` char(38) NOT NULL,
+              `value` longtext NOT NULL,
+              PRIMARY KEY (`id`),
+              UNIQUE KEY `uuid` (`uuid`),
+              UNIQUE KEY `clob_datatype_storage_uuid_index` (`uuid`)
+            ) ENGINE=InnoDB AUTO_INCREMENT=203 DEFAULT CHARSET=utf8;
+
+			SET FOREIGN_KEY_CHECKS = 1;
+		]]>
+        </sql>
+    </changeSet>
+    <changeSet id="truncate_form_resource_clob_data_150520250504" author="Toyeeb">
+        <sql>
+            <![CDATA[
+        	SET FOREIGN_KEY_CHECKS = 0;
+			TRUNCATE TABLE form_resource;
+			TRUNCATE TABLE clob_datatype_storage;
+			SET FOREIGN_KEY_CHECKS = 1;
+		]]>
+        </sql>
+    </changeSet>
+
+    <changeSet author="Adeyemi" id="form_resource_2025_07_02" runOnChange="true">
+        <sql>SET FOREIGN_KEY_CHECKS=0;</sql>
+        <sqlFile path="poc_related/forms/forms/form_resource.sql"
+                 stripComments="true"
+                 splitStatements="true"
+                 encoding="UTF-8"
+                 endDelimiter=";"/>
+        <sql>SET FOREIGN_KEY_CHECKS=1;</sql>
+    </changeSet>
+
+    <changeSet id="clob_datatype_storage_20250702051501" author="Adeyemi" runOnChange="true">
+        <sql>SET FOREIGN_KEY_CHECKS=0;</sql>
+        <sqlFile path="poc_related/forms/forms/clob_datatype_storage.sql"
+                 stripComments="true"
+                 splitStatements="true"
+                 encoding="UTF-8"
+                 endDelimiter=";"/>
+        <sql>SET FOREIGN_KEY_CHECKS=1;</sql>
+    </changeSet>
+
+    <changeSet id="global_property_max_resultset_update_20251505606" author="Toyeeb">
+        <sql>
+            <![CDATA[
         	SET FOREIGN_KEY_CHECKS = 0;
 			UPDATE `global_property` SET `property_value` = '150' WHERE `global_property`.`property` = 'webservices.rest.maxResultsDefault';
 			SET FOREIGN_KEY_CHECKS = 1;
@@ -1105,8 +1178,6 @@
 		]]>
         </sql>
 	</changeSet>
-	
-	
 	
 	
 

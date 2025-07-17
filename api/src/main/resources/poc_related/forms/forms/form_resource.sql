@@ -62,9 +62,28 @@ REPLACE INTO `form_resource` (`form_resource_id`, `form_id`, `name`, `value_refe
 (261, 83, 'JSON schema', '22356871-31b9-11f0-9444-00e04c364c8c', 'AmpathJsonSchema', NULL, NULL, NULL, '22356884-31b9-11f0-9444-00e04c364c8c', NULL, NULL),
 (262, 52, 'JSON schema', 'fbc3a88a-31bb-11f0-9444-00e04c364c8c', 'AmpathJsonSchema', NULL, NULL, NULL, 'fbc3a89e-31bb-11f0-9444-00e04c364c8c', NULL, NULL);
 REPLACE INTO `form_resource` (`form_resource_id`, `form_id`, `name`, `value_reference`, `datatype`, `datatype_config`, `preferred_handler`, `handler_config`, `uuid`, `date_changed`, `changed_by`) VALUES
-(263, 102, 'JSON schema', '36f8a8cd-31bf-11f0-9444-00e04c364c8c', 'AmpathJsonSchema', NULL, NULL, NULL, '36f8a8e6-31bf-11f0-9444-00e04c364c8c', NULL, NULL);
+(263, 102, 'JSON schema', '36f8a8cd-31bf-11f0-9444-00e04c364c8c', 'AmpathJsonSchema', NULL, NULL, NULL, '36f8a8e6-31bf-11f0-9444-00e04c364c8c', NULL, NULL),
+(264, 15,'JSON schema','6a69ca9c-4ad6-4d09-96c1-30e8ff0227e8','AmpathJsonSchema',NULL,NULL,NULL,'4ececb1c-3a8d-46f2-b66c-68fcde0240fc',NULL,NULL),
+(265, 99,'JSON schema','c74caab1-0629-457d-883e-441de6985d7c','AmpathJsonSchema',NULL,NULL,NULL,'9a825a6c-c9fd-4539-831f-ff2567b5c505',NULL,NULL),
+(266, 53,'JSON schema','dc0e606f-42d3-4bea-ac19-dcd170dadb6e','AmpathJsonSchema',NULL,NULL,NULL,'d99963bc-b465-4456-b189-333249a0db05',NULL,NULL),
+(267, 73,'JSON schema','83dc9bb5-aeff-4a19-bca0-26e4490dce4e','AmpathJsonSchema',NULL,NULL,NULL,'e2fb3d5a-79e5-4b58-b765-3a3e1659602b',NULL,NULL),
+(268, 54,'JSON schema','b95e9226-06d8-4d2e-80a5-d43cbdbfed36','AmpathJsonSchema',NULL,NULL,NULL,'882cbb68-ce2a-4bfa-900b-03b11258e957',NULL,NULL),
+(269, 83,'JSON schema','86ed5e74-4f8c-4797-b626-a1b691402c25','AmpathJsonSchema',NULL,NULL,NULL,'a6bfa198-87ec-4953-9096-d69ae5249ee9',NULL,NULL),
+(270, 95,'JSON schema','6d47363f-d00f-43df-92b5-b2813fa553a8','AmpathJsonSchema',NULL,NULL,NULL,'20a7d4f4-6851-4406-b77a-f198841fc857',NULL,NULL),
+(271, 92,'JSON schema','691c1eac-fe4d-44a7-9c7c-4bc9250a2291','AmpathJsonSchema',NULL,NULL,NULL,'ddb660f1-fd2c-488a-aca5-e9a7ba8222cf',NULL,NULL),
+(272, 102,'JSON schema','8604feb4-c8d8-4f81-ac0c-fef4040d1346','AmpathJsonSchema',NULL,NULL,NULL,'ab55cfaa-2757-4bb1-a251-ee61d155f3dc',NULL,NULL),
+(273, 79,'JSON schema','1d89a6b6-905d-41f3-afaa-f8e588782348','AmpathJsonSchema',NULL,NULL,NULL,'7fb9be53-711f-4e80-94b5-808025c846ec',NULL,NULL),
+(274, 94,'JSON schema','6ad1ffa3-74d9-43e9-ae3a-e033fcb88b0d','AmpathJsonSchema',NULL,NULL,NULL,'53a4c8e1-7545-4867-827b-62dbff031720',NULL,NULL),
+(275, 30,'JSON schema','2e0cf370-e7f3-4aba-ae99-9b907fe22a4d','AmpathJsonSchema',NULL,NULL,NULL,'849d6577-6d94-46bf-9e55-40474d282e8b',NULL,NULL);
 
 
+REPLACE INTO `form_resource` (`form_resource_id`, `form_id`,`name`,`value_reference`,`datatype`,`datatype_config`,`preferred_handler`,`handler_config`,`uuid`,`date_changed`,`changed_by`) VALUES
+(276, 78,'JSON schema','cf621bc3-5613-480a-bb2d-86e3c50d7bb4','AmpathJsonSchema',NULL,NULL,NULL,'5110e2cf-fa79-474f-b7fb-56ad22d87e91',NULL,NULL);
 
 
+REPLACE INTO `form_resource` (`form_resource_id`,`form_id`,`name`,`value_reference`,`datatype`,`datatype_config`,`preferred_handler`,`handler_config`,`uuid`,`date_changed`,`changed_by`) VALUES
+(277, 8, 'JSON schema', 'c0d66f00-31b7-11f0-9444-00e04c364c8c', 'AmpathJsonSchema', NULL, NULL, NULL, 'c0d66f17-31b7-11f0-9444-00e04c364c8c', NULL, NULL);
+
+REPLACE INTO `form_resource` (`form_resource_id`,`form_id`,`name`,`value_reference`,`datatype`,`datatype_config`,`preferred_handler`,`handler_config`,`uuid`,`date_changed`,`changed_by`) VALUES
+(278,80,'JSON schema','e98e41dd-cd9e-49fd-862b-ac195be125e0','AmpathJsonSchema',NULL,NULL,NULL,'af3adda3-0735-4d40-b434-f0b0a96cea19',NULL,NULL);
 
