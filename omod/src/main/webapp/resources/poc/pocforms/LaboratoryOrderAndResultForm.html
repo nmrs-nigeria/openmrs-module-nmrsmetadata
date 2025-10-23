@@ -830,7 +830,7 @@
         getField('viralLoadResultTest.value').change(function() {
         var viralLoadInput = getValue('viralLoadResultTest.value');
         if (viralLoadInput == "TND" || viralLoadInput == "tnd" || viralLoadInput == "Tnd") {
-        setValue('viralLoadResultTest.value', 0);
+        setValue('viralLoadResultTest.value', 19);
 
         }else if(viralLoadInput == "&lt;"+ "20" || viralLoadInput == "&lt;"+ " 20"){
         setValue('viralLoadResultTest.value', 20);
@@ -847,7 +847,6 @@
 
         var $ = jQuery;
         $(document).ready(function(){
-        getField('viralLoadResultTest.value')[0].disabled = 'disabled';
         });
         jQuery(function() {
         getField('AlphanumericViralLoadResult.value').change(function() {
@@ -865,7 +864,7 @@
         //getField('viralLoadResultTest.value')[0].required = '';
         }
         if (viralLoadInput == 166407) {
-        setValue('viralLoadResultTest.value', 19);
+        setValue('viralLoadResultTest.value', 0);
         var conceptID = viralLoadInput
         viralLoadInput = getValue('viralLoadResultTest.value');
 
