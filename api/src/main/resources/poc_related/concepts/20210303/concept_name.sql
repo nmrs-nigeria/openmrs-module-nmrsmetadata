@@ -1106,6 +1106,27 @@ REPLACE INTO `concept_name` (`concept_id`, `name`, `locale`, `creator`, `date_cr
 REPLACE INTO `concept_name` (`concept_id`, `name`, `locale`, `creator`, `date_created`, `concept_name_id`, `voided`, `voided_by`, `date_voided`, `void_reason`, `uuid`, `concept_name_type`, `locale_preferred`, `date_changed`, `changed_by`) VALUES (167249, 'Physical document audited-folder register review', 'en', 1, '2024-01-22 16:21:09', 144100, 0, NULL, NULL, NULL, '63fb39bf-537e-4581-8a84-1936ad5d8ad2', 'FULLY_SPECIFIED', 1, NULL, NULL);
 REPLACE INTO `concept_name` (`concept_id`, `name`, `locale`, `creator`, `date_created`, `concept_name_id`, `voided`, `voided_by`, `date_voided`, `void_reason`, `uuid`, `concept_name_type`, `locale_preferred`, `date_changed`, `changed_by`) VALUES (167250, 'Facility Visit', 'en', 1, '2024-01-22 16:21:44', 144101, 0, NULL, NULL, NULL, 'de420d02-571e-4ab8-aa30-048acbc5762c', 'FULLY_SPECIFIED', 1, NULL, NULL);
 REPLACE INTO `concept_name` (`concept_id`, `name`, `locale`, `creator`, `date_created`, `concept_name_id`, `voided`, `voided_by`, `date_voided`, `void_reason`, `uuid`, `concept_name_type`, `locale_preferred`, `date_changed`, `changed_by`) VALUES (167251, 'Client contacted', 'en', 1, '2024-01-22 16:22:17', 144102, 0, NULL, NULL, NULL, 'ebae3009-600f-4999-98a1-d13f28b6946c', 'FULLY_SPECIFIED', 1, NULL, NULL);
+REPLACE INTO `concept_name` (`concept_id`, `name`, `locale`, `creator`, `date_created`, `concept_name_id`, `voided`, `voided_by`, `date_voided`, `void_reason`, `uuid`, `concept_name_type`, `locale_preferred`, `date_changed`, `changed_by`) VALUES (167252, 'RHZE/RH', 'en', 1, '2026-01-27 13:21:24', 144103, 0, NULL, NULL, NULL, 'f59e56e2-73f6-451c-9b41-ee1256548b04', 'FULLY_SPECIFIED', 1, NULL, NULL);
+REPLACE INTO `concept_name` (`concept_id`, `name`, `locale`, `creator`, `date_created`, `concept_name_id`, `voided`, `voided_by`, `date_voided`, `void_reason`, `uuid`, `concept_name_type`, `locale_preferred`, `date_changed`, `changed_by`) VALUES (167252, 'RHZE prophylaxis', 'en', 1, '2026-01-27 13:21:24', 144104, 0, NULL, NULL, NULL, 'e98bce4a-b3b3-48d3-b765-a00e021c91b6', 'SHORT', 0, NULL, NULL);
+REPLACE INTO `concept_name` (`concept_id`, `name`, `locale`, `creator`, `date_created`, `concept_name_id`, `voided`, `voided_by`, `date_voided`, `void_reason`, `uuid`, `concept_name_type`, `locale_preferred`, `date_changed`, `changed_by`) VALUES (167253, 'RHZE/EH', 'en', 1, '2026-01-27 13:27:47', 144105, 0, NULL, NULL, NULL, '2b5fc095-7d4c-4c22-92d9-823ef9476470', 'FULLY_SPECIFIED', 1, NULL, NULL);
+REPLACE INTO `concept_name` (`concept_id`, `name`, `locale`, `creator`, `date_created`, `concept_name_id`, `voided`, `voided_by`, `date_voided`, `void_reason`, `uuid`, `concept_name_type`, `locale_preferred`, `date_changed`, `changed_by`) VALUES (167254, 'RH', 'en', 1, '2026-01-27 13:28:46', 144106, 0, NULL, NULL, NULL, '057f10f9-74e0-41c7-a689-5d4a8335d137', 'FULLY_SPECIFIED', 1, NULL, NULL);
+REPLACE INTO `concept_name` (`concept_id`, `name`, `locale`, `creator`, `date_created`, `concept_name_id`, `voided`, `voided_by`, `date_voided`, `void_reason`, `uuid`, `concept_name_type`, `locale_preferred`, `date_changed`, `changed_by`) VALUES (167255, 'Hepatitis C treatment', 'en', 1, '2026-01-27 13:29:44', 144107, 0, NULL, NULL, NULL, '4f987caa-dd59-4c2a-b734-891b1ac503ee', 'FULLY_SPECIFIED', 1, NULL, NULL);
+REPLACE INTO `concept_name` (`concept_id`, `name`, `locale`, `creator`, `date_created`, `concept_name_id`, `voided`, `voided_by`, `date_voided`, `void_reason`, `uuid`, `concept_name_type`, `locale_preferred`, `date_changed`, `changed_by`) VALUES (167256, 'Other OI', 'en', 1, '2026-01-27 13:30:25', 144108, 0, NULL, NULL, NULL, '78480530-c672-4a98-80d7-b83a0aa2a5da', 'FULLY_SPECIFIED', 1, NULL, NULL);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 REPLACE INTO `concept_name` (`concept_id`, `name`, `locale`, `creator`, `date_created`, `concept_name_id`, `voided`, `voided_by`, `date_voided`, `void_reason`, `uuid`, `concept_name_type`, `locale_preferred`) VALUES (166799, 'Day\'s', 'en', 1, '2022-01-11 11:41:37', 143650, 0, NULL, NULL, NULL, '5dac12a8-c9da-48ff-9f8b-34ad023f4388', 'FULLY_SPECIFIED', 1);
