@@ -6,6 +6,7 @@ import org.openmrs.api.FormService;
 import org.openmrs.api.context.Context;
 import org.openmrs.module.htmlformentry.HtmlFormEntryService;
 import org.openmrs.module.htmlformentryui.HtmlFormUtil;
+import org.openmrs.module.nmrsmetadata.dao.Database;
 import org.openmrs.ui.framework.resource.ResourceFactory;
 import org.openmrs.ui.framework.resource.ResourceProvider;
 
@@ -18,7 +19,7 @@ public class HtmlFormsInitializer implements Initializer {
 	
 	protected static final String providerName = "nmrsmetadata";
 	
-	protected static final String formsPath = "forms/";
+	protected static final String formsPath = "retrospective/forms/";
 	
 	protected static final Log log = LogFactory.getLog(HtmlFormsInitializer.class);
 	
@@ -49,6 +50,11 @@ public class HtmlFormsInitializer implements Initializer {
 				}
 			}
 		}
+		
+		Database.initConnection();
+		
+		//sets set sql mode to no substitution
+		Database.setSQLMode("NO_ENGINE_SUBSTITUTION");
 	}
 	
 	@Override
