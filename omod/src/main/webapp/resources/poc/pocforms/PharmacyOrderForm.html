@@ -697,11 +697,11 @@
 
                     <includeIf velocityTest="$fn.latestObs('166148').valueCoded.id == 166276">
                         <font color='blue' style="font-weight: bold">
-                        <lookup expression="fn.latestObs('166276').valueCoded.name" /> </font>
+                            <lookup expression="fn.latestObs('166276').valueCoded.name" /> </font>
                     </includeIf>
                     <includeIf velocityTest="$fn.latestObs('166148').valueCoded.id == 166363">
                         <font color='blue' style="font-weight: bold">
-                        <lookup expression="fn.latestObs('166363').valueCoded.name" /> </font>
+                            <lookup expression="fn.latestObs('166363').valueCoded.name" /> </font>
                     </includeIf>
 
                 </td>
@@ -759,14 +759,14 @@
         <legend class="legend_style">Service Delivery Model</legend>
         <table class="">
             <tr>
-<!--                <td class="alnleft_s">DSD Status</td>-->
-<!--                <td class="alnleft_s">-->
-<!--                    <obs id="dsdstatus" conceptId="167126" answerConceptIds="167127,167128" answerLabels="Devolved,Not Devolved" required="true">-->
-<!--                        <controls>-->
-<!--                            <when value="167127" thenDisplay="#devolved" />-->
-<!--                        </controls>-->
-<!--                    </obs>-->
-<!--                </td>-->
+                <!--                <td class="alnleft_s">DSD Status</td>-->
+                <!--                <td class="alnleft_s">-->
+                <!--                    <obs id="dsdstatus" conceptId="167126" answerConceptIds="167127,167128" answerLabels="Devolved,Not Devolved" required="true">-->
+                <!--                        <controls>-->
+                <!--                            <when value="167127" thenDisplay="#devolved" />-->
+                <!--                        </controls>-->
+                <!--                    </obs>-->
+                <!--                </td>-->
 
                 <td>
                     <table id="dsdStatus" class="table table-bordered" width="100%">
@@ -782,49 +782,49 @@
                         </tr>
                     </table>
                 </td>
-                    <tr id="devolved" >
+            <tr id="devolved" >
 
-                       <td>
-                            <table id="ServiceDeliveryModel" class="table table-bordered" width="100%">
-                                <tr>
-                                    <td>
-                                        <label>Dispensing Modality</label>
-                                        <obs id="service_delivery_model" conceptId="166148" answerConceptIds="166276,166363" answerLabels="Facility Based DSD Model, Community Based DSD Models">
-                                            <controls>
-                                                <when value="166276" thenDisplay="#Facility_Dispensing" />
-                                                <when value="166363" thenDisplay="#ddd_Dispensing" />
-                                            </controls>
-                                        </obs>
-                                    </td>
-                                </tr>
-                            </table>
-                        </td>
+                <td>
+                    <table id="ServiceDeliveryModel" class="table table-bordered" width="100%">
+                        <tr>
+                            <td>
+                                <label>Dispensing Modality</label>
+                                <obs id="service_delivery_model" conceptId="166148" answerConceptIds="166276,166363" answerLabels="Facility Based DSD Model, Community Based DSD Models">
+                                    <controls>
+                                        <when value="166276" thenDisplay="#Facility_Dispensing" />
+                                        <when value="166363" thenDisplay="#ddd_Dispensing" />
+                                    </controls>
+                                </obs>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
 
-                        <td>
-                            <table id="Facility_Dispensing" class="table table-bordered" width="100%">
-                                <tr>
-                                    <td>
-                                        <label>Facility Dispensing </label>
-                                        <obs id="facility_based" conceptId='166276' answerConceptIds="166151,167107,167108,167109,167110,167111,167112,167124" answerLabels="Fast Track, Facility ART group HCW led,Facility ART group Support group,Decentralization (Hub and Spoke),After hours,Weekend and Public holidays,Child/Teen/Adolescents club (Peer Managed),Mother infant pair/Mentor mother led" />
-                                    </td>
-                                </tr>
-                            </table>
-                        </td>
+                <td>
+                    <table id="Facility_Dispensing" class="table table-bordered" width="100%">
+                        <tr>
+                            <td>
+                                <label>Facility Dispensing </label>
+                                <obs id="facility_based" conceptId='166276' answerConceptIds="166151,167107,167108,167109,167110,167111,167112,167124" answerLabels="Fast Track, Facility ART group HCW led,Facility ART group Support group,Decentralization (Hub and Spoke),After hours,Weekend and Public holidays,Child/Teen/Adolescents club (Peer Managed),Mother infant pair/Mentor mother led" />
+                            </td>
+                        </tr>
+                    </table>
+                </td>
 
-                        <td>
-                            <table id="ddd_Dispensing" class="table table-bordered" width="100%">
-                                <tr>
-                                    <td>
-                                        <label>Community Dispensing (DDD)</label>
-                                        <obs id="community_based" conceptId='166363' answerConceptIds="166134,166135,167113,167114,167115,166280" answerLabels="Community Pharmacy, Community ART Group (HCW-led), Community ART Refill Group (PLHIV-led), Adolescent Community ART/ peer-led groups, One Stop Shop (OSS), Home/Courier Delivery" />
-                                    </td>
-                                </tr>
-                            </table>
-                        </td>
+                <td>
+                    <table id="ddd_Dispensing" class="table table-bordered" width="100%">
+                        <tr>
+                            <td>
+                                <label>Community Dispensing (DDD)</label>
+                                <obs id="community_based" conceptId='166363' answerConceptIds="166134,166135,167113,167114,167115,166280" answerLabels="Community Pharmacy, Community ART Group (HCW-led), Community ART Refill Group (PLHIV-led), Adolescent Community ART/ peer-led groups, One Stop Shop (OSS), Home/Courier Delivery" />
+                            </td>
+                        </tr>
+                    </table>
+                </td>
 
-                    </tr>
+            </tr>
 
-                </tr>
+            </tr>
             <td>
                 <table id="Multi_Month_Dispensing" class="table table-bordered" width="100%">
                     <tr>
@@ -1245,8 +1245,8 @@
             <tr>
                 <obsgroup groupingConceptId="165726">
                     <td>
-                        <obs class='gridmenu' id="oi_drug" conceptId="165727" answerConceptIds="70245,450,76488,80945,85151,71780,159587,73041,73449,75222,75842,76488,166059,81022,84221,84893,
-							931,1447,76613,256,77714,461,77897,79037,82667,85276,924,165257,1679" answerLabels="Acyclovir 200mg tab,Clavulanate pot. Amoxycillin 625mg tab,Fluconazole 50mg cap/tab,Nystatin 100000iu/ml susp,Tinidazole 500mg tab,Azithromycin 500mg cap,Benzathine penicillin 1gm inj,Ceftriaxone 1gm inj,Ciprofloxacin 500mg tab,Doxycycline 100mg cap,Erythromycin 500mg tab,
+                        <obs class='gridmenu' id="oi_drug" conceptId="165727" answerConceptIds="76489,71187,70245,450,76488,80945,85151,71780,159587,73041,73449,75222,75842,76488,166059,81022,84221,84893,
+							931,1447,76613,256,77714,461,77897,79037,82667,85276,924,165257,1679" answerLabels="Flucytosine (100mg/Kg in 4 divided doses),Liposomal Amphotericin B (3mg/Kg IV dly),Acyclovir 200mg tab,Clavulanate pot. Amoxycillin 625mg tab,Fluconazole 50mg cap/tab,Nystatin 100000iu/ml susp,Tinidazole 500mg tab,Azithromycin 500mg cap,Benzathine penicillin 1gm inj,Ceftriaxone 1gm inj,Ciprofloxacin 500mg tab,Doxycycline 100mg cap,Erythromycin 500mg tab,
 							Fluconazole 100mg,Oral Nystatin,Ofloxacin 200mg tab,Spectinomycin 1gm inj,Tetracycline 500mg cap,Amitryptiline 25mg tab,Arthemeter 20mg + Lumefantrine 120mg,Folic Acid tab,Ferrous Sulphate tab,Hydrocortizone,Multivitamin tab,Ibuprofen 200mg,Loperamide 2mg,Promethazine HCL 25mg,Tramadol HCL 50mg,
 							Sulfadoxine/Pyrimethamine 500mg/25mg,Cotrimoxazole,Isoniazid (INH)," />
                         <!--answerConceptIds="165257,76488,1679,80945" answerLabels="Cotrimoxazole,Fluconazole,Isoniazid,Nystatin"/>-->
@@ -1389,7 +1389,7 @@
             <tr>
                 <obsgroup groupingConceptId="165728">
                     <td>
-                        <obs class='gridmenu' id="tb_drug" conceptId="165304" answerConceptIds="1675,768,656,1108" answerLabels="RHZE,RHZ,RHE,EH" />
+                        <obs class='gridmenu' id="tb_drug" conceptId="165304" answerConceptIds="167254,167253,167252,1675,768,656,1108" answerLabels="RH,RHZE/EH,RHZE/RH,RHZE,RHZ,RHE,EH" />
                     </td>
                     <td>
                         <obs class='gridmenu' conceptId="165725" answerConceptIds="166061,165622,166062,162401,5622" answerLabels="150mg/75mg,300mg/150mg,150mg/75mg/40mg,Kit,Others" />
