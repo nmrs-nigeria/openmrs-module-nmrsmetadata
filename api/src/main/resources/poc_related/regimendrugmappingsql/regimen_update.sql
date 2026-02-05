@@ -422,3 +422,8 @@ REPLACE INTO `regimen_drug_mappings` (`regimen_drug_mapping_id`,`regimen_concept
 REPLACE INTO `regimen_drug_mappings` (`regimen_drug_mapping_id`,`regimen_concept_id`,`drugs_concept_id`,`pediatric_strength`,`adult_strength`) VALUES (425,164512,159809,NULL,165624);
 REPLACE INTO `regimen_drug_mappings` (`regimen_drug_mapping_id`,`regimen_concept_id`,`drugs_concept_id`,`pediatric_strength`,`adult_strength`) VALUES (426,166092,103166,NULL,165623);
 REPLACE INTO `regimen_drug_mappings` (`regimen_drug_mapping_id`,`regimen_concept_id`,`drugs_concept_id`,`pediatric_strength`,`adult_strength`) VALUES (427,165691,103166,167219,NULL);
+
+
+REPLACE INTO `regimen_drug_mappings` (`regimen_drug_mapping_id`,`regimen_concept_id`,`drugs_concept_id`,`pediatric_strength`,`adult_strength`) VALUES (428,167258,103166,NULL,165623);
+REPLACE INTO `regimen_drug_mappings` (`regimen_drug_mapping_id`,`regimen_concept_id`,`drugs_concept_id`,`pediatric_strength`,`adult_strength`) VALUES (429,167258,162796,NULL,165705);
+REPLACE INTO `regimen_drug_mappings` (`regimen_drug_mapping_id`,`regimen_concept_id`,`drugs_concept_id`,`pediatric_strength`,`adult_strength`) VALUES (430,165691,167259,167260,NULL);

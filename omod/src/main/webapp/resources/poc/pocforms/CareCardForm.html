@@ -672,20 +672,20 @@
             <tr>
                 <td class="alnleft_s">Cryptococcal Screening status</td>
                 <td class="alnleft_s"> <obs conceptId="167130" answerConceptIds="167131,167132,167133,167134,167135,167136,167137,167138" answerLabels="Not screened,Screened for Cryptococcus Ag,Cr Ag negative,Cr Ag positive,Cr Ag positive commenced on pre-emptive therapy,Diagnosed with Cryptococcal meningitis,Commenced treatment for cryptococcal meningitis,Completed treatment for cryptococcal meningitis" /> </td>
-                
+
                 <includeIf velocityTest="$patient.gender == 'F' ">
-	                <td class="alnleft_s">Cervical Cancer Screening Status</td>
-	                <td class="alnleft_s">
-	                    <obs id="cryptococal" conceptId="167139" answerConceptIds="167140,167141,167142,167143,167144,167145,167146,167147,167148" answerLabels="Not ordered,Ordered yet to screen,Screened negative,Screened positive yet to treat,Screened positive and treated,Screened positive and referred,Screened positive and declined treatment,Suspicious for cancer,Other findings" >
-	                        <controls>
-	                            <when value="167148" thenDisplay="#otherfindings" />
-	                            <when value="167144" thenDisplay="#cv_treatment" />
-	                        </controls>
-	                    </obs>
-	                </td>
+                    <td class="alnleft_s">Cervical Cancer Screening Status</td>
+                    <td class="alnleft_s">
+                        <obs id="cryptococal" conceptId="167139" answerConceptIds="167140,167141,167142,167143,167144,167145,167146,167147,167148" answerLabels="Not ordered,Ordered yet to screen,Screened negative,Screened positive yet to treat,Screened positive and treated,Screened positive and referred,Screened positive and declined treatment,Suspicious for cancer,Other findings" >
+                            <controls>
+                                <when value="167148" thenDisplay="#otherfindings" />
+                                <when value="167144" thenDisplay="#cv_treatment" />
+                            </controls>
+                        </obs>
+                    </td>
                 </includeIf>
-                
-                
+
+
             <tr id="otherfindings" class="alnleft_s">
                 <td>Specify:</td>
                 <td>
@@ -712,9 +712,9 @@
                     Hepatitis B Test</td>
                 <td class="alnleft_s"> <obs conceptId="166036"  /> </td>
                 <td class="alnleft_s">Hepatitis C Test</td>
-                    <td class="alnleft_s">
-                        <obs id="cryptococal" conceptId="165730" answerConceptIds="703,664,167255" answerLabels="positive,negative,treatment" />
-                    </td>
+                <td class="alnleft_s">
+                    <obs id="cryptococal" conceptId="165730" answerConceptIds="703,664,167255" answerLabels="positive,negative,treatment" />
+                </td>
 
             </tr>
         </table>
@@ -727,7 +727,7 @@
         <table>
             <tr>
                 <th style="width:40%; text-align: left;">Other OIs/Other problems</th>
-                </tr>
+            </tr>
             <tr>
                 <td style="width:30%" class="alnVertical">
                     Herpes Zoster
@@ -763,11 +763,11 @@
                     Pneumocystis Jiroveci Pneumonia
                     <obs conceptId="160170" answerConceptId="130021" answerLabel="" />
                     <br />
-                    
+
                     <!-- Other OIs<obs conceptId="165593" /> this was commented out and the updated concept used -->
 
-                    
-                     Other OIs<obs conceptId="167256" /> 
+
+                    Other OIs<obs conceptId="167256" />
 
                 </td>
             </tr>
@@ -1089,7 +1089,7 @@
                             <td id="TPT_Type_non_pregnant">
                                 <label>TPT Type</label>
                                 <!-- Observation for TPT Type -->
-                                <obs id="" conceptId="167176" answerConceptIds="167208,167177,167178,167179" answerLabels="INH Once Daily, 3HP Weekly, 3HR Daily, 1HP Daily">
+                                <obs id="" conceptId="167176" answerConceptIds="167208,167177,167178,167179,167184" answerLabels="INH Once Daily, 3HP Weekly, 3HR Daily, 1HP Daily, CTX/INH/P6">
                                     <controls>
                                         <!-- Control for displaying when TPT Type is INH Once Daily -->
                                         <when value="167208" thenDisplay="#INH_Once_Daily" />
@@ -1108,7 +1108,7 @@
                                 <td id="TPT_Type_pregnant">
                                     <label>TPT Type</label>
                                     <!-- Observation for TPT Type -->
-                                    <obs id="" conceptId="167176" answerConceptIds="167208,167178,167179" answerLabels="INH Once Daily, 3HR Daily, 1HP Daily">
+                                    <obs id="" conceptId="167176" answerConceptIds="167208,167178,167179,167184" answerLabels="INH Once Daily, 3HR Daily, 1HP Daily,CTX/INH/P6">
                                         <controls>
                                             <!-- Control for displaying when TPT Type is INH Once Daily -->
                                             <when value="167208" thenDisplay="#INH_Once_Daily" />
@@ -1124,7 +1124,7 @@
                                 <td id="TPT_Type_breastfeeding">
                                     <label>TPT Type</label>
                                     <!-- Observation for TPT Type -->
-                                    <obs id="" conceptId="167176" answerConceptIds="167208,167178,167179" answerLabels="INH Once Daily, 3HR Daily, 1HP Daily">
+                                    <obs id="" conceptId="167176" answerConceptIds="167208,167178,167179,167184" answerLabels="INH Once Daily, 3HR Daily, 1HP Daily, CTX/INH/P6">
                                         <controls>
                                             <!-- Control for displaying when TPT Type is INH Once Daily -->
                                             <when value="167208" thenDisplay="#INH_Once_Daily" />
@@ -1197,45 +1197,20 @@
             </tr>
         </table>
     </fieldset>
-
-    <fieldset style="width: -webkit-fill-available">
-        <legend class="legend_style">CD4</legend>
-        <table>
-
-            <tr>
-
-                <td class="alnleft">
-                    <div class="enable_clin_control" style="pointer-events: none">
-                        <obs conceptId="165731" style="checkbox" value="false" />CD4+ cell count (cells/mm3)
-                    </div>
-                </td>
-                <td>
-                    <div class="enable_lab_control" style="pointer-events: none">
-                        <obs conceptId="5497"/>
-                    </div>
-                </td>
-                <td>
-                    <div class="enable_clin_control" style="pointer-events: none"><obs conceptId="167085" style="checkbox" value="false" labelText="CD4 LFA" toggle="CD4LFA" /></div>
-                </td>
-                <td><div class="enable_lab_control" style="pointer-events: none"><obs conceptId="167088" answerConceptIds="167086,167087" answerLabels="&lt;200,&gt;=200" /></div></td>
-            </tr>
-        </table>
-    </fieldset>
-
     <fieldset style="width: -webkit-fill-available">
         <legend class="legend_style">Lab Plan</legend>
         <table>
             <tr><th colSpan="3" style="text-align: left;">Lab Orders</th></tr>
             <tr>
                 <td class="alnVertical">
-<!--                    The CD4 under the lab plan was commented out due to the new update of an entire CD4 section-->
-<!--                    <obs conceptId="1271" answerConceptId="657" answerLabel="" />-->
-<!--                    <label style="width: 170px;">CD4</label>-->
+                    <!--                    The CD4 under the lab plan was commented out due to the new update of an entire CD4 section-->
+                    <!--                    <obs conceptId="1271" answerConceptId="657" answerLabel="" />-->
+                    <!--                    <label style="width: 170px;">CD4</label>-->
                     <obs conceptId="1271" answerConceptId="856" answerLabel="" />
                     <label style="width: 170px;">Viral Load</label>
                     <obs conceptId="1271" answerConceptId="156176" answerLabel="" /><label style="width: 170px;">Esophageal Thrush</label>
                     Indication for Viral Load Test <obs conceptId='164980' answerLabels="Targeted,Routine" answerConceptIds=" 162082,161236" />
-                    EAC Session<obs id='eacsession' conceptId='166097' answerConceptIds='165643,165644,165645, 5622' answerLabels="1st Session, 2nd Session, 3rd Session, Additional EAC"/>
+                    EAC Session<obs id='eacsession' conceptId='166097' answerConceptIds='1107,165643,165644,165645, 5622' answerLabels="None,1st Session, 2nd Session, 3rd Session, Additional EAC"/>
                 </td>
                 <td class="alnVertical">
                     <obs conceptId="1271" answerConceptId="165737" answerLabel="" /><label style="width: 170px;">HB/PCV</label>
@@ -1318,7 +1293,7 @@
 
     <fieldset style="width: -webkit-fill-available">
         <legend class="legend_style">Additional Comments/Clinical Notes</legend>
-        <obs conceptId="165045" style="textarea" rows="10" cols="10" />
+        <obs conceptId="167256" style="textarea" rows="10" cols="10" />
     </fieldset>
 
     <fieldset style="width: -webkit-fill-available">
