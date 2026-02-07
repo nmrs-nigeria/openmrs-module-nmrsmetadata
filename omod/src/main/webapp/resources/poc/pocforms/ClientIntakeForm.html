@@ -508,43 +508,6 @@
 
         });
 
-        /*
-        $j(function(){
-        if(getField('rapid.value') != null){
-        getField('rapid.value').change(function(){
-        if(getValue('rapid.value')=="165851"){
-        setValue('final_recency_test.value',"165851")
-        }
-        });
-        }
-        });
-        */
-
-        /*
-        $j(function(){
-            $j('#setting_name_pitc').hide();
-            $j('#setting_pitc').hide();
-            $j('#setting_vtc').hide();
-            if($j('#kind_of_hts') != null){
-                $j('#kind_of_hts').change(function(){
-                    if($j('#kind_of_hts').val() == "Voluntary"){
-                        console.log("This is voluntary");
-                        $j('#setting_vtc').show();
-                        $j('#setting_name_vtc').show();
-                        $j('#setting_name_pitc').hide();
-                        $j('#setting_pitc').hide();
-                    }else if($j('#kind_of_hts').val() == "PITC") {
-                        console.log("This is pitc");
-                        $j('#setting_name_pitc').show();
-                        $j('#setting_pitc').show();
-                        $j('#setting_vtc').hide();
-                        $j('#setting_name_vtc').hide();
-                    }
-                });
-            }
-        });
-        */
-
         $j(function() {
             $j('#no_wives_label').hide();
             $j('#no_wives').hide();
@@ -947,12 +910,10 @@
                             $('#result').show();
                             setValue('result.value', 703);
                             $('#result').attr("style", "pointer-events: none;");
-                            //$('#recency').show();
                         } else {
                             $('#result').show();
                             setValue('result.value', 664);
                             $('#result').attr("style", "pointer-events: none;");
-                            //$('#recency').hide();
                         }
 
 
@@ -981,12 +942,10 @@
                         $('#result').show();
                         setValue('result.value', 703);
                         $('#result').attr("style", "pointer-events: none;");
-                        //$('#recency').show();
                     } else {
                         $('#result').show();
                         setValue('result.value', 664);
                         $('#result').attr("style", "pointer-events: none;");
-                        //$('#recency').hide();
                     }
 
 
@@ -1100,10 +1059,9 @@
                             setValue('final_recency_value.value', 166236);
                             $('#final_recency_value').attr("style", "pointer-events: none;");
                         }
-                        if (vlresult == "166240") {
+                        if (vlresult == "166240" || vlresult == "163611") {
                             setValue('final_recency_value.value', 166237);
                             $('#final_recency_value').attr("style", "pointer-events: none;");
-                            //$('#vl_result_obs').attr("style", "pointer-events: none;");
                         }
                         if (vlresult == "166238") {
                             setValue('final_recency_value.value', 166235);
@@ -1131,7 +1089,7 @@
                         if (vlresult_entered == "166239") {
                             setValue('final_recency_value.value', 166236);
                         }
-                        if (vlresult_entered == "166240") {
+                        if (vlresult_entered == "166240" || vlresult_entered == "163611") {
                             setValue('final_recency_value.value', 166237);
                         }
                     }
@@ -1140,23 +1098,14 @@
         });
     </script>
 
+    <!-- FIX APPLIED: Updated control_line change handler to use helper function for VL request activation -->
     <script>
         jQuery(function() {
             if (getField('control_line.value') != null) {
                 getField('control_line.value').change(function() {
                     var ctrln = getValue('control_line.value');
-                    if (ctrln == "1065") {
-                        //setValue('final_recency_test_recent.value', 664);
-                        //$('#final_recency_test_recent').attr("style", "pointer-events: none;");
-                        $('#tb_vl_request').attr("style", "pointer-events: none;");
-
-                    } else {
-                        //setValue('final_recency_test_recent.value', 163611);
-                        //$('#final_recency_test_recent').attr("style", "pointer-events: none;");
-                        $('#tb_vl_request').attr("style", "pointer-events: none;");
-
-                    }
-
+                    // Control line change no longer directly manages VL request;
+                    // that is handled by the unified recency interpretation handler below.
                 });
             }
         });
@@ -1167,57 +1116,34 @@
         jQuery(function() {
             if (getField('longterm_line.value') != null) {
                 getField('longterm_line.value').change(function() {
-                    var vffln = getValue('verification_line.value');
-                    var ctrln = getValue('control_line.value');
-                    var lngln = getValue('longterm_line.value');
-                    if (ctrln == "1065") {
-                        if (vffln == "1066") {
-                            if (lngln == "1065") {
-                                // setValue('final_recency_test_recent.value', 163611);
-                                //$('#final_recency_test_recent').attr("style", "pointer-events: none;");
-                                $('#tb_vl_request').attr("style", "pointer-events: none;");
-                            }
-
-
-                        } else {
-                            if (lngln == "1065") {
-                                //setValue('final_recency_test_recent.value', 165851);
-                                //$('#final_recency_test_recent').attr("style", "pointer-events: none;");
-                                $('#tb_vl_request').attr("style", "pointer-events: none;");
-                            } else {
-                                // setValue('final_recency_test_recent.value', 165852);
-                                //$('#final_recency_test_recent').attr("style", "pointer-events: none;");
-                                //$('#tb_vl_request').attr("style", "pointer-events: auto;");
-                            }
-                        }
-
-
-                    } else {
-                        // setValue('final_recency_test_recent.value', 163611);
-                        //$('#final_recency_test_recent').attr("style", "pointer-events: none;");
-                        $('#tb_vl_request').attr("style", "pointer-events: none;");
-
-                    }
-
+                    // Long-term line change no longer directly manages VL request;
+                    // that is handled by the unified recency interpretation handler below.
                 });
             }
         });
     </script>
 
 
+    <!-- FIX APPLIED: Updated final_recency_test_recent change handler.
+         Algorithm: Recent (165852) OR Invalid (163611) => activate VL request and show viral_load_table
+                    Long-Term (165851) OR Negative (664) => disable VL request -->
     <script>
         jQuery(function() {
             if (getField('final_recency_test_recent.value') != null) {
                 getField('final_recency_test_recent.value').change(function() {
                     var frtr = getValue('final_recency_test_recent.value');
 
-                    if (frtr == "165852") {
-
-                        $('#tb_vl_request').attr("style", "pointer-events: auto;");
-                        //setValue('tb_vl_request.value', 1066);
-
+                    if (frtr == "165852" || frtr == "163611") {
+                        // Recent or Invalid => show viral_load_table and activate VL request dropdown
+                        jQuery('#viral_load_table').show();
+                        jQuery('#viral_load_table').removeAttr('style');
+                        jQuery('#tb_vl_request').attr("style", "pointer-events: auto;");
                     } else {
-                        // $('#tb_vl_request').attr("style", "pointer-events: none;");
+                        // Long-Term or Negative => hide viral_load_table and disable VL request dropdown
+                        jQuery('#viral_load_table').hide();
+                        jQuery('#tb_vl_request').attr("style", "pointer-events: none;");
+                        setValue('tb_vl_request.value', "");
+                        jQuery('#new_tag').hide();
                     }
 
 
@@ -1251,6 +1177,98 @@
                     e.preventDefault();
                 }
             }
+
+            /* ============================================================
+               FIX: Edit-mode initialization for VL request and
+               viral load confirmation fields visibility.
+               
+               Problem: In edit mode, OpenMRS HFE loads saved values
+               into dropdowns but does NOT re-fire the change events
+               that control conditional visibility via thenDisplay.
+               
+               The tb_vl_request dropdown appears (because its parent
+               viral_load_table is shown), but:
+               (a) Its saved value may not be visually selected
+               (b) The #new_tag section (VL confirmation fields) 
+                   stays hidden because thenDisplay never re-fires
+               
+               Solution: On page load, read the actual select element
+               values directly from the DOM and force visibility.
+               ============================================================ */
+            function initializeEditModeVisibility() {
+                // Read values directly from DOM select elements as fallback
+                var savedOptout = '';
+                var savedRecency = '';
+                var savedVlRequest = '';
+
+                try { savedOptout = getValue('tb_optout.value'); } catch(e) {}
+                try { savedRecency = getValue('final_recency_test_recent.value'); } catch(e) {}
+                try { savedVlRequest = getValue('tb_vl_request.value'); } catch(e) {}
+
+                // Fallback: read directly from the select element in the DOM
+                if (!savedVlRequest || savedVlRequest === '') {
+                    var vlSelect = jQuery('#tb_vl_request select, #tb_vl_request input');
+                    if (vlSelect.length > 0) {
+                        savedVlRequest = vlSelect.val();
+                    }
+                }
+                if (!savedOptout || savedOptout === '') {
+                    var optoutSelect = jQuery('#tb_optout select, #tb_optout input');
+                    if (optoutSelect.length > 0) {
+                        savedOptout = optoutSelect.val();
+                    }
+                }
+                if (!savedRecency || savedRecency === '') {
+                    var recencySelect = jQuery('#final_recency_test_recent select, #final_recency_test_recent input');
+                    if (recencySelect.length > 0) {
+                        savedRecency = recencySelect.val();
+                    }
+                }
+
+                console.log('Edit mode init - optout:', savedOptout, 'recency:', savedRecency, 'vlRequest:', savedVlRequest);
+
+                if (savedOptout == "1066") {
+                    // Recency testing was done (Opt out = No)
+                    jQuery('#recency_table').show();
+
+                    if (savedRecency == "165852" || savedRecency == "163611") {
+                        // Recent or Invalid => show VL request section
+                        jQuery('#viral_load_table').show();
+                        jQuery('#viral_load_table').removeAttr('style');
+                        jQuery('#tb_vl_request').attr("style", "pointer-events: auto;");
+
+                        if (savedVlRequest == "1065") {
+                            // VL request = Yes => show ALL viral load confirmation fields
+                            jQuery('#new_tag').show();
+                            jQuery('#new_tag').removeAttr('style');
+                            jQuery('#new_tag').find('tr, td, input, select').show();
+                        }
+                    } else if (savedRecency == "165851" || savedRecency == "664") {
+                        // Long-Term or Negative => keep VL request hidden/disabled
+                        jQuery('#tb_vl_request').attr("style", "pointer-events: none;");
+                    }
+
+                    jQuery('#final_recency_test_recent').attr("style", "pointer-events: none;");
+                }
+
+                // Re-apply edit mode field locks
+                var urll = window.location.href;
+                if (/editHtml/.test(urll)) {
+                    jQuery('#tb_optout').attr("style", "pointer-events: none;");
+                    jQuery('#test_name_dropdown').attr("style", "pointer-events: none;");
+                    jQuery('#recency_test_date').attr("style", "pointer-events: none;");
+                    jQuery('#test_name').attr("style", "pointer-events: none;");
+                    jQuery('#control_line').attr("style", "pointer-events: none;");
+                    jQuery('#verification_line').attr("style", "pointer-events: none;");
+                    jQuery('#longterm_line').attr("style", "pointer-events: none;");
+                    jQuery('#final_recency_test_recent').attr("style", "pointer-events: none;");
+                }
+            }
+
+            // Run with multiple retries for slow page loads on NigeriaMRS
+            setTimeout(initializeEditModeVisibility, 500);
+            setTimeout(initializeEditModeVisibility, 1500);
+            setTimeout(initializeEditModeVisibility, 3000);
         }
     </script>
 
@@ -1296,165 +1314,89 @@
         });
 
 
+        /* FIX APPLIED: Unified three-line recency logic with correct VL request activation.
+           Algorithm:
+           - Recent (165852) => VL request ACTIVATED
+           - Invalid (163611) => VL request ACTIVATED
+           - Long-Term (165851) => VL request DISABLED
+           - Negative (664) => VL request DISABLED
+        */
+
+        /**
+         * Helper function to set VL request activation based on recency interpretation.
+         * Called after every control/verification/longterm line change.
+         */
+        function applyVlRequestActivation(recencyValue) {
+            if (recencyValue == "165852" || recencyValue == "163611") {
+                // Recent or Invalid => show viral_load_table and activate VL request
+                jQuery('#viral_load_table').show();
+                jQuery('#viral_load_table').removeAttr('style');
+                jQuery('#tb_vl_request').attr("style", "pointer-events: unset;");
+            } else {
+                // Long-Term (165851) or Negative (664) => hide viral_load_table and disable VL request
+                jQuery('#viral_load_table').hide();
+                setValue('tb_vl_request.value', "");
+                jQuery('#tb_vl_request').attr("style", "pointer-events: none;");
+                jQuery('#new_tag').hide();
+            }
+        }
+
+        /**
+         * Helper function to determine recency interpretation from the three lines
+         * and apply the result consistently.
+         */
+        function evaluateRecencyLines() {
+            var control_line = getValue('control_line.value');
+            var verification_line = getValue('verification_line.value');
+            var longterm_line = getValue('longterm_line.value');
+            var recencyValue = "";
+
+            if (control_line == "1065") {
+                if (verification_line == "1065") {
+                    if (longterm_line == "1065") {
+                        // Control=Yes, Verification=Yes, LongTerm=Yes => Long-Term (165851)
+                        recencyValue = "165851";
+                    } else if (longterm_line == "1066") {
+                        // Control=Yes, Verification=Yes, LongTerm=No => Recent (165852)
+                        recencyValue = "165852";
+                    }
+                } else if (verification_line == "1066") {
+                    if (longterm_line == "1066") {
+                        // Control=Yes, Verification=No, LongTerm=No => Negative (664)
+                        recencyValue = "664";
+                    } else if (longterm_line == "1065") {
+                        // Control=Yes, Verification=No, LongTerm=Yes => Invalid (163611)
+                        recencyValue = "163611";
+                    }
+                }
+            } else if (control_line == "1066") {
+                // Control=No => Invalid (163611)
+                recencyValue = "163611";
+            }
+
+            if (recencyValue !== "") {
+                setValue('final_recency_test_recent.value', recencyValue);
+                $('#final_recency_test_recent').attr("style", "pointer-events: none;");
+                applyVlRequestActivation(recencyValue);
+            }
+        }
+
         jQuery(function() {
             $('#final_recency_test_recent').attr("style", "pointer-events: none;");
+
             if (document.getElementById("control_line") != null) {
                 document.getElementById("control_line").addEventListener("change", function() {
-                    var control_line = getValue('control_line.value');
-                    var verification_line = getValue('verification_line.value');
-                    var longterm_line = getValue('longterm_line.value');
-                    if (control_line == "1065") {
-                        if (verification_line == "1065") {
-                            if (longterm_line == "1065") {
-                                setValue('final_recency_test_recent.value', 165851);
-                                $('#final_recency_test_recent').attr("style", "pointer-events: none;");
-                                setValue('tb_vl_request.value', "");
-                                // $('#tb_vl_request').attr("style", "pointer-events: none;");
-                            }
-                        }
-                    }
-                    if (control_line == "1065") {
-                        if (verification_line == "1065") {
-                            if (longterm_line == "1066") {
-                                setValue('final_recency_test_recent.value', 165852);
-                                $('#final_recency_test_recent').attr("style", "pointer-events: none;");
-                                // $('#tb_vl_request').attr("style", "pointer-events: unset;");
-                            }
-                        }
-                    }
-                    if (control_line == "1065") {
-                        if (verification_line == "1066") {
-                            if (longterm_line == "1066") {
-                                setValue('final_recency_test_recent.value', 664);
-                                $('#final_recency_test_recent').attr("style", "pointer-events: none;");
-                                setValue('tb_vl_request.value', "");
-                                // $('#tb_vl_request').attr("style", "pointer-events: none;");
-                            }
-                        }
-                    }
-                    if (control_line == "1065") {
-                        if (verification_line == "1066") {
-                            if (longterm_line == "1065") {
-                                setValue('final_recency_test_recent.value', 163611);
-                                $('#final_recency_test_recent').attr("style", "pointer-events: none;");
-                                setValue('tb_vl_request.value', "");
-                                // $('#tb_vl_request').attr("style", "pointer-events: none;");
-                            }
-                        }
-                    }
-                    if (control_line == "1066") {
-                        setValue('final_recency_test_recent.value', 163611);
-                        $('#final_recency_test_recent').attr("style", "pointer-events: none;");
-                        setValue('tb_vl_request.value', "");
-                        // $('#tb_vl_request').attr("style", "pointer-events: none;");
-
-                    }
-
+                    evaluateRecencyLines();
                 });
             }
             if (document.getElementById("verification_line") != null) {
                 document.getElementById("verification_line").addEventListener("change", function() {
-                    var control_line = getValue('control_line.value');
-                    var verification_line = getValue('verification_line.value');
-                    var longterm_line = getValue('longterm_line.value');
-                    if (control_line == "1065") {
-                        if (verification_line == "1065") {
-                            if (longterm_line == "1065") {
-                                setValue('final_recency_test_recent.value', 165851);
-                                $('#final_recency_test_recent').attr("style", "pointer-events: none;");
-                                setValue('tb_vl_request.value', "");
-                                // $('#tb_vl_request').attr("style", "pointer-events: none;");
-                            }
-                        }
-                    }
-                    if (control_line == "1065") {
-                        if (verification_line == "1065") {
-                            if (longterm_line == "1066") {
-                                setValue('final_recency_test_recent.value', 165852);
-                                $('#final_recency_test_recent').attr("style", "pointer-events: none;");
-                                // $('#tb_vl_request').attr("style", "pointer-events: unset;");
-                            }
-                        }
-                    }
-                    if (control_line == "1065") {
-                        if (verification_line == "1066") {
-                            if (longterm_line == "1066") {
-                                setValue('final_recency_test_recent.value', 664);
-                                $('#final_recency_test_recent').attr("style", "pointer-events: none;");
-                                setValue('tb_vl_request.value', "");
-                                // $('#tb_vl_request').attr("style", "pointer-events: none;");
-                            }
-                        }
-                    }
-                    if (control_line == "1065") {
-                        if (verification_line == "1066") {
-                            if (longterm_line == "1065") {
-                                setValue('final_recency_test_recent.value', 163611);
-                                $('#final_recency_test_recent').attr("style", "pointer-events: none;");
-                                setValue('tb_vl_request.value', "");
-                                // $('#tb_vl_request').attr("style", "pointer-events: none;");
-                            }
-                        }
-                    }
-                    if (control_line == "1066") {
-                        setValue('final_recency_test_recent.value', 163611);
-                        $('#final_recency_test_recent').attr("style", "pointer-events: none;");
-                        setValue('tb_vl_request.value', "");
-                        // $('#tb_vl_request').attr("style", "pointer-events: none;");
-
-                    }
+                    evaluateRecencyLines();
                 });
             }
             if (document.getElementById("longterm_line") != null) {
                 document.getElementById("longterm_line").addEventListener("change", function() {
-                    var control_line = getValue('control_line.value');
-                    var verification_line = getValue('verification_line.value');
-                    var longterm_line = getValue('longterm_line.value');
-                    if (control_line == "1065") {
-                        if (verification_line == "1065") {
-                            if (longterm_line == "1065") {
-                                setValue('final_recency_test_recent.value', 165851);
-                                $('#final_recency_test_recent').attr("style", "pointer-events: none;");
-                                setValue('tb_vl_request.value', "");
-                                // $('#tb_vl_request').attr("style", "pointer-events: none;");
-                            }
-                        }
-                    }
-                    if (control_line == "1065") {
-                        if (verification_line == "1065") {
-                            if (longterm_line == "1066") {
-                                setValue('final_recency_test_recent.value', 165852);
-                                $('#final_recency_test_recent').attr("style", "pointer-events: none;");
-                                // $('#tb_vl_request').attr("style", "pointer-events: unset;");
-                            }
-                        }
-                    }
-                    if (control_line == "1065") {
-                        if (verification_line == "1066") {
-                            if (longterm_line == "1066") {
-                                setValue('final_recency_test_recent.value', 664);
-                                $('#final_recency_test_recent').attr("style", "pointer-events: none;");
-                                setValue('tb_vl_request.value', "");
-                                // $('#tb_vl_request').attr("style", "pointer-events: none;");
-                            }
-                        }
-                    }
-                    if (control_line == "1065") {
-                        if (verification_line == "1066") {
-                            if (longterm_line == "1065") {
-                                setValue('final_recency_test_recent.value', 163611);
-                                $('#final_recency_test_recent').attr("style", "pointer-events: none;");
-                                setValue('tb_vl_request.value', "");
-                                // $('#tb_vl_request').attr("style", "pointer-events: none;");
-                            }
-                        }
-                    }
-                    if (control_line == "1066") {
-                        setValue('final_recency_test_recent.value', 163611);
-                        $('#final_recency_test_recent').attr("style", "pointer-events: none;");
-                        setValue('tb_vl_request.value', "");
-                        // $('#tb_vl_request').attr("style", "pointer-events: none;");
-                    }
+                    evaluateRecencyLines();
                 });
             }
 
@@ -1469,7 +1411,6 @@
 
                     var recentID_verify2 = getValue('recency_number_verif_value.value');
                     var rec_num = getValue('recency_number_verif_value.value').length;
-                    // window.alert('rec_num1:- ' +rec_num+' Out of Range');
                     var outrange = document.getElementById("outrange")
                     if (rec_num > 10) {
                         outrange.textContent = "#Participant ID must not be more than 10 characters"
@@ -1628,26 +1569,6 @@
 
 
 
-    <!--    <div class="hidden" headerLabel="Encounter Details" headerStyle="title" id="encounter-details" sectionTag="section">-->
-    <!--        <fieldset>-->
-    <!--            <legend class="legend_style">When?</legend>-->
-    <!--            <label>When?</label>-->
-    <!--            <encounterDate allowFutureDates="false" default="now" showTime="false"/>-->
-    <!--        </fieldset>-->
-
-    <!--        <fieldset>-->
-    <!--            <legend>Who?</legend>-->
-    <!--            <label>Who?</label>-->
-    <!--            <encounterProviderAndRole default="currentUser" encounterRole="240b26f9-dd88-4172-823d-4a8bfeb7841f" required="true"/>-->
-    <!--        </fieldset>-->
-
-    <!--        <fieldset>-->
-    <!--            <legend>Where?</legend>-->
-    <!--            <label>Where?</label>-->
-    <!--            <encounterLocation default="SessionAttribute:emrContext.sessionLocationId"/>-->
-    <!--        </fieldset>-->
-    <!--    </div>-->
-
     <table style="margin-bottom: 20px;">
         <thead>
         <tr>
@@ -1683,7 +1604,6 @@
 
             <td class="alnleft_s" id="setting_name_pitc">Setting</td>
             <td class="alnleft_s" id="setting_pitc">
-                <!-- <obs answerConceptIds="160539,160529,160546,5271,160542,161629,160545,165838,5622" answerLabels="VCT,TB,STI,FP,OPD,Ward,Outreach program,Standalone HTS, Others" conceptId="165839" id="setting" required="true"> -->
                 <obs answerConceptIds="160539,160529,160546,5271,160542,161629,160545,165838,5622" answerLabels="CT,TB,STI,FP,OPD,Ward,Outreach,Standalone HTS, Others" conceptId="165839" id="setting" required="true">
 
                     <controls>
@@ -1711,7 +1631,6 @@
             <td class="alnleft_s">MER Modality</td>
             <td class="alnleft_s">
                 <obs id="ct_value" conceptId="167154"  answerConceptIds="160546,1882,166020,1896,5964,160539,167159 " answerLabels="STI, Emergency, Index, Inpatient, TB, VCT" />
-                <!-- The last concept ID (, PMTCT,) was delibrately left to pick the defualt concept name from the DB -->
             </td>
         </tr>
 
@@ -1811,7 +1730,7 @@
             </td>
             <td class="alnleft_s">Type of Session</td>
             <td class="alnleft_s">
-                <obs answerConceptIds="165792,165789,165885" answerLabels="Individual, Couple, Previously self tested" conceptId="165793" />
+                <obs answerConceptIds="165792,165789,165885,165350" answerLabels="Individual, Couple, Previously self tested, Group Counselling" conceptId="165793" />
             </td>
             <td class="alnleft_s">Referred from</td>
             <td class="alnleft_s">
@@ -2319,7 +2238,7 @@
                     </td>
                     <td class="alnleft_f" id="vl_result_label">Viral Load Result Classification:</td>
                     <td class="alnleft_f">
-                        <obs answerConceptIds="166238,166239,166240" answerLabels="&lt;1000,&gt;=1000,Failed VL" conceptId="166241" id="vl_result_clasification" />
+                        <obs answerConceptIds="166238,166239,166240,163611" answerLabels="&lt;1000,&gt;=1000,Failed VL,Invalid" conceptId="166241" id="vl_result_clasification" />
                     </td>
                 </tr>
 
@@ -2369,8 +2288,6 @@
         beforeSubmit.push(function() {
             var tb_optout = getValue('tb_optout.value');
 
-            //var recency_number_value= getValue('recency_number_value.value');
-            // var recency_number_value = $('input:text', '#recency_number_value').eq(0).val();
             var recency_number_verif_value = getValue('recency_number_verif_value.value');
             var control_line = getValue('control_line.value');
             var verification_line = getValue('verification_line.value');
@@ -2379,15 +2296,9 @@
             var final_recency_value = getValue('final_recency_value.value');
             var recency_test_date = getValue('recency_test_date.value');
             var test_name_dropdown = getValue('test_name_dropdown.value');
-            //var vl_result_obs = getValue('vl_result_obs.value');
-            //var longterm_line = getValue('longterm_line.value');
 
             if (tb_optout === "1066") {
 
-                //var userKeyRegExp = /^[A-Z][A-Z][0-9]{8}$/;
-                //var recencyNum= getValue('recency_number_value.value');
-
-                //var recencyNum= $('input:text', '#recency_number_value').eq(0).val();
                 var recencyVer = getValue('recency_number_verif_value.value');
 
                 var patientIdentifier_recency = $('input:text', '#recency_number_value').eq(0).val();
@@ -2592,13 +2503,6 @@
     <fieldset>
         <legend class="legend_style">Post Test Counseling</legend>
         <table class="table" width="100%">
-            <!--<tr>-->
-            <!--<td colspan="1">Initial HIV Test:</td>-->
-            <!--<td><obs conceptId="1040" /></td>-->
-            <!--<td colspan="1">Confirmatory HIV Test:</td>-->
-            <!--<td><obs conceptId="1326" /></td>-->
-
-            <!--</tr>-->
 
         </table>
         <table class="table" width="100%">
@@ -2853,47 +2757,6 @@
         </table>
     </fieldset>
 
-
-    <!-- UPDATED -->
-<!--    <fieldset>-->
-<!--        <legend class="legend_style">Population Type</legend>-->
-<!--        <table width="100%" border="0">-->
-<!--            <td>-->
-<!--                <table>-->
-<!--                    <td>-->
-<!--                        <tr>-->
-<!--                    <td class="alnleft_s">Population Type</td>-->
-<!--                    <td>-->
-<!--                        <obs id="key_pop" conceptId="167207" answerLabels="Key Population,General Population" answerConceptIds="166910,166912" required="true">-->
-<!--                            <controls>-->
-<!--                                <when value="166910" thenDisplay="#key_pop_type" />-->
-<!--                            </controls>-->
-<!--                        </obs>-->
-<!--                    </td>-->
-<!--                    </tr>-->
-<!--            </td>-->
-<!--        </table>-->
-<!--        </td>-->
-
-<!--        <td>-->
-<!--            <table class="table" width="100%" id="key_pop_type">-->
-<!--                <tr>-->
-<!--                    <td>Key Population Type</td>-->
-<!--                    <includeIf velocityTest="$patient.gender == 'F' ">-->
-<!--                        <td>-->
-<!--                            <obs conceptId="166369" answerLabels="FSW,PWID,TG,People in prisons and other enclosed settings" answerConceptIds="166285,166286,166287,162277" />-->
-<!--                        </td>-->
-<!--                    </includeIf>-->
-<!--                    <includeIf velocityTest="$patient.gender == 'M' ">-->
-<!--                        <td>-->
-<!--                            <obs conceptId="166369" answerLabels="MSM,PWID,TG,People in prisons and other enclosed settings" answerConceptIds="160578,166286,166287,162277" />-->
-<!--                        </td>-->
-<!--                    </includeIf>-->
-<!--                </tr>-->
-<!--            </table>-->
-<!--        </td>-->
-<!--        </table>-->
-<!--    </fieldset>-->
 
     <fieldset>
         <legend class="legend_style">Signature and date</legend>
