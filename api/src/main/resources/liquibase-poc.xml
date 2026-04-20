@@ -1158,6 +1158,114 @@
 	<!-- 	]]>  -->
     <!--     </sql>   -->
 	<!--  </changeSet>   -->
-   
-    
+
+
+    <!-- ============================================================ -->
+    <!-- new_tools: concepts 167261–167601                            -->
+    <!-- ============================================================ -->
+
+    <changeSet id="new_tools_concept_20260419" author="Adeyemi" runOnChange="true">
+        <sql>SET FOREIGN_KEY_CHECKS=0;</sql>
+        <sqlFile path="poc_related/new_tools/concepts/concept.sql"
+                 stripComments="true"
+                 splitStatements="true"
+                 encoding="UTF-8"
+                 endDelimiter=";"/>
+        <sql>SET FOREIGN_KEY_CHECKS=1;</sql>
+    </changeSet>
+
+    <changeSet id="new_tools_concept_name_20260419" author="Adeyemi" runOnChange="true">
+        <sql>SET FOREIGN_KEY_CHECKS=0;</sql>
+        <sqlFile path="poc_related/new_tools/concepts/concept_name.sql"
+                 stripComments="true"
+                 splitStatements="true"
+                 encoding="UTF-8"
+                 endDelimiter=";"/>
+        <sql>SET FOREIGN_KEY_CHECKS=1;</sql>
+    </changeSet>
+
+    <changeSet id="new_tools_concept_description_20260419" author="Adeyemi" runOnChange="true">
+        <sql>SET FOREIGN_KEY_CHECKS=0;</sql>
+        <sqlFile path="poc_related/new_tools/concepts/concept_description.sql"
+                 stripComments="true"
+                 splitStatements="true"
+                 encoding="UTF-8"
+                 endDelimiter=";"/>
+        <sql>SET FOREIGN_KEY_CHECKS=1;</sql>
+    </changeSet>
+
+    <changeSet id="new_tools_concept_numeric_20260419" author="Adeyemi" runOnChange="true">
+        <sql>SET FOREIGN_KEY_CHECKS=0;</sql>
+        <sqlFile path="poc_related/new_tools/concepts/concept_numeric.sql"
+                 stripComments="true"
+                 splitStatements="true"
+                 encoding="UTF-8"
+                 endDelimiter=";"/>
+        <sql>SET FOREIGN_KEY_CHECKS=1;</sql>
+    </changeSet>
+
+    <changeSet id="new_tools_concept_answer_20260419" author="Adeyemi" runOnChange="true">
+        <sql>SET FOREIGN_KEY_CHECKS=0;</sql>
+        <sqlFile path="poc_related/new_tools/concepts/concept_answer.sql"
+                 stripComments="true"
+                 splitStatements="true"
+                 encoding="UTF-8"
+                 endDelimiter=";"/>
+        <sql>SET FOREIGN_KEY_CHECKS=1;</sql>
+    </changeSet>
+
+    <changeSet id="new_tools_regimen_drug_mapping_20260419" author="Adeyemi" runOnChange="true">
+        <sql>SET FOREIGN_KEY_CHECKS=0;</sql>
+        <sqlFile path="poc_related/new_tools/regimendrugmapping/regimen_drug_mapping.sql"
+                 stripComments="true"
+                 splitStatements="true"
+                 encoding="UTF-8"
+                 endDelimiter=";"/>
+        <sql>SET FOREIGN_KEY_CHECKS=1;</sql>
+    </changeSet>
+
+    <!-- ============================================================ -->
+    <!-- new_tools: 11 new/updated forms with AmpathJsonSchema (O3)   -->
+    <!-- ============================================================ -->
+
+    <changeSet id="new_tools_encounter_type_20260419" author="Adeyemi" runOnChange="true">
+        <sql>SET FOREIGN_KEY_CHECKS=0;</sql>
+        <sqlFile path="poc_related/new_tools/encounter_type/encounter_type.sql"
+                 stripComments="true"
+                 splitStatements="true"
+                 encoding="UTF-8"
+                 endDelimiter=";"/>
+        <sql>SET FOREIGN_KEY_CHECKS=1;</sql>
+    </changeSet>
+
+    <changeSet id="new_tools_form_20260419" author="Adeyemi" runOnChange="true">
+        <sql>SET FOREIGN_KEY_CHECKS=0;</sql>
+        <sqlFile path="poc_related/new_tools/forms/form.sql"
+                 stripComments="true"
+                 splitStatements="true"
+                 encoding="UTF-8"
+                 endDelimiter=";"/>
+        <sql>SET FOREIGN_KEY_CHECKS=1;</sql>
+    </changeSet>
+
+    <changeSet id="new_tools_clob_datatype_storage_20260419" author="Adeyemi" runOnChange="true">
+        <sql>SET FOREIGN_KEY_CHECKS=0;</sql>
+        <sqlFile path="poc_related/new_tools/forms/clob_datatype_storage.sql"
+                 stripComments="true"
+                 splitStatements="true"
+                 encoding="UTF-8"
+                 endDelimiter=";"/>
+        <sql>SET FOREIGN_KEY_CHECKS=1;</sql>
+    </changeSet>
+
+    <changeSet id="new_tools_form_resource_20260419" author="Adeyemi" runOnChange="true">
+        <sql>SET FOREIGN_KEY_CHECKS=0;</sql>
+        <sqlFile path="poc_related/new_tools/forms/form_resource.sql"
+                 stripComments="true"
+                 splitStatements="true"
+                 encoding="UTF-8"
+                 endDelimiter=";"/>
+        <sql>SET FOREIGN_KEY_CHECKS=1;</sql>
+    </changeSet>
+
 </databaseChangeLog>
