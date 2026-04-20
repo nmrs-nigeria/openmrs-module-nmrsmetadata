@@ -27,12 +27,10 @@ REPLACE INTO `form_resource` (`form_resource_id`, `form_id`, `name`, `value_refe
 (227, 22, 'JSON schema', 'dcdbf099-3166-11f0-b8e6-0a0027000011', 'AmpathJsonSchema', NULL, NULL, NULL, 'dcdbf0b8-3166-11f0-b8e6-0a0027000011', NULL, NULL),
 (228, 45, 'JSON schema', 'dcdd1aea-3166-11f0-b8e6-0a0027000011', 'AmpathJsonSchema', NULL, NULL, NULL, 'dcdd1b00-3166-11f0-b8e6-0a0027000011', NULL, NULL),
 (229, 19, 'JSON schema', 'dcddd416-3166-11f0-b8e6-0a0027000011', 'AmpathJsonSchema', NULL, NULL, NULL, 'dcddd42e-3166-11f0-b8e6-0a0027000011', NULL, NULL),
-(230, 13, 'JSON schema', 'dcde8b9f-3166-11f0-b8e6-0a0027000011', 'AmpathJsonSchema', NULL, NULL, NULL, 'dcde8bb3-3166-11f0-b8e6-0a0027000011', NULL, NULL),
 (231, 10, 'JSON schema', 'dcdf515b-3166-11f0-b8e6-0a0027000011', 'AmpathJsonSchema', NULL, NULL, NULL, 'dcdf5175-3166-11f0-b8e6-0a0027000011', NULL, NULL),
 (232, 81, 'JSON schema', 'dce00bdc-3166-11f0-b8e6-0a0027000011', 'AmpathJsonSchema', NULL, NULL, NULL, 'dce00bea-3166-11f0-b8e6-0a0027000011', NULL, NULL);
 REPLACE INTO `form_resource` (`form_resource_id`, `form_id`, `name`, `value_reference`, `datatype`, `datatype_config`, `preferred_handler`, `handler_config`, `uuid`, `date_changed`, `changed_by`) VALUES
 (233, 91, 'JSON schema', 'dce0a896-3166-11f0-b8e6-0a0027000011', 'AmpathJsonSchema', NULL, NULL, NULL, 'dce0a8a9-3166-11f0-b8e6-0a0027000011', NULL, NULL),
-(234, 69, 'JSON schema', 'dce193eb-3166-11f0-b8e6-0a0027000011', 'AmpathJsonSchema', NULL, NULL, NULL, 'dce193f9-3166-11f0-b8e6-0a0027000011', NULL, NULL),
 (235, 21, 'JSON schema', 'dce23caa-3166-11f0-b8e6-0a0027000011', 'AmpathJsonSchema', NULL, NULL, NULL, 'dce23cbe-3166-11f0-b8e6-0a0027000011', NULL, NULL),
 (236, 90, 'JSON schema', 'dce2f01f-3166-11f0-b8e6-0a0027000011', 'AmpathJsonSchema', NULL, NULL, NULL, 'dce2f036-3166-11f0-b8e6-0a0027000011', NULL, NULL),
 (237, 48, 'JSON schema', 'dce3b2a5-3166-11f0-b8e6-0a0027000011', 'AmpathJsonSchema', NULL, NULL, NULL, 'dce3b2b9-3166-11f0-b8e6-0a0027000011', NULL, NULL),
@@ -47,7 +45,6 @@ REPLACE INTO `form_resource` (`form_resource_id`, `form_id`, `name`, `value_refe
 (246, 106, 'JSON schema', 'dce92f05-3166-11f0-b8e6-0a0027000011', 'AmpathJsonSchema', NULL, NULL, NULL, 'dce92f19-3166-11f0-b8e6-0a0027000011', NULL, NULL),
 (247, 85, 'JSON schema', 'dce9a7cf-3166-11f0-b8e6-0a0027000011', 'AmpathJsonSchema', NULL, NULL, NULL, 'dce9a7de-3166-11f0-b8e6-0a0027000011', NULL, NULL),
 (248, 108, 'JSON schema', 'dcea2775-3166-11f0-b8e6-0a0027000011', 'AmpathJsonSchema', NULL, NULL, NULL, 'dcea2787-3166-11f0-b8e6-0a0027000011', NULL, NULL),
-(249, 27, 'JSON schema', 'dcea9a2a-3166-11f0-b8e6-0a0027000011', 'AmpathJsonSchema', NULL, NULL, NULL, 'dcea9a38-3166-11f0-b8e6-0a0027000011', NULL, NULL),
 (250, 14, 'JSON schema', 'dceb163b-3166-11f0-b8e6-0a0027000011', 'AmpathJsonSchema', NULL, NULL, NULL, 'dceb1649-3166-11f0-b8e6-0a0027000011', NULL, NULL),
 (251, 16, 'JSON schema', 'dceba1c7-3166-11f0-b8e6-0a0027000011', 'AmpathJsonSchema', NULL, NULL, NULL, 'dceba1d7-3166-11f0-b8e6-0a0027000011', NULL, NULL),
 (252, 76, 'JSON schema', 'dcec3f1b-3166-11f0-b8e6-0a0027000011', 'AmpathJsonSchema', NULL, NULL, NULL, 'dcec3f2a-3166-11f0-b8e6-0a0027000011', NULL, NULL),
