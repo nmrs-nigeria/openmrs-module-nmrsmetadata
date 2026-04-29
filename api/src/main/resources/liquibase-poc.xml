@@ -1225,7 +1225,7 @@
     </changeSet>
 
     <!-- ============================================================ -->
-    <!-- new_tools: 11 new/updated forms with AmpathJsonSchema (O3)   -->
+    <!-- new_tools: 11 new/updated forms (O3)                         -->
     <!-- ============================================================ -->
 
     <changeSet id="new_tools_encounter_type_20260419" author="Adeyemi" runOnChange="true">

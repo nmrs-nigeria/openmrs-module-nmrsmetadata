@@ -19,4 +19,5 @@ REPLACE INTO `concept_numeric` (`concept_id`,`hi_absolute`,`hi_critical`,`hi_nor
 REPLACE INTO `concept_numeric` (`concept_id`,`hi_absolute`,`hi_critical`,`hi_normal`,`low_absolute`,`low_critical`,`low_normal`,`units`,`allow_decimal`,`display_precision`) VALUES (167590,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,NULL);
 REPLACE INTO `concept_numeric` (`concept_id`,`hi_absolute`,`hi_critical`,`hi_normal`,`low_absolute`,`low_critical`,`low_normal`,`units`,`allow_decimal`,`display_precision`) VALUES (167595,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,NULL);
 
+REPLACE INTO `concept_numeric` (`concept_id`,`hi_absolute`,`hi_critical`,`hi_normal`,`low_absolute`,`low_critical`,`low_normal`,`units`,`allow_decimal`,`display_precision`) VALUES (167626,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,NULL);
 SET FOREIGN_KEY_CHECKS=1;
