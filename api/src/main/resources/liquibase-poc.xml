@@ -1268,4 +1268,18 @@
         <sql>SET FOREIGN_KEY_CHECKS=1;</sql>
     </changeSet>
 
+    <changeSet id="20260618_CTD" author="Adeyemi">
+    <preConditions onFail="MARK_RAN">
+        <sqlCheck expectedResult="0">
+            SELECT COUNT(*) FROM liquibasechangelog WHERE ID='20260618_CTD';
+        </sqlCheck>
+    </preConditions>
+        <sql>
+        	SET FOREIGN_KEY_CHECKS = 0;
+            UPDATE `regimen_drug_mappings` SET `adult_strength` = 165074 where `regimen_drug_mapping_id` = 132;
+            UPDATE `encounter_type` SET name='Client Tracking and Discontinuation' WHERE encounter_type_id=15;
+       		SET FOREIGN_KEY_CHECKS = 1;
+        </sql>
+    </changeSet>
+
 </databaseChangeLog>
