@@ -476,10 +476,10 @@
             var duration_ss;
 
             // get and set duration and next appt date
-            getField('qtyDispensed_s.value').change(function() {
+            getField('duration_disp_.value').change(function() {
                 // var duration_sss =  $('input:text', '#duration_s').eq(0).val();
-                // qtyDispensed_s
-                var duration_sss =  $('input:text', '#qtyDispensed_s').eq(0).val();
+                // duration_disp_
+                var duration_sss =  $('input:text', '#duration_disp_').eq(0).val();
                 var pillBallances = $('input:text', '#pillBallance').eq(0).val();
                 var encounterDates = getValue('encounterDate.value');
 
@@ -804,7 +804,20 @@
                 </td>
                 <td><b>Current Regimen:</b>
                     <font color='blue' style="font-weight: bold">
-                        <lookup complexExpression="$fn.latestObs('164506').valueCoded.name" /> </font>
+                        <lookup complexExpression="
+                            #set($regimens = ['164507','164514','165703','164506','164513','165702'])
+                            #set($latest = false)
+                            #foreach($regs in $regimens)
+                                #set($o = $fn.latestObs($regs))
+                                #if($o &amp;&amp; $o.valueCoded)
+                                    #if(!$latest || $o.obsDatetime.after($latest.obsDatetime))
+                                        #set($latest = $o)
+                                    #end
+                                #end
+                            #end
+                            #if($latest)$!{latest.valueCoded.name}#end
+                        " />
+                    </font>
                 </td>
                 <td>
                     <b>Weight:</b>
@@ -1146,7 +1159,7 @@
                     </td>
 
                     <td class="pharmacist-only">
-                        <obs conceptId="167209" class="duration_disp" />
+                        <obs conceptId="167209" id="duration_disp_" />
                     </td>
                     <td class="pharmacist-only">
                         <obs conceptId="1443" id="qtyDispensed_s" />
