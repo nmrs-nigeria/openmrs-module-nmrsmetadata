@@ -1,0 +1,34 @@
+[
+  {
+    "id": "registrationapp.registerPatient",
+    "description": "Template for patient registration app instances",
+    "contextModel": [],
+    "configOptions": [
+      {
+        "name": "allowUnknownPatients",
+        "description": "Allow unknown patients",
+        "defaultValue": false
+      },
+      {
+        "name": "allowManualIdentifier",
+        "description": "Allow manual identifiers",
+        "defaultValue": false
+      },
+      {
+        "name": "allowRetrospectiveEntry",
+        "description": "Allow retrospective entry",
+        "defaultValue": false
+      },
+      {
+        "name": "afterCreatedUrl",
+        "description": "URL after patient creation",
+        "defaultValue": "/coreapps/clinicianfacing/patient.page?patientId={{patientId}}"
+      },
+      {
+        "name": "sections",
+        "description": "Registration form sections",
+        "defaultValue": []
+      }
+    ]
+  }
+]
